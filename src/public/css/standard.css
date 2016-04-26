@@ -1,0 +1,74 @@
+fieldset {
+    width: 200pt;
+    font-size: 20pt;
+    color: #888888;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    padding-bottom: 5pt;
+}
+
+fieldset input {
+    border-bottom-width: 2pt;
+    border-bottom-color: #222222;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 175pt;
+}
+
+fieldset button {
+    display: inline-block;
+    horiz-align: center;
+    vertical-align: bottom;
+    font-size: 12pt;
+    color: #888888;
+    border: 1pt solid;
+    margin-top: 20pt;
+}
+
+.rssFeed {
+    width: 20%;
+    alignment: left;
+    align-content: left;
+    position: absolute;
+    left:0%;
+    top: 5%;
+}
+
+.right {
+    width: 20%;
+    alignment: right;
+    align-content: right;
+    position: absolute;
+    right:0%;
+    top: 5%;
+}
+.main {
+    alignment: center;
+    align-content: center;
+    position: absolute;
+    left:20%;
+    right:20%;
+    top: 5%;
+    border-left: solid;
+    border-right: solid;
+    border-collapse: separate;
+}
+
+body {
+    margin: auto;
+}
+
+.menuBar {
+    position: absolute;
+    top: 0%;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+div {
+    display: block;
+}
