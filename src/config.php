@@ -5,14 +5,14 @@
 $config = array(
     "db" => array(
         "db1" => array(
-            "dbname" => "database1",
-            "username" => "dbUser",
+            "dbname" => "hsw",
+            "username" => "dbUser1",
             "password" => "pa$$",
             "host" => "localhost"
         ),
         "db2" => array(
-            "dbname" => "database2",
-            "username" => "dbUser",
+            "dbname" => "hsw",
+            "username" => "dbUser2",
             "password" => "pa$$",
             "host" => "localhost"
         )
