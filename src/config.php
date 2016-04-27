@@ -48,7 +48,7 @@ spl_autoload_register( function($class) {
 
 
 // create connection to database
-$dbh = new PDO('mysql:host=localhost;dbname=phpprakt', 'auser', 'apassword');
+$dbh = new PDO('mysql:host=localhost;dbname=phpprakt', 'root', ''); #TODO: implement DB-Connections and use the users from $config
 
 
 // start session

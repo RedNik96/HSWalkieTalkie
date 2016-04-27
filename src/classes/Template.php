@@ -9,16 +9,16 @@ class Template {
 
         // load passed template and store contents for usage in layout
         ob_start();
-        include('templates/' . $template .'.php');
+        include(TEMPLATES_PATH . '/' . $template .'.php');
         if ($template!=='login') {
-            include('templates/menuBar.php');
-            include('templates/rss.php');
-            include('templates/rightBar.php');
+            include(TEMPLATES_PATH . '/menuBar.php');
+            include(TEMPLATES_PATH . '/rss.php');
+            include(TEMPLATES_PATH . '/rightBar.php');
         }
         $content_for_layout = ob_get_clean();
 
         // load and show layout
-        include('templates/layout.php');
+        include(TEMPLATES_PATH . "/layout.php");
     }
     public static function addLine($data)
     {

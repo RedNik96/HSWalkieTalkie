@@ -1,6 +1,6 @@
     <?php
 
-    require_once 'config.php';
+    require_once '../config.php';
 
     // initialize variables
     $template_data = array();
@@ -13,8 +13,10 @@
         }
         Template::render('timeline', $template_data);
     }
+
+    #TODO: hier sollte das URL-Routing implementiert werden
     //if (Session::authenticated()) {
-        if ($_REQUEST['nav']==='timeline') {
+        /*if ($_REQUEST['nav']==='timeline') {
             Template::render('timeline', $template_data);
         } else {
             if ($_REQUEST['nav']==='profile') {
@@ -31,7 +33,7 @@
                     }
                 }
             }
-        }
+        }*/
 
     //} else {
         //$template_data['title'] = 'Login';
