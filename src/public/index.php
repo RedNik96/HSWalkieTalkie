@@ -1,9 +1,10 @@
     <?php
 
     require_once '../config.php';
+    require_once LIBRARY_PATH . '/dannyvankooten-AltoRouter-39c5009/AltoRouter.php';
 
     // initialize variables
-    $template_data = array();
+    $template_data = [];
     global $dbh;
 
     // handle login
@@ -15,28 +16,21 @@
     }
 
     #TODO: hier sollte das URL-Routing implementiert werden
-    //if (Session::authenticated()) {
-        /*if ($_REQUEST['nav']==='timeline') {
-            Template::render('timeline', $template_data);
-        } else {
-            if ($_REQUEST['nav']==='profile') {
-                Template::render('profile', $template_data);
-            } else {
-                if ($_REQUEST['nav']==='settings') {
-                    Template::render('settings', $template_data);
-                } else {
-                    if (($_REQUEST['nav']==='logout')) {
-                        //Session::logout();
-                        Template::render('login', $template_data);
-                    } else {
-                        Template::render('timeline', $template_data);
-                    }
-                }
-            }
-        }*/
+    $router = new AltoRouter();
+    $router->setBasePath('/src/public');
 
-    //} else {
-        //$template_data['title'] = 'Login';
-        //Template::render('login', $template_data);
-       // Template::render('timeline', $template_data);
-    //}
+    $router->map( 'GET', '/', function() {
+        echo 'test1';
+    });
+
+    $router->map( 'GET', '/[i:id]', function($id) {
+        echo 'test2' . $id;
+    });
+
+    $match = $router->match();
+
+    if( $match && is_callable( $match['target'] ) ) {
+    	call_user_func_array( $match['target'], $match['params'] );
+    } else {
+    	header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+    }

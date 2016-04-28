@@ -27,7 +27,7 @@ $config = array(
     ex. require_once(LIBRARY_PATH . "Paginator.php")
 */
 defined("LIBRARY_PATH")
-    or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/library'));
+    or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/libraries'));
 
 defined("TEMPLATES_PATH")
     or define("TEMPLATES_PATH", realpath(dirname(__FILE__) . '/templates'));
