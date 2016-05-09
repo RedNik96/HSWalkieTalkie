@@ -7,7 +7,7 @@
         <legend>Registrieren</legend>
         <table>
             <tr>
-                <td style="width:30px;">
+                <td>
                     <span class="dividingLine">
                         Verpflichtende Angaben
                     </span>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="BIC">BIC</label>
+                    <label for="bic">BIC</label>
                 </td>
                 <td>
                     <input name="bic" id="bic" type="text" placeholder="" autocomplete="off">
