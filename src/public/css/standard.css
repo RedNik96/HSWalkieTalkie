@@ -72,3 +72,8 @@ body {
 div {
     display: block;
 }
+
+span.dividingLine {
+    display:inline;
+    color: orange;
+}
