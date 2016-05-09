@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/login.css">
 <form action="index.php" method="post" class="login">
-    
+    <header>$$Heißer Scheiß du Wixxer$$</header>
+    <main>
     <fieldset >
         <legend>LogIn</legend>
 
@@ -27,10 +28,13 @@
         </div>
 
         <div class="register-link">
-            <a href="register.php" class="button">Rich Bitch werden - Registieren</a>
+            <a href="register.php">$Rich Bitch werden - Registieren</a>
         </div>
 
 
     </fieldset>
-    
+    </main>
+    <footer>
+        <a href="https://www.google.de">Back to Google</a>
+    </footer>
 </form>
