@@ -20,7 +20,8 @@
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        echo 'test2';
+        $template_data['muell']='sdf';
+        Template::render('timeline', $template_data);
     });
 
     $router->map( 'GET', '/user/', function() {
@@ -29,6 +30,10 @@
 
     $router->map( 'GET', '/user/[i:id]', function($id) {
         echo 'user' . $id;
+    });
+    $router->map( 'GET', '/settings', function() {
+        $template_data['muell']='sdf';
+        Template::render('settings', $template_data);
     });
 
     $match = $router->match();

@@ -13,6 +13,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <?= $content_for_layout ?>
+    <div class="container-fluid full">
+        <? if (isset($content_top)) { ?>
+            <div class="row">
+                <?=$content_top ?>
+            </div>
+        <? }
+        if (isset($content_left) && isset($content_right)) { ?>
+            <div class="row content">
+                <div class="col-lg-3">
+                    <?=$content_left ?>
+                </div>
+                <div class="col-lg-6">
+                    <?=$content_for_layout ?>
+                </div>
+                <div class="col-lg-3">
+                    <?=$content_right ?>
+                </div>
+            </div>
+        <? } else { ?>
+            <div class="row content">
+                <?=$content_for_layout ?>
+            </div>
+        <? } ?>
+    </div>
 </body>
 </html>

@@ -27,35 +27,6 @@ fieldset button {
     margin-top: 20pt;
 }
 
-.rssFeed {
-    width: 20%;
-    alignment: left;
-    align-content: left;
-    position: absolute;
-    left:0%;
-    top: 5%;
-}
-
-.right {
-    width: 20%;
-    alignment: right;
-    align-content: right;
-    position: absolute;
-    right:0%;
-    top: 5%;
-}
-.main {
-    alignment: center;
-    align-content: center;
-    position: absolute;
-    left:20%;
-    right:20%;
-    top: 5%;
-    border-left: solid;
-    border-right: solid;
-    border-collapse: separate;
-}
-
 body {
     margin: auto;
 }
@@ -69,6 +40,12 @@ body {
     visibility: hidden;
 }
 
-div {
-    display: block;
+.content {
+    position: absolute;
+    top: 7%;
+    width: 100%;
+}
+
+.full {
+    width: 100%;
 }
