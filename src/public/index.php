@@ -17,7 +17,7 @@
 
     #TODO: hier sollte das URL-Routing implementiert werden
     $router = new AltoRouter();
-    $router->setBasePath('/src/public');
+    $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
         echo 'test2';
