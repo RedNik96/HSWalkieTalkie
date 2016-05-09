@@ -49,7 +49,7 @@ require_once('classes/Template.php');
 
 
 // create connection to database
-$dbh = new PDO('mysql:host=localhost;dbname=hsw', 'root', ''); #TODO: implement DB-Connections and use the users from $config
+$dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', ''); #TODO: implement DB-Connections and use the users from $config
 
 
 // start session
