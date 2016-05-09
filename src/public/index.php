@@ -20,11 +20,15 @@
     $router->setBasePath('/src/public');
 
     $router->map( 'GET', '/', function() {
-        echo 'test1';
+        echo 'test2';
     });
 
-    $router->map( 'GET', '/[i:id]', function($id) {
-        echo 'test2' . $id;
+    $router->map( 'GET', '/user/', function() {
+        echo 'profil';
+    });
+
+    $router->map( 'GET', '/user/[i:id]', function($id) {
+        echo 'user' . $id;
     });
 
     $match = $router->match();
