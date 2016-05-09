@@ -36,6 +36,10 @@
         Template::render('settings', $template_data);
     });
 
+    $router->map( 'GET', '/register/', function() {
+        include("../templates/register.php");
+    });
+
     $match = $router->match();
 
     if( $match && is_callable( $match['target'] ) ) {

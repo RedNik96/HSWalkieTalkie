@@ -1,3 +1,5 @@
+
+
 fieldset {
     width: 200pt;
     font-size: 20pt;
@@ -27,30 +29,38 @@ fieldset button {
     margin-top: 20pt;
 }
 
-body {
-    margin: auto;
+label {
+    display: inline-block;
+    width: 28%;
+    text-align: left;
+
 }
 
-.menuBar {
-    position: absolute;
-    top: 0%;
+form{
+    width: 75%;
+    text-align: center;
 }
 
-.invisible {
-    visibility: hidden;
+.username input{
+    width: 68%;
+    alignment: left;
 }
 
-.content {
-    position: absolute;
-    top: 7%;
-    width: 100%;
+.password input{
+    width: 68%;
+
 }
 
-.full {
-    width: 100%;
+.login-button{
+text-align: right;
+
+
 }
 
-span.dividingLine {
-    display:inline;
-    color: orange;
+.register-link{
+    text-align: right;
+
+}
+.Login div{
+    width: 400px;
 }
