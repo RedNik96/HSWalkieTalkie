@@ -8,19 +8,7 @@
     global $dbh;
 
     // handle login
-    if (isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
-        if(isset($_POST['register'])){
-            Session::create_user(
-                $_POST['firstName'],
-                $_POST['lastName'],
-                $_POST['email'],
-                $_POST['username'],
-                $_POST['password'],
-                $_POST['confirmedPassword'],
-                $_POST['iban'],
-                $_POST['bic']
-            );
-        }
+    if (isset($_REQUEST['username']) && isset($_REQUEST['password']) && false) {
         if (!Session::check_credentials($_REQUEST['username'], $_REQUEST['password'])) {
             $template_data['message'] = 'Login failed!';
         }
@@ -32,9 +20,14 @@
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        $template_data['muell']='sdf';
+        if (Session::authenticated()) {
+            Template::render("login", array());
+        } else {
+            Template::render("timeline", array());
+        }
+        $template_data['muell'] = 'sdf';
         Template::render('timeline', $template_data);
-    });
+    }, 'timeline');  //Über den 4. Parameter (timeline) ist der Pfad mit $router->generate('timeline') zu bekommen
 
     $router->map( 'GET', '/user/', function() {
         echo 'profil';
@@ -46,11 +39,14 @@
     $router->map( 'GET', '/settings', function() {
         $template_data['muell']='sdf';
         Template::render('settings', $template_data);
-    });
+    }, 'settings');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
 
     $router->map('GET', '/register/', function () {
-        $template_data = array();
-        Template::render('register', $template_data);
+        Template::render('register', array());
+    }, 'registrierung');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
+
+    $router->map('POST', '/register/', function () {
+        include(CLASSES_PATH . "/handler/registerHandler.php");
     });
 
     $match = $router->match();

@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Musikverwaltung</title>
+    <title>HSWalkieTalkie</title>
     <link rel="stylesheet" href="../public/css/standard.css">
     <!-- Font Awesome-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
