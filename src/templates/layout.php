@@ -25,18 +25,18 @@
         if (isset($content_left) && isset($content_right)) { ?>
             <div class="row content">
                 <div class="col-lg-3">
-                    <?=$content_left ?>
+                    <?= $content_left ?>
                 </div>
                 <div class="col-lg-6">
-                    <?=$content_for_layout ?>
+                    <?= $content_for_layout ?>
                 </div>
                 <div class="col-lg-3">
-                    <?=$content_right ?>
+                    <?= $content_right ?>
                 </div>
             </div>
         <? } else { ?>
             <div class="row content">
-                <?=$content_for_layout ?>
+                <?= $content_for_layout ?>
             </div>
         <? } ?>
     </div>
