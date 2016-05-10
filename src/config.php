@@ -42,13 +42,16 @@ ini_set("error_reporting", "true");
 error_reporting(E_ALL|E_STRCT);
 
 // register function to automatically load classes
-spl_autoload_register( function($class) {
-    require_once('classes/' . $class . '.php');
-});
+//spl_autoload_register( function($class) {
+require_once('classes/Session.php');
+require_once('classes/Template.php');
+//});
 
 
 // create connection to database
-$dbh = new PDO('mysql:host=localhost;dbname=phpprakt', 'root', ''); #TODO: implement DB-Connections and use the users from $config
+$dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', '',
+    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+); #TODO: implement DB-Connections and use the users from $config
 
 
 // start session

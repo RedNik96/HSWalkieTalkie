@@ -8,7 +8,7 @@
     global $dbh;
 
     // handle login
-    if (isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
+    if (isset($_REQUEST['username']) && isset($_REQUEST['password']) && false) {
         if (!Session::check_credentials($_REQUEST['username'], $_REQUEST['password'])) {
             $template_data['message'] = 'Login failed!';
         }
@@ -20,7 +20,11 @@
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        echo 'test2';
+        Template::render('timeline', []);
+    }, 'timeline');  //Über den 4. Parameter (timeline) ist der Pfad mit $router->generate('timeline') zu bekommen);
+
+    $router->map( 'GET', '/login/', function() {
+        Template::render('login', []);
     });
 
     $router->map( 'GET', '/user/', function() {
@@ -29,6 +33,22 @@
 
     $router->map( 'GET', '/user/[i:id]', function($id) {
         echo 'user' . $id;
+    });
+
+    $router->map( 'GET', '/settings/', function() {
+        Template::render('settings', []);
+    }, 'settings');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
+
+    $router->map('GET', '/register/', function () {
+        Template::render('register', []);
+    }, 'registrierung');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
+
+    $router->map('POST', '/register/', function () {
+        include(CLASSES_PATH . "/handler/registerHandler.php");
+    });
+
+    $router->map('GET', '/profile/', function () {
+        Template::render('profile', []);
     });
 
     $match = $router->match();
