@@ -9,8 +9,7 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
-CREATE TABLE `User` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
   `username` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   `password` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   `firstName` varchar(60) COLLATE utf8mb4_bin NOT NULL,
@@ -18,77 +17,77 @@ CREATE TABLE `User` (
   `feedName` varchar(60) COLLATE utf8mb4_bin,
   `feedPassword` varchar(60) COLLATE utf8mb4_bin,
   `email` varchar(60) COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `BIC` (
+CREATE TABLE `bic` (
   `bic` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`bic`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `Konto` (
+CREATE TABLE `konto` (
   `iban` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   `bic` varchar(60) COLLATE utf8mb4_bin NOT NULL,
-  `user` int(11) NOT NULL,
+  `user` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`iban`),
-  FOREIGN KEY (`bic`) REFERENCES BIC (`bic`) ON DELETE CASCADE,
-  FOREIGN KEY (`user`) REFERENCES User (`id`) ON DELETE CASCADE
+  FOREIGN KEY (`bic`) REFERENCES bic (`bic`) ON DELETE CASCADE,
+  FOREIGN KEY (`user`) REFERENCES user (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `Follower` (
-  `followed` int(11) NOT NULL,
-  `follower` int(11) NOT NULL,
+CREATE TABLE `follower` (
+  `followed` varchar(60) COLLATE utf8mb4_bin NOT NULL,
+  `follower` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`followed`, `follower`),
-  FOREIGN KEY (`followed`) REFERENCES User (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`follower`) REFERENCES User (`id`) ON DELETE CASCADE
+  FOREIGN KEY (`followed`) REFERENCES user (`username`) ON DELETE CASCADE,
+  FOREIGN KEY (`follower`) REFERENCES user (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `Posts` (
+CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `content` varchar(60) COLLATE utf8mb4_bin NOT NULL,
-  `user` int(11) NOT NULL,
+  `user` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user`) REFERENCES User (`id`) ON DELETE CASCADE
+  FOREIGN KEY (`user`) REFERENCES user (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `Reposts` (
-  `user` int(11) NOT NULL,
+CREATE TABLE `reposts` (
+  `user` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   `post` int(11) NOT NULL,
-  `Take_Money` int(11),
+  `takeMoney` varchar(60) COLLATE utf8mb4_bin,
   PRIMARY KEY (`user`, `post`),
-  FOREIGN KEY (`user`) REFERENCES User (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`post`) REFERENCES Posts (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`Take_Money`) REFERENCES User (`id`) ON DELETE CASCADE
+  FOREIGN KEY (`user`) REFERENCES user (`username`) ON DELETE CASCADE,
+  FOREIGN KEY (`post`) REFERENCES posts (`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`takeMoney`) REFERENCES user (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `Votes` (
-  `voter` int(11) NOT NULL,
+CREATE TABLE `votes` (
+  `voter` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   `post` int(11) NOT NULL,
   `vote` boolean,
   PRIMARY KEY (`voter`, `post`),
-  FOREIGN KEY (`voter`) REFERENCES User (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`post`) REFERENCES Posts (`id`) ON DELETE CASCADE
+  FOREIGN KEY (`voter`) REFERENCES user (`username`) ON DELETE CASCADE,
+  FOREIGN KEY (`post`) REFERENCES posts (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `Duell` (
+CREATE TABLE `duell` (
   `id` int(11) NOT NULL,
-  `fighter_post` int(11) NOT NULL,
-  `fighter_repost` int(11) NOT NULL,
+  `fighterPost` varchar(60) COLLATE utf8mb4_bin NOT NULL,
+  `fighterRepost` varchar(60) COLLATE utf8mb4_bin NOT NULL,
   `post` int(11) NOT NULL,
-  `winner` int(11),
+  `winner` varchar(60) COLLATE utf8mb4_bin,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`fighter_post`) REFERENCES User (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`fighter_repost`) REFERENCES User (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`post`) REFERENCES Posts (`id`) ON DELETE CASCADE,
-  FOREIGN KEY (`winner`) REFERENCES User (`id`) ON DELETE CASCADE
+  FOREIGN KEY (`fighterPost`) REFERENCES user (`username`) ON DELETE CASCADE,
+  FOREIGN KEY (`fighterRepost`) REFERENCES user (`username`) ON DELETE CASCADE,
+  FOREIGN KEY (`post`) REFERENCES posts (`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`winner`) REFERENCES user (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `Ergebnis` (
+CREATE TABLE `ergebnis` (
   `id` int(11) NOT NULL,
   `duell` int(11) NOT NULL,
   `round` int(11) NOT NULL,
-  `fighter_post_action` int(11) NOT NULL,
-  `fighter_repost_action` int(11) NOT NULL,
+  `fighterPostAction` int(11) NOT NULL,
+  `fighterRepostAction` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`duell`) REFERENCES Duell (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
