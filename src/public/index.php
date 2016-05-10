@@ -7,13 +7,12 @@
     $template_data = [];
     global $dbh;
 
-    // handle login
-    if (isset($_REQUEST['username']) && isset($_REQUEST['password']) && false) {
-        if (!Session::check_credentials($_REQUEST['username'], $_REQUEST['password'])) {
-            $template_data['message'] = 'Login failed!';
-        }
-        Template::render('timeline', $template_data);
+    /*
+    if(!Session::authenticated()) {
+        Template::render("login", []);
+        die();
     }
+    */
 
     #TODO: hier sollte das URL-Routing implementiert werden
     $router = new AltoRouter();
@@ -22,10 +21,6 @@
     $router->map( 'GET', '/', function() {
         Template::render('timeline', []);
     }, 'timeline');  //Über den 4. Parameter (timeline) ist der Pfad mit $router->generate('timeline') zu bekommen);
-
-    $router->map( 'GET', '/login/', function() {
-        Template::render('login', []);
-    });
 
     $router->map( 'GET', '/user/', function() {
         echo 'profil';
