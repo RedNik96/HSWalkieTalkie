@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<svg width="59cm" height="29cm" viewBox="-149 0 1162 564" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="55cm" height="29cm" viewBox="-149 1 1094 564" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
     <rect style="fill: #ffffff" x="319.88" y="159.213" width="210.8" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="319.88" y="159.213" width="210.8" height="18"/>
@@ -49,28 +49,31 @@
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="431.28" y="385.213">Ort/plz</text>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="742" y="209" width="133.8" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="742" y="209" width="133.8" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="808.9" y="223">Posts</text>
-    <rect style="fill: #ffffff" x="742" y="227" width="133.8" height="52"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="742" y="227" width="133.8" height="52"/>
-    <polygon style="fill: #000000" points="745,237 747,240 749,237 747,234 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="751" y="243">id</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="814.9" y="243">int</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="751" y1="244.6" x2="838" y2="244.6"/>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="747" cy="253" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="751" y="259">content</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="814.9" y="259">varchar</text>
-    <ellipse style="fill: #000000" cx="747" cy="269" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="751" y="275">user</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="814.9" y="275">User</text>
+    <rect style="fill: #ffffff" x="741" y="256" width="156.9" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="741" y="256" width="156.9" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="819.45" y="270">Posts</text>
+    <rect style="fill: #ffffff" x="741" y="274" width="156.9" height="68"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="741" y="274" width="156.9" height="68"/>
+    <polygon style="fill: #000000" points="744,284 746,287 748,284 746,281 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="750" y="290">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="837" y="290">int</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="750" y1="291.6" x2="860.1" y2="291.6"/>
+    <ellipse style="fill: #000000" cx="746" cy="300" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="750" y="306">content</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="837" y="306">varchar</text>
+    <ellipse style="fill: #000000" cx="746" cy="316" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="750" y="322">user</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="837" y="322">User</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="746" cy="332" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="750" y="338">parentPost</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="837" y="338">Post</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="530.68,168.213 636.34,168.213 636.34,237 732.264,237 "/>
-    <polygon style="fill: #000000" points="739.764,237 729.764,242 732.264,237 729.764,232 "/>
-    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="739.764,237 729.764,242 732.264,237 729.764,232 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="530.68,168.213 635.84,168.213 635.84,284 731.264,284 "/>
+    <polygon style="fill: #000000" points="738.764,284 728.764,289 731.264,284 728.764,279 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="738.764,284 728.764,289 731.264,284 728.764,279 "/>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="534.68" y="164.213">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="738" y="233">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="737" y="280">n</text>
   </g>
   <g>
     <rect style="fill: #ffffff" x="187.438" y="424.514" width="118.4" height="18"/>
@@ -120,10 +123,10 @@
     <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="557" y="91">n</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="808.9,209 808.9,114 689.136,114 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="819.45,256 819.45,114 689.136,114 "/>
     <polygon style="fill: #000000" points="681.636,114 691.636,109 689.136,114 691.636,119 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="681.636,114 691.636,109 689.136,114 691.636,119 "/>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="812.9" y="205">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="823.45" y="252">1</text>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="683.4" y="110">n</text>
   </g>
   <g>
@@ -134,43 +137,11 @@
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="309.838" y="429.514">n</text>
   </g>
   <g>
-    <polygon style="fill: #ffffff" points="592.686,201.736 635.786,175.876 678.886,201.736 635.786,227.596 "/>
-    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="592.686,201.736 635.786,175.876 678.886,201.736 635.786,227.596 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="586.686" y="195.736"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="684.886" y="195.736"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:monospace;font-style:normal;font-weight:normal" x="635.786" y="205.736">posted</text>
-  </g>
-  <g>
-    <rect style="fill: #ffffff" x="588" y="343" width="133.8" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="588" y="343" width="133.8" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="654.9" y="357">Reposts</text>
-    <rect style="fill: #ffffff" x="588" y="361" width="133.8" height="52"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="588" y="361" width="133.8" height="52"/>
-    <polygon style="fill: #000000" points="591,371 593,374 595,371 593,368 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="597" y="377">user</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="676.3" y="377">User</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="597" y1="378.6" x2="707.1" y2="378.6"/>
-    <polygon style="fill: #000000" points="591,387 593,390 595,387 593,384 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="597" y="393">post</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="676.3" y="393">Posts</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="597" y1="394.6" x2="714.8" y2="394.6"/>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="593" cy="403" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="597" y="409">takeMoney</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="676.3" y="409">Users</text>
-  </g>
-  <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="530.68,219.213 559.34,219.213 559.34,371 578.264,371 "/>
-    <polygon style="fill: #000000" points="585.764,371 575.764,376 578.264,371 575.764,366 "/>
-    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="585.764,371 575.764,376 578.264,371 575.764,366 "/>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="534.68" y="215.213">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="584" y="367">n</text>
-  </g>
-  <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="808.9,279 808.9,387 731.536,387 "/>
-    <polygon style="fill: #000000" points="724.036,387 734.036,382 731.536,387 734.036,392 "/>
-    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="724.036,387 734.036,382 731.536,387 734.036,392 "/>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="812.9" y="291">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="725.8" y="383">n</text>
+    <polygon style="fill: #ffffff" points="592.686,219.736 635.786,193.876 678.886,219.736 635.786,245.596 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="592.686,219.736 635.786,193.876 678.886,219.736 635.786,245.596 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="586.686" y="213.736"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="684.886" y="213.736"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:monospace;font-style:normal;font-weight:normal" x="635.786" y="223.736">posted</text>
   </g>
   <g>
     <rect style="fill: #ffffff" x="391.672" y="446.22" width="180" height="18"/>
@@ -201,13 +172,6 @@
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="436.672,443.984 431.672,433.984 436.672,436.484 441.672,433.984 "/>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="481.98" y="401.213">1</text>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="440.672" y="442.22">n</text>
-  </g>
-  <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="654.9,413 654.9,474.22 581.408,474.22 "/>
-    <polygon style="fill: #000000" points="573.908,474.22 583.908,469.22 581.408,474.22 583.908,479.22 "/>
-    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="573.908,474.22 583.908,469.22 581.408,474.22 583.908,479.22 "/>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="658.9" y="425">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="575.672" y="470.22">1</text>
   </g>
   <g>
     <rect style="fill: #ffffff" x="718.894" y="462.072" width="226.2" height="18"/>
@@ -282,20 +246,13 @@
     <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="84.2976" y="199.687">n</text>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="919.79" y="368" width="93.15" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="919.79" y="368" width="93.15" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="966.365" y="382">Repost Votes</text>
-    <rect style="fill: #ffffff" x="919.79" y="386" width="93.15" height="4"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="919.79" y="386" width="93.15" height="4"/>
-  </g>
-  <g>
     <rect style="fill: #ffffff" x="326.79" y="1" width="103" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="326.79" y="1" width="103" height="18"/>
     <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="378.29" y="15">Ort</text>
     <rect style="fill: #ffffff" x="326.79" y="19" width="103" height="36"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="326.79" y="19" width="103" height="36"/>
     <polygon style="fill: #000000" points="329.79,29 331.79,32 333.79,29 331.79,26 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="335.79" y="35">plz</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="335.79" y="35">zip</text>
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="368.89" y="35">varchar</text>
     <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="335.79" y1="36.6" x2="422.79" y2="36.6"/>
     <ellipse style="fill: #000000" cx="331.79" cy="45" rx="2" ry="2"/>
@@ -306,7 +263,14 @@
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="372.58,159.213 372.58,107.106 378.29,107.106 378.29,64.7361 "/>
     <polygon style="fill: #000000" points="378.29,57.2361 383.29,67.2361 378.29,64.7361 373.29,67.2361 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="378.29,57.2361 383.29,67.2361 378.29,64.7361 373.29,67.2361 "/>
-    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="376.58" y="155.213">1</text>
-    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="382.29" y="67">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="376.58" y="155.213">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="382.29" y="67">n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="571.672,474.22 656.336,474.22 656.336,316 731.264,316 "/>
+    <polygon style="fill: #000000" points="738.764,316 728.764,321 731.264,316 728.764,311 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="738.764,316 728.764,321 731.264,316 728.764,311 "/>
+    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="575.672" y="470.22">c</text>
+    <text font-size="9.59863" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="737" y="312">1</text>
   </g>
 </svg>
