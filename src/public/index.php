@@ -39,6 +39,10 @@
         Template::render('settings', []);
     }, 'settings');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
 
+    $router->map('POST', '/settings/', function () {
+        include(CLASSES_PATH . "/handler/settingsHandler.php");
+    });
+
     $router->map('GET', '/register/', function () {
         Template::render('register', []);
     }, 'registrierung');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen

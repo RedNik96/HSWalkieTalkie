@@ -33,19 +33,4 @@ class Template {
         }
         include(TEMPLATES_PATH . "/layout.php");
     }
-    public static function addLine($data)
-    {
-        // registered passed variables as local variables
-        extract($data);
-
-        // load passed template and store contents for usage in layout
-        ob_start();
-        include('templates/list.php');
-
-        self::$tableContent= self::$tableContent . ob_get_clean();
-
-    }
-    public static function deleteRows() {
-        self::$tableContent=null;
-    }
 }

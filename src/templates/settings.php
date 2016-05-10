@@ -3,7 +3,7 @@
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#personal">persönliche Informationen</a></li>
             <li><a data-toggle="tab" href="#pass">Passwort ändern</a></li>
-            <li><a data-toggle="tab" href="#konto">Konto</a></li>
+            <li><a data-toggle="tab" href="#account">Konto</a></li>
             <li><a data-toggle="tab" href="#ilias">Ilias-Feed</a></li>
         </ul>
 
@@ -26,26 +26,26 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="vorname" class=" col-sm-6 control-label">
+                                    <label for="firstname" class=" col-sm-6 control-label">
                                         Vorname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="vorname" id="vorname" type="text" autofocus class="form-control">
+                                        <input name="firstname" id="firstname" type="text" autofocus class="form-control">
                                     </div>
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="nachname" class=" col-sm-6 control-label">
+                                    <label for="lastname" class=" col-sm-6 control-label">
                                         Nachname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="nachname" id="nachname" type="text" autofocus class="form-control">
+                                        <input name="lastname" id="lastname" type="text" autofocus class="form-control">
                                     </div>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="username" class=" col-sm-6 control-label">
-                                        Username:
+                                        Benutzername:
                                     </label>
                                     <div class="col-sm-6">
                                         <input name="username" id="username" type="text" autofocus class="form-control">
@@ -53,27 +53,43 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="geb" class=" col-sm-6 control-label">
+                                    <label for="birth" class=" col-sm-6 control-label">
                                         Geburtstag:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="geb" id="geb" type="date" autofocus class="form-control">
+                                        <input name="birth" id="birth" type="date" autofocus class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ort" class=" col-sm-6 control-label">
+                                    <label for="street" class=" col-sm-6 control-label">
+                                        Straße:
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input name="street" id="street" type="text" autofocus class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nr" class=" col-sm-6 control-label">
+                                        Hausnummer:
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input name="nr" id="nr" type="text" autofocus class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city" class=" col-sm-6 control-label">
                                         Ort:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="ort" id="ort" type="text" autofocus class="form-control">
+                                        <input name="city" id="city" type="text" autofocus class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="plz" class=" col-sm-6 control-label">
+                                    <label for="zip" class=" col-sm-6 control-label">
                                         PLZ:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="plz" id="plz" type="number" autofocus class="form-control">
+                                        <input name="zip" id="zip" type="number" autofocus class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -152,56 +168,91 @@
                 </div>
 
             </div>
-            <div id="konto" class="tab-pane fade">
-                <h3>Kontoinformationen</h3>
-                <div class="row">
-                        <div>
-                            <label for="email" class="inputlabel">
-                                Email:
+            <div id="account" class="tab-pane fade">
+                <div class="container-border">
+                    <form class="form-horizontal">
+                        <legend>
+                            Kontodaten ändern
+                        </legend>
+                        <div class="form-group">
+                            <label for="iban" class=" col-lg-6 control-label">
+                                IBAN:
                             </label>
-                            <input name="email" id="email" type="email" autofocus class="input">
+                            <div class="col-lg-6">
+                                <input name="iban" id="iban" type="text" autofocus class="form-control">
+                            </div>
+
                         </div>
-                        <div>
-                            <label for="vorname" class="inputlabel">
-                                Vorname:
+                        <div class="form-group">
+                            <label for="bic" class=" col-lg-6 control-label">
+                                BIC:
                             </label>
-                            <input name="vorname" id="vorname" type="text" class="input">
+                            <div class="col-lg-6">
+                                <input name="big" id="big" type="text" autofocus class="form-control">
+                            </div>
+
                         </div>
-                        <div>
-                            <label for="nachname" class="inputlabel">
-                                Nachname:
+                        <div class="form-group">
+                            <label for="holder" class=" col-lg-6 control-label">
+                                Kontoinhaber:
                             </label>
-                            <input name="nachname" id="nachname" type="text" class="input">
+                            <div class="col-lg-6">
+                                <input name="holder" id="holder" type="text" autofocus class="form-control">
+                            </div>
                         </div>
-                        <div>
-                            <label for="username" class="inputlabel">
-                                Username:
+                        <div class="form-group">
+                            <label for="bank" class=" col-lg-6 control-label">
+                                Kreditinstitut:
                             </label>
-                            <input name="username" id="username" type="text" class="input">
+                            <div class="col-lg-6">
+                                <input name="bank" id="bank" type="text" autofocus class="form-control">
+                            </div>
                         </div>
-                        <div>
-                            <label for="geb" class="inputlabel">
-                                Geburtstag:
-                            </label>
-                            <input name="geb" id="geb" type="date" class="input">
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label"></label>
+                            <div class="col-lg-4">
+                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" class="btn btn-primary" name="change-account">Kontodaten ändern</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <a href="../settings/" class="btn btn-default active" role="button">Änderungen verwerfen</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="ort" class="inputlabel">
-                                Wohnort:
-                            </label>
-                            <input name="ort" id="ort" type="text" class="input">
-                        </div>
-                        <div>
-                            <label for="plz" class="inputlabel">
-                                PLZ:
-                            </label>
-                            <input name="plz" id="plz" type="number" class="input">
-                        </div>
-                    </div>
+                    </form>
+                </div>
             </div>
             <div id="ilias" class="tab-pane fade">
-                <h3>Ilias Einstellungen</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                <div class="container-border">
+                    <form class="form-horizontal">
+                        <legend>
+                            Ilias-Feed Einstellungen
+                        </legend>
+                        <div class="form-group">
+                            <label for="url" class=" col-lg-6 control-label">
+                                RSS-Feed-URL:
+                            </label>
+                            <div class="col-lg-6">
+                                <input name="url" id="url" type="url" autofocus class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label"></label>
+                            <div class="col-lg-4">
+                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" class="btn btn-primary" name="change-ilias">Ilias-Feed ändern</button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <a href="../settings/" class="btn btn-default active" role="button">Änderungen verwerfen</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
