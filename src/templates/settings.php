@@ -16,16 +16,22 @@
                     <div >
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="email" class="control-label">
+                                <label for="email" class=" col-lg-6 control-label">
                                     Email:
                                 </label>
-                                <input name="email" id="email" type="email" autofocus class="form-control">
+                                <div class="col-lg-6">
+                                    <input name="email" id="email" type="email" autofocus class="form-control">
+                                </div>
+
                             </div>
-                            <div>
-                                <label for="vorname" class="inputlabel">
+                            <div class="form-group">
+                                <label for="vorname" class=" col-lg-6 control-label">
                                     Vorname:
                                 </label>
-                                <input name="vorname" id="vorname" type="text" class="input">
+                                <div class="col-lg-6">
+                                    <input name="vorname" id="vorname" type="text" autofocus class="form-control">
+                                </div>
+
                             </div>
                             <div>
                                 <label for="nachname" class="inputlabel">
