@@ -9,6 +9,18 @@
 
     // handle login
     if (isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
+        if(isset($_POST['register'])){
+            Session::create_user(
+                $_POST['firstName'],
+                $_POST['lastName'],
+                $_POST['email'],
+                $_POST['username'],
+                $_POST['password'],
+                $_POST['confirmedPassword'],
+                $_POST['iban'],
+                $_POST['bic']
+            );
+        }
         if (!Session::check_credentials($_REQUEST['username'], $_REQUEST['password'])) {
             $template_data['message'] = 'Login failed!';
         }
@@ -36,8 +48,9 @@
         Template::render('settings', $template_data);
     });
 
-    $router->map( 'GET', '/register/', function() {
-        include("../templates/register.php");
+    $router->map('GET', '/register/', function () {
+        $template_data = array();
+        Template::render('register', $template_data);
     });
 
     $match = $router->match();

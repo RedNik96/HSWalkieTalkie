@@ -1,79 +1,73 @@
-<!--<link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/standard.css">-->
-<link rel="stylesheet" type="text/css" href="../css/standard.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" type="text/css" href="../css/register.css">
 
-<form action="registerHandling.php">
-    <fieldset>
-        <legend>Registrieren</legend>
-        <table>
-            <tr>
-                <td>
-                    <span class="dividingLine">
-                        Verpflichtende Angaben
-                    </span>
-                </td>
-                <td>
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="email">E-Mail-Adresse*</label>
-                </td>
-                <td>
-                    <input name="email" id="email" type="text" placeholder="max.mustermann@gmail.com" autofocus autocomplete="off">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="username">Benutzername*</label>
-                </td>
-                <td>
-                    <input name="username" id="username" type="text" placeholder="Max Mustermann" autocomplete="off">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="password">Passwort*</label>
-                </td>
-                <td>
-                    <input name="password" id="password" type="password" placeholder="Passwort" autocomplete="off">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="passwordConfirm">Passwort erneut eingeben*</label>
-                </td>
-                <td>
-                    <input name="passwordConfirm" id="passwordConfirm" type="password" placeholder="Passwort" autocomplete="off">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="dividingLine">
-                        Optionale Angaben
-                    </span>
-                </td>
-                <td>
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="iban">IBAN</label>
-                </td>
-                <td>
-                    <input name="iban" id="iban" type="text" placeholder="" autocomplete="off">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="bic">BIC</label>
-                </td>
-                <td>
-                    <input name="bic" id="bic" type="text" placeholder="" autocomplete="off">
-                </td>
-            </tr>
-        </table>
-    </fieldset>
-</form>
+<body>
+    <div class="container">
+        <form action="../" class="form-horizontal" method="POST">
+
+            <legend>Verpflichtende Angaben</legend>
+            <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
+                <label for="firstName" class="col-sm-6 control-label">Vorname*</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname" autofocus required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
+                <label for="lastName" class="col-sm-6 control-label">Nachname*</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Nachname" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
+                <label for="email" class="col-sm-6 control-label">E-Mail-Adresse*</label>
+                <div class="col-xs-6">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username" class="col-sm-6 control-label">Benutzername*</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-6 control-label">Passwort*</label>
+                <div class="col-xs-6">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmedPassword" class="col-sm-6 control-label">Passwort erneut eingeben*</label>
+                <div class="col-xs-6">
+                    <input type="password" class="form-control" id="confirmedPassword" name="confirmedPassword" placeholder="Password" required>
+                </div>
+            </div>
+            <legend>Optionale Angaben</legend>
+            <div class="form-group">
+                <label for="iban" class="col-sm-6 control-label">IBAN</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="iban" name="iban" placeholder="IBAN" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bic" class="col-sm-6 control-label">BIC</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="bic" name="bic" placeholder="BIC" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label"></label>
+                <div class="col-xs-6">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-primary" name="register">Registrieren</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <a href="../" class="btn btn-default active" role="button">Abbrechen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

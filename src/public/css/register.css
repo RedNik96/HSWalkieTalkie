@@ -1,7 +1,8 @@
-fieldset {
-    display: inline-block;
-}
-
-form {
-    text-align: center;
+div.container {
+    width:500px;
+    border:1px solid black;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-top: 5px;
 }
