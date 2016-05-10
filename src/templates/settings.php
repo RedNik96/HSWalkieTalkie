@@ -170,58 +170,61 @@
             </div>
             <div id="account" class="tab-pane fade">
                 <div class="container-border">
-                    <form class="form-horizontal">
+
                         <legend>
                             Kontodaten ändern
                         </legend>
-                        <div class="form-group">
-                            <label for="iban" class=" col-lg-6 control-label">
-                                IBAN:
-                            </label>
-                            <div class="col-lg-6">
-                                <input name="iban" id="iban" type="text" autofocus class="form-control">
-                            </div>
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>
+                                neues Konto anlegen
+                            </legend>
 
-                        </div>
-                        <div class="form-group">
-                            <label for="bic" class=" col-lg-6 control-label">
-                                BIC:
-                            </label>
-                            <div class="col-lg-6">
-                                <input name="big" id="big" type="text" autofocus class="form-control">
-                            </div>
+                            <div class="form-group">
+                                <label for="iban" class=" col-lg-6 control-label">
+                                    IBAN:
+                                </label>
+                                <div class="col-lg-6">
+                                    <input name="iban" id="iban" type="text" autofocus class="form-control">
+                                </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label for="holder" class=" col-lg-6 control-label">
-                                Kontoinhaber:
-                            </label>
-                            <div class="col-lg-6">
-                                <input name="holder" id="holder" type="text" autofocus class="form-control">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="bank" class=" col-lg-6 control-label">
-                                Kreditinstitut:
-                            </label>
-                            <div class="col-lg-6">
-                                <input name="bank" id="bank" type="text" autofocus class="form-control">
+                            <div class="form-group">
+                                <label for="bic" class=" col-lg-6 control-label">
+                                    BIC:
+                                </label>
+                                <div class="col-lg-6">
+                                    <input name="bic" id="bic" type="text" autofocus class="form-control">
+                                </div>
+
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label"></label>
-                            <div class="col-lg-4">
-                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                                    <div class="btn-group" role="group">
-                                        <button type="submit" class="btn btn-primary" name="change-account">Kontodaten ändern</button>
-                                    </div>
-                                    <div class="btn-group" role="group">
-                                        <a href="../settings/" class="btn btn-default active" role="button">Änderungen verwerfen</a>
+                            <div class="form-group">
+                                <label for="bank" class=" col-lg-6 control-label">
+                                    Kreditinstitut:
+                                </label>
+
+                                <div class="col-lg-6">
+                                    <input name="bank" id="bank" type="text" autofocus class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-6 control-label"></label>
+                                <div class="col-lg-4">
+                                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-primary" name="new-account">Kontodaten ändern</button>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <a href="../settings/" class="btn btn-default active" role="button">Änderungen verwerfen</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
                     </form>
+
+
+
                 </div>
             </div>
             <div id="ilias" class="tab-pane fade">
