@@ -53,6 +53,9 @@
     $router->map('GET', '/register/', function () {
         Template::render('register', []);
     });
+    $router->map('GET', '/profile/', function () {
+        Template::render('profile', []);
+    });
 
     $match = $router->match();
 

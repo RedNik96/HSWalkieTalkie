@@ -1,13 +1,4 @@
-.inputlabel {
-    display: inline-block;
-    margin: auto;
-    width: 100px;
-    padding-bottom: 10px;
-}
 
-.input {
-    width: 250px;
-}
 .buttonrow {
     text-align: right;
     padding-top: 5px;
@@ -31,4 +22,8 @@ div.container-border {
 
 legend {
     padding-left: 10px;
+}
+
+input {
+    padding-right: 10px;
 }

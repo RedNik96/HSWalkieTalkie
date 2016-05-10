@@ -1,7 +1,6 @@
 <?php
 
 class Template {
-    public static $tableContent ='';
     public static function render($template, $data)
     {
         // registered passed variables as local variables
