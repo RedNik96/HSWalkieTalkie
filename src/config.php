@@ -49,7 +49,9 @@ require_once('classes/Template.php');
 
 
 // create connection to database
-$dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', ''); #TODO: implement DB-Connections and use the users from $config
+$dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', '',
+    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+); #TODO: implement DB-Connections and use the users from $config
 
 
 // start session
