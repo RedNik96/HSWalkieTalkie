@@ -1,0 +1,34 @@
+.inputlabel {
+    display: inline-block;
+    margin: auto;
+    width: 100px;
+    padding-bottom: 10px;
+}
+
+.input {
+    width: 250px;
+}
+.buttonrow {
+    text-align: right;
+    padding-top: 5px;
+}
+.imagepanel {
+    text-align: center;
+}
+
+img {
+    padding-bottom: 5px;
+    width: 200px;
+    height: 200px;
+}
+div.container-border {
+    border:1px solid black;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+legend {
+    padding-left: 10px;
+}
