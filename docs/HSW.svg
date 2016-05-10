@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<svg width="55cm" height="29cm" viewBox="-149 1 1094 564" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="54cm" height="29cm" viewBox="-149 1 1078 564" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
     <rect style="fill: #ffffff" x="319.88" y="159.213" width="210.8" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="319.88" y="159.213" width="210.8" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="425.28" y="173.213">User</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="425.28" y="173.213">user</text>
     <rect style="fill: #ffffff" x="319.88" y="177.213" width="210.8" height="212"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="319.88" y="177.213" width="210.8" height="212"/>
     <polygon style="fill: #000000" points="322.88,187.213 324.88,190.213 326.88,187.213 324.88,184.213 "/>
@@ -36,7 +36,7 @@
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="328.88" y="321.213">picture</text>
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="431.28" y="321.213">link/varchar</text>
     <ellipse style="fill: #000000" cx="324.88" cy="331.213" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="328.88" y="337.213">geburtstag</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="328.88" y="337.213">birthday</text>
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="431.28" y="337.213">date</text>
     <ellipse style="fill: #000000" cx="324.88" cy="347.213" rx="2" ry="2"/>
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="328.88" y="353.213">strasse</text>
@@ -51,7 +51,7 @@
   <g>
     <rect style="fill: #ffffff" x="741" y="256" width="156.9" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="741" y="256" width="156.9" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="819.45" y="270">Posts</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="819.45" y="270">posts</text>
     <rect style="fill: #ffffff" x="741" y="274" width="156.9" height="68"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="741" y="274" width="156.9" height="68"/>
     <polygon style="fill: #000000" points="744,284 746,287 748,284 746,281 "/>
@@ -78,7 +78,7 @@
   <g>
     <rect style="fill: #ffffff" x="187.438" y="424.514" width="118.4" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="187.438" y="424.514" width="118.4" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="246.638" y="438.514">Follower</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="246.638" y="438.514">follower</text>
     <rect style="fill: #ffffff" x="187.438" y="442.514" width="118.4" height="36"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="187.438" y="442.514" width="118.4" height="36"/>
     <polygon style="fill: #000000" points="190.438,452.514 192.438,455.514 194.438,452.514 192.438,449.514 "/>
@@ -93,7 +93,7 @@
   <g>
     <rect style="fill: #ffffff" x="561" y="86" width="118.4" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="561" y="86" width="118.4" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="620.2" y="100">Votes</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="620.2" y="100">votes</text>
     <rect style="fill: #ffffff" x="561" y="104" width="118.4" height="52"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="561" y="104" width="118.4" height="52"/>
     <polygon style="fill: #000000" points="564,114 566,117 568,114 566,111 "/>
@@ -113,7 +113,7 @@
     <polygon style="fill: #000000" points="246.638,422.278 241.638,412.278 246.638,414.778 251.638,412.278 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="246.638,422.278 241.638,412.278 246.638,414.778 251.638,412.278 "/>
     <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="315.88" y="263.213">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="250.638" y="420.514">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="250.638" y="420.514">c/n</text>
   </g>
   <g>
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="477.98,159.213 477.98,95 551.264,95 "/>
@@ -134,7 +134,7 @@
     <polygon style="fill: #000000" points="308.074,433.514 318.074,428.514 315.574,433.514 318.074,438.514 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="308.074,433.514 318.074,428.514 315.574,433.514 318.074,438.514 "/>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="429.28" y="401.213">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="309.838" y="429.514">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="309.838" y="429.514">c/n</text>
   </g>
   <g>
     <polygon style="fill: #ffffff" points="592.686,219.736 635.786,193.876 678.886,219.736 635.786,245.596 "/>
@@ -144,69 +144,69 @@
     <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:monospace;font-style:normal;font-weight:normal" x="635.786" y="223.736">posted</text>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="391.672" y="446.22" width="180" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="391.672" y="446.22" width="180" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="481.672" y="460.22">Duell</text>
-    <rect style="fill: #ffffff" x="391.672" y="464.22" width="180" height="84"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="391.672" y="464.22" width="180" height="84"/>
-    <polygon style="fill: #000000" points="394.672,474.22 396.672,477.22 398.672,474.22 396.672,471.22 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="400.672" y="480.22">id</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="518.472" y="480.22">int</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="400.672" y1="481.82" x2="541.572" y2="481.82"/>
-    <ellipse style="fill: #000000" cx="396.672" cy="490.22" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="400.672" y="496.22">fighter_post</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="518.472" y="496.22">User</text>
-    <ellipse style="fill: #000000" cx="396.672" cy="506.22" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="400.672" y="512.22">fighter_repost</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="518.472" y="512.22">User</text>
-    <ellipse style="fill: #000000" cx="396.672" cy="522.22" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="400.672" y="528.22">post</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="518.472" y="528.22">Repost</text>
-    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="396.672" cy="538.22" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="400.672" y="544.22">winner</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="518.472" y="544.22">User</text>
+    <rect style="fill: #ffffff" x="414.672" y="453.22" width="156.9" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="414.672" y="453.22" width="156.9" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="493.122" y="467.22">duell</text>
+    <rect style="fill: #ffffff" x="414.672" y="471.22" width="156.9" height="84"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="414.672" y="471.22" width="156.9" height="84"/>
+    <polygon style="fill: #000000" points="417.672,481.22 419.672,484.22 421.672,481.22 419.672,478.22 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="423.672" y="487.22">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="533.772" y="487.22">int</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="423.672" y1="488.82" x2="556.872" y2="488.82"/>
+    <ellipse style="fill: #000000" cx="419.672" cy="497.22" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="423.672" y="503.22">fighterPost</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="533.772" y="503.22">User</text>
+    <ellipse style="fill: #000000" cx="419.672" cy="513.22" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="423.672" y="519.22">fighterRepost</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="533.772" y="519.22">User</text>
+    <ellipse style="fill: #000000" cx="419.672" cy="529.22" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="423.672" y="535.22">post</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="533.772" y="535.22">Post</text>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" cx="419.672" cy="545.22" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="423.672" y="551.22">winner</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="533.772" y="551.22">User</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="477.98,389.213 477.98,417.716 436.672,417.716 436.672,436.484 "/>
-    <polygon style="fill: #000000" points="436.672,443.984 431.672,433.984 436.672,436.484 441.672,433.984 "/>
-    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="436.672,443.984 431.672,433.984 436.672,436.484 441.672,433.984 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="477.98,389.213 477.98,421.216 453.897,421.216 453.897,443.484 "/>
+    <polygon style="fill: #000000" points="453.897,450.984 448.897,440.984 453.897,443.484 458.897,440.984 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="453.897,450.984 448.897,440.984 453.897,443.484 458.897,440.984 "/>
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="481.98" y="401.213">1</text>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="440.672" y="442.22">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="457.897" y="449.22">c/n</text>
   </g>
   <g>
-    <rect style="fill: #ffffff" x="718.894" y="462.072" width="226.2" height="18"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="718.894" y="462.072" width="226.2" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="831.994" y="476.072">Ergebnis</text>
-    <rect style="fill: #ffffff" x="718.894" y="480.072" width="226.2" height="84"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="718.894" y="480.072" width="226.2" height="84"/>
+    <rect style="fill: #ffffff" x="718.894" y="462.072" width="210.8" height="18"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="718.894" y="462.072" width="210.8" height="18"/>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="824.294" y="476.072">round</text>
+    <rect style="fill: #ffffff" x="718.894" y="480.072" width="210.8" height="84"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="718.894" y="480.072" width="210.8" height="84"/>
     <polygon style="fill: #000000" points="721.894,490.072 723.894,493.072 725.894,490.072 723.894,487.072 "/>
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="727.894" y="496.072">id</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="899.594" y="496.072">int</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="727.894" y1="497.672" x2="922.694" y2="497.672"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="884.194" y="496.072">int</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="727.894" y1="497.672" x2="907.294" y2="497.672"/>
     <ellipse style="fill: #000000" cx="723.894" cy="506.072" rx="2" ry="2"/>
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="727.894" y="512.072">duell</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="899.594" y="512.072">Duell</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="884.194" y="512.072">Duell</text>
     <ellipse style="fill: #000000" cx="723.894" cy="522.072" rx="2" ry="2"/>
     <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="727.894" y="528.072">round</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="899.594" y="528.072">int</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="884.194" y="528.072">int</text>
     <ellipse style="fill: #000000" cx="723.894" cy="538.072" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="727.894" y="544.072">fighter_post_action</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="899.594" y="544.072">int</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="727.894" y="544.072">fighterPostAction</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="884.194" y="544.072">int</text>
     <ellipse style="fill: #000000" cx="723.894" cy="554.072" rx="2" ry="2"/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="727.894" y="560.072">fighter_repost_action</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="899.594" y="560.072">int</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="727.894" y="560.072">fighterRepostAction</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="884.194" y="560.072">int</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="571.672,522.22 645.283,522.22 645.283,522.072 709.158,522.072 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="571.572,529.22 645.233,529.22 645.233,522.072 709.158,522.072 "/>
     <polygon style="fill: #000000" points="716.658,522.072 706.658,527.072 709.158,522.072 706.658,517.072 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="716.658,522.072 706.658,527.072 709.158,522.072 706.658,517.072 "/>
-    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="575.672" y="518.22">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="575.572" y="525.22">1</text>
     <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="714.894" y="518.072">n</text>
   </g>
   <g>
     <rect style="fill: #ffffff" x="88.2976" y="175.687" width="110.7" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="88.2976" y="175.687" width="110.7" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="143.648" y="189.687">Account</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="143.648" y="189.687">account</text>
     <rect style="fill: #ffffff" x="88.2976" y="193.687" width="110.7" height="52"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="88.2976" y="193.687" width="110.7" height="52"/>
     <polygon style="fill: #000000" points="91.2976,203.687 93.2976,206.687 95.2976,203.687 93.2976,200.687 "/>
@@ -223,7 +223,7 @@
   <g>
     <rect style="fill: #ffffff" x="-148.21" y="176.154" width="103" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-148.21" y="176.154" width="103" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-96.71" y="190.154">BIC</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-96.71" y="190.154"> bic</text>
     <rect style="fill: #ffffff" x="-148.21" y="194.154" width="103" height="20"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-148.21" y="194.154" width="103" height="20"/>
     <polygon style="fill: #000000" points="-145.21,204.154 -143.21,207.154 -141.21,204.154 -143.21,201.154 "/>
@@ -248,7 +248,7 @@
   <g>
     <rect style="fill: #ffffff" x="326.79" y="1" width="103" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="326.79" y="1" width="103" height="18"/>
-    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="378.29" y="15">Ort</text>
+    <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="378.29" y="15">ort</text>
     <rect style="fill: #ffffff" x="326.79" y="19" width="103" height="36"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="326.79" y="19" width="103" height="36"/>
     <polygon style="fill: #000000" points="329.79,29 331.79,32 333.79,29 331.79,26 "/>
@@ -267,10 +267,24 @@
     <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="382.29" y="67">n</text>
   </g>
   <g>
-    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="571.672,474.22 656.336,474.22 656.336,316 731.264,316 "/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="571.572,481.22 656.286,481.22 656.286,316 731.264,316 "/>
     <polygon style="fill: #000000" points="738.764,316 728.764,321 731.264,316 728.764,311 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="738.764,316 728.764,321 731.264,316 728.764,311 "/>
-    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="575.672" y="470.22">c</text>
+    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="575.572" y="477.22">c</text>
     <text font-size="9.59863" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="737" y="312">1</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="530.68,389.213 530.68,417.716 532.347,417.716 532.347,443.484 "/>
+    <polygon style="fill: #000000" points="532.347,450.984 527.347,440.984 532.347,443.484 537.347,440.984 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="532.347,450.984 527.347,440.984 532.347,443.484 537.347,440.984 "/>
+    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="534.68" y="401.213">1</text>
+    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="536.347" y="449.22">c/n</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="530.68,379.213 571.572,379.213 571.572,443.484 "/>
+    <polygon style="fill: #000000" points="571.572,450.984 566.572,440.984 571.572,443.484 576.572,440.984 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="571.572,450.984 566.572,440.984 571.572,443.484 576.572,440.984 "/>
+    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="534.68" y="375.213">1</text>
+    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="575.572" y="449.22">c/n</text>
   </g>
 </svg>
