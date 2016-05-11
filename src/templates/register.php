@@ -1,9 +1,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" type="text/css" href="../css/register.css">
 
-<body>
-    <div class="container">
-        <form action="../register/" class="form-horizontal" method="POST">
+<div class="container">
+    <form action="<?php echo $GLOBALS['router']->generate('registrierung'); ?>" class="form-horizontal" method="POST">
 
             <legend>Verpflichtende Angaben</legend>
             <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
