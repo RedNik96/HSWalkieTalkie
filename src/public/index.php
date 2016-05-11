@@ -21,7 +21,7 @@
     $router->map( 'GET', '/', function() {
         include CLASSES_PATH . "/TimelineHandler.php";
     });
-    
+
     $router->map( 'GET', '/user/', function() {
         echo 'profil';
     });
@@ -47,7 +47,8 @@
     });
 
     $router->map('GET', '/profile/', function () {
-        Template::render('profile', []);
+        include(CLASSES_PATH . "/handler/ProfileHandler.php");
+        ProfileHandler::GET();
     });
 
     $match = $router->match();
