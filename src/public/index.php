@@ -36,7 +36,11 @@
     });
 
     $router->map('GET', '/register/', function () {
-        Template::render('register', []);
+        Template::render('register', [], array(
+            'template_top'      => null,
+            'template_right'    => null,
+            'template_left'     => null
+        ));
     }, 'registrierung');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
 
     $router->map('POST', '/register/', function () {
