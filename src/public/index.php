@@ -19,7 +19,7 @@
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        include CLASSES_PATH . "/TimelineHandler.php";
+        include(CLASSES_PATH . "/handler/TimelineHandler.php");
     }, 'timeline');
     
     $router->map( 'GET', '/user/', function() {
