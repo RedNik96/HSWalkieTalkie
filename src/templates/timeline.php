@@ -20,8 +20,8 @@
                 <div class="postauthor">
                     <img class="img-rounded" src="leon.jpg" alt="Bild">
                     <div class="postauthorname">
-                        <span id="name"><?= htmlspecialchars($post['firstname']) . " " . htmlspecialchars($post['lastname'])?></span>
-                        <span id="username">@le0on</span>
+                        <span id="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
+                        <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
                     </div>
                 </div>
                 <div class="posttime">
@@ -29,7 +29,8 @@
                 </div>
             </div>
             <div class="postcontent">
-                Test <br> $cashtag
+                <?= htmlspecialchars($post['content']); ?>
+                <!--Test <br> $cashtag-->
             </div>
             <div class="postfooter">
                 <div class="share">
