@@ -13,7 +13,7 @@ class Session {
                 $stmt2=$GLOBALS['dbh']->prepare('update user set logged_in=true where id=:id ');
                 $stmt2->bindParam(':id',$id);
                 $stmt2->execute();
-                $GLOBALS['username']=$_REQUEST['username'];
+                $_SESSION['user']=$_REQUEST['username'];
                 return true;
             } else {
                 $_SESSION['logged_in'] = false;
@@ -27,6 +27,9 @@ class Session {
 
     public static function authenticated()
     {
+        if(!isset($_SESSION['logged_in'])) {
+            return false;
+        }
         return ($_SESSION['logged_in'] === true);
     }
 
@@ -39,7 +42,7 @@ class Session {
         session_start();
     }
     
-    public static function create_user($firstName, $lastName, $email, $username, $password, $confirmedPassword, $iban, $bic)
+    public static function create_user($firstName, $lastName, $email, $username, $password, $confirmedPassword, $birthday, $street, $housenumber, $zip, $iban, $bic)
     {
         global $dbh;
     
@@ -48,12 +51,12 @@ class Session {
             $stmt = $dbh->prepare("SELECT COUNT(*) FROM User WHERE username = :username");
             
             $stmt->execute(array(
-                'username'     => $username
+                'username'          => $username
             ));
             
             if ($stmt->fetchColumn() == 0) {         // user does not yet exists, create it
-                $stmt2 = $dbh->prepare("INSERT INTO user (username, password, firstName, lastName, email) 
-                                        VALUES (:username, :password, :firstName, :lastName, :email);");
+                $stmt2 = $dbh->prepare("INSERT INTO user (username, password, firstName, lastName, email, birthday, street, housenumber, zip) 
+                                        VALUES (:username, :password, :firstName, :lastName, :email, :birthday, :street, :housenumber, :zip);");
     
                 $hash = password_hash($password, PASSWORD_DEFAULT);
     
@@ -62,28 +65,25 @@ class Session {
                     'password'      => $hash,
                     'firstName'     => $firstName,
                     'lastName'      => $lastName,
-                    'email'         => $email
+                    'email'         => $email,
+                    'birthday'      => $birthday,
+                    'street'        => $street,
+                    'housenumber'   => $housenumber,
+                    'zip'           => $zip
                 ));
 
-                if($bic) {
-                    //query that adds bic, if it not yet exists.
-                    $stmt2 = $dbh->prepare("INSERT INTO bic (bic) VALUES (:bic)");
-                    $stmt2->execute(array(
-                        'bic' => $bic
-                    ));
-                }
                 if($iban) {
                     //query that adds iban, if it not yet exists
                     $stmt2 = $dbh->prepare("INSERT INTO konto (iban, bic, user) VALUES (:iban, :bic, :username)");
                     $stmt2->execute(array(
-                        'iban' => $iban,
-                        'bic' => $bic,
-                        'username' => $username
+                        'iban'      => $iban,
+                        'bic'       => $bic,
+                        'username'  => $username
                     ));
                 }
 
-                $_SESSION['logged_in'] = true;
-                $_SESSION['user'] = $username;
+                $_SESSION['logged_in']  = true;
+                $_SESSION['user']       = $username;
     
                 // create new session_id
                 session_regenerate_id(true);

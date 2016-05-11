@@ -7,38 +7,21 @@
     $template_data = [];
     global $dbh;
 
-    // handle login
-    if (isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
-        if(isset($_POST['register'])){
-            Session::create_user(
-                $_POST['firstName'],
-                $_POST['lastName'],
-                $_POST['email'],
-                $_POST['username'],
-                $_POST['password'],
-                $_POST['confirmedPassword'],
-                $_POST['iban'],
-                $_POST['bic']
-            );
-        }
-        if (!Session::check_credentials($_REQUEST['username'], $_REQUEST['password'])) {
-            $template_data['message'] = 'Login failed!';
-        }
-        Template::render('timeline', $template_data);
+    /*
+    if(!Session::authenticated()) {
+        Template::render("login", []);
+        die();
     }
+    */
 
     #TODO: hier sollte das URL-Routing implementiert werden
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        Template::render('timeline', []);
-    });
-
-    $router->map( 'GET', '/login/', function() {
-        Template::render('login', []);
-    });
-
+        include CLASSES_PATH . "/TimelineHandler.php";
+    }, 'timeline');
+    
     $router->map( 'GET', '/user/', function() {
         echo 'profil';
     });
@@ -46,12 +29,25 @@
     $router->map( 'GET', '/user/[i:id]', function($id) {
         echo 'user' . $id;
     });
+
     $router->map( 'GET', '/settings/', function() {
-        Template::render('settings', []);
+        SettingsHandler::get();
+    }, 'settings');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
+
+    $router->map('POST', '/settings/', function () {
+        SettingsHandler::post();
     });
 
     $router->map('GET', '/register/', function () {
         Template::render('register', []);
+    }, 'registrierung');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
+
+    $router->map('POST', '/register/', function () {
+        include(CLASSES_PATH . "/handler/registerHandler.php");
+    });
+
+    $router->map('GET', '/profile/', function () {
+        Template::render('profile', []);
     });
 
     $match = $router->match();

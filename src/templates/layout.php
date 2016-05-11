@@ -1,8 +1,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Musikverwaltung</title>
-    <link rel="stylesheet" href="../public/css/standard.css">
+    <title>HSWalkieTalkie</title>
+    <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/layout.css">
     <!-- Font Awesome-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
     <!-- Das neueste kompilierte und minimierte CSS -->
@@ -12,6 +12,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <!-- Das neueste kompilierte und minimierte JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../public/css/poststylesheet.css">
+    <link rel="stylesheet" href="../public/css/postwritestylesheet.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
 
 </head>
@@ -40,5 +47,9 @@
             </div>
         <? } ?>
     </div>
+    <footer>
+        Made with <i class="fa fa-heart" aria-hidden="true"></i> and 99+ bottles of <i class="fa fa-beer" aria-hidden="true"></i>
+    </footer>
+    
 </body>
 </html>

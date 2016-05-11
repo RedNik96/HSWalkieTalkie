@@ -45,6 +45,7 @@ error_reporting(E_ALL|E_STRCT);
 //spl_autoload_register( function($class) {
 require_once('classes/Session.php');
 require_once('classes/Template.php');
+require_once('classes/handler/SettingsHandler.php');
 //});
 
 
