@@ -35,6 +35,9 @@ defined("TEMPLATES_PATH")
 defined("CLASSES_PATH")
     or define("CLASSES_PATH", realpath(dirname(__FILE__) . '/classes'));
 
+defined("IMG_PATH")
+    or define("IMG_PATH", realpath(dirname(__FILE__) . '/img'));
+
 /*
     Error reporting.
 */

@@ -47,7 +47,8 @@
     });
 
     $router->map('GET', '/profile/', function () {
-        Template::render('profile', []);
+        include(CLASSES_PATH . "/handler/ProfileHandler.php");
+        ProfileHandler::GET();
     });
 
     $match = $router->match();
