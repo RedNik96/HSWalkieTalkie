@@ -33,7 +33,7 @@ CREATE TABLE `user` (
 
 CREATE TABLE `bic` (
   `bic` varchar(11) COLLATE utf8mb4_bin NOT NULL,
-  `bank` varchar(100) COLLATE utf8mb4_bin NOT NULL
+  `bank` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`bic`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
