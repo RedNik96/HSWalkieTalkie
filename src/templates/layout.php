@@ -44,7 +44,7 @@
             </div>
         <? } else { ?>
             <div class="row content">
-                <?=$content_for_layout ?>
+                <?= $content_for_layout ?>
             </div>
         <? } ?>
     </div>

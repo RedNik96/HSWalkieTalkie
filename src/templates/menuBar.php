@@ -19,7 +19,7 @@
         <li <? if ($GLOBALS['match']['name']=='settings') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settings");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
       </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="fa fa-power-off fa-2x"></span></a></span></li>
+          <li><a href="<?= $GLOBALS['router']->generate('logout'); ?>"><span class="fa fa-power-off fa-2x"></span></a></li>
         </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -7,12 +7,9 @@
     $template_data = [];
     global $dbh;
 
-    /*
-    if(!Session::authenticated()) {
-        Template::render("login", []);
-        die();
-    }
-    */
+
+
+
 
     #TODO: hier sollte das URL-Routing implementiert werden
     $router = new AltoRouter();
@@ -51,8 +48,25 @@
         ProfileHandler::GET();
     }, 'profile');
 
-    $match = $router->match();
+    $router->map('POST', '/', function() {
+        LoginHandler::post();
+    });
+    
+    $router->map('POST', '/logout/', function() {
+        LogoutHandler::logout();
+    }, "logout");
 
+
+    $match = $router->match();
+    if((!Session::authenticated()) && (!($match['name'] === 'registrierung'))) {
+      if($match['name']!='timeline'){
+          header("Location: ".$router->generate("timeline"));
+      }
+        Template::render("login", array(
+            'url' => $router->generate("registrierung")
+        ));
+        die();
+    }
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {
