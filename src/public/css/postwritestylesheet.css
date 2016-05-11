@@ -1,0 +1,23 @@
+.postwrite {
+    border: 1px solid grey;
+    box-shadow: 1px 1px 1px 1px grey;
+    padding: 0.5%;
+    border-radius: 6px;
+}
+
+.postwrite textarea{
+    resize: none;
+}
+
+.postwrite .postaddonsdiv{
+    width: 49.5%;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.postwrite .postbuttondiv{
+    text-align: right;
+    margin-top: 5px;
+    display: inline-block;
+    width: 49%;
+}
