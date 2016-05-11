@@ -4,6 +4,8 @@ class Template {
     public static function render($template, $data)
     {
         // registered passed variables as local variables
+        $content_left = null;
+        $content_right = null;
         extract($data);
 
         // load passed template and store contents for usage in layout

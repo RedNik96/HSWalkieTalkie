@@ -19,9 +19,9 @@
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        Template::render('timeline', []);
-    }, 'timeline');  //Über den 4. Parameter (timeline) ist der Pfad mit $router->generate('timeline') zu bekommen);
-
+        include CLASSES_PATH . "/TimelineHandler.php";
+    });
+    
     $router->map( 'GET', '/user/', function() {
         echo 'profil';
     });
