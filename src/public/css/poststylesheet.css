@@ -41,15 +41,6 @@
     display: block;
 }
 
-#name{
-    font-weight: bold;
-    color: black;
-}
-
-#username{
-    color: grey;
-}
-
 .post .postheader .posttime {
     width: 39%;
     display: inline-block;
@@ -71,12 +62,4 @@
 .post .postfooter .vote{
     display: inline-block;
     width: 40%;
-}
-
-#cash {
-    color: #eea236;
-}
-
-#shared{
-    color: #2e6da4;
 }

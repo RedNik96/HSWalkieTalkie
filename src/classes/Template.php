@@ -27,6 +27,7 @@ class Template {
                 include(TEMPLATES_PATH . '/rss.php');
                 $content_left = ob_get_clean();
                 ob_start();
+                include('/handler/StatisticHandler.php');
                 include(TEMPLATES_PATH . '/rightBar.php');
                 $content_right = ob_get_clean();
             }
