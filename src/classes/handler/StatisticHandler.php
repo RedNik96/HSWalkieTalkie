@@ -1,37 +1,47 @@
 <?php
 
-global $dbh;
+class StatisticHandler {
 
-$stmtRichestUsers = $dbh->prepare("
-  SELECT U.firstName, U.lastName, U.username
-  FROM user AS U
-  LIMIT 3
-  ");
+    public static function getStats(){
+        global $dbh;
 
-$result = $stmtRichestUsers->execute();
+        $stmtRichestUsers = $dbh->prepare("
+              SELECT U.firstName, U.lastName, U.username
+              FROM user AS U
+              LIMIT 3
+              ");
 
-$richestUsers = array();
-while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
-    $richestUsers[$result['username']] = array(
-        'username' => $result['username'],
-        'firstName' => $result['firstName'],
-        'lastName' => $result['lastName']
-    );
-}
+        $result = $stmtRichestUsers->execute();
 
-$stmtTrendingTags = $dbh->prepare("
-  SELECT U.firstName, U.lastName, U.username
-  FROM user AS U
-  LIMIT 3
-  ");
+        $richestUsers = array();
+        while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
+            $richestUsers[$result['username']] = array(
+                'username' => $result['username'],
+                'firstName' => $result['firstName'],
+                'lastName' => $result['lastName']
+            );
+        }
 
-$result = $stmtTrendingTags->execute();
+        $stmtTrendingTags = $dbh->prepare("
+              SELECT U.firstName, U.lastName, U.username
+              FROM user AS U
+              LIMIT 3
+              ");
 
-$trendingTags = array();
-while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
-    $trendingTags[$result['username']] = array(
-        'username' => $result['username'],
-        'firstName' => $result['firstName'],
-        'lastName' => $result['lastName']
-    );
+        $result = $stmtTrendingTags->execute();
+
+        $trendingTags = array();
+        while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
+            $trendingTags[$result['username']] = array(
+                'username' => $result['username'],
+                'firstName' => $result['firstName'],
+                'lastName' => $result['lastName']
+            );
+        }
+
+        return array(
+            'richestUsers' => $richestUsers,
+            'trendingTags' => $trendingTags
+        );
+    }
 }

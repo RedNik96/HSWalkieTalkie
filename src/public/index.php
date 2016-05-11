@@ -49,7 +49,7 @@
     $router->map('GET', '/profile/', function () {
         include(CLASSES_PATH . "/handler/ProfileHandler.php");
         ProfileHandler::GET();
-    });
+    }, 'profile');
 
     $match = $router->match();
 

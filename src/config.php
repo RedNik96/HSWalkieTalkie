@@ -49,6 +49,7 @@ error_reporting(E_ALL|E_STRCT);
 require_once('classes/Session.php');
 require_once('classes/Template.php');
 require_once('classes/handler/SettingsHandler.php');
+require_once('classes/handler/StatisticHandler.php');
 //});
 
 

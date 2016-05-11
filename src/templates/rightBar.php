@@ -6,12 +6,12 @@
     <legend>Statistiken</legend>
     <span>Statistiken anzeigen für </span>
     <input data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox">
-    <? if(!empty($richestUsers)): ?>
+    <? if(!empty($stats['richestUsers'])): ?>
         <div class="statistic" class="richestUsers">
             <legend class="statisticCategory">Reichste Benutzer</legend>
 
             <? $i=0;
-            foreach($richestUsers as $user):
+            foreach($stats['richestUsers'] as $user):
             $i++?>
             <div class="ranking">
                 <div class="placement">
