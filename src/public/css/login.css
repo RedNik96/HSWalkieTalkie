@@ -1,3 +1,13 @@
+div.container {
+    width:500px;
+    border:1px solid black;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-top: 5px;
+    text-align: center;
+}
+
 header {
     font-size: 24pt;
     color: gold;
@@ -7,10 +17,33 @@ header {
     padding-bottom: 5pt;
 }
 
-footer {
-    padding-top: 10pt;
+label {
+    display: inline-block;
+    text-align: left;
+}
+
+button {
+    margin-left: 72%;
+}
+/*
+fieldset button {
+    display: inline-block;
+    horiz-align: right;
+    vertical-align: bottom;
+    font-size: 12pt;
+    color: #888888;
+    border: 1pt solid;
+    margin-top: 10pt;
+    margin-right: 6pt;
+    text-align: right;
+}
+
+.register-link{
+    display: inline-block;
+    text-align: right;
     font-size: 12pt;
 }
+
 fieldset {
     width: 200pt;
     font-size: 20pt;
@@ -30,18 +63,6 @@ fieldset input {
     width: 200pt;
 }
 
-fieldset button {
-    display: inline-block;
-    horiz-align: right;
-    vertical-align: bottom;
-    font-size: 12pt;
-    color: #888888;
-    border: 1pt solid;
-    margin-top: 10pt;
-    margin-right: 6pt;
-    text-align: right;
-}
-
 fieldset label {
     display: inline-block;
     font-size: 14pt;
@@ -49,38 +70,4 @@ fieldset label {
     text-align: left;
 
 }
-
-form{
-    width: 100%;
-    text-align: center;
-}
-
-.login-button{
-    text-align: right;
-}
-
-.register-link{
-    display: inline-block;
-    text-align: center;
-    font-size: 12pt;
-
-
-
-}
-/*
-.username input{
-     width: 68%;
-     alignment: left;
- }
-
-.password input{
-    width: 68%;
-
-}
-
-
 */
-
-fieldset div{
-      width: 400px;
-  }

@@ -24,14 +24,14 @@
         <? }
         if (isset($content_left) && isset($content_right)) { ?>
             <div class="row content">
-                <div class="col-lg-3">
-                    <?= $content_left ?>
+                <div class="col-lg-3 container-fluid">
+                    <?=$content_left ?>
                 </div>
-                <div class="col-lg-6">
-                    <?= $content_for_layout ?>
+                <div class="col-lg-6 container-fluid">
+                    <?=$content_for_layout ?>
                 </div>
-                <div class="col-lg-3">
-                    <?= $content_right ?>
+                <div class="col-lg-3 container-fluid">
+                    <?=$content_right ?>
                 </div>
             </div>
         <? } else { ?>
