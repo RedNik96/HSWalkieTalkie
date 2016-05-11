@@ -10,9 +10,14 @@ class Template {
         // registered passed variables as local variables
         extract($data);
         // top
-        ob_start();
-        include(TEMPLATES_PATH . '/' . $template_top .'.php');
-        $content_top = ob_get_clean();
+        if ($template_top == null) {
+            $content_top = null;
+        } else {
+            ob_start();
+            include(TEMPLATES_PATH . '/' . $template_top .'.php');
+            $content_top = ob_get_clean();
+        }
+
         // left
         if ($template_left == null) {
             $content_left = null;
