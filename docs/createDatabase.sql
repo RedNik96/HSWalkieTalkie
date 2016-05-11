@@ -22,7 +22,7 @@ CREATE TABLE `user` (
   `lastName` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `feedURL` varchar(255) COLLATE utf8mb4_bin,
   `email` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `picture` varchar(255) COLLATE utf8mb4_bin,
   `birthday` DATE NOT NULL,
   `street` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `housenumber` varchar(255) COLLATE utf8mb4_bin NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `user` (
 
 CREATE TABLE `bic` (
   `bic` varchar(11) COLLATE utf8mb4_bin NOT NULL,
-  `bank` varchar(100) COLLATE utf8mb4_bin NOT NULL
+  `bank` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`bic`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 

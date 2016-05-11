@@ -31,11 +31,11 @@
     });
 
     $router->map( 'GET', '/settings/', function() {
-        Template::render('settings', []);
+        SettingsHandler::get();
     }, 'settings');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
 
     $router->map('POST', '/settings/', function () {
-        include(CLASSES_PATH . "/handler/settingsHandler.php");
+        SettingsHandler::post();
     });
 
     $router->map('GET', '/register/', function () {
