@@ -20,7 +20,7 @@
 
     $router->map( 'GET', '/', function() {
         include CLASSES_PATH . "/TimelineHandler.php";
-    });
+    }, 'timeline');
     
     $router->map( 'GET', '/user/', function() {
         echo 'profil';
