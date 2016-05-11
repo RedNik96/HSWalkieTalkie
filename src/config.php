@@ -35,6 +35,9 @@ defined("TEMPLATES_PATH")
 defined("CLASSES_PATH")
     or define("CLASSES_PATH", realpath(dirname(__FILE__) . '/classes'));
 
+defined("IMG_PATH")
+    or define("IMG_PATH", realpath(dirname(__FILE__) . '/img'));
+
 /*
     Error reporting.
 */
@@ -46,6 +49,7 @@ error_reporting(E_ALL|E_STRCT);
 require_once('classes/Session.php');
 require_once('classes/Template.php');
 require_once('classes/handler/SettingsHandler.php');
+require_once('classes/handler/StatisticHandler.php');
 //});
 
 

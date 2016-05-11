@@ -28,9 +28,11 @@ while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
     );
 }
 
-//$posts = array('John', 'Jack', 'Jill', 'Jason');
-$test = array(
-    "posts" => $posts
+$stats = StatisticHandler::getStats();
+
+$data = array(
+    "posts" => $posts,
+    "stats" => $stats
 );
 
-Template::render("timeline", $test);
+Template::render("timeline", $data);

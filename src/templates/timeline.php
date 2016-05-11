@@ -13,12 +13,12 @@
     </div>
 </form>
 
-<?php if(!empty($posts)): ?>
-    <?php foreach($posts as $post): ?>
+<? if(!empty($posts)): ?>
+    <? foreach($posts as $post): ?>
         <form class = "post">
             <div class="postheader">
                 <div class="postauthor">
-                    <img class="img-rounded" src="leon.jpg" alt="Bild">
+                    <img class="img-rounded" src="../../leon.jpg" alt="Bild">
                     <div class="postauthorname">
                         <span id="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
                         <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
@@ -46,8 +46,8 @@
             </div>
         </form>
     <?php endforeach; ?>
-<?php else: ?>
+<? else: ?>
     Keine Posts vorhanden.
-<?php endif; ?>
+<? endif; ?>
 
 

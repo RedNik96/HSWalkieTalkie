@@ -14,13 +14,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Timeline</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Settings</a></li>
+        <li class="active"><a href="<? global $router; echo $router->generate("timeline");?>"><span class="fa fa-newspaper-o fa-2x"></span> Neuigkeiten</a></span></li>
+        <li><a href="<? global $router; echo $router->generate("profile");?>"><span class="fa fa-user fa-2x"></span> Profil</a></span></li>
+        <li><a href="<? global $router; echo $router->generate("settings");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
       </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="<?= $GLOBALS['router']->generate('logout'); ?>">logout</a></li>
+          <li><a href="<?= $GLOBALS['router']->generate('logout'); ?>"><span class="fa fa-power-off fa-2x"></span></a></li>
         </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<!--TODO: URL's für NavBar auslagern-->
