@@ -63,7 +63,7 @@
             <div class="form-group">
                 <label for="zip" class="col-lg-6 control-label">PLZ*</label>
                 <div class="col-lg-6">
-                    <select class="form-control" id="zip" name="zip" required>
+                    <select class="form-control" id="zip" name="zip" data-codes="<?= $zips; ?>" required>
                         <option></option>
                         <?php
                             global $dbh;
