@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>HSWalkieTalkie</title>
-    <link rel="stylesheet" href="../public/css/standard.css">
+    <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/layout.css">
     <!-- Font Awesome-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
     <!-- Das neueste kompilierte und minimierte CSS -->
@@ -40,5 +40,9 @@
             </div>
         <? } ?>
     </div>
+    <footer>
+        Made with <i class="fa fa-heart" aria-hidden="true"></i> and 99+ bottles of <i class="fa fa-beer" aria-hidden="true"></i>
+    </footer>
+    
 </body>
 </html>

@@ -45,3 +45,10 @@ fieldset legend {
     border-bottom: none;
     padding-right: 10px;
 }
+i {
+    margin: 3px;
+}
+
+.btn {
+    padding-left: 5px;
+}
