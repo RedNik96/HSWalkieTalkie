@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="register-link col-xs-offset-6">
-                    <a href="register.php">$Rich Bitch werden - Registieren</a>
+                    <a href="<?= $url ?>">$Rich Bitch werden - Registieren</a>
                 </div>
             </fieldset>
         </form>

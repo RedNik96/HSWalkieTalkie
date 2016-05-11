@@ -19,7 +19,7 @@
         <li><a href="#">Settings</a></li>
       </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">logout</a></li>
+          <li><a href="<?= $GLOBALS['router']->generate('logout'); ?>">logout</a></li>
         </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
