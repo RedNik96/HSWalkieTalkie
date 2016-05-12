@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
-
+<link href="../../bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="../../bootstrap-fileinput-master/js/fileinput.min.js"></script>
     <div class="container">
         <script type="text/javascript">
             function deleteFunction() {
@@ -114,11 +116,22 @@
                                 <div >
                                     <img src=<? if ($user_info['picture']) { ?>"/HSWalkieTalkie/src/img/<? print $user_info['picture']."\""; } ?>alt="Profilbild">
                                 </div>
+                                <div class="form-group" id="fileupload">
+                                    <label class="control-label">Select File</label>
+                                    <input id="input-4" name="input4[]" type="file" multiple class="file-loading">
+                                    <script>
+                                        $(document).on('ready', function() {
+                                            $("#input-4").fileinput({showCaption: false});
+                                        });
+                                    </script>
                                     <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen -->
                                     <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
                                     <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
-                                    Diese Datei hochladen: <input name="userfile" type="file" />
-                                <button type="submit" name="change-picture" class="btn btn-default">Profilbild ändern</button>
+                                    <label for="userfile" class="col-lg-6 control-label">Profilbild ändern:</label>
+                                    <input name="userfile" type="file" class="col-lg-6"/>
+
+                                </div>
+                                <button type="submit" name="change-picture" class="btn btn-default active">Profilbild ändern</button>
                             </div>
                         </div>
                         <div class="row buttonrow">

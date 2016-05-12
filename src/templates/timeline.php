@@ -7,10 +7,10 @@
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6"></textarea>
     <div class="postaddonsdiv">
-        <input id="input-4" name="input4[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
+        <input id="postedFiles" name="postedFiles[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
         <script>
             $(document).on('ready', function() {
-                $("#input-4").fileinput({showCaption: false});
+                $("#postedFiles").fileinput({showCaption: false});
             });
         </script>
     </div>
@@ -24,29 +24,36 @@
         <form class = "post">
             <div class="postheader">
                 <div class="postauthor">
-                    <img class="img-rounded" src="../../leon.jpg" alt="Bild">
+
+                    <img class="img-rounded" src="../img/<?= $post['picture']; ?>" alt="Bild">
                     <div class="postauthorname">
                         <span id    ="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
                         <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
                     </div>
                 </div>
                 <div class="posttime">
-                    <span id="time">12.03.2016 17:04 Uhr</span>
+                    <span id="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
                 </div>
             </div>
             <div class="postcontent">
-                <?= htmlspecialchars($post['content']); ?>
+                <?
+                foreach ($post['imgs'] as $img) {
+                    ?><img src="<?= "../img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
+                }
+                echo "<br>";
+                print htmlspecialchars($post['content']);
+                ?>
                 <!--Test <br> $cashtag-->
             </div>
             <div class="postfooter">
                 <div class="share">
                     <button class="btn btn-primary" id="sharebutton"><i class="fa fa-share" aria-hidden="true"></i></button>
-                    <span id="shared">53</span>
+                    <span id="shared"><?= htmlspecialchars($post['reposts']); ?></span>
                 </div>
 
                 <div class="vote">
                     <button class="btn btn-danger" id="vote-down"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
-                    <span id="cash">$53</span>
+                    <span id="cash">$<?= $post['votes']; ?></span>
                     <button class="btn btn-warning" id="vote-up"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
                 </div>
             </div>

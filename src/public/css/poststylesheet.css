@@ -53,6 +53,11 @@
     color: grey;
 }
 
+.post .postcontent img{
+    max-height:140px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
 
 .post .postfooter .share{
     display: inline-block;
