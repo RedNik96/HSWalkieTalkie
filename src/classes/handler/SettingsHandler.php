@@ -34,10 +34,21 @@ class SettingsHandler {
         if(isset($_POST['change-picture'])){
             $check = getimagesize($_FILES["userfile"]["tmp_name"]);
             if($check !== false) {
-                $target_file = IMG_PATH . "\\" . basename($_FILES["userfile"]["name"]);
+                $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
+                $stmt->execute( array(
+                    'user' => $_SESSION['user']
+                ));
+                $picture=$stmt->fetch();
+                unlink(IMG_PATH . "\\" . $picture['picture']);
+                $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
+                $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
+
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["userfile"]["name"]). " has been uploaded to " . $target_file;
-                    die;
+                    $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");
+                    $stmt->execute( array(
+                        'picture' => $_SESSION['user'] . "." . $imageFileType,
+                        'user' => $_SESSION['user']
+                    ));
                 }
             }
             $_SESSION['settings']=0;
