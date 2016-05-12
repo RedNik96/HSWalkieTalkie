@@ -13,11 +13,13 @@ class Post
             /*  echo "\n" . count($_FILES['postedFiles']['name']);
               die();*/
 
-            $stmt = $dbh->prepare("INSERT INTO posts (content, user)
-            VALUES (:content, :user)");
+            $stmt = $dbh->prepare("INSERT INTO posts (content, user, datePosted)
+            VALUES (:content, :user, :date)");
+            $now = date('Y-m-d H:i:s');
             $stmt->execute(array(
                 'content'   => $_POST['content'],
-                'user'      => $_SESSION['user']
+                'user'      => $_SESSION['user'],
+                'date'      => $now
             ));
 
             if(isset($_FILES['postedFiles']))

@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="posttime">
-                    <span id="time"><?= htmlspecialchars($post['date']); ?> Uhr</span>
+                    <span id="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
                 </div>
             </div>
             <div class="postcontent">
