@@ -74,9 +74,13 @@
         if($match['name']!='timeline'){
             header("Location: ".$router->generate("timeline"));
         }
-
+        $template_data = array();
+        if(isset($_SESSION['login_failed']) && $_SESSION['login_failed'])
+        {
+            $template_data['message'] = 'Login failed!';
+        }
         //Rendere die login-Seite ohne den standardisierten Seitenaufbau (oben Menubar, links rss_feed etc)
-        Template::render("login", [], array(
+        Template::render("login", $template_data, array(
             'template_top'      => null,
             'template_right'    => null,
             'template_left'     => null
