@@ -1,8 +1,9 @@
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
-<link href="../../bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="../../bootstrap-fileinput-master/js/fileinput.min.js"></script>
-    <div class="container">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+
+    <div class="container" id="container" url="<? global $router; echo $router->generate('settings');?>">
         <script type="text/javascript">
             function deleteFunction() {
                 var inputs = document.getElementsByClassName('filled');
@@ -117,21 +118,17 @@
                                     <img src=<? if ($user_info['picture']) { ?>"/HSWalkieTalkie/src/img/<? print $user_info['picture']."\""; } ?>alt="Profilbild">
                                 </div>
                                 <div class="form-group" id="fileupload">
-                                    <label class="control-label">Select File</label>
-                                    <input id="input-4" name="input4[]" type="file" multiple class="file-loading">
-                                    <script>
+                                    <label class="control-label">Profilbild ändern:</label>
+                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settings');?>">
+                                    <script >
                                         $(document).on('ready', function() {
-                                            $("#input-4").fileinput({showCaption: false});
+                                            $("#userfile").fileinput({showCaption: false});
                                         });
                                     </script>
-                                    <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen -->
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-                                    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
-                                    <label for="userfile" class="col-lg-6 control-label">Profilbild ändern:</label>
-                                    <input name="userfile" type="file" class="col-lg-6"/>
-
                                 </div>
-                                <button type="submit" name="change-picture" class="btn btn-default active">Profilbild ändern</button>
+                                <div id="labelpanel">
+                                    <label class="label label-danger" id="danger"></label>
+                                </div>
                             </div>
                         </div>
                         <div class="row buttonrow">
@@ -385,6 +382,25 @@
             $('.bankselect').on('change', function() {
                 var bics = <?php echo json_encode($bics); ?>;
                 $('#bank'+this.id).text(bics[this.value]);
+            });
+            $('#username').on('change', function(){
+                var username=(this).value;
+                $.post($('#container').url,
+                    {
+                        check_user: "true",
+                        username: ""+username
+                    },
+                    function(data){
+                        if (data==="    false") {
+                            $('#username').focus();
+                            $("label[for='username']").text('Benutzername schon vorhanden!');
+                            $("label[for='username']").css('color', 'red');
+                        } else {
+                            $("label[for='username']").text('Benutzername:');
+                            $("label[for='username']").css('color', 'black');
+                        }
+
+                    });
             });
         </script>
     </div>
