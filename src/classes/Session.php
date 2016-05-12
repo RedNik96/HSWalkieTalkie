@@ -2,7 +2,7 @@
 
 class Session {
   
-    public static function check_credentials($user, $password){
+    public static function checkCredentials($user, $password){
 
     global $dbh;
 

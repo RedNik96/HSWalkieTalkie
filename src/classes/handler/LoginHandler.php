@@ -5,14 +5,13 @@ class LoginHandler
 {
     public static function post(){
        if(Session::checkCredentials($_POST['username'],$_POST['password'])){
-                LoginHandler::authenticated();
-                Template::render('/timeline/', []);
-            }elseif (!Session::check_credentials($_POST['username'],$_POST['password'])){
+                Template::render('timeline', []);
+            }elseif (!Session::checkCredentials($_POST['username'],$_POST['password'])){
                 $template_data['message'] = 'Login failed!';
             }
     }
 
-    public static function check_credentials($user, $password){
+    public static function checkCredentials($user, $password){
 
         global $dbh;
 

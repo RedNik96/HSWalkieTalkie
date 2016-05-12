@@ -50,6 +50,8 @@ require_once('classes/Session.php');
 require_once('classes/Template.php');
 require_once('classes/handler/SettingsHandler.php');
 require_once('classes/handler/StatisticHandler.php');
+require_once(CLASSES_PATH . "/handler/LogoutHandler.php");
+require_once(CLASSES_PATH . "/handler/LoginHandler.php");
 //});
 
 

@@ -1,6 +1,6 @@
 <?php
 class Template {
-    public static function render($template_center, $data, $templates=array()) {
+    public static function render($template_center, $data=array(), $templates=array()) {
         // define valid args and their defaults
         $template_top = 'menuBar';
         $template_left = 'rss';

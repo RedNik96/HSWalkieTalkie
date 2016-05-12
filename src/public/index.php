@@ -6,11 +6,7 @@
     // initialize variables
     $template_data = [];
     global $dbh;
-
-
-
-
-
+    
     #TODO: hier sollte das URL-Routing implementiert werden
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
@@ -41,36 +37,34 @@
             'template_right'    => null,
             'template_left'     => null
         ));
-    }, 'registrierung');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
+    }, 'registrierungGet');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
 
     $router->map('POST', '/register/', function () {
         include(CLASSES_PATH . "/handler/registerHandler.php");
-    });
+    }, 'registrierungPost');
 
     $router->map('GET', '/profile/', function () {
         include(CLASSES_PATH . "/handler/ProfileHandler.php");
         ProfileHandler::GET();
     }, 'profile');
 
-    $router->map('POST', '/', function() {
+    $router->map('POST', '/login/', function() {
         LoginHandler::post();
-    });
+    }, "loginPost");
     
-    $router->map('POST', '/logout/', function() {
+    $router->map('GET', '/logout/', function() {
         LogoutHandler::logout();
-    }, "logout");
-
+    }, "logoutGet");
 
     $match = $router->match();
-    if((!Session::authenticated()) && (!($match['name'] === 'registrierung'))) {
+    if((!Session::authenticated()) && (!(in_array($match['name'], array('registrierungGet', 'registrierungPost', 'loginPost'))))) {
       if($match['name']!='timeline'){
           header("Location: ".$router->generate("timeline"));
       }
-        Template::render("login", array(
-            'url' => $router->generate("registrierung")
-        ));
+        Template::render("login");
         die();
     }
+    
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {
