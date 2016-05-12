@@ -55,7 +55,7 @@ CREATE TABLE `follower` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `posts` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `user` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `parentPost` int(11),

@@ -56,6 +56,11 @@
         LogoutHandler::logout();
     }, "logoutGet");
 
+    $router->map('POST', '/newpost/', function() {
+        Post::create();
+    }, "newpostPost");
+    
+
     $match = $router->match();
 
     //Wenn keine Anmeldung vorliegt, soll direkt auf die Login-Seite verlinkt werden
