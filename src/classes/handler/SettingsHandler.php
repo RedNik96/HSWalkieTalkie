@@ -130,6 +130,16 @@ class SettingsHandler {
                 die;
             }
         }
+        if (isset($_POST['check_pwd'])) {
+            if (LoginHandler::checkCredentials($_SESSION['user'],$_POST['pwd'])) {
+                echo "true";
+                die;
+            } else {
+                echo "false";
+                die;
+            }
+            
+        }
         global $router;
         header("Location: " . $router->generate("settings"));
     }
@@ -146,7 +156,7 @@ class SettingsHandler {
             //'username' => 'peterPan'
         ));
         $user_info=$stmt->fetch();
-        $user_info=EscapeUtil::escape_array($user_info);
+        EscapeUtil::escape_array($user_info);
         $stmt=$dbh->prepare("SELECT account.iban, account.bic, bic.bank FROM account,bic WHERE user=:username and account.bic=bic.bic ORDER BY account.iban ASC");
         $stmt->execute( array(
             'username' => $_SESSION['user']
@@ -154,19 +164,19 @@ class SettingsHandler {
         ));
         $i=0;
         while ($bank_info[$i]=$stmt->fetch()) {
-            $bank_info[$i]=EscapeUtil::escape_array($bank_info[$i]);
+            EscapeUtil::escape_array($bank_info[$i]);
             $i++;
         }
         $stmt = $dbh->prepare("SELECT bic, bank from bic");
         $stmt->execute();
         while($result = $stmt->fetch()) {
-            $result=EscapeUtil::escape_array($result);
+            EscapeUtil::escape_array($result);
             $bics[$result[0]] = $result[1];
         }
         $stmt = $dbh->prepare("SELECT zip, city from city");
         $stmt->execute();
         while($result = $stmt->fetch()) {
-            $result=EscapeUtil::escape_array($result);
+            EscapeUtil::escape_array($result);
             $zips[$result[0]] = $result[1];
         }
         $template_data = array(

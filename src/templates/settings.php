@@ -10,6 +10,12 @@
                 for (var i = 0; i < inputs.length; ++i) {
                     inputs[i].value = inputs[i].getAttribute('data-value');
                 }
+                $("label[for='username']").text('Benutzername:');
+                $("label[for='username']").css('color', 'black');
+                $("label[for='old']").text('Altes Passwort:');
+                $("label[for='old']").css('color', 'black');
+                $("label[for='verify']").text('Wiederhole Passwort:');
+                $("label[for='verify']").css('color', 'black');
             }
         </script>
         <ul class="nav nav-tabs">
@@ -115,7 +121,11 @@
                             </div>
                             <div class="col-sm-6 imagepanel">
                                 <div >
-                                    <img src=<? if ($user_info['picture']) { ?>"/HSWalkieTalkie/src/img/<? print $user_info['picture']."\""; } ?>alt="Profilbild">
+                                    <img src=<? if ($user_info['picture']) {?>
+                                         "/HSWalkieTalkie/src/img/<? print $user_info['picture']."\"";
+                                    } else { ?>
+                                        "/HSWalkieTalkie/src/img/profile_default.png"
+                                    <? } ?>alt="Profilbild">
                                 </div>
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>
@@ -401,6 +411,34 @@
                         }
 
                     });
+            });
+            $('#old').on('change', function(){
+                var pwd=(this).value;
+                $.post($('#container').url,
+                    {
+                        check_pwd: "true",
+                        pwd: ""+pwd
+                    },
+                    function(data){
+                        if (data==="    false") {
+                            $('#old').focus();
+                            $("label[for='old']").text('Passwort falsch!');
+                            $("label[for='old']").css('color', 'red');
+                        } else {
+                            $("label[for='old']").text('Altes Passwort:');
+                            $("label[for='old']").css('color', 'black');
+                        }
+                    });
+            });
+            $('#verify').on('change', function(){
+                if ((this).value!==$('#new').val()) {
+                    $('#verify').focus();
+                    $("label[for='verify']").text('Passwort stimmt nicht überein!');
+                    $("label[for='verify']").css('color', 'red');
+                } else {
+                    $("label[for='verify']").text('Wiederhole Passwort:');
+                    $("label[for='verify']").css('color', 'black');
+                }
             });
         </script>
     </div>
