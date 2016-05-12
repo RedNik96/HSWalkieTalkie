@@ -28,8 +28,16 @@
                 </div>
             </div>
             <div class="login-button" >
+                <label for="password" class="col-sm-4 control-label"></label>
+                <label for="password" class="col-sm-5 control-label" style="text-align:left;">
+                    <?php
+                        if(isset($message)){
+                            echo $message;
+                        }
+                    ?>
+                </label>
                 <div class="form-group">
-                    <button type="submit" id="login-button" class="btn btn-primary col-xs-3">
+                    <button type="submit" id="login-button" class="btn btn-primary col-sm-3">
                         <i class="fa fa-sign-in" aria-hidden="true"> Login</i>
                     </button>
                 </div>
