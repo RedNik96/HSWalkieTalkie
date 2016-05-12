@@ -3,7 +3,7 @@
 global $dbh;
 
 $stmt = $dbh->prepare("
-  SELECT P.id AS postID, U.firstName, U.lastName, U.username, P.content, P.datePosted, 
+  SELECT P.id AS postID, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted, 
     ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
       (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes
   FROM posts AS P, user AS U
@@ -29,6 +29,7 @@ while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
         'username'  => $result['username'],
         'firstName' => $result['firstName'],
         'lastName'  => $result['lastName'],
+        'picture'   => $result['picture'],
         'content'   => $result['content'],
         'votes'     => $result['Votes'],
         'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),

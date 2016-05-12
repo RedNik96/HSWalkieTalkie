@@ -24,7 +24,8 @@
         <form class = "post">
             <div class="postheader">
                 <div class="postauthor">
-                    <img class="img-rounded" src="../../leon.jpg" alt="Bild">
+
+                    <img class="img-rounded" src="../img/<?= $post['picture']; ?>" alt="Bild">
                     <div class="postauthorname">
                         <span id    ="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
                         <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
@@ -52,7 +53,7 @@
 
                 <div class="vote">
                     <button class="btn btn-danger" id="vote-down"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
-                    <span id="cash">$53</span>
+                    <span id="cash">$<?= $post['votes']; ?></span>
                     <button class="btn btn-warning" id="vote-up"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
                 </div>
             </div>
