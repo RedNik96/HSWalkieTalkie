@@ -12,8 +12,6 @@
     <script src="/HSWalkieTalkie/src/libraries/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/layout.css">
-    <link rel="stylesheet" href="../public/css/poststylesheet.css">
-    <link rel="stylesheet" href="../public/css/postwritestylesheet.css">
 
 </head>
 <body>
