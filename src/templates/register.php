@@ -136,4 +136,15 @@
         var zips = <?php echo json_encode($zips); ?>;
         $('#city').text(zips[this.value]);
     });
+    $('#confirmedPassword').on('change', function(){
+        if ((this).value!==$('#password').val()) {
+            $('#confirmedPassword').focus();
+            $("label[for='confirmedPassword']").text('Passwort stimmt nicht überein!');
+            $("label[for='confirmedPassword']").css('color', 'red');
+        } else {
+            $("label[for='confirmedPassword']").text('Passwort erneut eingeben*');
+            $("label[for='confirmedPassword']").css('color', 'black');
+        }
+    });
+    
 </script>
