@@ -18,6 +18,7 @@
     <script src="bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
 
+
 </head>
 <body>
     <div class="container-fluid full">
@@ -44,7 +45,7 @@
             </div>
         <? } ?>
     </div>
-    <footer>
+    <footer id="footer">
         Made with <i class="fa fa-heart" aria-hidden="true"></i> and 99+ bottles of <i class="fa fa-beer" aria-hidden="true"></i>
     </footer>
 

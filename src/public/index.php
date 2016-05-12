@@ -6,20 +6,13 @@
     // initialize variables
     $template_data = [];
     global $dbh;
-
-    /*
-    if(!Session::authenticated()) {
-        Template::render("login", []);
-        die();
-    }
-    */
-
+    
     #TODO: hier sollte das URL-Routing implementiert werden
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        include CLASSES_PATH . "/TimelineHandler.php";
+        include(CLASSES_PATH . "/handler/TimelineHandler.php");
     }, 'timeline');
     
     $router->map( 'GET', '/user/', function() {
@@ -39,20 +32,62 @@
     });
 
     $router->map('GET', '/register/', function () {
-        Template::render('register', []);
-    }, 'registrierung');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
+        Template::render('register', [], array(
+            'template_top'      => null,
+            'template_right'    => null,
+            'template_left'     => null
+        ));
+    }, 'registrierungGet');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
 
     $router->map('POST', '/register/', function () {
         include(CLASSES_PATH . "/handler/registerHandler.php");
-    });
+    }, 'registrierungPost');
 
     $router->map('GET', '/profile/', function () {
         include(CLASSES_PATH . "/handler/ProfileHandler.php");
         ProfileHandler::GET();
-    });
+    }, 'profile');
+
+    $router->map('POST', '/login/', function() {
+        LoginHandler::post();
+    }, "loginPost");
+    
+    $router->map('GET', '/logout/', function() {
+        LogoutHandler::logout();
+    }, "logoutGet");
+
+    $router->map('POST', '/newpost/', function() {
+        Post::create();
+    }, "newpostPost");
+    
 
     $match = $router->match();
 
+    //Wenn keine Anmeldung vorliegt, soll direkt auf die Login-Seite verlinkt werden
+    //Ausnahme: Der Aufruf kommt von bestimmten Seiten, wie z.B.
+    // von der Login-Seite auf die Registrierungsseite,
+    // von der Registrierungsseite (nach POST) zur RegisterHandler Seite
+    // von der Login-Seite (nach Submit der Anmeldedaten)
+    if((!LoginHandler::authenticated()) && (!(in_array($match['name'], array('registrierungGet', 'registrierungPost', 'loginPost'))))) {
+        //Ist die Url z. B. /HSWalkieTalie/src/public/settings/, aber es liegt noch keine Anmeldung vor, dann soll
+        //der Schönheitshalber erst ein Redirect auf /HSWalkieTalkie/src/public/ erfolgen
+        if($match['name']!='timeline'){
+            header("Location: ".$router->generate("timeline"));
+        }
+        $template_data = array();
+        if(isset($_SESSION['login_failed']) && $_SESSION['login_failed'])
+        {
+            $template_data['message'] = 'Login failed!';
+        }
+        //Rendere die login-Seite ohne den standardisierten Seitenaufbau (oben Menubar, links rss_feed etc)
+        Template::render("login", $template_data, array(
+            'template_top'      => null,
+            'template_right'    => null,
+            'template_left'     => null
+        ));
+        die();
+    }
+    
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {

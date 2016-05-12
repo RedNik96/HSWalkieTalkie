@@ -1,46 +1,8 @@
 <?php
 
 class Session {
-    public static function check_credentials($user, $password)
-    {    
-        $stmt=$GLOBALS['dbh']->prepare("select password, id from user where username=:username");
-        $stmt->bindParam(':username',$_REQUEST['username']);
-        if ($stmt->execute()) {
-            $row=$stmt->fetch();
-            if ($row['password']===$_REQUEST['password']&&isset($_REQUEST['password'])) {
-                $_SESSION['logged_in'] = true;
-                $id=$row['id'];
-                $stmt2=$GLOBALS['dbh']->prepare('update user set logged_in=true where id=:id ');
-                $stmt2->bindParam(':id',$id);
-                $stmt2->execute();
-                $_SESSION['user']=$_REQUEST['username'];
-                return true;
-            } else {
-                $_SESSION['logged_in'] = false;
-                return false;
-            }
-        } else {
-            $_SESSION['logged_in'] = false;
-            return false;
-        }
-    }
-
-    public static function authenticated()
-    {
-        if(!isset($_SESSION['logged_in'])) {
-            return false;
-        }
-        return ($_SESSION['logged_in'] === true);
-    }
-
-    public static function logout()
-    {
-        // destroy old session
-        session_destroy();
-
-        // immediately start a new one
-        session_start();
-    }
+  
+  
     
     public static function create_user($firstName, $lastName, $email, $username, $password, $confirmedPassword, $birthday, $street, $housenumber, $zip, $iban, $bic)
     {
@@ -74,7 +36,7 @@ class Session {
 
                 if($iban) {
                     //query that adds iban, if it not yet exists
-                    $stmt2 = $dbh->prepare("INSERT INTO konto (iban, bic, user) VALUES (:iban, :bic, :username)");
+                    $stmt2 = $dbh->prepare("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)");
                     $stmt2->execute(array(
                         'iban'      => $iban,
                         'bic'       => $bic,
