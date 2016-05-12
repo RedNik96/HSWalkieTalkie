@@ -3,7 +3,7 @@
 <link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
-    <div class="container" id="container" url="<? global $router; echo $router->generate('settings');?>">
+    <div>
         <script type="text/javascript">
             function deleteFunction() {
                 var inputs = document.getElementsByClassName('filled');
@@ -28,7 +28,7 @@
         <div class="tab-content">
             <div id="personal" class="tab-pane fade <? if ($tab===0) {?>in active<?;} ?>">
                 <div class="container-border">
-                    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('SettingsPersonalInformation')?>">
                         <legend>
                             Persönliche Informationen
                         </legend>
@@ -66,7 +66,7 @@
                                         Benutzername:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value=<?= $user_info['username']?>>
+                                        <input name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsUserCheckPost');?>">
                                     </div>
 
                                 </div>
@@ -173,7 +173,7 @@
                                         Altes Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input name="old" id="old" type="password" autofocus class="form-control filled">
+                                        <input name="old" id="old" type="password" autofocus class="form-control filled" url="<? global $router; echo $router->generate('settingsUserCheckPost');?>">
                                     </div>
 
                                 </div>
@@ -395,7 +395,7 @@
             });
             $('#username').on('change', function(){
                 var username=(this).value;
-                $.post($('#container').url,
+                $.post($(this).url,
                     {
                         check_user: "true",
                         username: ""+username
@@ -414,7 +414,7 @@
             });
             $('#old').on('change', function(){
                 var pwd=(this).value;
-                $.post($('#container').url,
+                $.post($(this).url,
                     {
                         check_pwd: "true",
                         pwd: ""+pwd

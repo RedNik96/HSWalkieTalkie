@@ -2,37 +2,7 @@
 class SettingsHandler {
     public static function post() {
         global $dbh;
-
-        if(isset($_POST['change-settings'])){
-            $email=$_POST['email'];
-            $firstname=$_POST['firstname'];
-            $lastname=$_POST['lastname'];
-            $username=$_POST['username'];
-            $birth=$_POST['birth'];
-            $city=$_POST['city'];
-            $zip=$_POST['zip'];
-            $street=$_POST['street'];
-            $nr=$_POST['nr'];
-
-            $stmt=$dbh->prepare("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
-            username=:username, birthday=:birth, housenumber=:nr 
-            WHERE username=:user");
-            if ($stmt->execute( array(
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'email' => $email,
-                'zip' => $zip,
-                'street' => $street,
-                'username' => $username,
-                'birth' => $birth,
-                'nr' => $nr,
-                'user' => $_SESSION['user']
-            ))) {
-                $_SESSION['user']=$username;
-            }
-            $_SESSION['settings']=0;
-        }
-
+        
         if(isset($_POST['new-account'])){
             $iban=$_POST['iban'];
             $bic=$_POST['bic'];
@@ -94,54 +64,9 @@ class SettingsHandler {
             ));
             $_SESSION['settings']=3;
         }
-        if (isset($_FILES["userfile"])) {
-            $check = getimagesize($_FILES["userfile"]["tmp_name"]);
-            if($check !== false) {
-                $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
-                $stmt->execute( array(
-                    'user' => $_SESSION['user']
-                ));
-                $picture=$stmt->fetch();
-                unlink(IMG_PATH . "\\" . $picture['picture']);
-                $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
-                $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
-
-                if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                    $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");
-                    $stmt->execute( array(
-                        'picture' => $_SESSION['user'] . "." . $imageFileType,
-                        'user' => $_SESSION['user']
-                    ));
-                }
-            }
-            $_SESSION['settings']=0;
-        }
-        if (isset($_POST['check_user'])) {
-            if ($_POST['username']===$_SESSION['user']) {
-                echo "true";
-                die;
-            }
-            $stmt=$dbh->prepare("SELECT username FROM user WHERE username=:user");
-            $stmt->execute( array(
-                'user' => $_POST['username']
-            ));
-            if ($stmt->fetch()) {
-                echo "false";
-                die;
-            }
-        }
-        if (isset($_POST['check_pwd'])) {
-            if (LoginHandler::checkCredentials($_SESSION['user'],$_POST['pwd'])) {
-                echo "true";
-                die;
-            } else {
-                echo "false";
-                die;
-            }
-            
-        }
+        
         global $router;
-        header("Location: " . $router->generate("settings"));
+        header("Location: " . $router->generate("settingsGet"));
     }
     public static function get() {
         global $dbh;
@@ -189,6 +114,85 @@ class SettingsHandler {
         $templates['template_left']=null;
         $templates['template_right']=null;
         Template::render('settings', $template_data, $templates);
+    }
+    public static function personalInformation() {
+        global $dbh;
+
+        if(isset($_POST['change-settings'])){
+            $email=$_POST['email'];
+            $firstname=$_POST['firstname'];
+            $lastname=$_POST['lastname'];
+            $username=$_POST['username'];
+            $birth=$_POST['birth'];
+            $city=$_POST['city'];
+            $zip=$_POST['zip'];
+            $street=$_POST['street'];
+            $nr=$_POST['nr'];
+
+            $stmt=$dbh->prepare("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
+            username=:username, birthday=:birth, housenumber=:nr 
+            WHERE username=:user");
+            if ($stmt->execute( array(
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'email' => $email,
+                'zip' => $zip,
+                'street' => $street,
+                'username' => $username,
+                'birth' => $birth,
+                'nr' => $nr,
+                'user' => $_SESSION['user']
+            ))) {
+                $_SESSION['user']=$username;
+            }
+            $_SESSION['settings']=0;
+        }
+        
+        if (isset($_FILES["userfile"])) {
+            $check = getimagesize($_FILES["userfile"]["tmp_name"]);
+            if($check !== false) {
+                $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
+                $stmt->execute( array(
+                    'user' => $_SESSION['user']
+                ));
+                $picture=$stmt->fetch();
+                unlink(IMG_PATH . "\\" . $picture['picture']);
+                $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
+                $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
+
+                if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
+                    $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");
+                    $stmt->execute( array(
+                        'picture' => $_SESSION['user'] . "." . $imageFileType,
+                        'user' => $_SESSION['user']
+                    ));
+                }
+            }
+            $_SESSION['settings']=0;
+        }
+        
+        global $router;
+        header("Location: " . $router->generate("settingsGet"));
+    }
+    static public function checkUser() {
+        global $dbh;
+            if ($_POST['username']===$_SESSION['user']) {
+                echo "true";
+            }
+            $stmt=$dbh->prepare("SELECT username FROM user WHERE username=:user");
+            $stmt->execute( array(
+                'user' => $_POST['username']
+            ));
+            if ($stmt->fetch()) {
+                echo "false";
+            }
+    }
+    static public function checkPwd() {
+            if (LoginHandler::checkCredentials($_SESSION['user'],$_POST['pwd'])) {
+                echo "true";
+            } else {
+                echo "false";
+            }
     }
 }
   
