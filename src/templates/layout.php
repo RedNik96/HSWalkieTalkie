@@ -4,12 +4,12 @@
     <title>HSWalkieTalkie</title>
     <!-- Font Awesome-->
     <link rel="stylesheet" href="/HSWalkieTalkie/src/libraries/font-awesome-4.6.2/css/font-awesome.min.css">
+    <!-- jQuery -->
+    <script src="/HSWalkieTalkie/src/libraries/jQuery/jquery-2.2.3.min.js"></script>
     <!-- bootstrap -->
     <link rel="stylesheet" href="/HSWalkieTalkie/src/libraries/bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/HSWalkieTalkie/src/libraries/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css">
     <script src="/HSWalkieTalkie/src/libraries/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-    <!-- jQuery -->
-    <script src="/HSWalkieTalkie/src/libraries/jQuery/jquery-2.2.3.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/layout.css">
     <link rel="stylesheet" href="../public/css/poststylesheet.css">

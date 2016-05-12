@@ -6,7 +6,7 @@
     // initialize variables
     $template_data = [];
     global $dbh;
-    
+
     #TODO: hier sollte das URL-Routing implementiert werden
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
@@ -14,14 +14,6 @@
     $router->map( 'GET', '/', function() {
         include(CLASSES_PATH . "/handler/TimelineHandler.php");
     }, 'timeline');
-    
-    $router->map( 'GET', '/user/', function() {
-        echo 'profil';
-    });
-
-    $router->map( 'GET', '/user/[i:id]', function($id) {
-        echo 'user' . $id;
-    });
 
     $router->map( 'GET', '/settings/', function() {
         SettingsHandler::get();
@@ -51,7 +43,7 @@
     $router->map('POST', '/login/', function() {
         LoginHandler::post();
     }, "loginPost");
-    
+
     $router->map('GET', '/logout/', function() {
         LogoutHandler::logout();
     }, "logoutGet");
@@ -59,7 +51,7 @@
     $router->map('POST', '/newpost/', function() {
         Post::create();
     }, "newpostPost");
-    
+
 
     $match = $router->match();
 
@@ -87,7 +79,7 @@
         ));
         die();
     }
-    
+
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {
