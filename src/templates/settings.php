@@ -19,7 +19,7 @@
         <div class="tab-content">
             <div id="personal" class="tab-pane fade <? if ($tab===0) {?>in active<?;} ?>">
                 <div class="container-border">
-                    <form class="form-horizontal" method="post">
+                    <form class="form-horizontal" method="post" enctype="multipart/form-data">
                         <legend>
                             Persönliche Informationen
                         </legend>
@@ -114,8 +114,11 @@
                                 <div >
                                     <img src="" alt="Profilbild">
                                 </div>
-
-                                <button class="btn btn-default">Profilbild ändern</button>
+                                    <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen -->
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                                    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
+                                    Diese Datei hochladen: <input name="userfile" type="file" />
+                                <button type="submit" name="change-picture" class="btn btn-default">Profilbild ändern</button>
                             </div>
                         </div>
                         <div class="row buttonrow">

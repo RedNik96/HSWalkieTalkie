@@ -13,15 +13,10 @@ class SettingsHandler {
             $street=$_POST['street'];
             $nr=$_POST['nr'];
 
-            $stmt=$dbh->prepare("INSERT INTO city values (:zip, :city");
-            $stmt->execute( array(
-                'zip' => $zip,
-                'city' => $city
-            ));
-            $dbh->prepare("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, city=:zip, street=:street, 
+            $stmt=$dbh->prepare("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
             username=:username, birthday=:birth, housenumber=:nr 
-            WHERE user=:user");
-            $stmt->execute( array(
+            WHERE username=:user");
+            if ($stmt->execute( array(
                 'firstname' => $firstname,
                 'lastname' => $lastname,
                 'email' => $email,
@@ -31,7 +26,20 @@ class SettingsHandler {
                 'birth' => $birth,
                 'nr' => $nr,
                 'user' => $_SESSION['user']
-            ));
+            ))) {
+                $_SESSION['user']=$username;
+            }
+            $_SESSION['settings']=0;
+        }
+        if(isset($_POST['change-picture'])){
+            $check = getimagesize($_FILES["userfile"]["tmp_name"]);
+            if($check !== false) {
+                $target_file = IMG_PATH . "\\" . basename($_FILES["userfile"]["name"]);
+                if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
+                    echo "The file ". basename( $_FILES["userfile"]["name"]). " has been uploaded to " . $target_file;
+                    die;
+                }
+            }
             $_SESSION['settings']=0;
         }
         if(isset($_POST['new-account'])){
@@ -42,8 +50,8 @@ class SettingsHandler {
             $stmt->execute( array(
                 'iban' => $iban,
                 'bic' => $bic,
-                //'user' => $_SESSION['user']
-                'user' => 'peterPan'
+                'user' => $_SESSION['user']
+                //'user' => 'peterPan'
             ));
             $_SESSION['settings']=2;
         }
@@ -52,8 +60,8 @@ class SettingsHandler {
             $stmt=$dbh->prepare("DELETE FROM account WHERE iban=:iban and user=:user");
             $stmt->execute( array(
                 'iban' => $iban,
-                //'user' => $_SESSION['user']
-                'user' => 'peterPan'
+                'user' => $_SESSION['user']
+                //'user' => 'peterPan'
             ));
             $_SESSION['settings']=2;
         }
@@ -73,9 +81,9 @@ class SettingsHandler {
         if(isset($_POST['change-pwd'])){
             $old=$_POST['old'];
             $new=$_POST['new'];
-            $register=$_POST['register'];
-            if (Session::check_credentials($_SESSION['user'],$old)&&$new===$register) {
-                $stmt=$dbh->prepare("UPDATE user SET password=:hash WHERE user=:user");
+            $verify=$_POST['verify'];
+            if (LoginHandler::checkCredentials($_SESSION['user'],$old)&&$new===$verify) {
+                $stmt=$dbh->prepare("UPDATE user SET password=:hash WHERE username=:user");
                 $hash = password_hash($new, PASSWORD_DEFAULT);
                 $stmt->execute( array(
                     'hash' => $hash,
@@ -87,7 +95,7 @@ class SettingsHandler {
         }
         if(isset($_POST['change-ilias'])){
             $url=$_POST['url'];
-            $stmt=$dbh->prepare("UPDATE user SET feedUrl=:url WHERE user=:user");
+            $stmt=$dbh->prepare("UPDATE user SET feedUrl=:url WHERE username=:user");
             $stmt->execute( array(
                 'url' => $url,
                 'user' => $_SESSION['user']
@@ -107,14 +115,14 @@ class SettingsHandler {
         }
         $stmt=$dbh->prepare("SELECT * FROM user, city WHERE username=:username and city.zip=user.zip");
         $stmt->execute( array(
-            //'username' => $_SESSION['user']
-            'username' => 'peterPan'
+            'username' => $_SESSION['user']
+            //'username' => 'peterPan'
         ));
         $user_info=$stmt->fetch();
         $stmt=$dbh->prepare("SELECT account.iban, account.bic, bic.bank FROM account,bic WHERE user=:username and account.bic=bic.bic ORDER BY account.iban ASC");
         $stmt->execute( array(
-            //'username' => $_SESSION['user']
-            'username' => 'peterPan'
+            'username' => $_SESSION['user']
+            //'username' => 'peterPan'
         ));
         $i=0;
         while ($bank_info[$i]=$stmt->fetch()) {
