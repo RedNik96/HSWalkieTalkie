@@ -4,9 +4,9 @@
 class LoginHandler
 {
     public static function post(){
-       if(Session::checkCredentials($_POST['username'],$_POST['password'])){
+       if(LoginHandler::checkCredentials($_POST['username'],$_POST['password'])){
                 Template::render('timeline', []);
-            }elseif (!Session::checkCredentials($_POST['username'],$_POST['password'])){
+            }elseif (!LoginHandler::checkCredentials($_POST['username'],$_POST['password'])){
                 $template_data['message'] = 'Login failed!';
             }
     }
@@ -39,6 +39,9 @@ class LoginHandler
 
     public static function authenticated()
     {
+        if(!isset($_SESSION['logged_in'])) {
+            return false;
+        }
         return ($_SESSION['logged_in'] === true);
     }
 
