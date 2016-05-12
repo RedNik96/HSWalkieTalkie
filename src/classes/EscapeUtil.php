@@ -11,7 +11,7 @@ class EscapeUtil
                 $value=escape_array($value);
             }
         }
-        return $variable;
+        //return $variable;
     }
 
 }
