@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="posttime">
-                    <span id="time">12.03.2016 17:04 Uhr</span>
+                    <span id="time"><?= htmlspecialchars($post['date']); ?> Uhr</span>
                 </div>
             </div>
             <div class="postcontent">

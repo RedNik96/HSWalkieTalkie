@@ -59,9 +59,17 @@ CREATE TABLE `posts` (
   `content` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `user` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `parentPost` int(11),
+  `datePosted` date,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`parentPost`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `postsImg`(
+  `postId` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`postId`, `filename`),
+  FOREIGN KEY (`postId`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `votes` (
