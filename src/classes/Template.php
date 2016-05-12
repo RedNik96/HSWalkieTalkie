@@ -38,6 +38,7 @@ class Template {
         ob_start();
         include(TEMPLATES_PATH . '/' . $template_center .'.php');
         $content_for_layout = ob_get_clean();
+        
         include(TEMPLATES_PATH . "/layout.php");
     }
 }
