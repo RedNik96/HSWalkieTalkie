@@ -57,11 +57,25 @@
     }, "logoutGet");
 
     $match = $router->match();
+
+    //Wenn keine Anmeldung vorliegt, soll direkt auf die Login-Seite verlinkt werden
+    //Ausnahme: Der Aufruf kommt von bestimmten Seiten, wie z.B.
+    // von der Login-Seite auf die Registrierungsseite,
+    // von der Registrierungsseite (nach POST) zur RegisterHandler Seite
+    // von der Login-Seite (nach Submit der Anmeldedaten)
     if((!Session::authenticated()) && (!(in_array($match['name'], array('registrierungGet', 'registrierungPost', 'loginPost'))))) {
-      if($match['name']!='timeline'){
-          header("Location: ".$router->generate("timeline"));
-      }
-        Template::render("login");
+        //Ist die Url z. B. /HSWalkieTalie/src/public/settings/, aber es liegt noch keine Anmeldung vor, dann soll
+        //der Schönheitshalber erst ein Redirect auf /HSWalkieTalkie/src/public/ erfolgen
+        if($match['name']!='timeline'){
+            header("Location: ".$router->generate("timeline"));
+        }
+
+        //Rendere die login-Seite ohne den standardisierten Seitenaufbau (oben Menubar, links rss_feed etc)
+        Template::render("login", [], array(
+            'template_top'      => null,
+            'template_right'    => null,
+            'template_left'     => null
+        ));
         die();
     }
     
