@@ -17,11 +17,23 @@
 
     $router->map( 'GET', '/settings/', function() {
         SettingsHandler::get();
-    }, 'settings');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
+    }, 'settingsGet');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
 
     $router->map('POST', '/settings/', function () {
         SettingsHandler::post();
-    });
+    }, 'settingsPost');
+
+    $router->map('POST', '/settings/personalInformation/', function () {
+        SettingsHandler::personalInformation();
+    }, 'settingsPersonalInformationPost');
+
+    $router->map('POST', '/settings/checkUser/', function () {
+        SettingsHandler::checkUser();
+    }, 'settingsCheckUserPost');
+
+    $router->map('POST', '/settings/checkPwd/', function () {
+        SettingsHandler::checkPwd();
+    }, 'settingsCheckPwdPost');
 
     $router->map('GET', '/register/', function () {
         Template::render('register', [], array(
