@@ -112,10 +112,10 @@
                             </div>
                             <div class="col-sm-6 imagepanel">
                                 <div >
-                                    <img src="" alt="Profilbild">
+                                    <img src=<? if ($user_info['picture']) { ?>"/HSWalkieTalkie/src/img/<? print $user_info['picture']."\""; } ?>alt="Profilbild">
                                 </div>
                                     <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen -->
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
                                     <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
                                     Diese Datei hochladen: <input name="userfile" type="file" />
                                 <button type="submit" name="change-picture" class="btn btn-default">Profilbild ändern</button>
