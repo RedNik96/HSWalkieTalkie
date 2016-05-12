@@ -34,10 +34,21 @@ class SettingsHandler {
         if(isset($_POST['change-picture'])){
             $check = getimagesize($_FILES["userfile"]["tmp_name"]);
             if($check !== false) {
-                $target_file = IMG_PATH . "\\" . basename($_FILES["userfile"]["name"]);
+                $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
+                $stmt->execute( array(
+                    'user' => $_SESSION['user']
+                ));
+                $picture=$stmt->fetch();
+                unlink(IMG_PATH . "\\" . $picture['picture']);
+                $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
+                $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
+
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["userfile"]["name"]). " has been uploaded to " . $target_file;
-                    die;
+                    $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");
+                    $stmt->execute( array(
+                        'picture' => $_SESSION['user'] . "." . $imageFileType,
+                        'user' => $_SESSION['user']
+                    ));
                 }
             }
             $_SESSION['settings']=0;
@@ -119,6 +130,7 @@ class SettingsHandler {
             //'username' => 'peterPan'
         ));
         $user_info=$stmt->fetch();
+        $user_info=EscapeUtil::escape_array($user_info);
         $stmt=$dbh->prepare("SELECT account.iban, account.bic, bic.bank FROM account,bic WHERE user=:username and account.bic=bic.bic ORDER BY account.iban ASC");
         $stmt->execute( array(
             'username' => $_SESSION['user']
@@ -126,16 +138,19 @@ class SettingsHandler {
         ));
         $i=0;
         while ($bank_info[$i]=$stmt->fetch()) {
+            $bank_info[$i]=EscapeUtil::escape_array($bank_info[$i]);
             $i++;
         }
         $stmt = $dbh->prepare("SELECT bic, bank from bic");
         $stmt->execute();
         while($result = $stmt->fetch()) {
+            $result=EscapeUtil::escape_array($result);
             $bics[$result[0]] = $result[1];
         }
         $stmt = $dbh->prepare("SELECT zip, city from city");
         $stmt->execute();
         while($result = $stmt->fetch()) {
+            $result=EscapeUtil::escape_array($result);
             $zips[$result[0]] = $result[1];
         }
         $template_data = array(

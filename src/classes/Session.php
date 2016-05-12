@@ -36,7 +36,7 @@ class Session {
 
                 if($iban) {
                     //query that adds iban, if it not yet exists
-                    $stmt2 = $dbh->prepare("INSERT INTO konto (iban, bic, user) VALUES (:iban, :bic, :username)");
+                    $stmt2 = $dbh->prepare("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)");
                     $stmt2->execute(array(
                         'iban'      => $iban,
                         'bic'       => $bic,

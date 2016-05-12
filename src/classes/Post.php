@@ -2,14 +2,25 @@
 
 class Post
 {
-    public static function create($data)
+    public static function create()
     {
         global $dbh;
-
-        $stmt = $dbh->prepare("INSERT INTO posts (content, user)
+        global $router;
+        if(isset($_POST['content'])) {
+            if(isset($_FILES['postedFiles']))
+            {
+                print_r($_FILES['postedFiles']);
+            }
+            $stmt = $dbh->prepare("INSERT INTO posts (content, user)
             VALUES (:content, :user)");
 
-        $stmt->execute($data);
+
+            $stmt->execute(array(
+                'content'   => $_POST['content'],
+                'user'      => $_SESSION['user']
+            ));
+            header('Location: ' . $router->generate('timeline'));
+        }
     }
 
     public static function read($id)

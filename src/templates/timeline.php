@@ -1,10 +1,11 @@
-<form class = "postwrite" method="post">
-    <textarea class="form-control" placeholder="Was machst du gerade?" rows="6"></textarea>
+<? global $router; ?>
+<form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
+    <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6"></textarea>
     <div class="postaddonsdiv">
-        <input id="input-4" name="input4[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
+        <input id="postedFiles" name="postedFiles[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
         <script>
             $(document).on('ready', function() {
-                $("#input-4").fileinput({showCaption: false});
+                $("#postedFiles").fileinput({showCaption: false});
             });
         </script>
     </div>
@@ -20,7 +21,7 @@
                 <div class="postauthor">
                     <img class="img-rounded" src="../../leon.jpg" alt="Bild">
                     <div class="postauthorname">
-                        <span id="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
+                        <span id    ="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
                         <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
                     </div>
                 </div>

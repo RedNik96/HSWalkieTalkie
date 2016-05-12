@@ -46,10 +46,12 @@ error_reporting(E_ALL|E_STRCT);
 
 // register function to automatically load classes
 //spl_autoload_register( function($class) {
-require_once('classes/Session.php');
-require_once('classes/Template.php');
-require_once('classes/handler/SettingsHandler.php');
-require_once('classes/handler/StatisticHandler.php');
+require_once(CLASSES_PATH . "/Session.php");
+require_once(CLASSES_PATH . "/Template.php");
+require_once(CLASSES_PATH . "/Post.php");
+require_once(CLASSES_PATH . "/EscapeUtil.php");
+require_once(CLASSES_PATH . "/handler/SettingsHandler.php");
+require_once(CLASSES_PATH . "/handler/StatisticHandler.php");
 require_once(CLASSES_PATH . "/handler/LogoutHandler.php");
 require_once(CLASSES_PATH . "/handler/LoginHandler.php");
 require_once(CLASSES_PATH . "/handler/RSSHandler.php");
