@@ -49,6 +49,7 @@ error_reporting(E_ALL|E_STRCT);
 require_once(CLASSES_PATH . "/Session.php");
 require_once(CLASSES_PATH . "/Template.php");
 require_once(CLASSES_PATH . "/Post.php");
+require_once(CLASSES_PATH . "/EscapeUtil.php");
 require_once(CLASSES_PATH . "/handler/SettingsHandler.php");
 require_once(CLASSES_PATH . "/handler/StatisticHandler.php");
 require_once(CLASSES_PATH . "/handler/LogoutHandler.php");
