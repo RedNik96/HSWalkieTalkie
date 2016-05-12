@@ -1,9 +1,8 @@
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
-    <div>
+    <div class="container">
         <script type="text/javascript">
             function deleteFunction() {
                 var inputs = document.getElementsByClassName('filled');
@@ -28,7 +27,7 @@
         <div class="tab-content">
             <div id="personal" class="tab-pane fade <? if ($tab===0) {?>in active<?;} ?>">
                 <div class="container-border">
-                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('SettingsPersonalInformation')?>">
+                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('settingsPersonalInformationPost')?>">
                         <legend>
                             Persönliche Informationen
                         </legend>
@@ -66,7 +65,7 @@
                                         Benutzername:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsUserCheckPost');?>">
+                                        <input name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsCheckUserPost');?>">
                                     </div>
 
                                 </div>
@@ -129,7 +128,7 @@
                                 </div>
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>
-                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settings');?>">
+                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPost');?>">
                                     <script >
                                         $(document).on('ready', function() {
                                             $("#userfile").fileinput({showCaption: false});
@@ -164,7 +163,7 @@
             </div>
             <div id="pass" class="tab-pane fade <? if ($tab===1) {?>in active<?;} ?>">
                 <div class="container-border">
-                    <form class="form-horizontal" method="post">
+                    <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsChangePwdPost');?>">
                         <legend>
                             Passwort ändern
                         </legend>
@@ -173,7 +172,7 @@
                                         Altes Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input name="old" id="old" type="password" autofocus class="form-control filled" url="<? global $router; echo $router->generate('settingsUserCheckPost');?>">
+                                        <input name="old" id="old" type="password" autofocus class="form-control filled" url="<? global $router; echo $router->generate('settingsCheckPwdPost');?>">
                                     </div>
 
                                 </div>
@@ -220,12 +219,12 @@
                     <? $i=0;
                     while ($i<count($bank_info)-1) {
                     ?>
-                    
+                        <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsAccountPost');?>">
                         <fieldset>
                             <legend>
                                 Konto <?= $i +1?>
                             </legend>
-                            <form class="form-horizontal" method="post">
+
                             <div class="form-group">
                                 <label for="iban" class=" col-lg-6 control-label">
                                     IBAN:
@@ -275,14 +274,14 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
+
                         </fieldset>
-                    
+                        </form>
                     <?
                         $i++;
                     }
                     ?>
-                    <form class="form-horizontal" method="post">
+                    <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsNewAccountPost');?>">
                         <fieldset>
                             <legend>
                                 neues Konto anlegen
@@ -340,7 +339,7 @@
             </div>
             <div id="ilias" class="tab-pane fade <? if ($tab===3) {?>in active<?;} ?>">
                 <div class="container-border">
-                    <form class="form-horizontal" method="post">
+                    <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsChangeIliasPost');?>">
                         <legend>
                             Ilias-Feed Einstellungen
                         </legend>
@@ -395,7 +394,8 @@
             });
             $('#username').on('change', function(){
                 var username=(this).value;
-                $.post($(this).url,
+                var url=document.getElementById('username').getAttribute('url');
+                $.post(url,
                     {
                         check_user: "true",
                         username: ""+username
@@ -414,7 +414,8 @@
             });
             $('#old').on('change', function(){
                 var pwd=(this).value;
-                $.post($(this).url,
+                var url=document.getElementById('old').getAttribute('url');
+                $.post(url,
                     {
                         check_pwd: "true",
                         pwd: ""+pwd

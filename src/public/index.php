@@ -35,6 +35,22 @@
         SettingsHandler::checkPwd();
     }, 'settingsCheckPwdPost');
 
+    $router->map('POST', '/settings/account/', function () {
+        SettingsHandler::changeAccount();
+    }, 'settingsAccountPost');
+
+    $router->map('POST', '/settings/newAccount/', function () {
+        SettingsHandler::createAccount();
+    }, 'settingsNewAccountPost');
+
+    $router->map('POST', '/settings/changePwd/', function () {
+        SettingsHandler::changePwd();
+    }, 'settingsChangePwdPost');
+
+    $router->map('POST', '/settings/changeIlias/', function () {
+        SettingsHandler::changeIlias();
+    }, 'settingsChangeIliasPost');
+
     $router->map('GET', '/register/', function () {
         Template::render('register', [], array(
             'template_top'      => null,
