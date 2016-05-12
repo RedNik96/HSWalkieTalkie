@@ -48,7 +48,7 @@
             <div class="postfooter">
                 <div class="share">
                     <button class="btn btn-primary" id="sharebutton"><i class="fa fa-share" aria-hidden="true"></i></button>
-                    <span id="shared">53</span>
+                    <span id="shared"><?= htmlspecialchars($post['reposts']); ?></span>
                 </div>
 
                 <div class="vote">

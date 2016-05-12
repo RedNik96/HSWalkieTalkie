@@ -59,7 +59,7 @@ CREATE TABLE `posts` (
   `content` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `user` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `parentPost` int(11),
-  `datePosted` date,
+  `datePosted` datetime,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`parentPost`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
