@@ -2,50 +2,7 @@
 
 class Session {
   
-    public static function checkCredentials($user, $password){
-
-    global $dbh;
-
-    $stmt = $dbh->prepare("SELECT password FROM user
-            WHERE username = :user");
-
-    $stmt->execute(array(
-        'user'     => $user,
-    ));
-
-    $hash = $stmt->fetchColumn();
-
-    if (password_verify($password, $hash)) {
-        $_SESSION['logged_in'] = true;
-        $_SESSION['user'] = $user;
-
-        // create new session_id
-        session_regenerate_id(true);
-
-        return true;
-    }
-
-    return false;
-}
-    public static function authenticated()
-    {
-        if(!isset($_SESSION['logged_in'])) {
-            return false;
-        }
-        return ($_SESSION['logged_in'] === true);
-    }
-
-    public static function logout()
-    {
-        // destroy old session
-        session_destroy();
-
-        // immediately start a new one
-        session_start();
-
-        // create new session_id
-        session_regenerate_id(true);
-    }
+  
     
     public static function create_user($firstName, $lastName, $email, $username, $password, $confirmedPassword, $birthday, $street, $housenumber, $zip, $iban, $bic)
     {
