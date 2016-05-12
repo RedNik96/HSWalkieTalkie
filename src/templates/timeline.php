@@ -7,10 +7,10 @@
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6"></textarea>
     <div class="postaddonsdiv">
-        <input id="input-4" name="input4[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
+        <input id="postedFiles" name="postedFiles[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
         <script>
             $(document).on('ready', function() {
-                $("#input-4").fileinput({showCaption: false});
+                $("#postedFiles").fileinput({showCaption: false});
             });
         </script>
     </div>
@@ -35,7 +35,13 @@
                 </div>
             </div>
             <div class="postcontent">
-                <?= htmlspecialchars($post['content']); ?>
+                <?
+                foreach ($post['imgs'] as $img) {
+                    ?><img src="<?= "../img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
+                }
+                echo "<br>";
+                print htmlspecialchars($post['content']);
+                ?>
                 <!--Test <br> $cashtag-->
             </div>
             <div class="postfooter">
