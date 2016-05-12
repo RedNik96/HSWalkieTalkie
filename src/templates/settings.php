@@ -1,12 +1,21 @@
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
-    <div class="container">
+    <div class="container" id="container" url="<? global $router; echo $router->generate('settings');?>">
         <script type="text/javascript">
             function deleteFunction() {
                 var inputs = document.getElementsByClassName('filled');
                 for (var i = 0; i < inputs.length; ++i) {
                     inputs[i].value = inputs[i].getAttribute('data-value');
                 }
+                $("label[for='username']").text('Benutzername:');
+                $("label[for='username']").css('color', 'black');
+                $("label[for='old']").text('Altes Passwort:');
+                $("label[for='old']").css('color', 'black');
+                $("label[for='verify']").text('Wiederhole Passwort:');
+                $("label[for='verify']").css('color', 'black');
             }
         </script>
         <ul class="nav nav-tabs">
@@ -112,13 +121,24 @@
                             </div>
                             <div class="col-sm-6 imagepanel">
                                 <div >
-                                    <img src=<? if ($user_info['picture']) { ?>"/HSWalkieTalkie/src/img/<? print $user_info['picture']."\""; } ?>alt="Profilbild">
+                                    <img src=<? if ($user_info['picture']) {?>
+                                         "/HSWalkieTalkie/src/img/<? print $user_info['picture']."\"";
+                                    } else { ?>
+                                        "/HSWalkieTalkie/src/img/profile_default.png"
+                                    <? } ?>alt="Profilbild">
                                 </div>
-                                    <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen -->
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-                                    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
-                                    Diese Datei hochladen: <input name="userfile" type="file" />
-                                <button type="submit" name="change-picture" class="btn btn-default">Profilbild ändern</button>
+                                <div class="form-group" id="fileupload">
+                                    <label class="control-label">Profilbild ändern:</label>
+                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settings');?>">
+                                    <script >
+                                        $(document).on('ready', function() {
+                                            $("#userfile").fileinput({showCaption: false});
+                                        });
+                                    </script>
+                                </div>
+                                <div id="labelpanel">
+                                    <label class="label label-danger" id="danger"></label>
+                                </div>
                             </div>
                         </div>
                         <div class="row buttonrow">
@@ -372,6 +392,53 @@
             $('.bankselect').on('change', function() {
                 var bics = <?php echo json_encode($bics); ?>;
                 $('#bank'+this.id).text(bics[this.value]);
+            });
+            $('#username').on('change', function(){
+                var username=(this).value;
+                $.post($('#container').url,
+                    {
+                        check_user: "true",
+                        username: ""+username
+                    },
+                    function(data){
+                        if (data==="    false") {
+                            $('#username').focus();
+                            $("label[for='username']").text('Benutzername schon vorhanden!');
+                            $("label[for='username']").css('color', 'red');
+                        } else {
+                            $("label[for='username']").text('Benutzername:');
+                            $("label[for='username']").css('color', 'black');
+                        }
+
+                    });
+            });
+            $('#old').on('change', function(){
+                var pwd=(this).value;
+                $.post($('#container').url,
+                    {
+                        check_pwd: "true",
+                        pwd: ""+pwd
+                    },
+                    function(data){
+                        if (data==="    false") {
+                            $('#old').focus();
+                            $("label[for='old']").text('Passwort falsch!');
+                            $("label[for='old']").css('color', 'red');
+                        } else {
+                            $("label[for='old']").text('Altes Passwort:');
+                            $("label[for='old']").css('color', 'black');
+                        }
+                    });
+            });
+            $('#verify').on('change', function(){
+                if ((this).value!==$('#new').val()) {
+                    $('#verify').focus();
+                    $("label[for='verify']").text('Passwort stimmt nicht überein!');
+                    $("label[for='verify']").css('color', 'red');
+                } else {
+                    $("label[for='verify']").text('Wiederhole Passwort:');
+                    $("label[for='verify']").css('color', 'black');
+                }
             });
         </script>
     </div>

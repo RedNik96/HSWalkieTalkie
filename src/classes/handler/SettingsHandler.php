@@ -2,6 +2,7 @@
 class SettingsHandler {
     public static function post() {
         global $dbh;
+
         if(isset($_POST['change-settings'])){
             $email=$_POST['email'];
             $firstname=$_POST['firstname'];
@@ -31,28 +32,7 @@ class SettingsHandler {
             }
             $_SESSION['settings']=0;
         }
-        if(isset($_POST['change-picture'])){
-            $check = getimagesize($_FILES["userfile"]["tmp_name"]);
-            if($check !== false) {
-                $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
-                $stmt->execute( array(
-                    'user' => $_SESSION['user']
-                ));
-                $picture=$stmt->fetch();
-                unlink(IMG_PATH . "\\" . $picture['picture']);
-                $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
-                $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
 
-                if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                    $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");
-                    $stmt->execute( array(
-                        'picture' => $_SESSION['user'] . "." . $imageFileType,
-                        'user' => $_SESSION['user']
-                    ));
-                }
-            }
-            $_SESSION['settings']=0;
-        }
         if(isset($_POST['new-account'])){
             $iban=$_POST['iban'];
             $bic=$_POST['bic'];
@@ -66,6 +46,7 @@ class SettingsHandler {
             ));
             $_SESSION['settings']=2;
         }
+
         if(isset($_POST['delete-account'])){
             $iban=$_POST['ibanalt'];
             $stmt=$dbh->prepare("DELETE FROM account WHERE iban=:iban and user=:user");
@@ -113,7 +94,52 @@ class SettingsHandler {
             ));
             $_SESSION['settings']=3;
         }
+        if (isset($_FILES["userfile"])) {
+            $check = getimagesize($_FILES["userfile"]["tmp_name"]);
+            if($check !== false) {
+                $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
+                $stmt->execute( array(
+                    'user' => $_SESSION['user']
+                ));
+                $picture=$stmt->fetch();
+                unlink(IMG_PATH . "\\" . $picture['picture']);
+                $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
+                $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
 
+                if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
+                    $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");
+                    $stmt->execute( array(
+                        'picture' => $_SESSION['user'] . "." . $imageFileType,
+                        'user' => $_SESSION['user']
+                    ));
+                }
+            }
+            $_SESSION['settings']=0;
+        }
+        if (isset($_POST['check_user'])) {
+            if ($_POST['username']===$_SESSION['user']) {
+                echo "true";
+                die;
+            }
+            $stmt=$dbh->prepare("SELECT username FROM user WHERE username=:user");
+            $stmt->execute( array(
+                'user' => $_POST['username']
+            ));
+            if ($stmt->fetch()) {
+                echo "false";
+                die;
+            }
+        }
+        if (isset($_POST['check_pwd'])) {
+            if (LoginHandler::checkCredentials($_SESSION['user'],$_POST['pwd'])) {
+                echo "true";
+                die;
+            } else {
+                echo "false";
+                die;
+            }
+            
+        }
         global $router;
         header("Location: " . $router->generate("settings"));
     }
@@ -130,7 +156,7 @@ class SettingsHandler {
             //'username' => 'peterPan'
         ));
         $user_info=$stmt->fetch();
-        $user_info=EscapeUtil::escape_array($user_info);
+        EscapeUtil::escape_array($user_info);
         $stmt=$dbh->prepare("SELECT account.iban, account.bic, bic.bank FROM account,bic WHERE user=:username and account.bic=bic.bic ORDER BY account.iban ASC");
         $stmt->execute( array(
             'username' => $_SESSION['user']
@@ -138,19 +164,19 @@ class SettingsHandler {
         ));
         $i=0;
         while ($bank_info[$i]=$stmt->fetch()) {
-            $bank_info[$i]=EscapeUtil::escape_array($bank_info[$i]);
+            EscapeUtil::escape_array($bank_info[$i]);
             $i++;
         }
         $stmt = $dbh->prepare("SELECT bic, bank from bic");
         $stmt->execute();
         while($result = $stmt->fetch()) {
-            $result=EscapeUtil::escape_array($result);
+            EscapeUtil::escape_array($result);
             $bics[$result[0]] = $result[1];
         }
         $stmt = $dbh->prepare("SELECT zip, city from city");
         $stmt->execute();
         while($result = $stmt->fetch()) {
-            $result=EscapeUtil::escape_array($result);
+            EscapeUtil::escape_array($result);
             $zips[$result[0]] = $result[1];
         }
         $template_data = array(

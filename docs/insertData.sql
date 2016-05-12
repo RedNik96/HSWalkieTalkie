@@ -1,3 +1,4 @@
+use hswalkietalkie;
 INSERT INTO city (zip, city) VALUES
 ('10115', 'Berlin'),
 ('10117', 'Berlin'),
