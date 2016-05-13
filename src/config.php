@@ -57,6 +57,7 @@ require_once(CLASSES_PATH . "/handler/LoginHandler.php");
 require_once(CLASSES_PATH . "/handler/TimelineHandler.php");
 require_once(CLASSES_PATH . "/handler/SearchHandler.php");
 include(CLASSES_PATH . "/handler/ProfileHandler.php");
+require_once (CLASSES_PATH . "/User.php");
 //});
 
 

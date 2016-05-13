@@ -17,6 +17,7 @@
                 <div class="placement">
                     <span><?echo $i?>.</span>
                 </div>
+                <? User::getUserHtml("", $user['firstName'], $user['lastName'], $user['username'])?>
                 <!--<div class="postauthor">
                     <img class="img-rounded" src="" alt="Bild">
                     <div class="postauthorname">
@@ -24,7 +25,6 @@
                         <span id="username">@<?=htmlspecialchars($user['username']); ?></span>
                     </div>
                 </div>-->
-                <? ?>
                 <span id="cash">$43</span>
             </div>
             <?endforeach; ?>

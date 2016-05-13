@@ -3,6 +3,10 @@ body footer {
     margin-right: 10px;
 }
 
+#searchBar{
+    margin-top: 1%;
+}
+
 #name{
     font-weight: bold;
     color: black;
