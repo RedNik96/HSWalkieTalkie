@@ -1,73 +1,6 @@
 <?php
 class SettingsHandler {
-    public static function post() {
-        global $dbh;
-        
-        if(isset($_POST['new-account'])){
-            $iban=$_POST['iban'];
-            $bic=$_POST['bic'];
-
-            $stmt=$dbh->prepare("INSERT INTO account values (:iban, :bic, :user)");
-            $stmt->execute( array(
-                'iban' => $iban,
-                'bic' => $bic,
-                'user' => $_SESSION['user']
-                //'user' => 'peterPan'
-            ));
-            $_SESSION['settings']=2;
-        }
-
-        if(isset($_POST['delete-account'])){
-            $iban=$_POST['ibanalt'];
-            $stmt=$dbh->prepare("DELETE FROM account WHERE iban=:iban and user=:user");
-            $stmt->execute( array(
-                'iban' => $iban,
-                'user' => $_SESSION['user']
-                //'user' => 'peterPan'
-            ));
-            $_SESSION['settings']=2;
-        }
-        if(isset($_POST['change-account'])){
-            print_r($_POST);
-            $ibanalt=$_POST['ibanalt'];
-            $iban=$_POST['iban'];
-            $bic=$_POST['bic'];
-            $stmt=$dbh->prepare("UPDATE account SET iban=:iban, bic=:bic WHERE iban=:ibanalt");
-            $stmt->execute( array(
-                'bic' => $bic,
-                'iban' => $iban,
-                'ibanalt' => $ibanalt
-            ));
-            $_SESSION['settings']=2;
-        }
-        if(isset($_POST['change-pwd'])){
-            $old=$_POST['old'];
-            $new=$_POST['new'];
-            $verify=$_POST['verify'];
-            if (LoginHandler::checkCredentials($_SESSION['user'],$old)&&$new===$verify) {
-                $stmt=$dbh->prepare("UPDATE user SET password=:hash WHERE username=:user");
-                $hash = password_hash($new, PASSWORD_DEFAULT);
-                $stmt->execute( array(
-                    'hash' => $hash,
-                    'user' => $_SESSION['user']
-                ));
-            }
-            $_SESSION['settings']=1;
-
-        }
-        if(isset($_POST['change-ilias'])){
-            $url=$_POST['url'];
-            $stmt=$dbh->prepare("UPDATE user SET feedUrl=:url WHERE username=:user");
-            $stmt->execute( array(
-                'url' => $url,
-                'user' => $_SESSION['user']
-            ));
-            $_SESSION['settings']=3;
-        }
-        
-        global $router;
-        header("Location: " . $router->generate("settingsGet"));
-    }
+    
     public static function get() {
         global $dbh;
         $tab=0;
@@ -115,10 +48,12 @@ class SettingsHandler {
         $templates['template_right']=null;
         Template::render('settings', $template_data, $templates);
     }
+    
     public static function personalInformation() {
         global $dbh;
 
         if(isset($_POST['change-settings'])){
+
             $email=$_POST['email'];
             $firstname=$_POST['firstname'];
             $lastname=$_POST['lastname'];
@@ -145,10 +80,13 @@ class SettingsHandler {
             ))) {
                 $_SESSION['user']=$username;
             }
-            $_SESSION['settings']=0;
         }
-        
-        if (isset($_FILES["userfile"])) {
+        if (isset($_POST['deletePicture'])) {
+            $stmt=$dbh->prepare("UPDATE user SET picture=null WHERE username=:user");
+            $stmt->execute( array(
+                'user' => $_SESSION['user']
+            ));
+        } else if (isset($_FILES["userfile"])) {
             $check = getimagesize($_FILES["userfile"]["tmp_name"]);
             if($check !== false) {
                 $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
@@ -168,12 +106,14 @@ class SettingsHandler {
                     ));
                 }
             }
-            $_SESSION['settings']=0;
         }
+
         
+        $_SESSION['settings']=0;
         global $router;
         header("Location: " . $router->generate("settingsGet"));
     }
+    
     static public function checkUser() {
         global $dbh;
             if ($_POST['username']===$_SESSION['user']) {
@@ -187,12 +127,86 @@ class SettingsHandler {
                 echo "false";
             }
     }
+    
     static public function checkPwd() {
             if (LoginHandler::checkCredentials($_SESSION['user'],$_POST['pwd'])) {
                 echo "true";
             } else {
                 echo "false";
             }
+    }
+    static public function changeAccount() {
+        global $dbh;
+        if(isset($_POST['delete-account'])){
+            $iban=$_POST['ibanalt'];
+            $stmt=$dbh->prepare("DELETE FROM account WHERE iban=:iban and user=:user");
+            $stmt->execute( array(
+                'iban' => $iban,
+                'user' => $_SESSION['user']
+                //'user' => 'peterPan'
+            ));
+        }
+        if(isset($_POST['change-account'])){
+            print_r($_POST);
+            $ibanalt=$_POST['ibanalt'];
+            $iban=$_POST['iban'];
+            $bic=$_POST['bic'];
+            $stmt=$dbh->prepare("UPDATE account SET iban=:iban, bic=:bic WHERE iban=:ibanalt");
+            $stmt->execute( array(
+                'bic' => $bic,
+                'iban' => $iban,
+                'ibanalt' => $ibanalt
+            ));
+        }
+        $_SESSION['settings']=2;
+        global $router;
+        header("Location: " . $router->generate("settingsGet"));
+    }
+    static public function createAccount() {
+        global $dbh;
+
+            $iban=$_POST['iban'];
+            $bic=$_POST['bic'];
+
+            $stmt=$dbh->prepare("INSERT INTO account values (:iban, :bic, :user)");
+            $stmt->execute( array(
+                'iban' => $iban,
+                'bic' => $bic,
+                'user' => $_SESSION['user']
+                //'user' => 'peterPan'
+            ));
+        $_SESSION['settings']=2;
+        global $router;
+        header("Location: " . $router->generate("settingsGet"));
+    }
+    static public function changePwd() {
+        global $dbh;
+            $old=$_POST['old'];
+            $new=$_POST['new'];
+            $verify=$_POST['verify'];
+            if (LoginHandler::checkCredentials($_SESSION['user'],$old)&&$new===$verify) {
+                $stmt=$dbh->prepare("UPDATE user SET password=:hash WHERE username=:user");
+                $hash = password_hash($new, PASSWORD_DEFAULT);
+                $stmt->execute( array(
+                    'hash' => $hash,
+                    'user' => $_SESSION['user']
+                ));
+            }
+        $_SESSION['settings']=1;
+        global $router;
+        header("Location: " . $router->generate("settingsGet"));
+    }
+    static public function changeIlias() {
+        global $dbh;
+            $url=$_POST['url'];
+            $stmt=$dbh->prepare("UPDATE user SET feedUrl=:url WHERE username=:user");
+            $stmt->execute( array(
+                'url' => $url,
+                'user' => $_SESSION['user']
+            ));
+        $_SESSION['settings']=3;
+        global $router;
+        header("Location: " . $router->generate("settingsGet"));
     }
 }
   

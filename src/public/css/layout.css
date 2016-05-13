@@ -3,6 +3,10 @@ body footer {
     margin-right: 10px;
 }
 
+#searchBar{
+    margin-top: 1%;
+}
+
 #name{
     font-weight: bold;
     color: black;
@@ -18,4 +22,8 @@ body footer {
 
 #shared{
     color: #2e6da4;
+}
+
+#searchBar {
+    width: 250px;
 }
