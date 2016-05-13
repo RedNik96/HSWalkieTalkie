@@ -1,14 +1,27 @@
-<div class="row">
-  <img src="/HSWalkieTalkie/src/img/profile_default.png" alt="Profil Bild" />
+<div class="row picture-row">
+  <img src="<?= $user_info['picture'] ?>" class="img-responsive" alt="Profil Bild" />
 </div>
-<div class="row">
+<div class="row name-row col-md-offset-1">
   <div>
-    Name, Vorname
+    <?= $user_info['lastName'] ?>,
+    <?= $user_info['firstName'] ?>
   </div>
   <div>
-    username
+    @<?= $user_info['username'] ?>
   </div>
 </div>
-<div class="row">
-  Informationen zu dem Benutzer
+<div class="row info-row col-md-offset-1">
+  <div><?= $user_info['email'] ?></div>
+  <div><?= $user_info['zip'] ?> <?= $user_info['city'] ?></div>
+  <div><?= $user_info['birthday'] ?></div>
 </div>
+
+<style>
+  .name-row {
+    font-weight: bold;
+    margin-top: 1em;
+  }
+  .info-row {
+    margin-top: 1em;
+  }
+</style>

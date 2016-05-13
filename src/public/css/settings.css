@@ -51,8 +51,13 @@ i {
 
 .btn {
     padding-left: 5px;
+    margin-top: 7px;
 }
 
 #fileupload {
     margin-top: 20px;
+}
+
+.fileinput {
+    padding-top: 7px;
 }

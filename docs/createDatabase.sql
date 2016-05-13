@@ -22,7 +22,7 @@ CREATE TABLE `user` (
   `lastName` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `feedURL` varchar(255) COLLATE utf8mb4_bin,
   `email` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_bin,
+  `picture` varchar(255) COLLATE utf8mb4_bin DEFAULT "profile_default.png",
   `birthday` DATE NOT NULL,
   `street` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `housenumber` varchar(255) COLLATE utf8mb4_bin NOT NULL,

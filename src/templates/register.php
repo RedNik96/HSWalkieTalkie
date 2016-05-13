@@ -3,7 +3,7 @@
 
 <? global $router; ?>
 <div class="container">
-    <form action="<?= $router->generate('registrierungGet'); ?>" class="form-horizontal" method="POST">
+    <form action="<?= $router->generate('registrierungPost'); ?>" class="form-horizontal" method="POST">
 
         <legend>Verpflichtende Angaben</legend>
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
@@ -136,4 +136,15 @@
         var zips = <?php echo json_encode($zips); ?>;
         $('#city').text(zips[this.value]);
     });
+    $('#confirmedPassword').on('change', function(){
+        if ((this).value!==$('#password').val()) {
+            $('#confirmedPassword').focus();
+            $("label[for='confirmedPassword']").text('Passwort stimmt nicht überein!');
+            $("label[for='confirmedPassword']").css('color', 'red');
+        } else {
+            $("label[for='confirmedPassword']").text('Passwort erneut eingeben*');
+            $("label[for='confirmedPassword']").css('color', 'black');
+        }
+    });
+    
 </script>
