@@ -1,3 +1,5 @@
+<link href="/HSWalkieTalkie/src/libraries/select2-4.0.2/dist/css/select2.min.css" rel="stylesheet" />
+<script src="/HSWalkieTalkie/src/libraries/select2-4.0.2/dist/js/select2.min.js"></script>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,7 +21,9 @@
         <li <? if ($GLOBALS['match']['name']=='settingsGet') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settingsGet");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Suchen">
+            <select type="search" id="searchBar" type="text" class="form-control" placeholder="Suchen">
+              <option></option>
+            </select>
           </div>
           <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Suchen</button>
         </form>
@@ -30,5 +34,28 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<script type="text/javascript">
+  $('#searchBar').select2({
+    placeholder: 'Name oder $cashtag suchen',
+  });
+  $.ajax({
+    method: 'POST',
+        url: '/HSWalkieTalkie/src/public/searchData/',
+    }).then(function (data) {
+      $data=data;
+    for (var i = 0; i < data.names.length; i++) {
+      var $option = $('<option></option>').val('');
+      $option.text($data.names[i]).val($data.names[i]); // update the text that is displayed (and maybe even the value)
+      $('#searchBar').append($option).trigger('change'); // append the option and update Select2
+    }
+    for (var i = 0; i < data.fullNames.length; i++) {
+      var $option = $('<option></option>').val('');
+      $option.text($data.fullNames[i]).val($data.fullNames[i]); // update the text that is displayed (and maybe even the value)
+      $('#searchBar').append($option).trigger('change'); // append the option and update Select2
+    }
+  });
+
+
+</script>
 
 <!--TODO: URL's für NavBar auslagern-->

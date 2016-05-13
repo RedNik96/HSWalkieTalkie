@@ -19,3 +19,7 @@ body footer {
 #shared{
     color: #2e6da4;
 }
+
+#searchBar {
+    width: 250px;
+}
