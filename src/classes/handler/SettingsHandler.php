@@ -53,6 +53,7 @@ class SettingsHandler {
         global $dbh;
 
         if(isset($_POST['change-settings'])){
+
             $email=$_POST['email'];
             $firstname=$_POST['firstname'];
             $lastname=$_POST['lastname'];
@@ -79,10 +80,13 @@ class SettingsHandler {
             ))) {
                 $_SESSION['user']=$username;
             }
-            $_SESSION['settings']=0;
         }
-        
-        if (isset($_FILES["userfile"])) {
+        if (isset($_POST['deletePicture'])) {
+            $stmt=$dbh->prepare("UPDATE user SET picture=null WHERE username=:user");
+            $stmt->execute( array(
+                'user' => $_SESSION['user']
+            ));
+        } else if (isset($_FILES["userfile"])) {
             $check = getimagesize($_FILES["userfile"]["tmp_name"]);
             if($check !== false) {
                 $stmt=$dbh->prepare("SELECT picture FROM user WHERE username=:user");
@@ -102,9 +106,10 @@ class SettingsHandler {
                     ));
                 }
             }
-            $_SESSION['settings']=0;
         }
+
         
+        $_SESSION['settings']=0;
         global $router;
         header("Location: " . $router->generate("settingsGet"));
     }
@@ -160,7 +165,6 @@ class SettingsHandler {
     static public function createAccount() {
         global $dbh;
 
-        if(isset($_POST['new-account'])){
             $iban=$_POST['iban'];
             $bic=$_POST['bic'];
 
@@ -171,14 +175,12 @@ class SettingsHandler {
                 'user' => $_SESSION['user']
                 //'user' => 'peterPan'
             ));
-        }
         $_SESSION['settings']=2;
         global $router;
         header("Location: " . $router->generate("settingsGet"));
     }
     static public function changePwd() {
         global $dbh;
-        if(isset($_POST['change-pwd'])){
             $old=$_POST['old'];
             $new=$_POST['new'];
             $verify=$_POST['verify'];
@@ -190,21 +192,18 @@ class SettingsHandler {
                     'user' => $_SESSION['user']
                 ));
             }
-        }
         $_SESSION['settings']=1;
         global $router;
         header("Location: " . $router->generate("settingsGet"));
     }
     static public function changeIlias() {
         global $dbh;
-        if(isset($_POST['change-ilias'])){
             $url=$_POST['url'];
             $stmt=$dbh->prepare("UPDATE user SET feedUrl=:url WHERE username=:user");
             $stmt->execute( array(
                 'url' => $url,
                 'user' => $_SESSION['user']
             ));
-        }
         $_SESSION['settings']=3;
         global $router;
         header("Location: " . $router->generate("settingsGet"));

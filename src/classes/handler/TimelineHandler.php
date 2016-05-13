@@ -14,7 +14,7 @@ Class TimelineHandler {
     Template::render("timeline", $data);
   }
 
-  public static function getOwnPosts() {
+  public static function getOwnPosts($user) {
     global $dbh;
 
     $stmt=$dbh->prepare(
@@ -26,14 +26,14 @@ Class TimelineHandler {
       WHERE username = :username AND P.user = :username");
 
     $stmt->execute(array(
-        'username' => $_SESSION['user']
+        'username' => $user
     ));
     return $stmt;
   }
 
-  public static function getOwnPostsAsArray() {
+  public static function getOwnPostsAsArray($user) {
     global $dbh;
-    $stmt = self::getOwnPosts();
+    $stmt = self::getOwnPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $stmt2 = $dbh->prepare("SELECT filename FROM postsImg WHERE postID = :pid");

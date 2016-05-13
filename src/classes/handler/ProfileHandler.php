@@ -20,10 +20,12 @@ Class ProfileHandler {
     $res = $stmt->fetch();
     if ($res['picture'] == null) {
       $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
+    } else {
+      $res['picture'] = "/HSWalkieTalkie/src/img/" . $res['picture'];
     }
 
     // rendert das falsche und nicht alles so richtig
-    $posts = TimelineHandler::getOwnPostsAsArray();
+    $posts = TimelineHandler::getOwnPostsAsArray($_SESSION['user']);
 
     $data = array(
       'user_info' => $res,

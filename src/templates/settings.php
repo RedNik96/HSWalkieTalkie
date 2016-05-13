@@ -16,7 +16,9 @@
                 $("label[for='verify']").text('Wiederhole Passwort:');
                 $("label[for='verify']").css('color', 'black');
             }
+
         </script>
+
         <ul class="nav nav-tabs">
             <li <? if ($tab===0) {?>class="active" <?;} ?>><a data-toggle="tab" href="#personal">persönliche Informationen</a></li>
             <li <? if ($tab===1) {?>class="active" <?;} ?>><a data-toggle="tab" href="#pass">Passwort ändern</a></li>
@@ -38,7 +40,7 @@
                                         Email:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="email" id="email" type="email" autofocus class="form-control filled" data-value="<?= $user_info['email']?>" value=<?= $user_info['email']?>>
+                                        <input required name="email" id="email" type="email" autofocus class="form-control filled" data-value="<?= $user_info['email']?>" value=<?= $user_info['email']?>>
                                     </div>
 
                                 </div>
@@ -47,7 +49,7 @@
                                         Vorname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="firstname" id="firstname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['firstName']?>" value=<?= $user_info['firstName']?>>
+                                        <input required name="firstname" id="firstname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['firstName']?>" value=<?= $user_info['firstName']?>>
                                     </div>
 
                                 </div>
@@ -56,7 +58,7 @@
                                         Nachname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="lastname" id="lastname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['lastName']?>" value=<?= $user_info['lastName']?>>
+                                        <input required name="lastname" id="lastname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['lastName']?>" value=<?= $user_info['lastName']?>>
                                     </div>
 
                                 </div>
@@ -65,7 +67,7 @@
                                         Benutzername:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsCheckUserPost');?>">
+                                        <input required name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsCheckUserPost');?>">
                                     </div>
 
                                 </div>
@@ -74,7 +76,7 @@
                                         Geburtstag:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="birth" id="birth" type="date" autofocus class="form-control filled" data-value="<?= $user_info['birthday']?>" value=<?= $user_info['birthday']?>>
+                                        <input required name="birth" id="birth" type="date" autofocus class="form-control filled" data-value="<?= $user_info['birthday']?>" value=<?= $user_info['birthday']?>>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -82,7 +84,7 @@
                                         Straße:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="street" id="street" type="text" autofocus class="form-control filled" data-value="<?= $user_info['street']?>" value=<?= $user_info['street']?>>
+                                        <input required name="street" id="street" type="text" autofocus class="form-control filled" data-value="<?= $user_info['street']?>" value=<?= $user_info['street']?>>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -90,7 +92,7 @@
                                         Hausnummer:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value=<?= $user_info['housenumber']?>>
+                                        <input required name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value=<?= $user_info['housenumber']?>>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -98,7 +100,7 @@
                                         PLZ:
                                     </label>
                                     <div class="col-sm-6">
-                                        <select class="form-control filled" id="zip" name="zip"  data-value="<?= $user_info['zip']?>" >
+                                        <select required class="form-control filled" id="zip" name="zip"  data-value="<?= $user_info['zip']?>" >
                                             <option></option>
                                             <?
                                             foreach ($zips as $key => $value) {
@@ -129,6 +131,7 @@
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>
                                     <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPost');?>">
+                                    <button name="deletePicture" id="deletePicture" class="btn btn-default active"><i class="fa fa-trash" aria-hidden="true"></i>Profilbild löschen</button>
                                     <script >
                                         $(document).on('ready', function() {
                                             $("#userfile").fileinput({showCaption: false});
@@ -172,7 +175,7 @@
                                         Altes Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input name="old" id="old" type="password" autofocus class="form-control filled" url="<? global $router; echo $router->generate('settingsCheckPwdPost');?>">
+                                        <input required name="old" id="old" type="password" autofocus class="form-control filled" url="<? global $router; echo $router->generate('settingsCheckPwdPost');?>">
                                     </div>
 
                                 </div>
@@ -181,7 +184,7 @@
                                         Neues Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input name="new" id="new" type="password" autofocus class="form-control filled">
+                                        <input required name="new" id="new" type="password" autofocus class="form-control filled">
                                     </div>
 
                                 </div>
@@ -190,7 +193,7 @@
                                         Wiederhole Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input name="verify" id="verify" type="password" autofocus class="form-control filled">
+                                        <input required name="verify" id="verify" type="password" autofocus class="form-control filled">
                                     </div>
                                 </div>
                         <div class="form-group">
@@ -230,7 +233,7 @@
                                     IBAN:
                                 </label>
                                 <div class="col-lg-6">
-                                    <input name="iban" id="iban" type="text" autofocus class="form-control" data-value="<?= $bank_info[$i]['iban']?>" value=<?= $bank_info[$i]['iban']?>>
+                                    <input required name="iban" id="iban" type="text" autofocus class="form-control" data-value="<?= $bank_info[$i]['iban']?>" value=<?= $bank_info[$i]['iban']?>>
                                 </div>
 
                             </div>
@@ -239,7 +242,7 @@
                                     BIC:
                                 </label>
                                 <div class="col-lg-6">
-                                    <select class="form-control bankselect" id="<?= $i ?>" name="bic"  data-value="<?= $bank_info[$i]['bic']?>" >
+                                    <select required class="form-control bankselect" id="<?= $i ?>" name="bic"  data-value="<?= $bank_info[$i]['bic']?>" >
                                         <option></option>
                                         <?
                                         foreach ($bics as $key => $value) {
@@ -292,7 +295,7 @@
                                     IBAN:
                                 </label>
                                 <div class="col-lg-6">
-                                    <input name="iban" id="iban" type="text" autofocus class="form-control filled">
+                                    <input required name="iban" id="iban" type="text" autofocus class="form-control filled">
                                 </div>
 
                             </div>
@@ -301,7 +304,7 @@
                                     BIC:
                                 </label>
                                 <div class="col-lg-6">
-                                    <select class="form-control filled" id="bic" name="bic">
+                                    <select required class="form-control filled" id="bic" name="bic">
                                         <option></option>
                                         <?
                                         foreach ($bics as $key => $value) {
@@ -348,7 +351,7 @@
                                 RSS-Feed-URL:
                             </label>
                             <div class="col-lg-6">
-                                <input name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value=<?= $user_info['feedURL']?>>
+                                <input required name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value=<?= $user_info['feedURL']?>>
                             </div>
                         </div>
                         <div class="form-group">
