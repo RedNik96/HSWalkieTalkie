@@ -35,24 +35,35 @@
   </div><!-- /.container-fluid -->
 </nav>
 <script type="text/javascript">
-  $('#searchBar').select2({
-    placeholder: 'Name oder $cashtag suchen',
-  });
   $.ajax({
     method: 'POST',
-        url: '/HSWalkieTalkie/src/public/searchData/',
-    }).then(function (data) {
-      $data=data;
+    url: '/HSWalkieTalkie/src/public/searchData/',
+  }).then(function (data) {
+    var data=data;
+    var names= '[' +
+      '{ "text":"Benutzer" , "children": [ ';
+    
     for (var i = 0; i < data.names.length; i++) {
-      var $option = $('<option></option>').val('');
-      $option.text($data.names[i]).val($data.names[i]); // update the text that is displayed (and maybe even the value)
-      $('#searchBar').append($option).trigger('change'); // append the option and update Select2
+      if (i>0) {
+        names+=',';
+      }
+      names+='{ "id":"'+i+'", "text":"'+data.names[i]+'"}';
     }
+    names+=']},{ "text":"Benutzernamen" , "children": [ ';
+
     for (var i = 0; i < data.fullNames.length; i++) {
-      var $option = $('<option></option>').val('');
-      $option.text($data.fullNames[i]).val($data.fullNames[i]); // update the text that is displayed (and maybe even the value)
-      $('#searchBar').append($option).trigger('change'); // append the option and update Select2
+      if (i>0) {
+        names+=',';
+      }
+      names+='{ "id":"'+i+'", "text":"'+data.fullNames[i]+'"}';
     }
+    names+=']}]';
+    var obj = JSON.parse(names);
+    $('#searchBar').select2({
+      placeholder: 'Name oder $cashtag suchen',
+      data: obj
+    });
+
   });
 
 

@@ -149,7 +149,7 @@
                                 <div class="col-sm-4">
                                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                         <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-primary" name="change-settings">
+                                            <button type="submit" class="btn btn-primary" id="change-settings" name="change-settings">
                                                 <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                                 Änderungen speichern
                                             </button>
@@ -201,7 +201,7 @@
                             <div class="col-lg-4">
                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                     <div class="btn-group" role="group">
-                                        <button type="submit" class="btn btn-primary" name="change-pwd"><i class="fa fa-floppy-o" aria-hidden="true"></i>Passwort ändern</button>
+                                        <button id="change-pwd" type="submit" class="btn btn-primary" name="change-pwd"><i class="fa fa-floppy-o" aria-hidden="true"></i>Passwort ändern</button>
                                     </div>
                                     <div class="btn-group" role="group">
                                         <a onclick="deleteFunction()" class="btn btn-default active" role="button"><i class="fa fa-times" aria-hidden="true"></i>Änderungen verwerfen</a>
