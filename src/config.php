@@ -60,12 +60,22 @@ include(CLASSES_PATH . "/handler/ProfileHandler.php");
 require_once (CLASSES_PATH . "/User.php");
 //});
 
-
+try {
 // create connection to database
-$dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', '',
-    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
-); #TODO: implement DB-Connections and use the users from $config
-
+    $dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', '',
+        array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+    ); #TODO: implement DB-Connections and use the users from $config
+}catch (Exception $e)
+{
+    if(strpos($e->getMessage(),"Unknown database 'hswalkietalkie'") !== false) {
+        $dbh = new PDO('mysql:host=localhost', 'root', '');
+        $pathToSrc = dirname(__FILE__);
+        $pathToHSWalkieTalkie = substr($pathToSrc, 0, strrpos($pathToSrc, '\\'));
+        include($pathToHSWalkieTalkie . "/docs/insertData.php");
+    } else {
+        throw $e;
+    }
+}
 
 // start session
 session_start();
