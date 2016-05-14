@@ -39,7 +39,6 @@
     method: 'POST',
     url: '/HSWalkieTalkie/src/public/searchData/',
   }).then(function (data) {
-    var data=data;
     var names= '[' +
       '{ "text":"Benutzer" , "children": [ ';
     
@@ -56,6 +55,14 @@
         names+=',';
       }
       names+='{ "id":"'+i+'", "text":"'+data.fullNames[i]+'"}';
+    }
+    names+=']},{ "text":"$chashtags" , "children": [ ';
+
+    for (var i = 0; i < data.tags.length; i++) {
+      if (i>0) {
+        names+=',';
+      }
+      names+='{ "id":"'+i+'", "text":"'+data.tags[i]+'"}';
     }
     names+=']}]';
     var obj = JSON.parse(names);
