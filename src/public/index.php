@@ -50,7 +50,10 @@
     $router->map('POST', '/settings/changeIlias/', function () {
         SettingsHandler::changeIlias();
     }, 'settingsChangeIliasPost');
-    
+
+    $router->map('POST', '/searchData/', function () {
+        SearchHandler::getSearchData();
+    }, 'searchDataPost');
 
     $router->map('GET', '/register/', function () {
         Template::render('register', [], array(

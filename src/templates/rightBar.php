@@ -17,14 +17,9 @@
                 <div class="placement">
                     <span><?echo $i?>.</span>
                 </div>
-                <!--<div class="postauthor">
-                    <img class="img-rounded" src="" alt="Bild">
-                    <div class="postauthorname">
-                        <span id="name"><?=htmlspecialchars($user['firstName']) . " " . htmlspecialchars($user['lastName'])?></span>
-                        <span id="username">@<?=htmlspecialchars($user['username']); ?></span>
-                    </div>
-                </div>-->
-                <? ?>
+                <div class="postauthor">
+                    <? echo User::getUserHtml($user['profilePicture'], $user['firstName'], $user['lastName'], $user['username'])?>
+                </div>
                 <span id="cash">$43</span>
             </div>
             <?endforeach; ?>

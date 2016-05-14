@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/profile.css">
 <div class="row picture-row">
   <img src="<?= $user_info['picture'] ?>" class="img-responsive" alt="Profil Bild" />
 </div>
@@ -15,13 +16,3 @@
   <div><?= $user_info['zip'] ?> <?= $user_info['city'] ?></div>
   <div><?= $user_info['birthday'] ?></div>
 </div>
-
-<style>
-  .name-row {
-    font-weight: bold;
-    margin-top: 1em;
-  }
-  .info-row {
-    margin-top: 1em;
-  }
-</style>
