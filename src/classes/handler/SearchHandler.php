@@ -22,8 +22,8 @@ class SearchHandler
             for ($n; $n<$count;$n++) {
                 $content=strstr($content,'$');
                 $end=0;
-                if (strpos($content,' ')<strpos($content,'$')) {
-                    $end=strpos($content,' ');
+                if (strpos($content,' ')<strpos(substr($content,1),'$')) {
+                    $end=strpos(substr($content,1),'$')+1;
                 } else {
                     $end=strpos($content,' ');
                 }
@@ -46,24 +46,31 @@ class SearchHandler
     }
     static public function search() {
         global $dbh;
-        if (substr($_POST['search'],0,1)==='n') {
-            $name = substr($_POST['search'],1);
-            $firstName=substr($name,0,strpos($name,' '));
-            $lastName=substr($name,strpos($name,' ')+1);
-            $stmt=$dbh->prepare("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname");
-            $stmt->execute( array(
-                'firstname' => $firstName,
-                'lastname' => $lastName
-            ));
-            $result=$stmt->fetch();
-            $username=$result['username'];
+        if (substr($_POST['search'],0,1)==='$') {
 
+            $_SESSION['cashtag']=$_POST['search'];
+            global $router;
+            header("Location: " . $router->generate("showCashTagGet"));
         } else {
-            $username=substr($_POST['search'],1);
+            if (substr($_POST['search'],0,1)==='n') {
+                $name = substr($_POST['search'],1);
+                $firstName=substr($name,0,strpos($name,' '));
+                $lastName=substr($name,strpos($name,' ')+1);
+                $stmt=$dbh->prepare("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname");
+                $stmt->execute( array(
+                    'firstname' => $firstName,
+                    'lastname' => $lastName
+                ));
+                $result=$stmt->fetch();
+                $username=$result['username'];
+
+            } else {
+                $username=substr($_POST['search'],1);
+            }
+            $_SESSION['showUser']=$username;
+            global $router;
+            header("Location: " . $router->generate("showUserGet"));
         }
-        $_SESSION['showUser']=$username;
-        global $router;
-        header("Location: " . $router->generate("showUserGet"));
     }
 }
 ?>

@@ -62,7 +62,7 @@
       if (i>0) {
         names+=',';
       }
-      names+='{ "id":"'+i+'", "text":"'+data.tags[i]+'"}';
+      names+='{ "id":"'+data.tags[i]+'", "text":"'+data.tags[i]+'"}';
     }
     names+=']}]';
     var obj = JSON.parse(names);

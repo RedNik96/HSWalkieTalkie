@@ -63,6 +63,10 @@
         ProfileHandler::showUser();
     }, 'showUserGet');
 
+    $router->map('GET', '/showCashTag/', function () {
+        CashTagHandler::get();
+    }, 'showCashTagGet');
+
     $router->map('GET', '/register/', function () {
         Template::render('register', [], array(
             'template_top'      => null,
