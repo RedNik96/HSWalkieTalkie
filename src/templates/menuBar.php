@@ -19,9 +19,9 @@
         <li <? if ($GLOBALS['match']['name']=='timeline') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("timeline");?>"><span class="fa fa-newspaper-o fa-2x"></span> Neuigkeiten</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='profile') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("profile");?>"><span class="fa fa-user fa-2x"></span> Profil</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='settingsGet') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settingsGet");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" role="search" method="post" action="<?= $GLOBALS['router']->generate('searchPost'); ?>">
           <div class="form-group">
-            <select type="search" id="searchBar" type="text" class="form-control" placeholder="Suchen">
+            <select name="search" type="search" id="searchBar" type="text" class="form-control" placeholder="Suchen">
               <option></option>
             </select>
           </div>
@@ -46,7 +46,7 @@
       if (i>0) {
         names+=',';
       }
-      names+='{ "id":"'+i+'", "text":"'+data.names[i]+'"}';
+      names+='{ "id":"u'+data.names[i]+'", "text":"'+data.names[i]+'"}';
     }
     names+=']},{ "text":"Benutzernamen" , "children": [ ';
 
@@ -54,7 +54,7 @@
       if (i>0) {
         names+=',';
       }
-      names+='{ "id":"'+i+'", "text":"'+data.fullNames[i]+'"}';
+      names+='{ "id":"n'+data.fullNames[i]+'", "text":"'+data.fullNames[i]+'"}';
     }
     names+=']},{ "text":"$chashtags" , "children": [ ';
 

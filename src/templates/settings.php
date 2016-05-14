@@ -29,7 +29,7 @@
         <div class="tab-content">
             <div id="personal" class="tab-pane fade <? if ($tab===0) {?>in active<?;} ?>">
                 <div class="container-border">
-                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('settingsPersonalInformationPost')?>">
+                    <form id="personal" class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('settingsPersonalInformationPost')?>">
                         <legend>
                             Persönliche Informationen
                         </legend>
@@ -444,6 +444,27 @@
                     $("label[for='verify']").css('color', 'black');
                 }
             });
+            function checkUser() {
+                var username=(this).value;
+                var url=document.getElementById('username').getAttribute('url');
+                $.post(url,
+                    {
+                        check_user: "true",
+                        username: ""+username
+                    },
+                    function(data){
+                        if (data==="    false") {
+                            $('#username').focus();
+                            $("label[for='username']").text('Benutzername schon vorhanden!');
+                            $("label[for='username']").css('color', 'red');
+                        } else {
+                            $("label[for='username']").text('Benutzername:');
+                            $("label[for='username']").css('color', 'black');
+                            $('#personal').submit;
+                        }
+
+                    });
+            }
         </script>
     </div>
 

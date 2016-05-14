@@ -55,6 +55,14 @@
         SearchHandler::getSearchData();
     }, 'searchDataPost');
 
+    $router->map('POST', '/search/', function () {
+        SearchHandler::search();
+    }, 'searchPost');
+
+    $router->map('GET', '/showUser/', function () {
+        ProfileHandler::showUser();
+    }, 'showUserGet');
+
     $router->map('GET', '/register/', function () {
         Template::render('register', [], array(
             'template_top'      => null,

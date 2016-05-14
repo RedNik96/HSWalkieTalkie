@@ -44,6 +44,26 @@ class SearchHandler
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+    static public function search() {
+        global $dbh;
+        if (substr($_POST['search'],0,1)==='n') {
+            $name = substr($_POST['search'],1);
+            $firstName=substr($name,0,strpos($name,' '));
+            $lastName=substr($name,strpos($name,' ')+1);
+            $stmt=$dbh->prepare("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname");
+            $stmt->execute( array(
+                'firstname' => $firstName,
+                'lastname' => $lastName
+            ));
+            $result=$stmt->fetch();
+            $username=$result['username'];
 
+        } else {
+            $username=substr($_POST['search'],1);
+        }
+        $_SESSION['showUser']=$username;
+        global $router;
+        header("Location: " . $router->generate("showUserGet"));
+    }
 }
 ?>
