@@ -94,6 +94,14 @@
     $router->map('POST', '/newpost/', function() {
         Post::create();
     }, "newpostPost");
+    
+    $router->map('POST', '/repost/', function() {
+        Post::repost();
+    }, "repostPost");
+    
+    $router->map('POST', '/vote/', function() {
+        Post::vote();
+    }, 'votePost');
 
 
     $match = $router->match();

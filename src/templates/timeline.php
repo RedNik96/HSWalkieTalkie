@@ -21,18 +21,19 @@
 
 <? if(!empty($posts)): ?>
     <? foreach($posts as $post): ?>
-        <form class = "post">
+        <div class = "post">
+        <!--<form class="post">-->
             <div class="postheader">
                 <div class="postauthor">
 
                     <img class="img-rounded" src="/HSWalkieTalkie/src/img/<?= $post['picture']; ?>" alt="Bild">
                     <div class="postauthorname">
-                        <span id    ="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
-                        <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
+                        <span class="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
+                        <span class="username">@<?= htmlspecialchars($post['username']); ?></span>
                     </div>
                 </div>
                 <div class="posttime">
-                    <span id="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
+                    <span class="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
                 </div>
             </div>
             <div class="postcontent">
@@ -46,19 +47,84 @@
                 <!--Test <br> $cashtag-->
             </div>
             <div class="postfooter">
+                <?php
+                    if($post['username'] != $_SESSION['user']):
+                ?>
                 <div class="share">
-                    <button class="btn btn-primary" id="sharebutton"><i class="fa fa-share" aria-hidden="true"></i></button>
-                    <span id="shared"><?= htmlspecialchars($post['reposts']); ?></span>
+                    <button class="btn btn-primary" name="btnRepost"
+                            data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
+                            data-user="<?= $_SESSION['user']; ?>"
+                            data-post="<?= $post['postID']; ?>">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                    </button>
+                    <span class="shared"><?= htmlspecialchars($post['reposts']); ?></span>
                 </div>
+                <?php endif; ?>
 
                 <div class="vote">
-                    <button class="btn btn-danger" id="vote-down"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
-                    <span id="cash">$<?= $post['votes']; ?></span>
-                    <button class="btn btn-warning" id="vote-up"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger"
+                            data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
+                            data-user="<?= $_SESSION['user']; ?>"
+                            data-post="<?= $post['postID']; ?>"
+                            data-vote="0"
+                    >
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <span class="cash">$<?= $post['votes']; ?></span>
+                    <button class="btn btn-warning"
+                            data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
+                            data-user="<?= $_SESSION['user']; ?>"
+                            data-post="<?= $post['postID']; ?>"
+                            data-vote="1"
+                    >
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
-        </form>
+        </div>
+        <!--</form>-->
     <?php endforeach; ?>
 <? else: ?>
     Keine Posts vorhanden.
 <? endif; ?>
+
+
+<script type="text/javascript">
+    $('.btn-warning,.btn-danger').on('click', function(){
+        var url = $(this).data('url');
+        var user = $(this).data('user');
+        var post = $(this).data('post');
+        var vote = $(this).data('vote');
+
+        var parent = (this).parentNode;
+        var span = parent.getElementsByTagName("span")[0];
+
+        $.post(url,
+        {
+            voter: user,
+            post: post,
+            vote: vote
+        }, function(numberOfVotes){
+
+                span.innerHTML = "$" + numberOfVotes.trim();
+            });
+    });
+
+    $('.btn-primary').on('click', function(){
+        var url = $(this).data('url');
+        var user = $(this).data('user');
+        var post = $(this).data('post');
+
+        var parent = (this).parentNode;
+        var span = parent.getElementsByTagName("span")[0];
+
+        $.post(url,
+        {
+            user: user,
+            post: post
+        }, function(numberOfReposts){
+            span.innerHTML = numberOfReposts.trim();
+            location.reload();
+        });
+    });
+</script>

@@ -7,20 +7,20 @@ body footer {
     margin-top: 1%;
 }
 
-#name{
+.name{
     font-weight: bold;
     color: black;
 }
 
-#username{
+.username{
     color: grey;
 }
 
-#cash {
+.cash {
     color: #eea236;
 }
 
-#shared{
+.shared{
     color: #2e6da4;
 }
 
