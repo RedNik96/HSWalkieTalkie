@@ -19,9 +19,9 @@
         <li <? if ($GLOBALS['match']['name']=='timeline') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("timeline");?>"><span class="fa fa-newspaper-o fa-2x"></span> Neuigkeiten</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='profile') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("profile");?>"><span class="fa fa-user fa-2x"></span> Profil</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='settingsGet') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settingsGet");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" role="search" method="post" action="<?= $GLOBALS['router']->generate('searchPost'); ?>">
           <div class="form-group">
-            <select type="search" id="searchBar" type="text" class="form-control" placeholder="Suchen">
+            <select name="search" type="search" id="searchBar" type="text" class="form-control" placeholder="Suchen">
               <option></option>
             </select>
           </div>
@@ -35,24 +35,44 @@
   </div><!-- /.container-fluid -->
 </nav>
 <script type="text/javascript">
-  $('#searchBar').select2({
-    placeholder: 'Name oder $cashtag suchen',
-  });
   $.ajax({
     method: 'POST',
-        url: '/HSWalkieTalkie/src/public/searchData/',
-    }).then(function (data) {
-      $data=data;
+    url: '/HSWalkieTalkie/src/public/searchData/',
+  }).then(function (data) {
+    var names= '[' +
+      '{ "text":"Benutzer" , "children": [ ';
+    
     for (var i = 0; i < data.names.length; i++) {
-      var $option = $('<option></option>').val('');
-      $option.text($data.names[i]).val($data.names[i]); // update the text that is displayed (and maybe even the value)
-      $('#searchBar').append($option).trigger('change'); // append the option and update Select2
+      if (i>0) {
+        names+=',';
+      }
+      names+='{ "id":"u'+data.names[i]+'", "text":"'+data.names[i]+'"}';
     }
+    names+=']},{ "text":"Benutzernamen" , "children": [ ';
+
     for (var i = 0; i < data.fullNames.length; i++) {
-      var $option = $('<option></option>').val('');
-      $option.text($data.fullNames[i]).val($data.fullNames[i]); // update the text that is displayed (and maybe even the value)
-      $('#searchBar').append($option).trigger('change'); // append the option and update Select2
+      if (i>0) {
+        names+=',';
+      }
+      names+='{ "id":"n'+data.fullNames[i]+'", "text":"'+data.fullNames[i]+'"}';
     }
+    if(data.tags) {
+      names += ']},{ "text":"$chashtags" , "children": [ ';
+      for (var i = 0; i < data.tags.length; i++) {
+        if (i > 0) {
+          names += ',';
+        }
+        names += '{ "id":"' + data.tags[i] + '", "text":"' + data.tags[i] + '"}';
+      }
+    }
+    names+=']}]';
+
+    var obj = JSON.parse(names);
+    $('#searchBar').select2({
+      placeholder: 'Name oder $cashtag suchen',
+      data: obj
+    });
+
   });
 
 

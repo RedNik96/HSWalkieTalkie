@@ -55,6 +55,18 @@
         SearchHandler::getSearchData();
     }, 'searchDataPost');
 
+    $router->map('POST', '/search/', function () {
+        SearchHandler::search();
+    }, 'searchPost');
+
+    $router->map('GET', '/showUser/', function () {
+        ProfileHandler::showUser();
+    }, 'showUserGet');
+
+    $router->map('GET', '/showCashTag/', function () {
+        CashTagHandler::get();
+    }, 'showCashTagGet');
+
     $router->map('GET', '/register/', function () {
         Template::render('register', [], array(
             'template_top'      => null,
@@ -82,6 +94,14 @@
     $router->map('POST', '/newpost/', function() {
         Post::create();
     }, "newpostPost");
+    
+    $router->map('POST', '/repost/', function() {
+        Post::repost();
+    }, "repostPost");
+    
+    $router->map('POST', '/vote/', function() {
+        Post::vote();
+    }, 'votePost');
 
 
     $match = $router->match();

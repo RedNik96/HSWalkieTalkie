@@ -12663,3 +12663,5 @@ INSERT INTO `bic` (`bic`, `bank`) VALUES
 ('WUEHDE61XXX', 'Wüstenrot Bank Pfandbriefbk ehe Wüstenrot Hypo'),
 ('WUPSDE33XXX', 'Stadtsparkasse Wuppertal'),
 ('WWBADE3AXXX', 'abcbank');
+
+COMMIT();

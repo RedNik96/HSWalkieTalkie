@@ -29,7 +29,7 @@
         <div class="tab-content">
             <div id="personal" class="tab-pane fade <? if ($tab===0) {?>in active<?;} ?>">
                 <div class="container-border">
-                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('settingsPersonalInformationPost')?>">
+                    <form id="personal" class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('settingsPersonalInformationPost')?>">
                         <legend>
                             Persönliche Informationen
                         </legend>
@@ -149,7 +149,7 @@
                                 <div class="col-sm-4">
                                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                         <div class="btn-group" role="group">
-                                            <button type="submit" class="btn btn-primary" name="change-settings">
+                                            <button type="submit" class="btn btn-primary" id="change-settings" name="change-settings">
                                                 <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                                 Änderungen speichern
                                             </button>
@@ -201,7 +201,7 @@
                             <div class="col-lg-4">
                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                     <div class="btn-group" role="group">
-                                        <button type="submit" class="btn btn-primary" name="change-pwd"><i class="fa fa-floppy-o" aria-hidden="true"></i>Passwort ändern</button>
+                                        <button id="change-pwd" type="submit" class="btn btn-primary" name="change-pwd"><i class="fa fa-floppy-o" aria-hidden="true"></i>Passwort ändern</button>
                                     </div>
                                     <div class="btn-group" role="group">
                                         <a onclick="deleteFunction()" class="btn btn-default active" role="button"><i class="fa fa-times" aria-hidden="true"></i>Änderungen verwerfen</a>
@@ -444,6 +444,27 @@
                     $("label[for='verify']").css('color', 'black');
                 }
             });
+            function checkUser() {
+                var username=(this).value;
+                var url=document.getElementById('username').getAttribute('url');
+                $.post(url,
+                    {
+                        check_user: "true",
+                        username: ""+username
+                    },
+                    function(data){
+                        if (data==="    false") {
+                            $('#username').focus();
+                            $("label[for='username']").text('Benutzername schon vorhanden!');
+                            $("label[for='username']").css('color', 'red');
+                        } else {
+                            $("label[for='username']").text('Benutzername:');
+                            $("label[for='username']").css('color', 'black');
+                            $('#personal').submit;
+                        }
+
+                    });
+            }
         </script>
     </div>
 

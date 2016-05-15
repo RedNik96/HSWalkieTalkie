@@ -3,6 +3,7 @@
     box-shadow: 1px 1px 1px 1px grey;
     padding: 5px;
     border-radius: 6px;
+    margin-bottom: 15px;
 }
 
 .post time {
@@ -48,7 +49,7 @@
     vertical-align: top;
 }
 
-#time{
+.time{
     text-align: right;
     color: grey;
 }
