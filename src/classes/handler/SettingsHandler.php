@@ -93,8 +93,12 @@ class SettingsHandler {
                 $stmt->execute( array(
                     'user' => $_SESSION['user']
                 ));
+
                 $picture=$stmt->fetch();
-                unlink(IMG_PATH . "\\" . $picture['picture']);
+                if ($picture!=null) {
+                    unlink(IMG_PATH . "\\" . $picture['picture']);
+                }
+
                 $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
                 $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
 

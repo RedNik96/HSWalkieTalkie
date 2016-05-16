@@ -66,8 +66,9 @@
       }
     }
     names+=']}]';
-
+    alert(names);
     var obj = JSON.parse(names);
+
     $('#searchBar').select2({
       placeholder: 'Name oder $cashtag suchen',
       data: obj
