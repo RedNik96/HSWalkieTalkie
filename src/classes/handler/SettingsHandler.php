@@ -96,11 +96,11 @@ class SettingsHandler {
 
                 $picture=$stmt->fetch();
                 if ($picture!=null) {
-                    unlink(IMG_PATH . "\\" . $picture['picture']);
+                    unlink(IMG_PATH . "\\" . "profile" . $picture['picture']);
                 }
 
                 $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
-                $target_file = IMG_PATH . "\\" . $_SESSION['user'] . "." . $imageFileType;
+                $target_file = IMG_PATH . "\\" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
 
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
                     $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");

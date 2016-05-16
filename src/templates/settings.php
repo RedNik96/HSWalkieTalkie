@@ -123,7 +123,7 @@
                             <div class="col-sm-6 imagepanel">
                                 <div >
                                     <img src=<? if ($user_info['picture']) {?>
-                                         "/HSWalkieTalkie/src/img/<? print $user_info['picture']."\"";
+                                         "/HSWalkieTalkie/src/img/profile/<? print $user_info['picture']."\"";
                                     } else { ?>
                                         "/HSWalkieTalkie/src/img/profile_default.png"
                                     <? } ?>alt="Profilbild">

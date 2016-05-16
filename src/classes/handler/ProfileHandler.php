@@ -22,7 +22,7 @@ Class ProfileHandler {
     if (is_null($res['picture'])) {
       $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
     } else {
-      $res['picture'] = "/HSWalkieTalkie/src/img/" . $res['picture'];
+      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
     }
 
     // rendert das falsche und nicht alles so richtig
@@ -55,7 +55,7 @@ Class ProfileHandler {
     if ($res['picture'] == null) {
       $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
     } else {
-      $res['picture'] = "/HSWalkieTalkie/src/img/" . $res['picture'];
+      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
     }
 
     // rendert das falsche und nicht alles so richtig
@@ -83,7 +83,7 @@ Class ProfileHandler {
       if ($res['picture'] == null) {
         $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
       } else {
-        $res['picture'] = "/HSWalkieTalkie/src/img/" . $res['picture'];
+        $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
       }
       $users[$i]=$res;
       $i++;
@@ -116,7 +116,7 @@ Class ProfileHandler {
     if ($res['picture'] == null) {
       $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
     } else {
-      $res['picture'] = "/HSWalkieTalkie/src/img/" . $res['picture'];
+      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
     }
 
     // rendert das falsche und nicht alles so richtig

@@ -7,7 +7,7 @@ class User {
         if (is_null($profilePicLink)) {
             $picture="/HSWalkieTalkie/src/img/profile_default.png";
         } else {
-            $picture="/HSWalkieTalkie/src/img/".$profilePicLink;
+            $picture="/HSWalkieTalkie/src/img/profile/".$profilePicLink;
         }
         $userhtml = "<link rel=\"stylesheet\" href=\"/HSWalkieTalkie/src//public/css/user.css\">
                      <div class=\"hswUser\">

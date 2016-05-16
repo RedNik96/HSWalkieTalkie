@@ -49,7 +49,7 @@ Class TimelineHandler {
         if (is_null($result['picture'])) {
             $result['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
         } else {
-            $result['picture'] = "/HSWalkieTalkie/src/img/" . $result['picture'];
+            $result['picture'] = "/HSWalkieTalkie/src/img/profile/" . $result['picture'];
         }
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
@@ -101,7 +101,7 @@ Class TimelineHandler {
         if (is_null($result['picture'])) {
             $result['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
         } else {
-            $result['picture'] = "/HSWalkieTalkie/src/img/" . $result['picture'];
+            $result['picture'] = "/HSWalkieTalkie/src/img/profile/" . $result['picture'];
         }
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
