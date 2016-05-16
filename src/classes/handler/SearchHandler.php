@@ -9,7 +9,10 @@ class SearchHandler
         $i=0;
         while ($result=$stmt->fetch()) {
             $response['names'][$i]=$result['username'];
-            $response['fullNames'][$i]=$result['firstName']. " " . $result['lastName'];
+            if ((!isset($response['fullNames']))||!(in_array($result['firstName']. " " . $result['lastName'],$response['fullNames']))) {
+                $response['fullNames'][$i]=$result['firstName']. " " . $result['lastName'];
+            }
+
             $i++;
         }
         $stmt=$dbh->prepare("SELECT content FROM posts WHERE content LIKE '%$%'");
@@ -63,6 +66,18 @@ class SearchHandler
                 ));
                 $result=$stmt->fetch();
                 $username=$result['username'];
+                $i=1;
+                while ($result=$stmt->fetch()) {
+                    $user[0]=$username;
+                    $user[$i]=$result['username'];
+                    $i++;
+                }
+                if ($i>1) {
+                    $_SESSION['showUser']=$user;
+                    global $router;
+                    header("Location: " . $router->generate("showMoreUserGet"));
+                    die;
+                }
 
             } else {
                 $username=substr($_POST['search'],1);

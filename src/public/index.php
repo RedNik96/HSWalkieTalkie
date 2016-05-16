@@ -63,6 +63,14 @@
         ProfileHandler::showUser();
     }, 'showUserGet');
 
+    $router->map('POST', '/showUser/', function () {
+        ProfileHandler::showUserPost();
+    }, 'showUserPost');
+
+    $router->map('GET', '/showMoreUser/', function () {
+        ProfileHandler::showMoreUser();
+    }, 'showMoreUserGet');
+
     $router->map('GET', '/showCashTag/', function () {
         CashTagHandler::get();
     }, 'showCashTagGet');

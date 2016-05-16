@@ -4,9 +4,9 @@
 }
 
 .hswUser .hswUsername{
-    display: inline-block;
-    vertical-align: top;
-}
+     display: inline-block;
+     vertical-align: top;
+ }
 
 .hswUser .hswUsername span{
     display: block;
@@ -18,5 +18,6 @@
 }
 
 #username{
+    display: block;
     color: grey;
 }

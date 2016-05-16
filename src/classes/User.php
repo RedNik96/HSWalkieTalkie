@@ -9,7 +9,7 @@ class User {
         } else {
             $picture="/HSWalkieTalkie/src/img/".$profilePicLink;
         }
-        $userhtml = "<link rel=\"stylesheet\" href=\"../public/css/user.css\">
+        $userhtml = "<link rel=\"stylesheet\" href=\"/HSWalkieTalkie/src//public/css/user.css\">
                      <div class=\"hswUser\">
                         <img class=\"img-rounded\" src=$picture alt=\"Bild\">
                         <div class=\"hswUsername\">
