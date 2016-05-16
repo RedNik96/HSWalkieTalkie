@@ -26,7 +26,7 @@
             <div class="postheader">
                 <div class="postauthor">
 
-                    <img class="img-rounded" src="/HSWalkieTalkie/src/img/<?= $post['picture']; ?>" alt="Bild">
+                    <img class="img-rounded" src="<?= $post['picture']; ?>" alt="Bild">
                     <div class="postauthorname">
                         <span class="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
                         <span class="username">@<?= htmlspecialchars($post['username']); ?></span>

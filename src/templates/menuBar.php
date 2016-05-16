@@ -66,7 +66,6 @@
       }
     }
     names+=']}]';
-    alert(names);
     var obj = JSON.parse(names);
 
     $('#searchBar').select2({

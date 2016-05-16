@@ -46,6 +46,11 @@ Class TimelineHandler {
             $imgs[$imgCounter] = $img['filename'];
             $imgCounter = $imgCounter + 1;
         }
+        if (is_null($result['picture'])) {
+            $result['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
+        } else {
+            $result['picture'] = "/HSWalkieTalkie/src/img/" . $result['picture'];
+        }
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
             'username'  => $result['username'],
@@ -92,6 +97,11 @@ Class TimelineHandler {
         while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             $imgs[$imgCounter] = $img['filename'];
             $imgCounter = $imgCounter + 1;
+        }
+        if (is_null($result['picture'])) {
+            $result['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
+        } else {
+            $result['picture'] = "/HSWalkieTalkie/src/img/" . $result['picture'];
         }
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],

@@ -18,7 +18,8 @@ Class ProfileHandler {
     ));
 
     $res = $stmt->fetch();
-    if ($res['picture'] == null) {
+
+    if (is_null($res['picture'])) {
       $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
     } else {
       $res['picture'] = "/HSWalkieTalkie/src/img/" . $res['picture'];
