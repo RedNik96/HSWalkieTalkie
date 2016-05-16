@@ -56,45 +56,78 @@ class Post
         }
     }
 
-    public static function read($id)
+    public static function getData($id)
     {
         global $dbh;
 
-        $stmt = $dbh->prepare("SELECT U.Firstname, U.Lastname, U.Username, P.Content, ((SELECT COUNT(V.Voter) FROM Votes AS V WHERE V.Post = P.ID AND V.Vote = true) -
-                                                              (SELECT COUNT(V.Voter) FROM Votes AS V WHERE V.Post = P.ID AND V.Vote = false)) AS Votes
-                               FROM Posts AS P, Votes AS V, User AS U, Follower AS F WHERE (U.id = F.Followed AND F.Follower = :userid) OR U.id = :userid");
+        $stmt = $dbh->prepare(
+            "SELECT P.id AS postID, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
+              ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
+              (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
+              (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
+            FROM posts AS P, user AS U
+            WHERE U.username = P.user AND P.id = :id");
 
-        $result = $stmt->execute(array("userid" => $id));
+        $result = $stmt->execute(array(
+            "id" => $id
+        ));
 
-        return $result;
+        return $stmt;
     }
 
-    public static function update($id, $data)
+    public static function vote()
     {
         global $dbh;
+        extract($_POST);
+        if(isset($voter) AND isset($post) AND isset($vote)) {
+            $voteExists = false;
+            $stmt = $dbh->prepare("SELECT * FROM votes WHERE voter = :voter AND post = :post");
+            $stmt->execute(array(
+                "voter" => $voter,
+                "post" => $post
+            ));
+            $voteExists = $stmt->fetch();
 
-        $stmt = $dbh->prepare("UPDATE album
-            SET artist = :artist, album = :album, year = :year)
-            WHERE ID = :id");
-
-        $data['id'] = $id;
-
-        $stmt->execute($data);
+            if (!$voteExists) {
+                $stmt = $dbh->prepare("INSERT INTO votes (voter, post, vote) VALUES (:voter, :post, :vote)");
+                $stmt->execute(array(
+                    "voter" => $voter,
+                    "post" => $post,
+                    "vote" => $vote
+                ));
+            } else {
+                $stmt = $dbh->prepare("UPDATE votes SET vote = :vote WHERE voter = :voter AND post = :post");
+                $stmt->execute(array(
+                    "voter" => $voter,
+                    "post" => $post,
+                    "vote" => $vote
+                ));
+            }
+            $stmt = self::getData($post);
+            if($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo $result['Votes'];
+            }
+        }
     }
 
-    public static function delete($id)
+    public static function repost()
     {
+        extract($_POST);
+
         global $dbh;
 
-        $stmt = $dbh->prepare("DELETE FROM Posts WHERE id = ?");
-
-        $stmt->execute(array($id));
-    }
-
-    public static function getAll()
-    {
-        global $dbh;
-
-        return $dbh->query("SELECT * FROM Posts")->fetchAll(PDO::FETCH_ASSOC);
+        if(isset($user) AND isset($post)) {
+            $stmt = $dbh->prepare("INSERT INTO posts (content, user, parentPost, datePosted) 
+                                      SELECT content, :user, :post, :datePosted FROM posts WHERE id = :post");
+            $stmt->execute(array(
+                "post"      => $post,
+                "user"      => $user,
+                "datePosted"=> date('Y-m-d H:i:s')
+            ));
+            $stmt = self::getData($post);
+            if($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo $result['Reposts'];
+            }
+        }
     }
 }

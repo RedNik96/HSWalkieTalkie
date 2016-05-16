@@ -56,15 +56,17 @@
       }
       names+='{ "id":"n'+data.fullNames[i]+'", "text":"'+data.fullNames[i]+'"}';
     }
-    names+=']},{ "text":"$chashtags" , "children": [ ';
-
-    for (var i = 0; i < data.tags.length; i++) {
-      if (i>0) {
-        names+=',';
+    if(data.tags) {
+      names += ']},{ "text":"$chashtags" , "children": [ ';
+      for (var i = 0; i < data.tags.length; i++) {
+        if (i > 0) {
+          names += ',';
+        }
+        names += '{ "id":"' + data.tags[i] + '", "text":"' + data.tags[i] + '"}';
       }
-      names+='{ "id":"'+data.tags[i]+'", "text":"'+data.tags[i]+'"}';
     }
     names+=']}]';
+
     var obj = JSON.parse(names);
     $('#searchBar').select2({
       placeholder: 'Name oder $cashtag suchen',
