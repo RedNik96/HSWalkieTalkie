@@ -46,8 +46,10 @@ Class ProfileHandler {
     global $dbh;
     // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
     // konto(IBAN, BIC)
-    $stmt=$dbh->prepare("SELECT * FROM user, city where username = :username AND user.zip = city.zip");
+    $stmt=$dbh->prepare("SELECT *, (SELECT COUNT(*) FROM follower WHERE followed = :username AND follower = :user) AS isFollowing FROM user as U, city as C where username = :username AND U.zip = C.zip");
+    //$stmt=$dbh->prepare("SELECT * FROM user, city where username = :username AND user.zip = city.zip");
     $stmt->execute(array(
+        'user'    => $_SESSION['user'],
         'username' => $_SESSION['showUser']
     ));
 
@@ -128,5 +130,46 @@ Class ProfileHandler {
     );
 
     Template::render('timeline', $data, array('template_right' => 'profile'));
+  }
+
+  public static function followUser(){
+    global $dbh;
+
+    extract($_POST);
+
+    if(isset($userFollowed) AND isset($userFollower))
+    {
+      $stmt = $dbh->prepare("SELECT * FROM follower WHERE followed = :followed AND follower = :follower");
+      $stmt->execute(array(
+          'followed'  => $userFollowed,
+          'follower'  => $userFollower
+      ));
+      if($stmt->fetch())
+      {
+        $stmt = $dbh->prepare("DELETE FROM follower WHERE followed = :followed AND follower = :follower");
+        $bool = $stmt->execute(array(
+            'followed' => $userFollowed,
+            'follower' => $userFollower
+        ));
+        if ($bool) {
+          echo "removed";
+        } else {
+          echo "false";
+        }
+      } else {
+        $stmt = $dbh->prepare("INSERT INTO follower (followed, follower) VALUES (:followed, :follower)");
+        $bool = $stmt->execute(array(
+            'followed' => $userFollowed,
+            'follower' => $userFollower
+        ));
+        if ($bool) {
+          echo "added";
+        } else {
+          echo "false";
+        }
+      }
+    } else {
+      echo "false";
+    }
   }
 }

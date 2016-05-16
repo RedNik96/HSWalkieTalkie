@@ -101,6 +101,8 @@ class SettingsHandler {
 
                 $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
                 $target_file = IMG_PATH . "\\" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
+                if(!file_exists(IMG_PATH. "\\profile"))
+                    mkdir(IMG_PATH. "\\profile");
 
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
                     $stmt=$dbh->prepare("UPDATE user SET picture=:picture WHERE username=:user");

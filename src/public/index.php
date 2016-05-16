@@ -91,6 +91,10 @@
         ProfileHandler::GET();
     }, 'profile');
 
+    $router->map('POST', '/profile/followUser', function () {
+        ProfileHandler::followUser();
+    }, 'followUserPOST');
+
     $router->map('POST', '/login/', function() {
         LoginHandler::post();
     }, "loginPost");

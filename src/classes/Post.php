@@ -35,7 +35,10 @@ class Post
                     if($check !== false)
                     {
                         $imageFileType = pathinfo($_FILES["postedFiles"]["name"][$i],PATHINFO_EXTENSION);
+
                         $target_file = "../img/posts/". $newID . "_" . $i . "." . $imageFileType;
+                        if(!file_exists("../img/posts"))
+                            mkdir("../img/posts");
                         if (move_uploaded_file($_FILES["postedFiles"]["tmp_name"][$i], $target_file)) {
                             echo "The file ". basename( $_FILES["postedFiles"]["name"][$i]). " has been uploaded.";
 

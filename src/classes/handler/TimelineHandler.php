@@ -71,7 +71,7 @@ Class TimelineHandler {
     global $dbh;
 
     $stmt = $dbh->prepare(
-      "SELECT P.id AS postID, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
+      "SELECT P.id AS postID, P.parentPost As postIDParent, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
         ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
           (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
         (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
@@ -88,9 +88,10 @@ Class TimelineHandler {
     $stmt = self::getPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $stmt2 = $dbh->prepare("SELECT filename FROM postsImg WHERE postID = :pid");
+        $stmt2 = $dbh->prepare("SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent");
         $stmt2->execute(array(
-            'pid'   => $result['postID']
+            'pid'       => $result['postID'],
+            'pidParent' => $result['postIDParent']
         ));
         $imgs = array();
         $imgCounter = 0;
