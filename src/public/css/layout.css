@@ -1,0 +1,29 @@
+body footer {
+    text-align: right;
+    margin-right: 10px;
+}
+
+#searchBar{
+    margin-top: 1%;
+}
+
+.name{
+    font-weight: bold;
+    color: black;
+}
+
+.username{
+    color: grey;
+}
+
+.cash {
+    color: #eea236;
+}
+
+.shared{
+    color: #2e6da4;
+}
+
+#searchBar {
+    width: 250px;
+}

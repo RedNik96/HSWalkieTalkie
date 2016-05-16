@@ -7,6 +7,10 @@
             $_POST['username'],
             $_POST['password'],
             $_POST['confirmedPassword'],
+            $_POST['birthday'],
+            $_POST['street'],
+            $_POST['housenumber'],
+            $_POST['zip'],
             $_POST['iban'],
             $_POST['bic']
         );

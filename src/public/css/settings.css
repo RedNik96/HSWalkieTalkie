@@ -14,10 +14,11 @@ img {
 }
 div.container-border {
     border:1px solid black;
-    webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 legend {
@@ -26,4 +27,37 @@ legend {
 
 input {
     padding-right: 10px;
+}
+
+.form-horizontal {
+    padding-right: 10px;
+}
+
+fieldset {
+    border: 1px solid #888888;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+fieldset legend {
+    width: auto;
+    border-bottom: none;
+    padding-right: 10px;
+}
+i {
+    margin: 3px;
+}
+
+.btn {
+    padding-left: 5px;
+    margin-top: 7px;
+}
+
+#fileupload {
+    margin-top: 20px;
+}
+
+.fileinput {
+    padding-top: 7px;
 }

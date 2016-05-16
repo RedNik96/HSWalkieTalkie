@@ -1,0 +1,41 @@
+.statistic {
+    border: 1px solid grey;
+    box-shadow: 1px 1px 1px 1px grey;
+    padding: 5px;
+    border-radius: 6px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.statistic .statisticCategory{
+    color: #eea236;
+}
+
+.ranking {
+    margin-top: 6px;
+}
+
+.statistic .postauthor {
+    display: inline-block;
+    width: 70%;
+}
+
+.statistic .postauthor img{
+    width: 50px;
+    height: 50px;
+}
+
+.statistic .postauthor .postauthorname{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.statistic .postauthor .postauthorname span{
+    display: block;
+}
+
+.statistic .placement {
+    width: 10%;
+    display: inline-block;
+    font-weight: bold;
+}
