@@ -12,6 +12,7 @@
   </div>
 </div>
 <div class="row info-row col-md-offset-1">
+  <?php if($_SESSION['user'] != $user_info['username']) { ?>
   <div>
       <button id="followUser" type="button" class="btn btn-primary"
           data-url="<?= $GLOBALS['router']->generate('followUserPOST'); ?>"
@@ -23,6 +24,7 @@
           <span id="textFollowUser"></span>
       </button>
   </div>
+    <?php } ?>
   <div><?= $user_info['email'] ?></div>
   <div><?= $user_info['zip'] ?> <?= $user_info['city'] ?></div>
   <div><?= $user_info['birthday'] ?></div>

@@ -122,11 +122,7 @@
                             </div>
                             <div class="col-sm-6 imagepanel">
                                 <div >
-                                    <img src=<? if ($user_info['picture']) {?>
-                                         "/HSWalkieTalkie/src/img/profile/<? print $user_info['picture']."\"";
-                                    } else { ?>
-                                        "/HSWalkieTalkie/src/img/profile_default.png"
-                                    <? } ?>alt="Profilbild">
+                                    <img src="/HSWalkieTalkie/src/img/profile/<? print $user_info['picture']."\""; ?>" alt="Profilbild">
                                 </div>
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>

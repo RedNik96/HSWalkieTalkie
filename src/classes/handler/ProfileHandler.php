@@ -18,12 +18,7 @@ Class ProfileHandler {
     ));
 
     $res = $stmt->fetch();
-
-    if (is_null($res['picture'])) {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
-    } else {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
-    }
+    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
 
     // rendert das falsche und nicht alles so richtig
     $posts = TimelineHandler::getOwnPostsAsArray($_SESSION['user']);
@@ -54,11 +49,7 @@ Class ProfileHandler {
     ));
 
     $res = $stmt->fetch();
-    if ($res['picture'] == null) {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
-    } else {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
-    }
+    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
 
     // rendert das falsche und nicht alles so richtig
     $posts = TimelineHandler::getOwnPostsAsArray($_SESSION['showUser']);
@@ -82,11 +73,7 @@ Class ProfileHandler {
           'username' => $user
       ));
       $res = $stmt->fetch();
-      if ($res['picture'] == null) {
-        $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
-      } else {
-        $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
-      }
+      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
       $users[$i]=$res;
       $i++;
     }
@@ -115,11 +102,7 @@ Class ProfileHandler {
     ));
 
     $res = $stmt->fetch();
-    if ($res['picture'] == null) {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
-    } else {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
-    }
+    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
 
     // rendert das falsche und nicht alles so richtig
     $posts = TimelineHandler::getOwnPostsAsArray($_POST['username']);

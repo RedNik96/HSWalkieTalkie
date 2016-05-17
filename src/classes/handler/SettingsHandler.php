@@ -82,7 +82,7 @@ class SettingsHandler {
             }
         }
         if (isset($_POST['deletePicture'])) {
-            $stmt=$dbh->prepare("UPDATE user SET picture=null WHERE username=:user");
+            $stmt=$dbh->prepare("UPDATE user SET picture=DEFAULT WHERE username=:user");
             $stmt->execute( array(
                 'user' => $_SESSION['user']
             ));
