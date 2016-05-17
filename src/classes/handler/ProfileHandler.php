@@ -2,62 +2,12 @@
 
 Class ProfileHandler {
   public static function get() {
-    /*
-    * Bild holen
-    * Name und Username holen
-    * Daten holen
-    */
-
-    // User holen
-    global $dbh;
-    // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
-    // konto(IBAN, BIC)
-    $stmt=$dbh->prepare("SELECT * FROM user, city where username = :username AND user.zip = city.zip");
-    $stmt->execute(array(
-        'username' => $_SESSION['user']
-    ));
-
-    $res = $stmt->fetch();
-    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
-
-    // rendert das falsche und nicht alles so richtig
-    $posts = TimelineHandler::getOwnPostsAsArray($_SESSION['user']);
-
-    $data = array(
-      'user_info' => $res,
-      'posts' => $posts
-    );
+    $data=self::getUser($_SESSION['user'],true);
 
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
   public static function showUser() {
-    /*
-    * Bild holen
-    * Name und Username holen
-    * Daten holen
-    */
-
-    // User holen
-    global $dbh;
-    // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
-    // konto(IBAN, BIC)
-    $stmt=$dbh->prepare("SELECT *, (SELECT COUNT(*) FROM follower WHERE followed = :username AND follower = :user) AS isFollowing FROM user as U, city as C where username = :username AND U.zip = C.zip");
-    //$stmt=$dbh->prepare("SELECT * FROM user, city where username = :username AND user.zip = city.zip");
-    $stmt->execute(array(
-        'user'    => $_SESSION['user'],
-        'username' => $_SESSION['showUser']
-    ));
-
-    $res = $stmt->fetch();
-    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
-
-    // rendert das falsche und nicht alles so richtig
-    $posts = TimelineHandler::getOwnPostsAsArray($_SESSION['showUser']);
-
-    $data = array(
-        'user_info' => $res,
-        'posts' => $posts
-    );
+    $data=self::getUser($_SESSION['showUser'],true);
 
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
@@ -86,32 +36,8 @@ Class ProfileHandler {
     Template::render('moreUser', $data);
   }
   public static function showUserPost() {
-    /*
-     * Bild holen
-     * Name und Username holen
-     * Daten holen
-     */
-
-    // User holen
-    global $dbh;
-    // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
-    // konto(IBAN, BIC)
-    $stmt=$dbh->prepare("SELECT * FROM user, city where username = :username AND user.zip = city.zip");
-    $stmt->execute(array(
-        'username' => $_POST['username']
-    ));
-
-    $res = $stmt->fetch();
-    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
-
-    // rendert das falsche und nicht alles so richtig
-    $posts = TimelineHandler::getOwnPostsAsArray($_POST['username']);
-
-    $data = array(
-        'user_info' => $res,
-        'posts' => $posts
-    );
-
+    $data=self::getUser($_POST['username'],true);
+   
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 
@@ -154,5 +80,43 @@ Class ProfileHandler {
     } else {
       echo "false";
     }
+  }
+  public static function getUser($user,$own) {
+    /*
+     */
+    // User holen
+    global $dbh;
+    // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
+    // konto(IBAN, BIC)
+    if ($user===$_SESSION['user']) {
+      $stmt=$dbh->prepare("SELECT * FROM user, city where username = :username AND user.zip = city.zip");
+      $stmt->execute(array(
+          'username' => $user
+      ));
+    } else {
+      $stmt=$dbh->prepare("SELECT *, (SELECT COUNT(*) FROM follower WHERE followed = :username AND follower = :user) AS isFollowing FROM user as U, city as C where username = :username AND U.zip = C.zip");
+      $stmt->execute(array(
+          'user'    => $_SESSION['user'],
+          'username' => $user
+      ));
+    }
+
+
+    $res = $stmt->fetch();
+    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
+
+    if ($own) {
+      $posts = TimelineHandler::getOwnPostsAsArray($user);
+    } else {
+      $posts = TimelineHandler::getPostsAsArray($user);
+    }
+
+
+    $data = array(
+        'user_info' => $res,
+        'posts' => $posts
+    );
+    return $data;
+    Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 }

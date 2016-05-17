@@ -10,7 +10,7 @@ class SearchHandler
         while ($result=$stmt->fetch()) {
             EscapeUtil::escape_array($result);
             $response['names'][$i]=$result['username'];
-            if ((!isset($response['fullNames']))||!(in_array($result['firstName']. " " . $result['lastName'],$response['fullNames']))) {
+            if (!(isset($response['fullNames']))||!(in_array($result['firstName']. " " . $result['lastName'],$response['fullNames']))) {
                 $response['fullNames'][$i]=$result['firstName']. " " . $result['lastName'];
             }
 
@@ -41,7 +41,7 @@ class SearchHandler
                         $i++;
                     }
                 } else {
-                    if ((!isset($response['tags']))||(!in_array(substr($content,0,$end),$response['tags']))) {
+                    if (!(isset($response['tags']))||!(in_array(substr($content,0,$end),$response['tags']))) {
                         $response['tags'][$i]=substr($content,0,$end);
                         $i++;
                     }
