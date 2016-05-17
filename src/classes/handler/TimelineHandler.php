@@ -99,11 +99,7 @@ Class TimelineHandler {
             $imgs[$imgCounter] = $img['filename'];
             $imgCounter = $imgCounter + 1;
         }
-        if (is_null($result['picture'])) {
-            $result['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
-        } else {
-            $result['picture'] = "/HSWalkieTalkie/src/img/profile/" . $result['picture'];
-        }
+        $result['picture'] = "/HSWalkieTalkie/src/img/profile/" . $result['picture'];
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
             'username'  => $result['username'],
