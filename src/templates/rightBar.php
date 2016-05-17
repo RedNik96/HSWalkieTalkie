@@ -20,7 +20,7 @@
                 <div class="postauthor">
                     <? echo User::getUserHtml($user['profilePicture'], $user['firstName'], $user['lastName'], $user['username'])?>
                 </div>
-                <span id="cash">$43</span>
+                <span class="cash">$<? echo htmlspecialchars($user['cash']) ?></span>
             </div>
             <?endforeach; ?>
         </div>
