@@ -3,21 +3,18 @@
 class User {
 
     public static function getUserHtml($profilePicLink, $firstname, $lastname, $username){
-
-        if (is_null($profilePicLink)) {
-            $picture="/HSWalkieTalkie/src/img/profile_default.png";
-        } else {
-            $picture="/HSWalkieTalkie/src/img/profile/".$profilePicLink;
-        }
+        global $router;
         $userhtml = "<link rel=\"stylesheet\" href=\"/HSWalkieTalkie/src//public/css/user.css\">
                      <div class=\"hswUser\">
-                        <img class=\"img-rounded\" src=$picture alt=\"Bild\">
+                        <img class=\"img-rounded\" src=\"/HSWalkieTalkie/src/img/profile/"  . $profilePicLink  . "\" alt=\"Bild\">
                         <div class=\"hswUsername\">
-                            <span id=\"name\">" . htmlspecialchars($firstname) . " "  . htmlspecialchars($lastname) . "</span>
-                            <span id=\"username\">" . htmlspecialchars($username) . "</span>
+                            <form method=\"post\" action=\"" . $router->generate('showUserPost') . "\">
+                                 <input type=\"hidden\" name=\"username\" value=\"" . $username . "\">
+                                  <a onclick='this.parentNode.submit();' class=\"name\" id=\"names\">" . $firstname . " " . $lastname . "</a>
+                                 <a onclick='this.parentNode.submit();' class=\"name\" id=\"username\">" . $username . "</a>
+                            </form>
                         </div>
-                     </div>";
-
+                       </div>";
         return $userhtml;
     }
 }
