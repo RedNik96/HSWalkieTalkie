@@ -12,16 +12,68 @@
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
     $router->map( 'GET', '/', function() {
-        include(CLASSES_PATH . "/handler/TimelineHandler.php");
+        TimelineHandler::get();
     }, 'timeline');
 
     $router->map( 'GET', '/settings/', function() {
         SettingsHandler::get();
-    }, 'settings');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
+    }, 'settingsGet');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
 
     $router->map('POST', '/settings/', function () {
         SettingsHandler::post();
-    });
+    }, 'settingsPost');
+
+    $router->map('POST', '/settings/personalInformation/', function () {
+        SettingsHandler::personalInformation();
+    }, 'settingsPersonalInformationPost');
+
+    $router->map('POST', '/settings/checkUser/', function () {
+        SettingsHandler::checkUser();
+    }, 'settingsCheckUserPost');
+
+    $router->map('POST', '/settings/checkPwd/', function () {
+        SettingsHandler::checkPwd();
+    }, 'settingsCheckPwdPost');
+
+    $router->map('POST', '/settings/account/', function () {
+        SettingsHandler::changeAccount();
+    }, 'settingsAccountPost');
+
+    $router->map('POST', '/settings/newAccount/', function () {
+        SettingsHandler::createAccount();
+    }, 'settingsNewAccountPost');
+
+    $router->map('POST', '/settings/changePwd/', function () {
+        SettingsHandler::changePwd();
+    }, 'settingsChangePwdPost');
+
+    $router->map('POST', '/settings/changeIlias/', function () {
+        SettingsHandler::changeIlias();
+    }, 'settingsChangeIliasPost');
+
+    $router->map('POST', '/searchData/', function () {
+        SearchHandler::getSearchData();
+    }, 'searchDataPost');
+
+    $router->map('POST', '/search/', function () {
+        SearchHandler::search();
+    }, 'searchPost');
+
+    $router->map('GET', '/showUser/', function () {
+        ProfileHandler::showUser();
+    }, 'showUserGet');
+
+    $router->map('POST', '/showUser/', function () {
+        ProfileHandler::showUserPost();
+    }, 'showUserPost');
+
+    $router->map('GET', '/showMoreUser/', function () {
+        ProfileHandler::showMoreUser();
+    }, 'showMoreUserGet');
+
+    $router->map('GET', '/showCashTag/', function () {
+        CashTagHandler::get();
+    }, 'showCashTagGet');
 
     $router->map('GET', '/register/', function () {
         Template::render('register', [], array(
@@ -32,13 +84,16 @@
     }, 'registrierungGet');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
 
     $router->map('POST', '/register/', function () {
-        include(CLASSES_PATH . "/handler/registerHandler.php");
+      include(CLASSES_PATH . "/handler/registerHandler.php");
     }, 'registrierungPost');
 
     $router->map('GET', '/profile/', function () {
-        include(CLASSES_PATH . "/handler/ProfileHandler.php");
         ProfileHandler::GET();
     }, 'profile');
+
+    $router->map('POST', '/profile/followUser', function () {
+        ProfileHandler::followUser();
+    }, 'followUserPOST');
 
     $router->map('POST', '/login/', function() {
         LoginHandler::post();
@@ -51,6 +106,14 @@
     $router->map('POST', '/newpost/', function() {
         Post::create();
     }, "newpostPost");
+    
+    $router->map('POST', '/repost/', function() {
+        Post::repost();
+    }, "repostPost");
+    
+    $router->map('POST', '/vote/', function() {
+        Post::vote();
+    }, 'votePost');
 
 
     $match = $router->match();

@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link href="../../bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="../../bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/poststylesheet.css">
+<link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/postwritestylesheet.css">
 
 <? global $router; ?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
@@ -21,24 +21,25 @@
 
 <? if(!empty($posts)): ?>
     <? foreach($posts as $post): ?>
-        <form class = "post">
+        <div class = "post">
+        <!--<form class="post">-->
             <div class="postheader">
                 <div class="postauthor">
 
-                    <img class="img-rounded" src="../img/<?= $post['picture']; ?>" alt="Bild">
+                    <img class="img-rounded" src="<?= $post['picture']; ?>" alt="Bild">
                     <div class="postauthorname">
-                        <span id    ="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
-                        <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
+                        <span class="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
+                        <span class="username">@<?= htmlspecialchars($post['username']); ?></span>
                     </div>
                 </div>
                 <div class="posttime">
-                    <span id="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
+                    <span class="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
                 </div>
             </div>
             <div class="postcontent">
                 <?
                 foreach ($post['imgs'] as $img) {
-                    ?><img src="<?= "../img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
+                    ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
                 }
                 echo "<br>";
                 print htmlspecialchars($post['content']);
@@ -46,21 +47,84 @@
                 <!--Test <br> $cashtag-->
             </div>
             <div class="postfooter">
+                <?php
+                    if($post['username'] != $_SESSION['user']):
+                ?>
                 <div class="share">
-                    <button class="btn btn-primary" id="sharebutton"><i class="fa fa-share" aria-hidden="true"></i></button>
-                    <span id="shared"><?= htmlspecialchars($post['reposts']); ?></span>
+                    <button class="btn btn-primary" name="btnRepost"
+                            data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
+                            data-user="<?= $_SESSION['user']; ?>"
+                            data-post="<?= $post['postID']; ?>">
+                        <i class="fa fa-share" aria-hidden="true"></i>
+                    </button>
+                    <span class="shared"><?= htmlspecialchars($post['reposts']); ?></span>
                 </div>
+                <?php endif; ?>
 
                 <div class="vote">
-                    <button class="btn btn-danger" id="vote-down"><i class="fa fa-chevron-down" aria-hidden="true"></i></button>
-                    <span id="cash">$<?= $post['votes']; ?></span>
-                    <button class="btn btn-warning" id="vote-up"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger"
+                            data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
+                            data-user="<?= $_SESSION['user']; ?>"
+                            data-post="<?= $post['postID']; ?>"
+                            data-vote="0"
+                    >
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <span class="cash">$<?= $post['votes']; ?></span>
+                    <button class="btn btn-warning"
+                            data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
+                            data-user="<?= $_SESSION['user']; ?>"
+                            data-post="<?= $post['postID']; ?>"
+                            data-vote="1"
+                    >
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
-        </form>
+        </div>
+        <!--</form>-->
     <?php endforeach; ?>
 <? else: ?>
     Keine Posts vorhanden.
 <? endif; ?>
 
 
+<script type="text/javascript">
+    $('.btn-warning,.btn-danger').on('click', function(){
+        var url = $(this).data('url');
+        var user = $(this).data('user');
+        var post = $(this).data('post');
+        var vote = $(this).data('vote');
+
+        var parent = (this).parentNode;
+        var span = parent.getElementsByTagName("span")[0];
+
+        $.post(url,
+        {
+            voter: user,
+            post: post,
+            vote: vote
+        }, function(numberOfVotes){
+
+                span.innerHTML = "$" + numberOfVotes.trim();
+            });
+    });
+
+    $('.btn-primary').on('click', function(){
+        var url = $(this).data('url');
+        var user = $(this).data('user');
+        var post = $(this).data('post');
+
+        var parent = (this).parentNode;
+        var span = parent.getElementsByTagName("span")[0];
+
+        $.post(url,
+        {
+            user: user,
+            post: post
+        }, function(numberOfReposts){
+            span.innerHTML = numberOfReposts.trim();
+            location.reload();
+        });
+    });
+</script>

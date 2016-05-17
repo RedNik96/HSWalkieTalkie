@@ -3,7 +3,7 @@
 
 <? global $router; ?>
 <div class="container">
-    <form action="<?= $router->generate('registrierungGet'); ?>" class="form-horizontal" method="POST">
+    <form action="<?= $router->generate('registrierungPost'); ?>" class="form-horizontal" method="POST">
 
         <legend>Verpflichtende Angaben</legend>
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->

@@ -3,19 +3,27 @@ body footer {
     margin-right: 10px;
 }
 
-#name{
+#searchBar{
+    margin-top: 1%;
+}
+
+.name{
     font-weight: bold;
     color: black;
 }
 
-#username{
+.username{
     color: grey;
 }
 
-#cash {
+.cash {
     color: #eea236;
 }
 
-#shared{
+.shared{
     color: #2e6da4;
+}
+
+#searchBar {
+    width: 250px;
 }
