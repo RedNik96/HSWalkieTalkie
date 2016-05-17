@@ -6,8 +6,11 @@ class StatisticHandler {
         global $dbh;
 
         $stmtRichestUsers = $dbh->prepare("
-              SELECT U.picture , U.firstName, U.lastName, U.username
+              SELECT U.picture , U.firstName, U.lastName, U.username,
+                      ((SELECT COUNT(V.voter) FROM posts AS P, votes AS V WHERE V.post = P.id AND V.vote = 1 AND p.user = U.username) -
+                        (SELECT COUNT(V.voter) FROM posts AS P, votes AS V WHERE V.post = P.id AND V.vote = 0 AND p.user = U.username)) AS cash
               FROM user AS U
+              ORDER BY cash DESC 
               LIMIT 3
               ");
 
@@ -19,7 +22,8 @@ class StatisticHandler {
                 'profilePicture' => $result['picture'],
                 'username' => $result['username'],
                 'firstName' => $result['firstName'],
-                'lastName' => $result['lastName']
+                'lastName' => $result['lastName'],
+                'cash' => $result['cash']
             );
         }
 

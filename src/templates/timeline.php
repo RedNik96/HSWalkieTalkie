@@ -42,7 +42,7 @@
                     ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
                 }
                 echo "<br>";
-                print htmlspecialchars($post['content']);
+                print str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
                 ?>
                 <!--Test <br> $cashtag-->
             </div>
