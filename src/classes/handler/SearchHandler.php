@@ -12,9 +12,8 @@ class SearchHandler
             $response['names'][$i]=$result['username'];
             if (!(isset($response['fullNames']))||!(in_array($result['firstName']. " " . $result['lastName'],$response['fullNames']))) {
                 $response['fullNames'][$i]=$result['firstName']. " " . $result['lastName'];
+                $i++;
             }
-
-            $i++;
         }
         $stmt=$dbh->prepare("SELECT content FROM posts WHERE content LIKE '%$%'");
         $stmt->execute();
@@ -80,7 +79,7 @@ class SearchHandler
                     global $router;
                     header("Location: " . $router->generate("showMoreUserGet",array(
                             'firstname' => $firstName,
-                            'lastname' => $lastName
+                            'lastname'
                             )));
                     die;
                 }
