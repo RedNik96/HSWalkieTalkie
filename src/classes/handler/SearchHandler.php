@@ -32,9 +32,8 @@ class SearchHandler
     static public function search() {
         if (substr($_POST['search'],0,1)==='$') {
 
-            $_SESSION['cashtag']=$_POST['search'];
             global $router;
-            header("Location: " . $router->generate("showCashTagGet"));
+            header("Location: " . $router->generate("showCashTagGet",array('cashtag' => substr($_POST['search'],1))));
         } else {
             if (substr($_POST['search'],0,1)==='n') {
                 $name = substr($_POST['search'],1);
@@ -55,7 +54,7 @@ class SearchHandler
                     global $router;
                     header("Location: " . $router->generate("showMoreUserGet",array(
                             'firstname' => $firstName,
-                            'lastname'
+                            'lastname' => $lastName
                             )));
                     die;
                 }

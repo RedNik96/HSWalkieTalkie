@@ -70,8 +70,8 @@
         ProfileHandler::showMoreUser($firstname,$lastname);
     }, 'showMoreUserGet');
 
-    $router->map('GET', '/showCashTag/', function () {
-        CashTagHandler::get();
+    $router->map('GET', '/showCashTag/[a:cashtag]/', function ($cashtag) {
+        CashTagHandler::get($cashtag);
     }, 'showCashTagGet');
 
     $router->map('GET', '/register/', function () {

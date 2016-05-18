@@ -1,9 +1,14 @@
 <?php
 
-
+/**
+ * Class CashTagHandler Handled den Aufruf der Cashtagsuchergebnisse
+ */
 class CashTagHandler
 {
-    static public function get() {
+    /**
+     * Sucht alle Post zu dem übergebenen Cashtag und rendert diese in die timeline.php
+     */
+    static public function get($cashtag) {
         $stmt = SQL::query(
             "SELECT P.id AS postID, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
               ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
@@ -12,10 +17,10 @@ class CashTagHandler
             FROM posts AS P, user AS U
             WHERE (U.username = P.user) AND (P.content like :cashtag1 or  P.content like :cashtag2 or P.content like :cashtag3 or P.content like :cashtag4)",
             array(
-                'cashtag1' => '%'.$_SESSION['cashtag'] . ' %',
-                'cashtag2' => '%'.$_SESSION['cashtag'],
-                'cashtag3' => '%'.$_SESSION['cashtag'] . '$%',
-                'cashtag4' => '%'.$_SESSION['cashtag'] . chr(13) . '%',
+                'cashtag1' => '%$'.$cashtag . ' %',
+                'cashtag2' => '%$'.$cashtag,
+                'cashtag3' => '%$'.$cashtag . '$%',
+                'cashtag4' => '%$'.$cashtag . chr(13) . '%',
         ));
 
         $posts = array();
