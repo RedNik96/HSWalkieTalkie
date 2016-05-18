@@ -3,9 +3,7 @@
 class SearchHandler
 {
     static public function getSearchData() {
-        global $dbh;
-        $stmt=$dbh->prepare("SELECT firstName, lastName, username FROM user");
-        $stmt->execute();
+        $stmt = SQL::query("SELECT firstName, lastName, username FROM user");
         $i=0;
         while ($result=$stmt->fetch()) {
             EscapeUtil::escape_array($result);
@@ -16,8 +14,7 @@ class SearchHandler
 
             $i++;
         }
-        $stmt=$dbh->prepare("SELECT content FROM posts WHERE content LIKE '%$%'");
-        $stmt->execute();
+        $stmt = SQL::query("SELECT content FROM posts WHERE content LIKE '%$%'");
         $i=0;
         while ($result=$stmt->fetch()) {
             EscapeUtil::escape_array($result);
@@ -53,7 +50,6 @@ class SearchHandler
         echo json_encode($response);
     }
     static public function search() {
-        global $dbh;
         if (substr($_POST['search'],0,1)==='$') {
 
             $_SESSION['cashtag']=$_POST['search'];
@@ -64,8 +60,7 @@ class SearchHandler
                 $name = substr($_POST['search'],1);
                 $firstName=substr($name,0,strpos($name,' '));
                 $lastName=substr($name,strpos($name,' ')+1);
-                $stmt=$dbh->prepare("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname");
-                $stmt->execute( array(
+                $stmt = SQL::query("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname", array(
                     'firstname' => $firstName,
                     'lastname' => $lastName
                 ));

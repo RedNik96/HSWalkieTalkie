@@ -1,5 +1,4 @@
     <?php
-
     require_once '../config.php';
     require_once LIBRARY_PATH . '/dannyvankooten-AltoRouter-39c5009/AltoRouter.php';
 
