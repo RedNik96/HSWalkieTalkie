@@ -22,7 +22,6 @@ Class ProfileHandler {
         'firstname' => $firstname
     ));
     while ($res = $stmt->fetch()) {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
       $users[$i]=$res;
       $i++;
     }
