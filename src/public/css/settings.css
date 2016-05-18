@@ -61,3 +61,12 @@ i {
 .fileinput {
     padding-top: 7px;
 }
+
+.wrong {
+    border: solid 2px #ac2925;
+}
+
+.wrong.form-control:focus{
+    border: solid 2px #ac2925;
+    box-shadow: none;
+}

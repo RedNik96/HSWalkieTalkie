@@ -139,11 +139,12 @@
     $('#confirmedPassword').on('change', function(){
         if ((this).value!==$('#password').val()) {
             $('#confirmedPassword').focus();
-            $("label[for='confirmedPassword']").text('Passwort stimmt nicht überein!');
-            $("label[for='confirmedPassword']").css('color', 'red');
+            $('#confirmedPassword').val('');
+            $('#confirmedPassword').attr("placeholder", "Passwort stimmt nicht überein");
+            $('#confirmedPassword').addClass('wrong');
         } else {
-            $("label[for='confirmedPassword']").text('Passwort erneut eingeben*');
-            $("label[for='confirmedPassword']").css('color', 'black');
+            $('#confirmedPassword').attr("placeholder", "");
+            $('#confirmedPassword').removeClass('wrong');
         }
     });
     

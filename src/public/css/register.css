@@ -6,3 +6,13 @@ div.container {
      border-radius: 6px;
      margin-top: 5px;
  }
+
+.wrong {
+    border: solid 2px #ac2925;
+}
+
+.wrong.form-control:focus{
+    border: solid 2px #ac2925;
+    box-shadow: none;
+}
+

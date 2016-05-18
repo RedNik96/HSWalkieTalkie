@@ -2,10 +2,12 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-<form>
+
     <legend>Statistiken</legend>
     <span>Statistiken anzeigen für </span>
-    <input data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox">
+    <form>
+        <input data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox">
+    </form>
     <? if(!empty($stats['richestUsers'])): ?>
         <div class="statistic" class="richestUsers">
             <legend class="statisticCategory">Reichste Benutzer</legend>
@@ -20,7 +22,7 @@
                 <div class="postauthor">
                     <? echo User::getUserHtml($user['profilePicture'], $user['firstName'], $user['lastName'], $user['username'])?>
                 </div>
-                <span id="cash">$43</span>
+                <span class="cash">$<? echo htmlspecialchars($user['cash']) ?></span>
             </div>
             <?endforeach; ?>
         </div>
@@ -50,4 +52,4 @@
             <?//endforeach; ?>
         </div>
     <? //endif; ?>
-</form>
+

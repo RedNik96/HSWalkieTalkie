@@ -24,28 +24,29 @@
         <div class = "post">
         <!--<form class="post">-->
             <div class="postheader">
-                <div class="postauthor">
+                <?php
+                if(isset($post['postIDParent']) && $post['postIDParent'])
+                {
+                    echo "<span class='label label-primary' style='font-size:14px;'>Repost from @". Post::getPoster($post['postIDParent']). "</span><br><br>";
+                }
 
-                    <img class="img-rounded" src="<?= $post['picture']; ?>" alt="Bild">
-                    <div class="postauthorname">
-                        <span class="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
-                        <span class="username">@<?= htmlspecialchars($post['username']); ?></span>
-                    </div>
+                ?>
+                <div class="postauthor">
+                    <? echo User::getUserHtml($post['picture'], $post['firstName'], $post['lastName'], $post['username'])?>
                 </div>
                 <div class="posttime">
                     <span class="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
                 </div>
             </div>
-            <div class="postcontent">
-                <?
-                foreach ($post['imgs'] as $img) {
-                    ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
-                }
-                echo "<br>";
-                print htmlspecialchars($post['content']);
-                ?>
-                <!--Test <br> $cashtag-->
-            </div>
+                <div class="postcontent">
+                    <?
+                    foreach ($post['imgs'] as $img) {
+                        ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
+                    }
+                    if(count($post['imgs'] > 0)) echo "<br>";
+                    print str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
+                    ?>
+                </div>
             <div class="postfooter">
                 <?php
                     if($post['username'] != $_SESSION['user']):

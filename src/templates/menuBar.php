@@ -49,7 +49,6 @@
       names+='{ "id":"u'+data.names[i]+'", "text":"'+data.names[i]+'"}';
     }
     names+=']},{ "text":"Benutzernamen" , "children": [ ';
-
     for (var i = 0; i < data.fullNames.length; i++) {
       if (i>0) {
         names+=',';

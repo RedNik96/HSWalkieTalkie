@@ -1,5 +1,4 @@
     <?php
-
     require_once '../config.php';
     require_once LIBRARY_PATH . '/dannyvankooten-AltoRouter-39c5009/AltoRouter.php';
 
@@ -59,16 +58,16 @@
         SearchHandler::search();
     }, 'searchPost');
 
-    $router->map('GET', '/showUser/', function () {
-        ProfileHandler::showUser();
+    $router->map('GET', '/showUser/[a:user]/', function( $user ) {
+        ProfileHandler::showUser($user);
     }, 'showUserGet');
 
     $router->map('POST', '/showUser/', function () {
         ProfileHandler::showUserPost();
     }, 'showUserPost');
 
-    $router->map('GET', '/showMoreUser/', function () {
-        ProfileHandler::showMoreUser();
+    $router->map('GET', '/showMoreUser/[a:firstname]/[a:lastname]/', function ($firstname, $lastname) {
+        ProfileHandler::showMoreUser($firstname,$lastname);
     }, 'showMoreUserGet');
 
     $router->map('GET', '/showCashTag/', function () {

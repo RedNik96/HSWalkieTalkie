@@ -3,21 +3,17 @@
 class SearchHandler
 {
     static public function getSearchData() {
-        global $dbh;
-        $stmt=$dbh->prepare("SELECT firstName, lastName, username FROM user");
-        $stmt->execute();
+        $stmt = SQL::query("SELECT firstName, lastName, username FROM user");
         $i=0;
         while ($result=$stmt->fetch()) {
             EscapeUtil::escape_array($result);
             $response['names'][$i]=$result['username'];
-            if ((!isset($response['fullNames']))||!(in_array($result['firstName']. " " . $result['lastName'],$response['fullNames']))) {
+            if (!(isset($response['fullNames']))||!(in_array($result['firstName']. " " . $result['lastName'],$response['fullNames']))) {
                 $response['fullNames'][$i]=$result['firstName']. " " . $result['lastName'];
+                $i++;
             }
-
-            $i++;
         }
-        $stmt=$dbh->prepare("SELECT content FROM posts WHERE content LIKE '%$%'");
-        $stmt->execute();
+        $stmt = SQL::query("SELECT content FROM posts WHERE content LIKE '%$%'");
         $i=0;
         while ($result=$stmt->fetch()) {
             EscapeUtil::escape_array($result);
@@ -41,7 +37,7 @@ class SearchHandler
                         $i++;
                     }
                 } else {
-                    if ((!isset($response['tags']))||(!in_array(substr($content,0,$end),$response['tags']))) {
+                    if (!(isset($response['tags']))||!(in_array(substr($content,0,$end),$response['tags']))) {
                         $response['tags'][$i]=substr($content,0,$end);
                         $i++;
                     }
@@ -53,7 +49,6 @@ class SearchHandler
         echo json_encode($response);
     }
     static public function search() {
-        global $dbh;
         if (substr($_POST['search'],0,1)==='$') {
 
             $_SESSION['cashtag']=$_POST['search'];
@@ -64,8 +59,7 @@ class SearchHandler
                 $name = substr($_POST['search'],1);
                 $firstName=substr($name,0,strpos($name,' '));
                 $lastName=substr($name,strpos($name,' ')+1);
-                $stmt=$dbh->prepare("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname");
-                $stmt->execute( array(
+                $stmt = SQL::query("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname", array(
                     'firstname' => $firstName,
                     'lastname' => $lastName
                 ));
@@ -74,24 +68,22 @@ class SearchHandler
                 $username=$result['username'];
                 $i=1;
                 while ($result=$stmt->fetch()) {
-                    EscapeUtil::escape_array($result);
-                    $user[0]=$username;
-                    $user[$i]=$result['username'];
                     $i++;
                 }
                 if ($i>1) {
-                    $_SESSION['showUser']=$user;
                     global $router;
-                    header("Location: " . $router->generate("showMoreUserGet"));
+                    header("Location: " . $router->generate("showMoreUserGet",array(
+                            'firstname' => $firstName,
+                            'lastname'
+                            )));
                     die;
                 }
 
             } else {
                 $username=substr($_POST['search'],1);
             }
-            $_SESSION['showUser']=$username;
             global $router;
-            header("Location: " . $router->generate("showUserGet"));
+            header("Location: " . $router->generate("showUserGet",array('user' => $username)));
         }
     }
 }

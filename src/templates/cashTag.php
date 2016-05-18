@@ -5,7 +5,7 @@
             <div class="postheader">
                 <div class="postauthor">
 
-                    <img class="img-rounded" src="/HSWalkieTalkie/src/img/<?= $post['picture']; ?>" alt="Bild">
+                    <img class="img-rounded" src="/HSWalkieTalkie/src/img/profile/<?= $post['picture']; ?>" alt="Bild">
                     <div class="postauthorname">
                         <span id    ="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
                         <span id="username">@<?= htmlspecialchars($post['username']); ?></span>
