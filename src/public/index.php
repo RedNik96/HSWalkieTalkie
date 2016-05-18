@@ -115,6 +115,10 @@
         Post::vote();
     }, 'votePost');
 
+    $router->map('POST', '/statisticsToggle/', function(){
+        StatisticHandler::toggle();
+    }, 'statisticsTogglePost');
+
 
     $match = $router->match();
 
