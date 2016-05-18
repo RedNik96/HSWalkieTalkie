@@ -74,24 +74,22 @@ class SearchHandler
                 $username=$result['username'];
                 $i=1;
                 while ($result=$stmt->fetch()) {
-                    EscapeUtil::escape_array($result);
-                    $user[0]=$username;
-                    $user[$i]=$result['username'];
                     $i++;
                 }
                 if ($i>1) {
-                    $_SESSION['showUser']=$user;
                     global $router;
-                    header("Location: " . $router->generate("showMoreUserGet"));
+                    header("Location: " . $router->generate("showMoreUserGet",array(
+                            'firstname' => $firstName,
+                            'lastname' => $lastName
+                            )));
                     die;
                 }
 
             } else {
                 $username=substr($_POST['search'],1);
             }
-            $_SESSION['showUser']=$username;
             global $router;
-            header("Location: " . $router->generate("showUserGet"));
+            header("Location: " . $router->generate("showUserGet",array('user' => $username)));
         }
     }
 }
