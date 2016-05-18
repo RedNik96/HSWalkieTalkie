@@ -32,14 +32,7 @@
 
                 ?>
                 <div class="postauthor">
-
-                    <img class="img-rounded" src="<?= $post['picture']; ?>" alt="Bild">
-                    <div class="postauthorname">
-                        <span class="name"><?= htmlspecialchars($post['firstName']) . " " . htmlspecialchars($post['lastName'])?></span>
-                        <span class="username">
-                            @<?= htmlspecialchars($post['username']); ?>
-                        </span>
-                    </div>
+                    <? echo User::getUserHtml($post['picture'], $post['firstName'], $post['lastName'], $post['username'])?>
                 </div>
                 <div class="posttime">
                     <span class="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>

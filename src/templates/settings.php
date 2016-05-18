@@ -402,11 +402,12 @@
                     function(data){
                         if (data==="    false") {
                             $('#username').focus();
-                            $("label[for='username']").text('Benutzername schon vorhanden!');
-                            $("label[for='username']").css('color', 'red');
+                            $('#username').val('');
+                            $('#username').attr("placeholder", "Benutzername schon vergeben");
+                            $('#username').addClass('wrong');
                         } else {
-                            $("label[for='username']").text('Benutzername:');
-                            $("label[for='username']").css('color', 'black');
+                            $('#username').attr("placeholder", "");
+                            $('#username').removeClass('wrong');
                         }
 
                     });
@@ -422,45 +423,27 @@
                     function(data){
                         if (data==="    false") {
                             $('#old').focus();
-                            $("label[for='old']").text('Passwort falsch!');
-                            $("label[for='old']").css('color', 'red');
+                            $('#old').val('');
+                            $('#old').attr("placeholder", "Falsches Passwort");
+                            $('#old').addClass('wrong');
                         } else {
-                            $("label[for='old']").text('Altes Passwort:');
-                            $("label[for='old']").css('color', 'black');
+                            $('#old').attr("placeholder", "");
+                            $('#old').removeClass('wrong');
                         }
                     });
             });
             $('#verify').on('change', function(){
                 if ((this).value!==$('#new').val()) {
                     $('#verify').focus();
-                    $("label[for='verify']").text('Passwort stimmt nicht überein!');
-                    $("label[for='verify']").css('color', 'red');
+                    $('#verify').val('');
+                    $('#verify').attr("placeholder", "Passwort stimmt nicht überein");
+                    $('#verify').addClass('wrong');
                 } else {
-                    $("label[for='verify']").text('Wiederhole Passwort:');
-                    $("label[for='verify']").css('color', 'black');
+                    $('#verify').attr("placeholder", "");
+                    $('#verify').removeClass('wrong');
                 }
             });
-            function checkUser() {
-                var username=(this).value;
-                var url=document.getElementById('username').getAttribute('url');
-                $.post(url,
-                    {
-                        check_user: "true",
-                        username: ""+username
-                    },
-                    function(data){
-                        if (data==="    false") {
-                            $('#username').focus();
-                            $("label[for='username']").text('Benutzername schon vorhanden!');
-                            $("label[for='username']").css('color', 'red');
-                        } else {
-                            $("label[for='username']").text('Benutzername:');
-                            $("label[for='username']").css('color', 'black');
-                            $('#personal').submit;
-                        }
 
-                    });
-            }
         </script>
     </div>
 

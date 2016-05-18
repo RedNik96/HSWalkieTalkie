@@ -6,22 +6,22 @@ Class ProfileHandler {
 
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
-  public static function showUser() {
-    $data=self::getUser($_SESSION['showUser'],true);
+  public static function showUser($user) {
+    $data=self::getUser($user,true);
 
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
-  public static function showMoreUser() {
+  public static function showMoreUser($firstname,$lastname) {
     // User holen
     // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
     // konto(IBAN, BIC)
-    $i=0;
-    foreach ($_SESSION['showUser'] as $user) {
-      $stmt = SQL::query("SELECT picture, firstName, lastName, username FROM user where username = :username", array(
-          'username' => $user
-      ));
 
-      $res = $stmt->fetch();
+    $i=0;
+    $stmt = SQL::query("SELECT picture, firstName, lastName, username FROM user where firstName = :firstname and lastName = :lastname", array(
+        'lastname' => $lastname,
+        'firstname' => $firstname
+    ));
+    while ($res = $stmt->fetch()) {
       $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
       $users[$i]=$res;
       $i++;
