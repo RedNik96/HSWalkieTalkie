@@ -9,7 +9,7 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 >
 >$RitchBitch
 >$moneymoneymoney
->$blingblin
+>$blingbling
 
 #ToDos
 * Kommentare //macht xgwsnde
