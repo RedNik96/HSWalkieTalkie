@@ -22,7 +22,6 @@
 <? if(!empty($posts)): ?>
     <? foreach($posts as $post): ?>
         <div class = "post">
-        <!--<form class="post">-->
             <div class="postheader">
                 <?php
                 if(isset($post['postIDParent']) && $post['postIDParent'])
@@ -48,19 +47,17 @@
                     ?>
                 </div>
             <div class="postfooter">
-                <?php
-                    if($post['username'] != $_SESSION['user']):
-                ?>
                 <div class="share">
                     <button class="btn btn-primary" name="btnRepost"
                             data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
                             data-user="<?= $_SESSION['user']; ?>"
-                            data-post="<?= $post['postID']; ?>">
+                            data-post="<?= $post['postID']; ?>"
+                            <? if($post['username'] == $_SESSION['user']) echo "disabled"; ?>
+                    >
                         <i class="fa fa-share" aria-hidden="true"></i>
                     </button>
                     <span class="shared"><?= htmlspecialchars($post['reposts']); ?></span>
                 </div>
-                <?php endif; ?>
 
                 <div class="vote">
                     <button class="btn btn-danger"
@@ -83,7 +80,6 @@
                 </div>
             </div>
         </div>
-        <!--</form>-->
     <?php endforeach; ?>
 <? else: ?>
     Keine Posts vorhanden.

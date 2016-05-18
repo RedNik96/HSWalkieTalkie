@@ -12,12 +12,7 @@
     display: block;
 }
 
-#name{
-    font-weight: bold;
-    color: black;
-}
-
-#username{
+.username{
     display: block;
     color: grey;
 }
