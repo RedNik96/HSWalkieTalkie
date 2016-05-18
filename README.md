@@ -21,3 +21,4 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * email für Registrierung
 * css Dateien abgleichen. z. B. wird im Login der Benutzername grau gedruckt, das Passwort nicht, weil in Layout css ein entsprechendes css gegeben ist.
 * 404 Landing Page
+* kein retweet von eigenen posts
