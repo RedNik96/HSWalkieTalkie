@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/poststylesheet.css">
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/postwritestylesheet.css">
 
-<? global $router; ?>
+<? global $router;
+if (!isset($cashtag)) {?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6"></textarea>
     <div class="postaddonsdiv">
@@ -18,11 +19,11 @@
         <button class="btn btn-primary" id="postbutton"><i class="fa fa-arrow-up" aria-hidden="true"> Posten</i></button>
     </div>
 </form>
+<? } ?>
 
 <? if(!empty($posts)): ?>
     <? foreach($posts as $post): ?>
         <div class = "post">
-        <!--<form class="post">-->
             <div class="postheader">
                 <?php
                 if(isset($post['postIDParent']) && $post['postIDParent'])
@@ -48,19 +49,17 @@
                     ?>
                 </div>
             <div class="postfooter">
-                <?php
-                    if($post['username'] != $_SESSION['user']):
-                ?>
                 <div class="share">
                     <button class="btn btn-primary" name="btnRepost"
                             data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
                             data-user="<?= $_SESSION['user']; ?>"
-                            data-post="<?= $post['postID']; ?>">
+                            data-post="<?= $post['postID']; ?>"
+                            <? if($post['username'] == $_SESSION['user']) echo "disabled"; ?>
+                    >
                         <i class="fa fa-share" aria-hidden="true"></i>
                     </button>
                     <span class="shared"><?= htmlspecialchars($post['reposts']); ?></span>
                 </div>
-                <?php endif; ?>
 
                 <div class="vote">
                     <button class="btn btn-danger"
@@ -83,7 +82,6 @@
                 </div>
             </div>
         </div>
-        <!--</form>-->
     <?php endforeach; ?>
 <? else: ?>
     Keine Posts vorhanden.

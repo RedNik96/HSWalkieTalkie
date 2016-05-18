@@ -61,6 +61,7 @@ require_once(CLASSES_PATH . "/handler/CashTagHandler.php");
 include(CLASSES_PATH . "/handler/ProfileHandler.php");
 require_once (CLASSES_PATH . "/User.php");
 require_once (CLASSES_PATH . "/SQL.php");
+require_once (CLASSES_PATH . "/Search.php");
 //});
 
 SQL::createConnection();

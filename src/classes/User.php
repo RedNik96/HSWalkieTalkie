@@ -8,8 +8,8 @@ class User {
                      <div class=\"hswUser\">
                         <img class=\"img-rounded\" src=\"/HSWalkieTalkie/src/img/profile/".$profilePicLink."\" alt=\"Bild\">
                         <div class=\"hswUsername\">
-                            <a href=\"" . $router->generate('showUserGet',array( 'user' => $username)) . "\" class=\"name\" id=\"names\">" . $firstname . " " . $lastname . "</a>
-                            <a href=\"" . $router->generate('showUserGet',array( 'user' => $username)) . "\" class=\"name\" id=\"username\">@" . $username . "</a>
+                            <a href=\"" . $router->generate('showUserGet',array( 'user' => $username)) . "\" class=\"name\">" . $firstname . " " . $lastname . "</a>
+                            <a href=\"" . $router->generate('showUserGet',array( 'user' => $username)) . "\" class=\"username name\">@" . $username . "</a>
                             </form>
                         </div>
                        </div>";

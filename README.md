@@ -1,17 +1,24 @@
 # HSWalkieTalkie
 HSW Testat Datenbankprogrammierung - WI 44/14
 
+#MOTTO
+> No more hastags!
+>
+>Der duale Student setzt nur
+>noch Cashtags.
+>
+>$RitchBitch
+>$moneymoneymoney
+>$blingbling
+
 #ToDos
-* Kommentare //macht Niklas
-* Repost     //erledigt xgwsdfe
-* Vote       //erledigt xgwsdfe
+* Kommentare //macht xgwsnde
+* ER-Diagramm anpassen/aktualisieren //xgwsnde
 * RSS        //macht Marius
 * Suche      //macht Jonas
-* Cashtagsuche -> cashtaglinks //macht Jonas
-* Andere Profile //erledigt Jonas
-* Folgen     //erledigt xgwsdfe
-* Auf im Post genannte Namen verlinken
+* Auf im Post genannte Namen verlinken //xgwsnde
 * Duell      //xgwsdfe
 * email für Registrierung
 * css Dateien abgleichen. z. B. wird im Login der Benutzername grau gedruckt, das Passwort nicht, weil in Layout css ein entsprechendes css gegeben ist.
 * 404 Landing Page
+* kein retweet von eigenen posts
