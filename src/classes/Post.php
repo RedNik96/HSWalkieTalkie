@@ -6,11 +6,7 @@ class Post
     {
         global $router;
         if(isset($_POST['content'])) {
-          /*  print_r($_FILES['postedFiles']['name'][1]);
-            print_r(isset($_FILES['postedFiles']) === true);
 
-            /*  echo "\n" . count($_FILES['postedFiles']['name']);
-              die();*/
             $now = date('Y-m-d H:i:s');
 
             $stmt = SQL::query("INSERT INTO posts (content, user, datePosted)
@@ -20,12 +16,23 @@ class Post
                 'date'      => $now
             ));
 
+            $stmt = SQL::query("SELECT MAX(id) AS newID FROM posts");
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $newID = $result['newID'];
+
+            $cashtagArr = Search::cashtag($_POST['content']);
+            foreach ($cashtagArr as $value)
+            {
+                SQL::query("INSERT INTO cashtag VALUES (:cashtag)", array( "cashtag" => $value));
+                $stmt = SQL::query("INSERT INTO cashtagpost VALUES (:cashtag, :postId)",
+                    array(
+                        "cashtag"   => $value,
+                        "postId"    => $newID
+                    ));
+            }
+
             if(isset($_FILES['postedFiles']))
             {
-                $stmt = SQL::query("SELECT MAX(id) AS newID FROM posts");
-
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                $newID = $result['newID'];
                 for($i = 0; $i < count($_FILES['postedFiles']['name']); $i++)
                 {
                     //Prüfen, ob es wirklich eine Datei ist
