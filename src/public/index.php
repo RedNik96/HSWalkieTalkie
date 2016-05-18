@@ -70,8 +70,8 @@
         ProfileHandler::showMoreUser($firstname,$lastname);
     }, 'showMoreUserGet');
 
-    $router->map('GET', '/showCashTag/', function () {
-        CashTagHandler::get();
+    $router->map('GET', '/showCashTag/[a:cashtag]/', function ($cashtag) {
+        CashTagHandler::get($cashtag);
     }, 'showCashTagGet');
 
     $router->map('GET', '/register/', function () {
@@ -113,6 +113,10 @@
     $router->map('POST', '/vote/', function() {
         Post::vote();
     }, 'votePost');
+
+    $router->map('POST', '/statisticsToggle/', function(){
+        StatisticHandler::toggle();
+    }, 'statisticsTogglePost');
 
 
     $match = $router->match();
