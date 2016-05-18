@@ -69,3 +69,17 @@
     display: inline-block;
     width: 40%;
 }
+
+.postcontent .smallerContent{
+    display: inline-block;
+    width: 75%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.postcontent .cash{
+    text-align: right;
+    display: inline-block;
+    width: 20%;
+}
