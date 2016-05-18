@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/poststylesheet.css">
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/postwritestylesheet.css">
 
-<? global $router; ?>
+<? global $router;
+if (!isset($cashtag)) {?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6"></textarea>
     <div class="postaddonsdiv">
@@ -18,6 +19,7 @@
         <button class="btn btn-primary" id="postbutton"><i class="fa fa-arrow-up" aria-hidden="true"> Posten</i></button>
     </div>
 </form>
+<? } ?>
 
 <? if(!empty($posts)): ?>
     <? foreach($posts as $post): ?>

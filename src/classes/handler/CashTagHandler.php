@@ -46,10 +46,11 @@ class CashTagHandler
         $stats = StatisticHandler::getStats();
         $data = array(
             "posts" => $posts,
-            "stats" => $stats
+            "stats" => $stats,
+            "cashtag" => true
         );
 
-        Template::render("cashTag", $data);
+        Template::render("timeline", $data);
 
     }
 }
