@@ -1,8 +1,19 @@
 # HSWalkieTalkie
 HSW Testat Datenbankprogrammierung - WI 44/14
 
+#MOTTO
+> No more hastags!
+>
+>Der duale Student setzt nur
+>noch Cashtags.
+>
+>$RitchBitch
+>$moneymoneymoney
+>$blingbling
+
 #ToDos
 * Kommentare //macht xgwsnde
+* ER-Diagramm anpassen/aktualisieren //xgwsnde
 * RSS        //macht Marius
 * Suche      //macht Jonas
 * Auf im Post genannte Namen verlinken //xgwsnde
