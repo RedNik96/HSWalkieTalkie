@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">HSWalkieTalkie</a>
+      <a class="navbar-brand" href="<? global $router; echo $router->generate("timeline");?>">HSWalkieTalkie</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

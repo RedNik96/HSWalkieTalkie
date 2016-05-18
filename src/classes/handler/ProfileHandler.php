@@ -101,7 +101,6 @@ Class ProfileHandler {
 
 
     $res = $stmt->fetch();
-    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
 
     if ($own) {
       $posts = TimelineHandler::getOwnPostsAsArray($user);
@@ -115,6 +114,5 @@ Class ProfileHandler {
         'posts' => $posts
     );
     return $data;
-    Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 }
