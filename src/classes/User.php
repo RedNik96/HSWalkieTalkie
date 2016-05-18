@@ -8,10 +8,8 @@ class User {
                      <div class=\"hswUser\">
                         <img class=\"img-rounded\" src=\"/HSWalkieTalkie/src/img/profile/".$profilePicLink."\" alt=\"Bild\">
                         <div class=\"hswUsername\">
-                            <form method=\"post\" action=\"" . $router->generate('showUserPost') . "\">
-                                 <input type=\"hidden\" name=\"username\" value=\"" . $username . "\">
-                                  <a onclick='this.parentNode.submit();' class=\"name\" id=\"names\">" . $firstname . " " . $lastname . "</a>
-                                 <a onclick='this.parentNode.submit();' class=\"name\" id=\"username\">@" . $username . "</a>
+                            <a href=\"" . $router->generate('showUserGet',array( 'user' => $username)) . "\" class=\"name\">" . $firstname . " " . $lastname . "</a>
+                            <a href=\"" . $router->generate('showUserGet',array( 'user' => $username)) . "\" class=\"username name\">@" . $username . "</a>
                             </form>
                         </div>
                        </div>";

@@ -13,12 +13,8 @@ class LoginHandler
 
     public static function checkCredentials($user, $password){
 
-        global $dbh;
-
-        $stmt = $dbh->prepare("SELECT password FROM user
-            WHERE username = :user");
-
-        $stmt->execute(array(
+        $stmt = SQL::query("SELECT password FROM user
+            WHERE username = :user", array(
             'user'     => $user,
         ));
 

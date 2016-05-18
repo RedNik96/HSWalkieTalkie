@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">HSWalkieTalkie</a>
+      <a class="navbar-brand" href="<? global $router; echo $router->generate("timeline");?>">HSWalkieTalkie</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,14 +19,15 @@
         <li <? if ($GLOBALS['match']['name']=='timeline') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("timeline");?>"><span class="fa fa-newspaper-o fa-2x"></span> Neuigkeiten</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='profile') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("profile");?>"><span class="fa fa-user fa-2x"></span> Profil</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='settingsGet') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settingsGet");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
-        <form class="navbar-form navbar-left" role="search" method="post" action="<?= $GLOBALS['router']->generate('searchPost'); ?>">
+        <form display="inline" class="navbar-form navbar-left" method="post" action="<? global $router;echo $router->generate('searchPost') ?>">
           <div class="form-group">
-            <select name="search" type="search" id="searchBar" type="text" class="form-control" placeholder="Suchen">
+            <select name="search" type="search" id="searchBar" type="text" class="select2-input" placeholder="Suchen">
               <option></option>
             </select>
           </div>
           <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Suchen</button>
         </form>
+
       </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="<?= $GLOBALS['router']->generate('logoutGet'); ?>"><span class="fa fa-power-off fa-2x"></span></a></li>
@@ -49,7 +50,6 @@
       names+='{ "id":"u'+data.names[i]+'", "text":"'+data.names[i]+'"}';
     }
     names+=']},{ "text":"Benutzernamen" , "children": [ ';
-
     for (var i = 0; i < data.fullNames.length; i++) {
       if (i>0) {
         names+=',';
@@ -70,7 +70,8 @@
 
     $('#searchBar').select2({
       placeholder: 'Name oder $cashtag suchen',
-      data: obj
+      data: obj,
+      closeOnSelect: false
     });
 
   });

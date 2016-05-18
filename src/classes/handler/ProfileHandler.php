@@ -13,19 +13,15 @@ Class ProfileHandler {
   }
   public static function showMoreUser($firstname,$lastname) {
     // User holen
-    global $dbh;
     // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
     // konto(IBAN, BIC)
-    
-    
-    $stmt=$dbh->prepare("SELECT picture, firstName, lastName, username FROM user where firstName = :firstname and lastName = :lastname");
-    $stmt->execute(array(
-        'lastname' => $lastname,
-        'firstname' => $firstname 
-    ));
+
     $i=0;
+    $stmt = SQL::query("SELECT picture, firstName, lastName, username FROM user where firstName = :firstname and lastName = :lastname", array(
+        'lastname' => $lastname,
+        'firstname' => $firstname
+    ));
     while ($res = $stmt->fetch()) {
-      $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
       $users[$i]=$res;
       $i++;
     }
@@ -44,36 +40,34 @@ Class ProfileHandler {
   }
 
   public static function followUser(){
-    global $dbh;
 
     extract($_POST);
 
     if(isset($userFollowed) AND isset($userFollower))
     {
-      $stmt = $dbh->prepare("SELECT * FROM follower WHERE followed = :followed AND follower = :follower");
-      $stmt->execute(array(
+      $stmt = SQL::query("SELECT * FROM follower WHERE followed = :followed AND follower = :follower", array(
           'followed'  => $userFollowed,
           'follower'  => $userFollower
       ));
-      if($stmt->fetch())
+
+      if($stmt != SQL::SQL_FEHLGESCHLAGEN() AND $stmt->fetch())
       {
-        $stmt = $dbh->prepare("DELETE FROM follower WHERE followed = :followed AND follower = :follower");
-        $bool = $stmt->execute(array(
+        $stmt = SQL::query("DELETE FROM follower WHERE followed = :followed AND follower = :follower", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
-        if ($bool) {
+        if ($stmt != SQL::SQL_FEHLGESCHLAGEN()) {
           echo "removed";
         } else {
           echo "false";
         }
       } else {
-        $stmt = $dbh->prepare("INSERT INTO follower (followed, follower) VALUES (:followed, :follower)");
-        $bool = $stmt->execute(array(
+        $stmt = SQL::query("INSERT INTO follower (followed, follower) VALUES (:followed, :follower)", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
-        if ($bool) {
+
+        if ($stmt != SQL::SQL_FEHLGESCHLAGEN()) {
           echo "added";
         } else {
           echo "false";
@@ -87,17 +81,19 @@ Class ProfileHandler {
     /*
      */
     // User holen
-    global $dbh;
     // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
     // konto(IBAN, BIC)
     if ($user===$_SESSION['user']) {
-      $stmt=$dbh->prepare("SELECT * FROM user, city where username = :username AND user.zip = city.zip");
-      $stmt->execute(array(
-          'username' => $user
+      $stmt = SQL::query("SELECT * FROM user, city where username = :username AND user.zip = city.zip", array(
+        'username' => $user
       ));
     } else {
-      $stmt=$dbh->prepare("SELECT *, (SELECT COUNT(*) FROM follower WHERE followed = :username AND follower = :user) AS isFollowing FROM user as U, city as C where username = :username AND U.zip = C.zip");
-      $stmt->execute(array(
+
+      $stmt = SQL::query("
+        SELECT *, 
+          (SELECT COUNT(*) FROM follower 
+            WHERE followed = :username AND follower = :user) AS isFollowing 
+        FROM user as U, city as C WHERE username = :username AND U.zip = C.zip", array(
           'user'    => $_SESSION['user'],
           'username' => $user
       ));
@@ -105,7 +101,6 @@ Class ProfileHandler {
 
 
     $res = $stmt->fetch();
-    $res['picture'] = "/HSWalkieTalkie/src/img/profile/" . $res['picture'];
 
     if ($own) {
       $posts = TimelineHandler::getOwnPostsAsArray($user);
@@ -119,6 +114,5 @@ Class ProfileHandler {
         'posts' => $posts
     );
     return $data;
-    Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 }

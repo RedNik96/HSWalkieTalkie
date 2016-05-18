@@ -104,4 +104,17 @@ CREATE TABLE `round` (
   FOREIGN KEY (`duell`) REFERENCES Duell (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `cashtag` (
+  `cashtag` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`cashtag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `cashtagPost` (
+  `cashtag` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `postId` int(11) NOT NULL,
+  PRIMARY KEY (`cashtag`, `postId`),
+  FOREIGN KEY (`cashtag`) REFERENCES cashtag (`cashtag`) ON DELETE CASCADE  ON UPDATE CASCADE,
+  FOREIGN KEY (`postId`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 COMMIT;
