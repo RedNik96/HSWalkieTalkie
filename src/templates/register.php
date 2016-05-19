@@ -9,13 +9,13 @@
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
             <label for="firstName" class="col-lg-6 control-label">Vorname*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname" maxlength="255" autofocus required autocomplete="off">
+                <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß- ]+" type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname" maxlength="255" autofocus required autocomplete="off">
             </div>
         </div>
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
             <label for="lastName" class="col-lg-6 control-label">Nachname*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Nachname" maxlength="255" required autocomplete="off">
+                <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß- ]+" type="text" class="form-control" id="lastName" name="lastName" placeholder="Nachname" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label for="username" class="col-lg-6 control-label">Benutzername*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" maxlength="100" required autocomplete="off">
+                <input url="<? global $router; echo $router->generate('registerCheckUserPost');?>" pattern="[A-Za-zÄÜÖäüöß0-9-_]+" type="text" class="form-control" id="username" name="username" placeholder="Benutzername" maxlength="100" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
@@ -51,13 +51,13 @@
         <div class="form-group">
             <label for="street" class="col-lg-6 control-label">Straße*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="street" name="street" placeholder="Straße" maxlength="255" required autocomplete="off">
+                <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß.- ]+" type="text" class="form-control" id="street" name="street" placeholder="Straße" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="housenumber" class="col-lg-6 control-label">Hausnummer*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="housenumber" name="housenumber" placeholder="Hausnummer" maxlength="255" required autocomplete="off">
+                <input pattern="[0-9][0-9a-z-]+" type="text" class="form-control" id="housenumber" name="housenumber" placeholder="Hausnummer" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
@@ -86,7 +86,7 @@
         <div class="form-group">
             <label for="iban" class="col-lg-3 control-label">IBAN</label>
             <div class="col-lg-9">
-                <input type="text" class="form-control" id="iban" name="iban" placeholder="IBAN" maxlength="34" autocomplete="off">
+                <input pattern="[A-Z0-9]+" type="text" class="form-control" id="iban" name="iban" placeholder="IBAN" maxlength="34" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
@@ -136,6 +136,7 @@
         var zips = <?php echo json_encode($zips); ?>;
         $('#city').text(zips[this.value]);
     });
+
     $('#confirmedPassword').on('change', function(){
         if ((this).value!==$('#password').val()) {
             $('#confirmedPassword').focus();
@@ -147,5 +148,25 @@
             $('#confirmedPassword').removeClass('wrong');
         }
     });
-    
+    $('#username').on('change', function(){
+        var username=(this).value;
+        var url=document.getElementById('username').getAttribute('url');
+        $.post(url,
+            {
+                check_user: "true",
+                username: ""+username
+            },
+            function(data){
+                if (data==="    false") {
+                    $('#username').focus();
+                    $('#username').val('');
+                    $('#username').attr("placeholder", "Benutzername schon vergeben");
+                    $('#username').addClass('wrong');
+                } else {
+                    $('#username').attr("placeholder", "");
+                    $('#username').removeClass('wrong');
+                }
+
+            });
+    });
 </script>

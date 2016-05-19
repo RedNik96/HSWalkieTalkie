@@ -68,6 +68,7 @@ class SettingsHandler {
             $zip=$_POST['zip'];
             $street=$_POST['street'];
             $nr=$_POST['nr'];
+
             //ändert die Daten des eingeloggten Users in die im Post übergebenen
             User::changePersonalInformation($firstname,$lastname,$email,$zip,$street,$username,$birth,$nr);
             //der username des eingeloggten Users wird aktualisiert
@@ -120,12 +121,11 @@ class SettingsHandler {
      * und meldet das Ergebnis dem AJAX-Post zurück
      */
     static public function checkUser() {
-
-        if (User::checkUser($_POST['username'])) {
+        if ($_POST['username']===$_SESSION['user']) {
             echo "true";
-        } else {
-            echo "false";
+            die;
         }
+        echo (User::checkUser($_POST['username'])) ;
     }
 
     /**

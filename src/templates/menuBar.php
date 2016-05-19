@@ -57,7 +57,7 @@
       names+='{ "id":"n'+data.fullNames[i]+'", "text":"'+data.fullNames[i]+'"}';
     }
     if(data.tags) {
-      names += ']},{ "text":"$chashtags" , "children": [ ';
+      names += ']},{ "text":"$cashtags" , "children": [ ';
       for (var i = 0; i < data.tags.length; i++) {
         if (i > 0) {
           names += ',';
