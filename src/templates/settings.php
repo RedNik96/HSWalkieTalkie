@@ -18,16 +18,15 @@
             }
 
         </script>
-
         <ul class="nav nav-tabs">
-            <li <? if ($tab===0) {?>class="active" <?;} ?>><a data-toggle="tab" href="#personal">persönliche Informationen</a></li>
-            <li <? if ($tab===1) {?>class="active" <?;} ?>><a data-toggle="tab" href="#pass">Passwort ändern</a></li>
-            <li <? if ($tab===2) {?>class="active" <?;} ?>><a data-toggle="tab" href="#account">Konto</a></li>
-            <li <? if ($tab===3) {?>class="active" <?;} ?>><a data-toggle="tab" href="#ilias">ILIAS-Feed</a></li>
+            <li <? if ($tab==0) {?>class="active" <?;} ?>><a data-toggle="tab" href="#personal">persönliche Informationen</a></li>
+            <li <? if ($tab==1) {?>class="active" <?;} ?>><a data-toggle="tab" href="#pass">Passwort ändern</a></li>
+            <li <? if ($tab==2) {?>class="active" <?;} ?>><a data-toggle="tab" href="#account">Konto</a></li>
+            <li <? if ($tab==3) {?>class="active" <?;} ?>><a data-toggle="tab" href="#ilias">Ilias-Feed</a></li>
         </ul>
 
         <div class="tab-content">
-            <div id="personal" class="tab-pane fade <? if ($tab===0) {?>in active<?;} ?>">
+            <div id="personal" class="tab-pane fade <? if ($tab==0) {?>in active<?;} ?>">
                 <div class="container-border">
                     <form id="personal" class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('settingsPersonalInformationPost')?>">
                         <legend>
@@ -126,7 +125,7 @@
                                 </div>
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>
-                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPost');?>">
+                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPersonalInformationPost');?>">
                                     <button name="deletePicture" id="deletePicture" class="btn btn-default active"><i class="fa fa-trash" aria-hidden="true"></i>Profilbild löschen</button>
                                     <script >
                                         $(document).on('ready', function() {
@@ -160,7 +159,7 @@
                     </form>
                 </div>
             </div>
-            <div id="pass" class="tab-pane fade <? if ($tab===1) {?>in active<?;} ?>">
+            <div id="pass" class="tab-pane fade <? if ($tab==1) {?>in active<?;} ?>">
                 <div class="container-border">
                     <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsChangePwdPost');?>">
                         <legend>
@@ -209,7 +208,7 @@
                 </div>
 
             </div>
-            <div id="account" class="tab-pane fade <? if ($tab===2) {?>in active<?;} ?>">
+            <div id="account" class="tab-pane fade <? if ($tab==2) {?>in active<?;} ?>">
                 <div class="container-border">
 
                         <legend>
@@ -336,11 +335,11 @@
 
                 </div>
             </div>
-            <div id="ilias" class="tab-pane fade <? if ($tab===3) {?>in active<?;} ?>">
+            <div id="ilias" class="tab-pane fade <? if ($tab==3) {?>in active<?;} ?>">
                 <div class="container-border">
                     <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsChangeIliasPost');?>">
                         <legend>
-                            ILIAS-Feed Einstellungen
+                            Ilias-Feed Einstellungen
                         </legend>
                         <div class="form-group">
                             <label for="url" class=" col-lg-6 control-label">

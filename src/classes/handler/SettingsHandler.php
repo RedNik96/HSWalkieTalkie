@@ -1,43 +1,41 @@
 <?php
-class SettingsHandler {
-    
-    public static function get() {
-        $tab=0;
-        if (isset($_SESSION['settings'])) {
-            $tab=$_SESSION['settings'];
-            $_SESSION['settings']=0;
-        }
 
+/**
+ * Class SettingsHandler kümmert sich um die Einstellungen
+ */
+class SettingsHandler {
+    /**
+     * sucht alle Voreinstellungen des eingeloggten Users und rendert die Einstellungsseite
+     */
+    public static function get($tab) {
+        //sucht alle persönlichen Informationen zum eingeloggten User
         $stmt = SQL::query("SELECT * FROM user, city WHERE username=:username and city.zip=user.zip", array(
             'username' => $_SESSION['user']
         ));
 
         $user_info=$stmt->fetch();
         EscapeUtil::escapeArray($user_info);
-
+        // sucht alle Kontoinformationen zum eingeloggten User
         $stmt = SQL::query("SELECT account.iban, account.bic, bic.bank FROM account,bic WHERE user=:username and account.bic=bic.bic ORDER BY account.iban ASC", array(
             'username' => $_SESSION['user']
         ));
-
-        $i=0;
-        while ($bank_info[$i]=$stmt->fetch()) {
-            EscapeUtil::escapeArray($bank_info[$i]);
-            $i++;
+        //speichert alle Kontoinformationen in einem Array
+        while ($bank_info[]=$stmt->fetch()) {
+            EscapeUtil::escapeArray($bank_info[]);
         }
-
+        //sucht alle Bics und Kreditinstitute
         $stmt = SQL::query("SELECT bic, bank from bic");
         while($result = $stmt->fetch()) {
             EscapeUtil::escapeArray($result);
             $bics[$result[0]] = $result[1];
         }
-
+        //sucht alle Postleitzahlen und Orte
         $stmt = SQL::query("SELECT zip, city from city");
-
         while($result = $stmt->fetch()) {
             EscapeUtil::escapeArray($result);
             $zips[$result[0]] = $result[1];
         }
-        
+        //die Daten für das Settings Template als Array
         $template_data = array(
             'tab' => $tab,
             'user_info' => $user_info,
@@ -45,15 +43,21 @@ class SettingsHandler {
             'zips' => $zips,
             'bics' => $bics
         );
+        //links und rechts wird nichts gerendert
         $templates['template_left']=null;
         $templates['template_right']=null;
+        //rendert das settings template
         Template::render('settings', $template_data, $templates);
     }
-    
+
+    /**
+     * @throws Exception Fileupload läuft schief
+     * kümmert sich um die Änderungen in den persönlichen Einstelungen
+     */
     public static function personalInformation() {
-
+        //Persönliche Informationen wurden geändert
         if(isset($_POST['change-settings'])){
-
+            //holt sich alle Daten aus dem HTTP-Post
             $email=$_POST['email'];
             $firstname=$_POST['firstname'];
             $lastname=$_POST['lastname'];
@@ -63,7 +67,7 @@ class SettingsHandler {
             $zip=$_POST['zip'];
             $street=$_POST['street'];
             $nr=$_POST['nr'];
-            
+            //ändert die Daten des eingeloggten Users in die im Post übergebenen
             $stmt = SQL::query("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
             username=:username, birthday=:birth, housenumber=:nr 
             WHERE username=:user", array(
@@ -77,16 +81,33 @@ class SettingsHandler {
                 'nr' => $nr,
                 'user' => $_SESSION['user']
             ));
-
-            $_SESSION['user'] = $username;
+            //der username des eingeloggten Users wird aktualisiert
+            if($stmt != SQL::SQL_FEHLGESCHLAGEN())
+            {
+                $_SESSION['user'] = $username;
+            }
         }
+        //das Bild wurde gelöscht
         if (isset($_POST['deletePicture'])) {
+            //sucht den Pfad des aktuellen Profilbildes und löscht es falls es nicht das Default Bild ist
+            $stmt = SQL::query("SELECT picture, DEFAULT(picture) AS defaultImg FROM user WHERE username=:user", array(
+                'user' => $_SESSION['user']
+            ));
+
+            $result=$stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
+                unlink(IMG_PATH . "\\" . "profile" . $result['picture']);
+            }
+            //der Pfad des Profilbildes wird auf den Default gesetzt
             $stmt = SQL::query("UPDATE user SET picture=DEFAULT WHERE username=:user", array(
                 'user' => $_SESSION['user']
             ));
+            //ein neues Profilbild wurde hochgeladen
         } else if (isset($_FILES["userfile"])) {
+            //überprüft ob tatsächlich ein Bild hochgeladen wurde
             $check = getimagesize($_FILES["userfile"]["tmp_name"]);
             if($check !== false) {
+                //sucht den Pfad des aktuellen Profilbildes und löscht es falls es nicht das Default Bild ist
                 $stmt = SQL::query("SELECT picture, DEFAULT(picture) AS defaultImg FROM user WHERE username=:user", array(
                     'user' => $_SESSION['user']
                 ));
@@ -95,12 +116,13 @@ class SettingsHandler {
                 if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
                     unlink(IMG_PATH . "\\" . "profile" . $result['picture']);
                 }
-
+                //es wird der Pfad zum Profilbild generiert
                 $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
                 $target_file = IMG_PATH . "\\" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
+                //der Ordner für die Profilbilder wird angelegt falls er noch nicht existiert
                 if(!file_exists(IMG_PATH. "\\profile"))
                     mkdir(IMG_PATH. "\\profile");
-
+                //das hochgeladene Foto wird gespeichert
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
                     SQL::query("UPDATE user SET picture=:picture WHERE username=:user", array(
                         'picture' => $_SESSION['user'] . "." . $imageFileType,
@@ -111,10 +133,9 @@ class SettingsHandler {
             }
         }
 
-        
-        $_SESSION['settings']=0;
+        //die Settingsseite wird gerenderet
         global $router;
-        header("Location: " . $router->generate("settingsGet"));
+        header("Location: " . $router->generate("settingsGet",array('tab' => 0)));
     }
     
     static public function checkUser() {
@@ -127,7 +148,7 @@ class SettingsHandler {
             'user' => $_POST['username']
         ));
 
-        if ($stmt ->fetch()) {
+        if ($stmt == SQL::SQL_FEHLGESCHLAGEN() || $stmt ->fetch()) {
             echo "false";
         }
     }
@@ -161,9 +182,8 @@ class SettingsHandler {
                 'ibanalt' => $ibanalt
             ));
         }
-        $_SESSION['settings']=2;
         global $router;
-        header("Location: " . $router->generate("settingsGet"));
+        header("Location: " . $router->generate("settingsGet",array('tab' => 2)));
     }
     static public function createAccount() {
 
@@ -175,9 +195,8 @@ class SettingsHandler {
             'user' => $_SESSION['user']
         ));
 
-        $_SESSION['settings']=2;
         global $router;
-        header("Location: " . $router->generate("settingsGet"));
+        header("Location: " . $router->generate("settingsGet",array('tab' => 2)));
     }
     static public function changePwd() {
         $old=$_POST['old'];
@@ -190,9 +209,8 @@ class SettingsHandler {
                 'user' => $_SESSION['user']
             ));
         }
-        $_SESSION['settings']=1;
         global $router;
-        header("Location: " . $router->generate("settingsGet"));
+        header("Location: " . $router->generate("settingsGet",array('tab' => 1)));
     }
     static public function changeIlias() {
         $url=$_POST['url'];
@@ -204,9 +222,8 @@ class SettingsHandler {
             'user' => $_SESSION['user']
         ));
 
-        $_SESSION['settings']=3;
         global $router;
-        header("Location: " . $router->generate("settingsGet"));
+        header("Location: " . $router->generate("settingsGet",array('tab' => 3)));
     }
 }
   
