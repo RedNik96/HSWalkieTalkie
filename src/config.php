@@ -15,8 +15,11 @@ defined("TEMPLATES_PATH")
 defined("CLASSES_PATH")
     or define("CLASSES_PATH", realpath(dirname(__FILE__) . '/classes'));
 
+defined("CSS_PATH")
+or define("CSS_PATH", "/HSWalkieTalkie/src/public/css");
+
 defined("IMG_PATH")
-    or define("IMG_PATH", realpath(dirname(__FILE__) . '/img'));
+    or define("IMG_PATH", "/HSWalkieTalkie/src/img");
 
 /*
     Error reporting.
@@ -35,7 +38,7 @@ require_once (CLASSES_PATH . "/handler/ErrorHandler.php");
 require_once (CLASSES_PATH . "/EscapeUtil.php");
 require_once (CLASSES_PATH . "/handler/LoginHandler.php");
 require_once (CLASSES_PATH . "/handler/LogoutHandler.php");
-require_once (CLASSES_PATH . "/Post.php");
+require_once (CLASSES_PATH . "/handler/PostHandler.php");
 require_once (CLASSES_PATH . "/handler/ProfileHandler.php");
 require_once (CLASSES_PATH . "/handler/RegisterHandler.php");
 require_once (CLASSES_PATH . "/handler/RSSHandler.php");
