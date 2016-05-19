@@ -12,11 +12,7 @@
     <script>
         $(function() {
             $('#toggle-event').change(function() {
-                $.post('/HSWalkieTalkie/src/public/statisticsToggle/', {
-                    toggle: "" + $(this).prop('checked')
-                }, function(data){
-                    alert(data);
-                });
+                location.reload();
             })
         });
     </script>
@@ -33,7 +29,7 @@
                     $i++?>
                     <div class="ranking">
                         <div class="placement">
-                            <span><?echo $i?>.</span>
+                            <?echo $i?>.
                         </div>
                         <div class="postauthor">
                             <? echo User::getUserHtml($user['profilePicture'], $user['firstName'], $user['lastName'], $user['username'])?>

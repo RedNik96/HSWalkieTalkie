@@ -25,7 +25,7 @@ Class ProfileHandler {
       $users[$i]=$res;
       $i++;
     }
-    $stats = StatisticHandler::getStats();
+    $stats = StatisticHandler::getFriendsStats();
 
     $data = array(
         "users" => $users,
