@@ -34,6 +34,7 @@ require_once(CLASSES_PATH . "/handler/SettingsHandler.php");
 require_once(CLASSES_PATH . "/handler/StatisticHandler.php");
 require_once(CLASSES_PATH . "/handler/LogoutHandler.php");
 require_once(CLASSES_PATH . "/handler/LoginHandler.php");
+require_once(CLASSES_PATH . "/handler/RSSHandler.php");
 require_once(CLASSES_PATH . "/handler/TimelineHandler.php");
 require_once(CLASSES_PATH . "/handler/SearchHandler.php");
 require_once(CLASSES_PATH . "/handler/CashTagHandler.php");
