@@ -1,6 +1,5 @@
 <?php
 
-// Config inspiriert von: http://code.tutsplus.com/tutorials/organize-your-next-php-project-the-right-way--net-5873
 
 /*
     Creating constants for heavily used paths makes things a lot easier.

@@ -19,10 +19,12 @@ class SettingsHandler {
         $stmt = SQL::query("SELECT account.iban, account.bic, bic.bank FROM account,bic WHERE user=:username and account.bic=bic.bic ORDER BY account.iban ASC", array(
             'username' => $_SESSION['user']
         ));
+        $i=0;
         //speichert alle Kontoinformationen in einem Array
-        while ($bank_info[]=$stmt->fetch()) {
-            EscapeUtil::escapeArray($bank_info[]);
+        while ($bank_info[$i]=$stmt->fetch()) {
+            EscapeUtil::escapeArray($bank_info[$i++]);
         }
+
         //sucht alle Bics und Kreditinstitute
         $stmt = SQL::query("SELECT bic, bank from bic");
         while($result = $stmt->fetch()) {
@@ -63,54 +65,33 @@ class SettingsHandler {
             $lastname=$_POST['lastname'];
             $username=$_POST['username'];
             $birth=$_POST['birth'];
-            $city=$_POST['city'];
             $zip=$_POST['zip'];
             $street=$_POST['street'];
             $nr=$_POST['nr'];
             //ändert die Daten des eingeloggten Users in die im Post übergebenen
-            $stmt = SQL::query("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
-            username=:username, birthday=:birth, housenumber=:nr 
-            WHERE username=:user", array(
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'email' => $email,
-                'zip' => $zip,
-                'street' => $street,
-                'username' => $username,
-                'birth' => $birth,
-                'nr' => $nr,
-                'user' => $_SESSION['user']
-            ));
+            User::changePersonalInformation($firstname,$lastname,$email,$zip,$street,$username,$birth,$nr);
             //der username des eingeloggten Users wird aktualisiert
-            if($stmt != SQL::SQL_FEHLGESCHLAGEN())
-            {
-                $_SESSION['user'] = $username;
-            }
+            $_SESSION['user'] = $username;
+
         }
         //das Bild wurde gelöscht
         if (isset($_POST['deletePicture'])) {
             //sucht den Pfad des aktuellen Profilbildes und löscht es falls es nicht das Default Bild ist
-            $stmt = SQL::query("SELECT picture, DEFAULT(picture) AS defaultImg FROM user WHERE username=:user", array(
-                'user' => $_SESSION['user']
-            ));
+            $stmt = User::getPicture();
 
             $result=$stmt->fetch(PDO::FETCH_ASSOC);
             if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
                 unlink(IMG_PATH . "/" . "profile/" . $result['picture']);
             }
             //der Pfad des Profilbildes wird auf den Default gesetzt
-            $stmt = SQL::query("UPDATE user SET picture=DEFAULT WHERE username=:user", array(
-                'user' => $_SESSION['user']
-            ));
+            User::deletePicture();
             //ein neues Profilbild wurde hochgeladen
         } else if (isset($_FILES["userfile"])) {
             //überprüft ob tatsächlich ein Bild hochgeladen wurde
             $check = getimagesize($_FILES["userfile"]["tmp_name"]);
             if($check !== false) {
                 //sucht den Pfad des aktuellen Profilbildes und löscht es falls es nicht das Default Bild ist
-                $stmt = SQL::query("SELECT picture, DEFAULT(picture) AS defaultImg FROM user WHERE username=:user", array(
-                    'user' => $_SESSION['user']
-                ));
+                $stmt = User::getPicture();
 
                 $result=$stmt->fetch(PDO::FETCH_ASSOC);
                 if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
@@ -124,11 +105,7 @@ class SettingsHandler {
                     mkdir(IMG_PATH. "/profile");
                 //das hochgeladene Foto wird gespeichert
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                    SQL::query("UPDATE user SET picture=:picture WHERE username=:user", array(
-                        'picture' => $_SESSION['user'] . "." . $imageFileType,
-                        'user' => $_SESSION['user']
-                    ));
-
+                    User::changePicture($imageFileType);
                 }
             }
         }
@@ -137,90 +114,89 @@ class SettingsHandler {
         global $router;
         header("Location: " . $router->generate("settingsGet",array('tab' => 0)));
     }
-    
+
+    /**
+     * überprüft ob es den Nutzernamen im HTTP-Post schon gibt oder ob der Nutzername dem des eingeloggten Users entspricht
+     * und meldet das Ergebnis dem AJAX-Post zurück
+     */
     static public function checkUser() {
 
-        if ($_POST['username']===$_SESSION['user']) {
-            echo "true";
-        }
-
-        $stmt = SQL::query("SELECT username FROM user WHERE username=:user", array(
-            'user' => $_POST['username']
-        ));
-
-        if ($stmt == SQL::SQL_FEHLGESCHLAGEN() || $stmt ->fetch()) {
-            echo "false";
-        }
-    }
-    
-    static public function checkPwd() {
-        if (LoginHandler::checkCredentials($_SESSION['user'],$_POST['pwd'])) {
+        if (User::checkUser($_POST['username'])) {
             echo "true";
         } else {
             echo "false";
         }
     }
-    static public function changeAccount() {
 
+    /**
+     * überprüft ob das im HTTP-Post übergebene Passwort mit dem des eingeloggtem User übereinstimmt
+     * und meldet das Ergebnis dem AJAX-Post zurück
+     */
+    static public function checkPwd() {
+        if (User::checkCredentials($_SESSION['user'],$_POST['pwd'])) {
+            echo "true";
+        } else {
+            echo "false";
+        }
+    }
+
+    /**
+     * @throws Exception wenn was nicht läuft
+     * löscht oder ändert die im HTTP-Post übergebene Bankverbindung
+     */
+    static public function changeAccount() {
+        //löscht die Bankverbindung
         if(isset($_POST['delete-account'])){
             $iban=$_POST['ibanalt'];
-
-            SQL::query("DELETE FROM account WHERE iban=:iban and user=:user", array(
-                'iban' => $iban,
-                'user' => $_SESSION['user']
-            ));
+            User::deleteAccount($iban);
         }
+        //ändert eine Bankverbindung
         if(isset($_POST['change-account'])){
-            print_r($_POST);
             $ibanalt=$_POST['ibanalt'];
             $iban=$_POST['iban'];
             $bic=$_POST['bic'];
 
-            SQL::query("UPDATE account SET iban=:iban, bic=:bic WHERE iban=:ibanalt", array(
-                'bic' => $bic,
-                'iban' => $iban,
-                'ibanalt' => $ibanalt
-            ));
+            User::changeAccount($ibanalt,$iban,$bic);
         }
         global $router;
         header("Location: " . $router->generate("settingsGet",array('tab' => 2)));
     }
+
+    /**
+     * @throws Exception wenn was nicht läuft
+     * legt eine neue Bankverbindung für den eingeloggten User ein
+     */
     static public function createAccount() {
 
         $iban=$_POST['iban'];
         $bic=$_POST['bic'];
-        SQL::query("INSERT INTO account values (:iban, :bic, :user)", array(
-            'iban' => $iban,
-            'bic' => $bic,
-            'user' => $_SESSION['user']
-        ));
+        User::createAccount($iban,$bic);
 
         global $router;
         header("Location: " . $router->generate("settingsGet",array('tab' => 2)));
     }
+
+    /**
+     * @throws Exception wenn was nicht klappt
+     * ändert das PAsswort des eingelogten Users in das im HTTP-Post übergebenen
+     */
     static public function changePwd() {
         $old=$_POST['old'];
         $new=$_POST['new'];
         $verify=$_POST['verify'];
-        if (LoginHandler::checkCredentials($_SESSION['user'],$old) && $new===$verify) {
-            $hash = password_hash($new, PASSWORD_DEFAULT);
-            $stmt = SQL::query("UPDATE user SET password=:hash WHERE username=:user", array(
-                'hash' => $hash,
-                'user' => $_SESSION['user']
-            ));
-        }
+        User::changePassword($old,$new,$verify);
         global $router;
         header("Location: " . $router->generate("settingsGet",array('tab' => 1)));
     }
-    static public function changeIlias() {
-        $url=$_POST['url'];
-        $feedPwd=$_POST['feedPwd'];
 
-        $stmt = SQL::query("UPDATE user SET feedUrl=:url, feedPassword=:feedPwd WHERE username=:user", array(
-            'url' => $url,
-            'feedPwd' => $feedPwd,
-            'user' => $_SESSION['user']
-        ));
+    /**
+     * @throws Exception wenn was schief geht
+     * ändert die Ilias-Einstellungen des aktuellen Benutzers
+     */
+    static public function changeIlias() {
+        $url=str_replace(' ','',$_POST['url']);
+        $feedPwd=$_POST['feedPwd'];
+        User::changeIlias($url,$feedPwd);
 
         global $router;
         header("Location: " . $router->generate("settingsGet",array('tab' => 3)));
