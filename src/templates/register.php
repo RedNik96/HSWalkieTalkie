@@ -128,7 +128,14 @@
 </div>
 
 <script type="text/javascript">
-
+    $('#bic').on('change', function() {
+        var bics = <?php echo json_encode($bics); ?>;
+        $('#bankname').text(bics[this.value]);
+    });
+    $('#zip').on('change', function() {
+        var zips = <?php echo json_encode($zips); ?>;
+        $('#city').text(zips[this.value]);
+    });
 
     $('#confirmedPassword').on('change', function(){
         if ((this).value!==$('#password').val()) {
