@@ -16,9 +16,10 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * RSS        //macht Marius
 * Suche      //macht Jonas
 * Auf im Post genannte Namen verlinken //erledigt xgwsdfe
-* Email für Registrierung
+* Cashtags im Content klickbar machen   //erledigt xgwsdfe
+* Cashtags in Trending Cashtags klickbar machen. Verlinken auf Cashtag-Handler //erledigt xgwsdfe
 * 404 Landing Page //erledigt xgadelf
+* SettingsHandler - RegisterHandler -> Funktionen auslagern in User. //erledigt xgadelf
 * Vote-Button deaktivieren, sobald einer gevotet hat //xgwsdfe
-* SettingsHandler - RegisterHandler -> Funktionen auslagern in User.
-* SQL Inserts erst durchführen, wenn Insert auch sicher fehlschlägt = vorher Querys durchführen.
-* mit enter einloggen
+* Trending Cashtags hübsch machen
+* FileInput Master in Libraries umziehen

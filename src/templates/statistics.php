@@ -48,23 +48,29 @@
 
 
     <!--TRENDING CASHTAGS -------------------------------------------------------------------------------------   -->
-    <? //if(!empty($trendingTags)): ?>
+    <? if(!empty($stats['trendingTags'])): ?>
         <div class="statistic">
             <div class="trendingCashtag">
                 <legend class="statisticCategory">Beliebteste $Cashtags</legend>
 
                 <? $i=0;
-                //foreach($trendingTags as $tag):
+                foreach($stats['trendingTags'] as $tag):
                 $i++?>
                 <div class="ranking">
-                    <div class="placement">
-                        <span><?echo $i?>.</span>
+                    <div class="placement" style="width:10%;">
+                        <span><?echo $i ?>.</span>
+                    </div>
+                    <div class="placement" style="width: 60%;">
+                        <span><?= Search::createCashtagLinks(htmlspecialchars($tag['cashtag'])); ?></span>
+                    </div>
+                    <div class="placement" style="width:30%; display: inline;">
+                        <span>$<? echo htmlspecialchars($tag['amount']) ?></span>
                     </div>
                 </div>
-                <?//endforeach; ?>
+                <?endforeach; ?>
             </div>
         </div>
-    <? //endif; ?>
+    <? endif; ?>
 
 
 

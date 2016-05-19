@@ -30,7 +30,7 @@ if (!isset($cashtag)) {?>
                 <?php
                 if(isset($post['postIDParent']) && $post['postIDParent'])
                 {
-                    echo "<span class='label label-primary' style='font-size:14px;'>Repost from @". Post::getPoster($post['postIDParent']). "</span><br><br>";
+                    echo "<span class='label label-primary' style='font-size:14px;'>Repost from @". PostHandler::getPoster($post['postIDParent']). "</span><br><br>";
                 }
 
                 ?>
@@ -48,7 +48,8 @@ if (!isset($cashtag)) {?>
                     }
                     if(count($post['imgs'] > 0)) echo "<br>";
                     $content = str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
-                    $content = Search::user($content);
+                    $content = Search::createUserLinks($content);
+                    $content = Search::createCashtagLinks($content);
                     print $content;
                     ?>
                 </div>

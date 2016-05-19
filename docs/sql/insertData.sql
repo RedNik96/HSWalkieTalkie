@@ -4,6 +4,7 @@ CREATE PROCEDURE getOriginalPoster (IN pPostID int(11))
 BEGIN
     DECLARE val, lParentPost INT;
 
+    SET lParentPost = pPostID;
     SET val = (SELECT parentPost FROM posts WHERE id = pPostID);
     WHILE (val > 0) DO
     	SET lParentPost = val;

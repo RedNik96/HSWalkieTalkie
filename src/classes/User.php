@@ -25,23 +25,31 @@ class User {
     }
     
     public static function checkUser($username) {
-        if ($username===$_SESSION['user']) {
-            return true;
-        }
+        
 
         $stmt = SQL::query("SELECT username FROM user WHERE username=:user", array(
             'user' => $_POST['username']
         ));
 
         if ($stmt ->fetch()) {
-            return false;
+            return "false";
         } else {
-            return true;
+            return "true";
         }
     }
 
+    /**
+     * Die Methode checkCredentials($user, $password) überprüft, ob für die eingegebene Kombination aus Benutzername und Passwort
+     * ein Eintrag in der Datenbank existiert. Falls ein Eintrag vorhanden ist, wird die Session authentifiziert und
+     * eine neue Session-ID generiert. Falls kein Eintrag existiert, wird kein Zugriff gewährt und es wird eine
+     * entsprechende Benachrichtigung ausgegeben.
+     * @param $user Der vom Nutzer auf der Loginseite angegebene Benutzername
+     * @param $password Das vom Nutzer auf der Loginseite eingegebene Password
+     * @return bool true, wenn Passwort und Benutzer zusammengehören, sonst false
+     */
     public static function checkCredentials($user, $password){
 
+        //Auslesen des als Hash gespeicherten Passworts in der Datenbank
         $stmt = SQL::query("SELECT password FROM user WHERE username = :user", array(
             'user'     => $user,
         ));
@@ -55,7 +63,7 @@ class User {
             $_SESSION['logged_in'] = true;
             $_SESSION['user'] = $user;
 
-            // create new session_id
+            //neue Session-ID generieren
             session_regenerate_id(true);
 
             return true;
@@ -136,6 +144,7 @@ class User {
     }
     
     public static function changePersonalInformation($firstname,$lastname,$email,$zip,$street,$username,$birth,$nr) {
+        //$firstname=mysql_real_escape_string($firstname);
         SQL::query("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
             username=:username, birthday=:birth, housenumber=:nr 
             WHERE username=:user", array(
