@@ -13,12 +13,13 @@
         TimelineHandler::get();
     }, 'timeline');
 
-    $router->map( 'GET', '/settings/', function() {
-        SettingsHandler::get();
-    }, 'settingsGet');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
+    $router->map( 'GET', '/settings/[i:tab]/', function($tab) {
+        SettingsHandler::get($tab);
+    }, 'settingsGet');
 
     $router->map('POST', '/settings/', function () {
-        SettingsHandler::post();
+        echo "scheiße";
+        die;
     }, 'settingsPost');
 
     $router->map('POST', '/settings/personalInformation/', function () {
