@@ -19,7 +19,7 @@
         <li <? if ($GLOBALS['match']['name']=='timeline') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("timeline");?>"><span class="fa fa-newspaper-o fa-2x"></span> Neuigkeiten</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='profile') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("profile");?>"><span class="fa fa-user fa-2x"></span> Profil</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='settingsGet') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settingsGet");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
-        <form display="inline" class="navbar-form navbar-left" method="post" action="<? global $router;echo $router->generate('searchPost') ?>">
+        <form id="searchForm" display="inline" class="navbar-form navbar-left" method="post" action="<? global $router;echo $router->generate('searchPost') ?>">
           <div class="form-group">
             <select name="search" type="search" id="searchBar" type="text" class="select2-input" placeholder="Suchen">
               <option></option>
@@ -75,6 +75,7 @@
     });
 
   });
+
 
 
 </script>

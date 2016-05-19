@@ -66,6 +66,10 @@
         ProfileHandler::showUserPost();
     }, 'showUserPost');
 
+    $router->map('GET', '/notFound/', function () {
+        SearchHandler::notFound();
+    }, 'notFoundGet');
+    
     $router->map('GET', '/showMoreUser/[a:firstname]/[a:lastname]/', function ($firstname, $lastname) {
         ProfileHandler::showMoreUser($firstname,$lastname);
     }, 'showMoreUserGet');

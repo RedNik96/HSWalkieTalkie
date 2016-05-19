@@ -27,3 +27,16 @@ body footer {
 #searchBar {
     width: 250px;
 }
+
+.border {
+    border: 1px solid grey;
+    box-shadow: 1px 1px 1px 1px grey;
+    padding: 5px;
+    border-radius: 6px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.border.alert {
+    background: rgba(255, 26, 26, 0.47);
+}

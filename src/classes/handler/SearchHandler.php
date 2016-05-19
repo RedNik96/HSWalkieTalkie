@@ -30,41 +30,50 @@ class SearchHandler
         echo json_encode($response);
     }
     static public function search() {
-        if (substr($_POST['search'],0,1)==='$') {
-
+        if (!(isset($_POST['search']))||($_POST['search']=="")) {
             global $router;
-            header("Location: " . $router->generate("showCashTagGet",array('cashtag' => substr($_POST['search'],1))));
+            header("Location: " . $router->generate("notFoundGet"));
         } else {
-            if (substr($_POST['search'],0,1)==='n') {
-                $name = substr($_POST['search'],1);
-                $firstName=substr($name,0,strpos($name,' '));
-                $lastName=substr($name,strpos($name,' ')+1);
-                $stmt = SQL::query("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname", array(
-                    'firstname' => $firstName,
-                    'lastname' => $lastName
-                ));
-                $result=$stmt->fetch();
-                EscapeUtil::escape_array($result);
-                $username=$result['username'];
-                $i=1;
-                while ($result=$stmt->fetch()) {
-                    $i++;
-                }
-                if ($i>1) {
-                    global $router;
-                    header("Location: " . $router->generate("showMoreUserGet",array(
-                            'firstname' => $firstName,
-                            'lastname' => $lastName
-                            )));
-                    die;
-                }
+            if (substr($_POST['search'],0,1)==='$') {
 
+                global $router;
+                header("Location: " . $router->generate("showCashTagGet",array('cashtag' => substr($_POST['search'],1))));
             } else {
-                $username=substr($_POST['search'],1);
+                if (substr($_POST['search'],0,1)==='n') {
+                    $name = substr($_POST['search'],1);
+                    $firstName=substr($name,0,strpos($name,' '));
+                    $lastName=substr($name,strpos($name,' ')+1);
+                    $stmt = SQL::query("SELECT username FROM user WHERE firstName=:firstname and lastName=:lastname", array(
+                        'firstname' => $firstName,
+                        'lastname' => $lastName
+                    ));
+                    $result=$stmt->fetch();
+                    EscapeUtil::escape_array($result);
+                    $username=$result['username'];
+                    $i=1;
+                    while ($result=$stmt->fetch()) {
+                        $i++;
+                    }
+                    if ($i>1) {
+                        global $router;
+                        header("Location: " . $router->generate("showMoreUserGet",array(
+                                'firstname' => $firstName,
+                                'lastname' => $lastName
+                            )));
+                        die;
+                    }
+
+                } else {
+                    $username=substr($_POST['search'],1);
+                }
+                global $router;
+                header("Location: " . $router->generate("showUserGet",array('user' => $username)));
             }
-            global $router;
-            header("Location: " . $router->generate("showUserGet",array('user' => $username)));
         }
+       
+    }
+    static public function notFound() {
+        Template::render('notFound');
     }
 }
 ?>

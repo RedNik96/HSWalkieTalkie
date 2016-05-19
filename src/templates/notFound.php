@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: anwender
- * Date: 19.05.2016
- * Time: 12:45
- */
+<div class="border alert">
+    <h2>Keine Suchergebnisse gefunden</h2>
+</div>
