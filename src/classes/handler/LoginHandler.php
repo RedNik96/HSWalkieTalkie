@@ -54,6 +54,9 @@ class LoginHandler
         return false;
     }
 
+    /**Überprüft, ob die aktuelle Session authentifiziert ist.
+     * @return bool true, wenn die Session gültig ist; false, wenn die Session nicht gültig ist
+     */
     public static function authenticated()
     {
         if(!isset($_SESSION['logged_in'])) {
