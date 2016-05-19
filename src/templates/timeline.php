@@ -106,11 +106,15 @@ if (!isset($cashtag)) {?>
                       </div>
                       <div class="col-xs-6">
                         <div class="name">
-                          <?= $comment['firstName'] ?>
-                          <?= $comment['lastName'] ?>
+                          <a href="<?= $router->generate('showUserGet',array( 'user' => comment['username'])) ?>" class="name">
+                            <?= $comment['firstName'] ?>
+                            <?= $comment['lastName'] ?>
+                          </a>
                         </div>
                         <div class="username">
-                          @<?= $comment['username'] ?>
+                          <a href="<?= $router->generate('showUserGet',array( 'user' => comment['username'])) ?>" class="username">
+                            @<?= $comment['username'] ?>
+                          </a>
                         </div>
                       </div>
                       <div class="col-xs-4 time">
