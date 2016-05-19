@@ -2,6 +2,9 @@
 
 class StatisticHandler {
 
+    /**
+     * Diese Funktion aktualisiert den Wert der Session-Variable des Toggle-Buttons für Statistiken
+     */
     public static function toggle(){
         if ($_POST['toggle']==="true") {
             $_SESSION['toggle']="true";
@@ -11,7 +14,10 @@ class StatisticHandler {
         echo $_SESSION['toggle'];
     }
 
-    //Statistiken für die Follower
+    /**
+     * Diese Funktion aktualisiert die Statistiken. Dabei sind die Statistiken nur auf die Benutzer ausgerichtet, denen man derzeitig folgt.
+     * @return array mit Daten der reichsten 3 Freunde, den 3 beliebtesten Cashtags unter den Freunden und dem besten Post der Freunde
+     */
     public static function getFriendsStats(){
         //REICHSTE NUTZER VON HSWalkieTalkie-Freunden--------------------------------------------------------------------------------
         $stmtRichestUsers = SQL::query("
@@ -25,6 +31,7 @@ class StatisticHandler {
               LIMIT 3
               ", array("username" => $_SESSION['user']));
 
+        //Rückgabe der reichsten Nutzer in einem Array speichern
         $richestUsers = array();
         $i=0;
         while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
@@ -46,6 +53,7 @@ class StatisticHandler {
               LIMIT 3
               ");
 
+        //Rückgabe der beliebtesten Cashtags in einem Array speichern
         $trendingTags = array();
         while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
             EscapeUtil::escapeArray($trendingTags);
@@ -69,6 +77,7 @@ class StatisticHandler {
             LIMIT 1
         ", array("userid" => $_SESSION['user']));
 
+        //Rückgabe des besten Posts in einem Array speichern
         $bestPost = array();
         while($result = $stmtBestPost->fetch(PDO::FETCH_ASSOC)) {
             EscapeUtil::escapeArray($result);
@@ -85,7 +94,7 @@ class StatisticHandler {
             );
         }
 
-        //Rückgabe----------------------------------------------------------------------------------------------
+        //Rückgabearray zusammenstellen und zurückgeben
         return array(
             'richestUsers' => $richestUsers,
             'trendingTags' => $trendingTags,
@@ -93,7 +102,10 @@ class StatisticHandler {
         );
     }
 
-    //Statistiken für alle Benutzer************************************************************************************
+    /**
+     * Diese Funktion aktualisiert die Statistiken. Dabei sind die Statistiken auf alle Benutzer ausgerichtet.
+     * @return array mit Daten der reichsten 3 Benutzer, den 3 beliebtesten Cashtags und dem besten Post aller Nutzer
+     */
     public static function getAllStats(){
         //REICHSTE NUTZER VON HSWalkieTalkie--------------------------------------------------------------------------------
         $sqlQuery = "SELECT U.picture , U.firstName, U.lastName, U.username,
@@ -104,6 +116,7 @@ class StatisticHandler {
               LIMIT 3";
         $stmtRichestUsers = SQL::query($sqlQuery);
 
+        //Rückgabe der reichsten Nutzer in einem Array speichern
         $richestUsers = array();
         $i=0;
         while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
@@ -130,6 +143,7 @@ class StatisticHandler {
                       LIMIT 3";
         $stmtTrendingTags = SQL::query($sqlQuery);
 
+        //Rückgabe der beliebtesten Cashtags in einem Array speichern
         $trendingTags = array();
         while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
             EscapeUtil::escapeArray($trendingTags);
@@ -151,9 +165,9 @@ class StatisticHandler {
             ORDER BY Votes DESC
             LIMIT 1
         ", array("userid" => $_SESSION['user']));
-        
 
-        
+
+        //Rückgabe der besten Posts in einem Array speichern
         $bestPost = array();
         while($result = $stmtBestPost->fetch(PDO::FETCH_ASSOC)) {
             EscapeUtil::escapeArray($result);
@@ -170,7 +184,7 @@ class StatisticHandler {
             );
         }
 
-        //Rückgabe----------------------------------------------------------------------------------------------
+        //Rückgabearray zusammenstellen und zurückgeben
         return array(
             'richestUsers' => $richestUsers,
             'trendingTags' => $trendingTags,
