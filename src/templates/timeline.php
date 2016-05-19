@@ -114,7 +114,7 @@ if (!isset($cashtag)) {?>
                         </div>
                       </div>
                       <div class="col-xs-4 time">
-                        <?= $comment['commentTime'] ?>
+                        <?= date('d.m.Y H:i:s', strtotime($comment['commentTime'])) ?>
                       </div>
                     </div>
                     <div class="row content">
