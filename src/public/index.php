@@ -66,6 +66,10 @@
         ProfileHandler::showUserPost();
     }, 'showUserPost');
 
+    $router->map('GET', '/notFound/', function () {
+        SearchHandler::notFound();
+    }, 'notFoundGet');
+    
     $router->map('GET', '/showMoreUser/[a:firstname]/[a:lastname]/', function ($firstname, $lastname) {
         ProfileHandler::showMoreUser($firstname,$lastname);
     }, 'showMoreUserGet');
@@ -118,7 +122,6 @@
         StatisticHandler::toggle();
     }, 'statisticsTogglePost');
 
-
     $match = $router->match();
 
     //Wenn keine Anmeldung vorliegt, soll direkt auf die Login-Seite verlinkt werden
@@ -149,5 +152,5 @@
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {
-    	header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        ErrorHandler::get();
     }

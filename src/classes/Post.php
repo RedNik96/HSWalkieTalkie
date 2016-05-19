@@ -123,18 +123,48 @@ class Post
         extract($_POST);
 
         if(isset($user) AND isset($post)) {
-            $stmt = SQL::query("INSERT INTO posts (content, user, parentPost, datePosted) 
+            $stmt = SQL::query("CALL getOriginalPoster(:post)", array("post" => $post));
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            SQL::query("SELECT 1"); //reconnect nach stored Procedure
+
+            //check if user is original poster
+            $stmtIsOriginalUser = SQL::query("SELECT user FROM posts WHERE id = :post", array("post" => $result['OriginalPoster']));
+            $resultIsOriginalUser = $stmtIsOriginalUser->fetch(PDO::FETCH_ASSOC);
+            $userHasAlreadyReposted = $resultIsOriginalUser['user'] == $user;
+
+            //check if user has reposted once
+            if(!$userHasAlreadyReposted)
+                $userHasAlreadyReposted = self::userHasAlreadyReposted($result['OriginalPoster'], $user);
+            if (!$userHasAlreadyReposted) {
+                $stmt = SQL::query("INSERT INTO posts (content, user, parentPost, datePosted) 
                                       SELECT content, :user, :post, :datePosted FROM posts WHERE id = :post",
-                array(
-                    "post"      => $post,
-                    "user"      => $user,
-                    "datePosted"=> date('Y-m-d H:i:s')
-            ));
+                    array(
+                        "post" => $post,
+                        "user" => $user,
+                        "datePosted" => date('Y-m-d H:i:s')
+                    ));
+            }
             $stmt = self::getData($post);
-            if($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo $result['Reposts'];
             }
         }
+    }
+
+    public static function userHasAlreadyReposted($postID, $forbiddenUsername)
+    {
+        $stmt = SQL::query("SELECT id, user FROM posts WHERE parentPost = :post", array("post" => $postID));
+
+        while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($result['user'] == $forbiddenUsername) {
+                return true;
+            } else {
+                if(self::userHasAlreadyReposted($result['id'], $forbiddenUsername))
+                    return true;
+            }
+        }
+        return false;
     }
 
     public static function getPoster($postID)

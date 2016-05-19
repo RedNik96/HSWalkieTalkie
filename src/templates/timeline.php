@@ -1,5 +1,6 @@
 <link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<script type="text/javascript" src="/HSWalkieTalkie/src/public/js/timeline.js"></script>
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/poststylesheet.css">
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/postwritestylesheet.css">
 
@@ -45,12 +46,14 @@ if (!isset($cashtag)) {?>
                         ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
                     }
                     if(count($post['imgs'] > 0)) echo "<br>";
-                    print str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
+                    $content = str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
+                    $content = Search::user($content);
+                    print $content;
                     ?>
                 </div>
             <div class="postfooter">
                 <div class="share">
-                    <button class="btn btn-primary" name="btnRepost"
+                    <button class="btn btn-primary repost" name="btnRepost"
                             data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
                             data-user="<?= $_SESSION['user']; ?>"
                             data-post="<?= $post['postID']; ?>"
@@ -86,44 +89,3 @@ if (!isset($cashtag)) {?>
 <? else: ?>
     Keine Posts vorhanden.
 <? endif; ?>
-
-
-<script type="text/javascript">
-    $('.btn-warning,.btn-danger').on('click', function(){
-        var url = $(this).data('url');
-        var user = $(this).data('user');
-        var post = $(this).data('post');
-        var vote = $(this).data('vote');
-
-        var parent = (this).parentNode;
-        var span = parent.getElementsByTagName("span")[0];
-
-        $.post(url,
-        {
-            voter: user,
-            post: post,
-            vote: vote
-        }, function(numberOfVotes){
-
-                span.innerHTML = "$" + numberOfVotes.trim();
-            });
-    });
-
-    $('.btn-primary').on('click', function(){
-        var url = $(this).data('url');
-        var user = $(this).data('user');
-        var post = $(this).data('post');
-
-        var parent = (this).parentNode;
-        var span = parent.getElementsByTagName("span")[0];
-
-        $.post(url,
-        {
-            user: user,
-            post: post
-        }, function(numberOfReposts){
-            span.innerHTML = numberOfReposts.trim();
-            location.reload();
-        });
-    });
-</script>

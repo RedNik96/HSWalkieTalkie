@@ -360,7 +360,7 @@
                         </div>
                         <div class="form-group">
                             <label class=" col-lg-6"></label>
-                            <label class=" col-lg-6">*Dieses Passwort muss im Klartext gespeichert werden<br>Benutze also nie ein Passwort, welches du auch woanders verwendest</label>
+                            <label class=" col-lg-6">*Dieses Passwort muss im Klartext gespeichert werden<br>Benutze also nie ein Passwort, welches du auch an anderer Stelle verwendest</label>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-6 control-label"></label>

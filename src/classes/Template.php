@@ -4,13 +4,13 @@ class Template {
         // define valid args and their defaults
         $template_top = 'menuBar';
         $template_left = 'rss';
-        $template_right = 'rightBar';
+        $template_right = 'statistics';
         // extraction magic!
         extract( $templates, EXTR_IF_EXISTS );
         // registered passed variables as local variables
         extract($data);
         //Daten für die Statistiken werden geholt --> je nachdem wie der toggle-Button steht
-        if ($template_right==='rightBar') {
+        if ($template_right==='statistics') {
             if (isset($_SESSION['toggle'])&&$_SESSION['toggle']==="true") {
                 $stats=StatisticHandler::getAllStats();
             } else {
