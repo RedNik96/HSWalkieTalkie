@@ -54,7 +54,7 @@ Class TimelineHandler {
             array(
               'postID' => $result['postID']
             )
-        )
+        );
 
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],

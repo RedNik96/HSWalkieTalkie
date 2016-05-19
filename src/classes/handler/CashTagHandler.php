@@ -35,12 +35,13 @@ class CashTagHandler
             }
 
             $stmt3 = SQL::query(
-              "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-              FROM comment as C, user as U
-              WHERE C.postID = :postID AND C.userID = U.username
-              ORDER BY C.commentTime DESC",
-              array(
-                'postID' => $postID)
+                "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+                FROM comment as C, user as U
+                WHERE C.postID = :postID AND C.userID = U.username
+                ORDER BY C.commentTime DESC",
+                array(
+                  'postID' => $result['postID']
+                )
             );
 
             // erzeugt ein Array mit allen Infos zu jedem Post das an das Template gegeben wird
