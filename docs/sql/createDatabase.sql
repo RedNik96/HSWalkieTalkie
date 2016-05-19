@@ -21,6 +21,7 @@ CREATE TABLE `user` (
   `firstName` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `lastName` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `feedURL` varchar(255) COLLATE utf8mb4_bin,
+  `feedPassword` varchar(255) COLLATE utf8mb4_bin,
   `email` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `picture` varchar(255) COLLATE utf8mb4_bin DEFAULT "profile_default.png",
   `birthday` DATE NOT NULL,

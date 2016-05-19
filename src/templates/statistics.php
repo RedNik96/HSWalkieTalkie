@@ -3,7 +3,6 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-
     <legend>Statistiken</legend>
     <span>Statistiken anzeigen für </span>
 
@@ -155,42 +154,3 @@
         </div>
     </div>
 
-<script type="text/javascript">
-    $('.btn-warning,.btn-danger').on('click', function(){
-        var url = $(this).data('url');
-        var user = $(this).data('user');
-        var post = $(this).data('post');
-        var vote = $(this).data('vote');
-
-        var parent = (this).parentNode;
-        var span = parent.getElementsByTagName("span")[0];
-
-        $.post(url,
-            {
-                voter: user,
-                post: post,
-                vote: vote
-            }, function(numberOfVotes){
-
-                span.innerHTML = "$" + numberOfVotes.trim();
-            });
-    });
-
-    $('.btn-primary').on('click', function(){
-        var url = $(this).data('url');
-        var user = $(this).data('user');
-        var post = $(this).data('post');
-
-        var parent = (this).parentNode;
-        var span = parent.getElementsByTagName("span")[0];
-
-        $.post(url,
-            {
-                user: user,
-                post: post
-            }, function(numberOfReposts){
-                span.innerHTML = numberOfReposts.trim();
-                location.reload();
-            });
-    });
-</script>

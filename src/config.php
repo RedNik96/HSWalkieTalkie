@@ -2,26 +2,6 @@
 
 // Config inspiriert von: http://code.tutsplus.com/tutorials/organize-your-next-php-project-the-right-way--net-5873
 
-$config = array(
-    "db" => array(
-        "db1" => array(
-            "dbname" => "hsw",
-            "username" => "dbUser1",
-            "password" => "pa$$",
-            "host" => "localhost"
-        ),
-        "db2" => array(
-            "dbname" => "hsw",
-            "username" => "dbUser2",
-            "password" => "pa$$",
-            "host" => "localhost"
-        )
-    ),
-    "urls" => array(
-        "baseUrl" => "http://HSW.com"
-    )
-);
-
 /*
     Creating constants for heavily used paths makes things a lot easier.
     ex. require_once(LIBRARY_PATH . "Paginator.php")

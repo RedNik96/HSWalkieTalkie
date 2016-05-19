@@ -1,4 +1,19 @@
 use hswalkietalkie;
+
+CREATE PROCEDURE getOriginalPoster (IN pPostID int(11))
+BEGIN
+    DECLARE val, lParentPost, postId INT;
+
+    SET val = (SELECT parentPost FROM posts WHERE id = pPostID);
+    WHILE (val > 0) DO
+    	SET lParentPost = val;
+    	SET val = (SELECT parentPost FROM posts WHERE id = lParentPost);
+    END WHILE;
+	SELECT lParentPost As OriginalPoster;
+END;
+
+COMMIT;
+
 INSERT INTO city (zip, city) VALUES
 ('10115', 'Berlin'),
 ('10117', 'Berlin'),
