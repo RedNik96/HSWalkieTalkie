@@ -96,7 +96,7 @@ class SettingsHandler {
 
             $result=$stmt->fetch(PDO::FETCH_ASSOC);
             if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
-                unlink(IMG_PATH . "\\" . "profile" . $result['picture']);
+                unlink(IMG_PATH . "/" . "profile/" . $result['picture']);
             }
             //der Pfad des Profilbildes wird auf den Default gesetzt
             $stmt = SQL::query("UPDATE user SET picture=DEFAULT WHERE username=:user", array(
@@ -114,14 +114,14 @@ class SettingsHandler {
 
                 $result=$stmt->fetch(PDO::FETCH_ASSOC);
                 if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
-                    unlink(IMG_PATH . "\\" . "profile" . $result['picture']);
+                    unlink(IMG_PATH . "/" . "profile/" . $result['picture']);
                 }
                 //es wird der Pfad zum Profilbild generiert
                 $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
-                $target_file = IMG_PATH . "\\" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
+                $target_file = IMG_PATH . "/" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
                 //der Ordner für die Profilbilder wird angelegt falls er noch nicht existiert
-                if(!file_exists(IMG_PATH. "\\profile"))
-                    mkdir(IMG_PATH. "\\profile");
+                if(!file_exists(IMG_PATH. "/profile"))
+                    mkdir(IMG_PATH. "/profile");
                 //das hochgeladene Foto wird gespeichert
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
                     SQL::query("UPDATE user SET picture=:picture WHERE username=:user", array(
@@ -132,7 +132,7 @@ class SettingsHandler {
                 }
             }
         }
-
+        
         //die Settingsseite wird gerenderet
         global $router;
         header("Location: " . $router->generate("settingsGet",array('tab' => 0)));

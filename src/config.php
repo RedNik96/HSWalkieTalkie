@@ -16,10 +16,10 @@ defined("CLASSES_PATH")
     or define("CLASSES_PATH", realpath(dirname(__FILE__) . '/classes'));
 
 defined("CSS_PATH")
-or define("CSS_PATH", "/HSWalkieTalkie/src/public/css");
+or define("CSS_PATH",  "/HSWalkieTalkie/src/public/css");
 
 defined("IMG_PATH")
-    or define("IMG_PATH", "/HSWalkieTalkie/src/img");
+    or define("IMG_PATH",  realpath(dirname(__FILE__) . "/img"));
 
 /*
     Error reporting.
