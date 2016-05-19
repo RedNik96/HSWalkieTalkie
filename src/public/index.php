@@ -122,7 +122,6 @@
         StatisticHandler::toggle();
     }, 'statisticsTogglePost');
 
-
     $match = $router->match();
 
     //Wenn keine Anmeldung vorliegt, soll direkt auf die Login-Seite verlinkt werden
@@ -153,5 +152,5 @@
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {
-    	header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        ErrorHandler::get();
     }

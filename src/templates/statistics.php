@@ -10,6 +10,7 @@
         <script>
             $(function() {
                 $('#toggle-event').change(function() {
+                    $('#toggle-event').bootstrapToggle('disable');
                     $.post('/HSWalkieTalkie/src/public/statisticsToggle/',
                         {
                             toggle: ""+$(this).prop('checked')
