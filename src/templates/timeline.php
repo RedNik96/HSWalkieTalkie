@@ -46,7 +46,9 @@ if (!isset($cashtag)) {?>
                         ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
                     }
                     if(count($post['imgs'] > 0)) echo "<br>";
-                    print str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
+                    $content = str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
+                    $content = Search::user($content);
+                    print $content;
                     ?>
                 </div>
             <div class="postfooter">
