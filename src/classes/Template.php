@@ -17,6 +17,9 @@ class Template {
                 $stats=StatisticHandler::getFriendsStats();
             }
         }
+        if ($template_left === 'rss'){
+            $rss_article=RSSHandler::getRssfeed();
+        }
         // top
         if ($template_top == null) {
             $content_top = null;
