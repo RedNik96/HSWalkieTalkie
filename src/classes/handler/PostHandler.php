@@ -75,7 +75,8 @@ class PostHandler
               (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
               (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
             FROM posts AS P, user AS U
-            WHERE U.username = P.user AND P.id = :id",
+            WHERE U.username = P.user AND P.id = :id
+            ORDER BY P.datePosted DESC",
             array(
                 "id" => $id
         ));

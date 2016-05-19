@@ -22,4 +22,6 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * CSS Dateien abgleichen. z. B. wird im Login der Benutzername grau gedruckt, das Passwort nicht, weil in Layout css ein entsprechendes css gegeben ist. //erledigt xgwsdfe
 * 404 Landing Page //erledigt xgadelf
 * kein Retweet von eigenen Posts //erledigt xgwsdfe
-* im Profilhandler "Followen" kommentieren //xgwsdfe
+* Vote-Button deaktivieren, sobald einer gevotet hat //xgwsdfe
+* SettingsHandler - RegisterHandler -> Funktionen auslagern in User.
+* SQL Inserts erst durchführen, wenn Insert auch sicher fehlschlägt = vorher Querys durchführen.

@@ -32,13 +32,17 @@ class Session {
                 ));
 
                 if($iban) {
-                    //query that adds iban, if it not yet exists
-                    $stmt2 = SQL::query("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)",
-                        array(
-                            'iban'      => $iban,
-                            'bic'       => $bic,
-                            'username'  => $username
-                    ));
+                    //Abfrage, ob IBAN noch nicht existiert
+                    $stmt2 = SQL::query("SELECT * FROM account where iban = :iban", array( "iban" => $iban));
+                    //Wenn nicht, kann Konto hinzugefüggt werden.
+                    if(!$stmt2->fetch()) {
+                        $stmt2 = SQL::query("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)",
+                            array(
+                                'iban' => $iban,
+                                'bic' => $bic,
+                                'username' => $username
+                            ));
+                    }
                 }
 
                 $_SESSION['logged_in']  = true;

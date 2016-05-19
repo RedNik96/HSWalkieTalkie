@@ -20,7 +20,8 @@ Class TimelineHandler {
           (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
         (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
       FROM posts AS P, user AS U
-      WHERE username = :username AND P.user = :username",
+      WHERE username = :username AND P.user = :username
+      ORDER BY P.datePosted DESC",
       array(
           'username' => $user
       ));
