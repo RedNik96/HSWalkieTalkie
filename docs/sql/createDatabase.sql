@@ -109,6 +109,7 @@ CREATE TABLE `comment` (
   `userID` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `postID` int(11) NOT NULL,
   `comment` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `commentTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userID`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`postID`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE

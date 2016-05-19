@@ -42,15 +42,29 @@ Class TimelineHandler {
         ));
         $imgs = array();
         $imgCounter = 0;
+
         while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             $imgs[$imgCounter] = $img['filename'];
             $imgCounter = $imgCounter + 1;
         }
+
         if (is_null($result['picture'])) {
             $result['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
         } else {
             $result['picture'] = "/HSWalkieTalkie/src/img/profile/" . $result['picture'];
         }
+
+        // TODO: auf SQL.php umstellen
+        $stmt3 = $dbh->prepare(
+          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+          FROM comment as C, user as U
+          WHERE C.postID = :postID AND C.userID = U.username
+          ORDER BY C.commentTime DESC
+          LIMIT 3");
+        $stmt3->execute(array(
+            'postID' => $result['postID']
+        ));
+
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
             'username'  => $result['username'],
@@ -61,7 +75,12 @@ Class TimelineHandler {
             'votes'     => $result['Votes'],
             'reposts'   => $result['Reposts'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
-            'imgs'      => $imgs
+            'imgs'      => $imgs,
+            'comments'  => array(
+                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
+                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
+                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC))
+            )
         );
     }
     return $posts;
@@ -104,6 +123,18 @@ Class TimelineHandler {
         } else {
             $result['picture'] = "/HSWalkieTalkie/src/img/profile/" . $result['picture'];
         }
+
+        // TODO: auf SQL.php umstellen
+        $stmt3 = $dbh->prepare(
+          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+          FROM comment as C, user as U
+          WHERE C.postID = :postID AND C.userID = U.username
+          ORDER BY C.commentTime DESC
+          LIMIT 3");
+        $stmt3->execute(array(
+            'postID' => $result['postID']
+        ));
+
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
             'username'  => $result['username'],
@@ -114,9 +145,15 @@ Class TimelineHandler {
             'votes'     => $result['Votes'],
             'reposts'   => $result['Reposts'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
-            'imgs'      => $imgs
+            'imgs'      => $imgs,
+            'comments'  => array(
+                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
+                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
+                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC))
+            )
         );
     }
+    var_dump($posts);
     return $posts;
   }
 }

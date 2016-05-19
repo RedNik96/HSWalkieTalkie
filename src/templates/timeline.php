@@ -21,7 +21,7 @@
 
 <? if(!empty($posts)): ?>
     <? foreach($posts as $post): ?>
-        <div class = "post">
+        <div class="post" data-id="<?= $post['postID'] ?>">
         <!--<form class="post">-->
             <div class="postheader">
                 <div class="postauthor">
@@ -46,11 +46,18 @@
                 ?>
                 <!--Test <br> $cashtag-->
             </div>
-            <div class="postfooter">
+            <div class="postfooter container-fluid">
+
+                <div class="comment col-xs-4">
+                    <button type="button" class="btn btn-primary btn-comment">
+                        <i class="fa fa-comments" aria-hidden="true"></i> Kommentieren
+                    </button>
+                </div>
+
                 <?php
                     if($post['username'] != $_SESSION['user']):
                 ?>
-                <div class="share">
+                <div class="share col-xs-4">
                     <button class="btn btn-primary" name="btnRepost"
                             data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
                             data-user="<?= $_SESSION['user']; ?>"
@@ -61,13 +68,12 @@
                 </div>
                 <?php endif; ?>
 
-                <div class="vote">
+                <div class="vote col-xs-4">
                     <button class="btn btn-danger"
                             data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
                             data-user="<?= $_SESSION['user']; ?>"
                             data-post="<?= $post['postID']; ?>"
-                            data-vote="0"
-                    >
+                            data-vote="0">
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </button>
                     <span class="cash">$<?= $post['votes']; ?></span>
@@ -75,12 +81,49 @@
                             data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
                             data-user="<?= $_SESSION['user']; ?>"
                             data-post="<?= $post['postID']; ?>"
-                            data-vote="1"
-                    >
+                            data-vote="1">
                         <i class="fa fa-chevron-up" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
+            <div class="comments container-fluid">
+                <? foreach($post['comments'] as $comment):
+                      if($comment):
+                ?>
+                <div class="comment-container row">
+                    <div class="row header">
+                      <div class="col-xs-offset-1 col-xs-1 picture">
+                        <img src="<?= "/HSWalkieTalkie/src/img/profile/" . $comment['picture'];?>" class="img-responsive img-rounded"/>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="name">
+                          <?= $comment['firstName'] ?>
+                          <?= $comment['lastName'] ?>
+                        </div>
+                        <div class="username">
+                          @<?= $comment['username'] ?>
+                        </div>
+                      </div>
+                      <div class="col-xs-4 time">
+                        <?= $comment['commentTime'] ?>
+                      </div>
+                    </div>
+                    <div class="row content">
+                        <div class="col-xs-offset-1 col-xs-10 comment">
+                            <?= $comment['comment'] ?>
+                        </div>
+                    </div>
+                  </div>
+                <? else:
+                      if(key($post['comments']) == 0):?>
+                          <div class="noComments">
+                            Es sind aktuell noch keine Kommentare verfasst worden.
+                          </div>
+                    <? endif;
+                       break; ?>
+                <? endif; ?>
+              <? endforeach; ?>
+          </div>
         </div>
         <!--</form>-->
     <?php endforeach; ?>
@@ -105,7 +148,6 @@
             post: post,
             vote: vote
         }, function(numberOfVotes){
-
                 span.innerHTML = "$" + numberOfVotes.trim();
             });
     });

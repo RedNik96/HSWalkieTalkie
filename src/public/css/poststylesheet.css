@@ -60,12 +60,33 @@
     margin-bottom: 10px;
 }
 
-.post .postfooter .share{
-    display: inline-block;
-    width: 57%;
+div.post div.postfooter {
+  margin-top: 1em;
 }
 
-.post .postfooter .vote{
-    display: inline-block;
-    width: 40%;
+.comments{
+  margin-top: 0.5em;
+}
+
+.comments .comment-container {
+  border-top: 1px solid grey;
+  padding: 0.5em;
+}
+
+.comments div.comment-container .header .picture {
+  padding: unset;
+  text-align: right;
+}
+
+.comments div.comment-container .header .date {
+  text-align: right;
+}
+
+.comments div.comment-container .content .comment {
+    padding-left: unset;
+}
+
+.comments div.noComments {
+  border-top: 1px solid grey;
+  padding: 0.5em;
 }
