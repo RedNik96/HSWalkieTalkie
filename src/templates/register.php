@@ -33,13 +33,13 @@
         <div class="form-group">
             <label for="password" class="col-lg-6 control-label">Passwort*</label>
             <div class="col-lg-6">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" maxlength="255" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Passwort" maxlength="255" required>
             </div>
         </div>
         <div class="form-group">
             <label for="confirmedPassword" class="col-lg-6 control-label">Passwort erneut eingeben*</label>
             <div class="col-lg-6">
-                <input type="password" class="form-control" id="confirmedPassword" name="confirmedPassword" placeholder="Password" maxlength="255" required>
+                <input type="password" class="form-control" id="confirmedPassword" name="confirmedPassword" placeholder="Passwort" maxlength="255" required>
             </div>
         </div>
         <div class="form-group">
