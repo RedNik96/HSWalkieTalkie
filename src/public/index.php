@@ -5,8 +5,7 @@
     // initialize variables
     $template_data = [];
     global $dbh;
-
-    #TODO: hier sollte das URL-Routing implementiert werden
+    
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
@@ -87,7 +86,7 @@
     }, 'registrierungGet');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
 
     $router->map('POST', '/register/', function () {
-      include(CLASSES_PATH . "/handler/registerHandler.php");
+        RegisterHandler::regsister();
     }, 'registrierungPost');
 
     $router->map('GET', '/profile/', function () {

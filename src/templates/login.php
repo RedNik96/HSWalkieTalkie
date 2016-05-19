@@ -44,7 +44,7 @@
             </div>
 
             <div class="register-link col-xs-offset-6">
-                <a href="<?= $router->generate('registrierungGet'); ?>">$Rich Bitch werden - Registieren</a>
+                <a href="<?= $router->generate('registrierungGet'); ?>">Jetzt registieren und reich werden!</a>
             </div>
         </fieldset>
     </form>
