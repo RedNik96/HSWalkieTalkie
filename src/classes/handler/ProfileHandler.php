@@ -108,11 +108,19 @@ Class ProfileHandler {
       $posts = TimelineHandler::getPostsAsArray($user);
     }
 
+    if ($user===$_SESSION['user']) {
+      $data = array(
+          'user_info' => $res,
+          'posts' => $posts
+      );
+    } else {
+      $data = array(
+          'user_info' => $res,
+          'posts' => $posts,
+          'cashtag' => true
+      );
+    }
 
-    $data = array(
-        'user_info' => $res,
-        'posts' => $posts
-    );
     return $data;
   }
 }

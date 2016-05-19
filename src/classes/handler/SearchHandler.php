@@ -6,7 +6,7 @@ class SearchHandler
         $stmt = SQL::query("SELECT firstName, lastName, username FROM user");
         $i=0;
         while ($result=$stmt->fetch()) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $response['names'][$i]=$result['username'];
             if (!(isset($response['fullNames']))||!(in_array($result['firstName']. " " . $result['lastName'],$response['fullNames']))) {
                 $response['fullNames'][$i]=$result['firstName']. " " . $result['lastName'];
@@ -16,7 +16,7 @@ class SearchHandler
         $stmt = SQL::query("SELECT content FROM posts WHERE content LIKE '%$%'");
         $i=0;
         while ($result=$stmt->fetch()) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $content=$result['content'];
             $cashtags=Search::cashtag($content);
             foreach ($cashtags as $tag) {
@@ -48,7 +48,7 @@ class SearchHandler
                         'lastname' => $lastName
                     ));
                     $result=$stmt->fetch();
-                    EscapeUtil::escape_array($result);
+                    EscapeUtil::escapeArray($result);
                     $username=$result['username'];
                     $i=1;
                     while ($result=$stmt->fetch()) {

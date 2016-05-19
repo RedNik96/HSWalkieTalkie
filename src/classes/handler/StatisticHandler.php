@@ -28,7 +28,7 @@ class StatisticHandler {
         $richestUsers = array();
         $i=0;
         while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $richestUsers[$i] = array(
                 'profilePicture' => $result['picture'],
                 'username' => $result['username'],
@@ -48,7 +48,7 @@ class StatisticHandler {
 
         $trendingTags = array();
         while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escape_array($trendingTags);
+            EscapeUtil::escapeArray($trendingTags);
             $trendingTags[$result['username']] = array(
                 'username' => $result['username'],
                 'firstName' => $result['firstName'],
@@ -71,7 +71,7 @@ class StatisticHandler {
 
         $bestPost = array();
         while($result = $stmtBestPost->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $bestPost = array(
                 'postID' => $result['postID'],
                 'firstName' => $result['firstName'],
@@ -107,7 +107,7 @@ class StatisticHandler {
         $richestUsers = array();
         $i=0;
         while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $richestUsers[$i] = array(
                 'profilePicture' => $result['picture'],
                 'username' => $result['username'],
@@ -132,7 +132,7 @@ class StatisticHandler {
 
         $trendingTags = array();
         while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escape_array($trendingTags);
+            EscapeUtil::escapeArray($trendingTags);
             $trendingTags[$result['username']] = array(
                 'username' => $result['username'],
                 'firstName' => $result['firstName'],
@@ -156,7 +156,7 @@ class StatisticHandler {
         
         $bestPost = array();
         while($result = $stmtBestPost->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $bestPost = array(
                 'postID' => $result['postID'],
                 'firstName' => $result['firstName'],
