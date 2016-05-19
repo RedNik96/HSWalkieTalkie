@@ -7,9 +7,9 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 >Der duale Student setzt nur
 >noch Cashtags.
 >
->$RitchBitch
->$moneymoneymoney
->$blingbling
+> \$RitchBitch
+> \$moneymoneymoney
+> \$blingbling
 
 #ToDos
 * Kommentare //macht xgwsnde
