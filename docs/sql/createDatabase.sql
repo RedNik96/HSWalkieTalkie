@@ -104,7 +104,7 @@ CREATE TABLE `round` (
   FOREIGN KEY (`duell`) REFERENCES duell (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `kommentar` (
+CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userID` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `postID` int(11) NOT NULL,
