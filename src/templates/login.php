@@ -7,7 +7,7 @@
     <form action="<?= $router->generate('loginPost'); ?>" method="post" class="form-horizontal">
         <fieldset>
             <legend>LogIn</legend>
-            <div class="username">
+            <div>
                 <div class="form-group">
                     <label for="username" class="col-sm-4 control-label">
                         Benutzername:
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="password">
+            <div>
                 <div class="form-group">
                     <label for="password" class="col-sm-4 control-label">
                         Passwort:
