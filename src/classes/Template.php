@@ -9,6 +9,14 @@ class Template {
         extract( $templates, EXTR_IF_EXISTS );
         // registered passed variables as local variables
         extract($data);
+        //Daten für die Statistiken werden geholt --> je nachdem wie der toggle-Button steht
+        if ($template_right==='rightBar') {
+            if (isset($_SESSION['toggle'])&&$_SESSION['toggle']==="true") {
+                $stats=StatisticHandler::getAllStats();
+            } else {
+                $stats=StatisticHandler::getFriendsStats();
+            }
+        }
         // top
         if ($template_top == null) {
             $content_top = null;
@@ -34,6 +42,7 @@ class Template {
             include(TEMPLATES_PATH . '/' . $template_right .'.php');
             $content_right = ob_get_clean();
         }
+
         // center
         ob_start();
         include(TEMPLATES_PATH . '/' . $template_center .'.php');

@@ -3,13 +3,12 @@
 class StatisticHandler {
 
     public static function toggle(){
-        if( $_POST['toggle'] === "true"){
-           $arr=self::getAllStats();
+        if ($_POST['toggle']==="true") {
+            $_SESSION['toggle']="true";
         } else {
-            $arr=self::getFriendsStats();
+            $_SESSION['toggle']="false";
         }
-        header('Content-Type: application/json');
-        echo json_encode($arr);
+        echo $_SESSION['toggle'];
     }
 
     //Statistiken für die Follower

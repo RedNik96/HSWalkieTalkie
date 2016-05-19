@@ -7,15 +7,20 @@
     <legend>Statistiken</legend>
     <span>Statistiken anzeigen für </span>
 
+        <input name="toggle" id="toggle-event" data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox" <? if (isset($_SESSION['toggle'])&&($_SESSION['toggle']==="true")) { echo "checked"; }?>>
+        <script>
+            $(function() {
+                $('#toggle-event').change(function() {
+                    $.post('/HSWalkieTalkie/src/public/statisticsToggle/',
+                        {
+                            toggle: ""+$(this).prop('checked')
+                        },function (data) {
+                        location.reload();
+                    });
+                })
+            });
+        </script>
 
-    <input id="toggle-event" data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox">
-    <script>
-        $(function() {
-            $('#toggle-event').change(function() {
-                location.reload();
-            })
-        });
-    </script>
 
 
     <!--REICHSTER BENUTZER -------------------------------------------------------------------------------------   -->
