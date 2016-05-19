@@ -47,22 +47,7 @@ class StatisticHandler {
         }
 
         //TRENDING CASHTAGS UNTER FREUNDEN------------------------------------------------------------------------------
-        $stmtTrendingTags = SQL::query("
-              SELECT U.firstName, U.lastName, U.username
-              FROM user AS U
-              LIMIT 3
-              ");
-
-        //Rückgabe der beliebtesten Cashtags in einem Array speichern
-        $trendingTags = array();
-        while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escapeArray($trendingTags);
-            $trendingTags[$result['username']] = array(
-                'username' => $result['username'],
-                'firstName' => $result['firstName'],
-                'lastName' => $result['lastName']
-            );
-        }
+        $trendingTags = self::getTrendingCashtags(true);
 
         //BESTER POST DER FREUNDE--------------------------------------------------------------------------------------
         $stmtBestPost = SQL::query("
@@ -132,27 +117,7 @@ class StatisticHandler {
         }
 
         //TRENDING CASHTAGS------------------------------------------------------------------------------
-        $stmtTrendingTags = SQL::query("
-              SELECT U.firstName, U.lastName, U.username
-              FROM user AS U
-              LIMIT 3
-              ");
-
-        $sqlQuery = "SELECT U.firstName, U.lastName, U.username
-                      FROM user AS U
-                      LIMIT 3";
-        $stmtTrendingTags = SQL::query($sqlQuery);
-
-        //Rückgabe der beliebtesten Cashtags in einem Array speichern
-        $trendingTags = array();
-        while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
-            EscapeUtil::escapeArray($trendingTags);
-            $trendingTags[$result['username']] = array(
-                'username' => $result['username'],
-                'firstName' => $result['firstName'],
-                'lastName' => $result['lastName']
-            );
-        }
+        $trendingTags = self::getTrendingCashtags(false);
 
         //BESTER POST--------------------------------------------------------------------------------------
         $stmtBestPost = SQL::query("
@@ -190,5 +155,50 @@ class StatisticHandler {
             'trendingTags' => $trendingTags,
             'bestPost' => $bestPost
         );
+    }
+
+    public static function getTrendingCashtags($searchInFriendsOnly)
+    {
+        $cashtags = array();
+
+        if($searchInFriendsOnly) {
+            $stmt = SQL::query("SELECT p.id FROM posts AS p LEFT JOIN follower AS f ON p.user = f.followed WHERE (f.follower = :user) OR p.user = :user",
+                array('user' => $_SESSION['user']));
+        } else {
+            $stmt = SQL::query("SELECT id FROM posts");
+        }
+
+        while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+            $stmtOriginalPost = SQL::query("CALL getOriginalPoster(:post);", array("post" => $result["id"]));
+            $resultOriginalPost = $stmtOriginalPost->fetch(PDO::FETCH_ASSOC);
+
+            SQL::query("SELECT 1");
+
+            $stmtCashtags = SQL::query("SELECT cashtag FROM cashtagpost WHERE postId = :post",
+                array("post" => $resultOriginalPost['OriginalPoster']));
+
+            while ($resultCashtag = $stmtCashtags->fetch(PDO::FETCH_ASSOC)) {
+                if (!isset($cashtags[$resultCashtag['cashtag']])) {
+                    $cashtags[$resultCashtag['cashtag']] = 0;
+                }
+                $cashtags[$resultCashtag['cashtag']]++;
+            }
+        }
+        
+        arsort($cashtags);
+
+        $i = 0;
+        $trendingTags = array();
+        foreach ($cashtags as $key => $value){
+
+            $trendingTags[$i++] = array(
+                "cashtag"   => $key,
+                "amount"    => $value
+            );
+            if($i == 3)
+                break;
+        }
+        return $trendingTags;
     }
 }

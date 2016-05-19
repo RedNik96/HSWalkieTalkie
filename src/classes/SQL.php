@@ -19,16 +19,16 @@ class SQL
     public static function createConnection()
     {
         global $dbh;
-
+        global $settings;
         try {
             // create connection to database
-            $dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', '',
+            $dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', $settings['dbuser'], $settings['dbpasswd'],
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
             );
         }catch (Exception $e)
         {
             if(strpos($e->getMessage(),"Unknown database 'hswalkietalkie'") !== false) {
-                $dbh = new PDO('mysql:host=localhost', 'root', '');
+                $dbh = new PDO('mysql:host=localhost', $settings['dbuser'], $settings['dbpasswd']);
                 $pathToClasses = dirname(__FILE__);
                 $pathToSrc = substr($pathToClasses, 0, strrpos($pathToClasses, '\\'));
                 $pathToHSWalkieTalkie = substr($pathToSrc, 0, strrpos($pathToSrc, '\\'));
@@ -54,7 +54,8 @@ class SQL
             $stmt = $dbh->prepare($preparedSQL);
             if($stmt->execute($parameterArr)) {
                 return $stmt;
-            } else {
+            } else if($preparedSQL != "SELECT 1") {
+
                 ErrorHandler::get();
                 die();
             }

@@ -13,7 +13,7 @@ Class ProfileHandler {
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 
-  /** 
+  /**
    * @param $user username des Users der angezeigt werden soll
    * das Profil des mitgegebenen Users wird gerendert
    */
@@ -51,7 +51,7 @@ Class ProfileHandler {
    */
   public static function showUserPost() {
     $data=self::getUser($_POST['username']);
-   
+
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 

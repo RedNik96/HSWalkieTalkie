@@ -5,7 +5,7 @@
     // initialize variables
     $template_data = [];
     global $dbh;
-    
+
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
@@ -73,7 +73,7 @@
     $router->map('GET', '/notFound/', function () {
         SearchHandler::notFound();
     }, 'notFoundGet');
-    
+
     $router->map('GET', '/showMoreUser/[*:name]/', function ($name) {
         ProfileHandler::showMoreUser($name);
     }, 'showMoreUserGet');
@@ -113,11 +113,11 @@
     $router->map('POST', '/newpost/', function() {
         PostHandler::create();
     }, "newpostPost");
-    
+
     $router->map('POST', '/repost/', function() {
         PostHandler::repost();
     }, "repostPost");
-    
+
     $router->map('POST', '/vote/', function() {
         PostHandler::vote();
     }, 'votePost');
@@ -125,6 +125,14 @@
     $router->map('POST', '/statisticsToggle/', function(){
         StatisticHandler::toggle();
     }, 'statisticsTogglePost');
+
+    $router->map('GET', '/post/[i:id]/', function($id) {
+        PostHandler::get($id);
+    }, 'viewPostGet');
+
+    $router->map('POST', '/post/[i:id]/', function($id) {
+        PostHandler::post($id);
+    }, 'viewPostPost');
 
     $match = $router->match();
 

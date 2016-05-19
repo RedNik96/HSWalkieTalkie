@@ -67,8 +67,6 @@ class PostHandler
 
     public static function getData($id)
     {
-        global $dbh;
-
         $stmt = SQL::query(
             "SELECT P.id AS postID, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
               ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
@@ -86,7 +84,6 @@ class PostHandler
 
     public static function vote()
     {
-        global $dbh;
         extract($_POST);
         if(isset($voter) AND isset($post) AND isset($vote)) {
             $voteExists = false;
@@ -138,7 +135,7 @@ class PostHandler
             if(!$userHasAlreadyReposted)
                 $userHasAlreadyReposted = self::userHasAlreadyReposted($result['OriginalPoster'], $user);
             if (!$userHasAlreadyReposted) {
-                $stmt = SQL::query("INSERT INTO posts (content, user, parentPost, datePosted) 
+                $stmt = SQL::query("INSERT INTO posts (content, user, parentPost, datePosted)
                                       SELECT content, :user, :post, :datePosted FROM posts WHERE id = :post",
                     array(
                         "post" => $post,
@@ -177,4 +174,77 @@ class PostHandler
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['username'];
     }
+
+
+      public static function get($postID) {
+          $stmt = SQL::query(
+              "SELECT P.id AS postID, P.parentPost As postIDParent, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
+                  ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
+                    (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
+                    (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
+              FROM posts AS P, user AS U
+              WHERE P.id = :postID AND P.user = U.username",
+              array(
+                'postID' => $postID)
+              );
+
+          $result = EscapeUtil::escapeArrayReturn($stmt->fetch(PDO::FETCH_ASSOC));
+
+          $stmt2 = SQL::query(
+              "SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent",
+              array(
+                'pid'       => $result['postID'],
+                'pidParent' => $result['postIDParent'])
+          );
+
+          $imgs = array();
+          while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+              $imgs[] = $img['filename'];
+          }
+
+          $stmt3 = SQL::query(
+            "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+            FROM comment as C, user as U
+            WHERE C.postID = :postID AND C.userID = U.username
+            ORDER BY C.commentTime DESC",
+            array(
+              'postID' => $postID)
+          );
+
+          $data = array(
+            'posts' => array(
+              array(
+                'postID'    => $result['postID'],
+                'username'  => $result['username'],
+                'firstName' => $result['firstName'],
+                'lastName'  => $result['lastName'],
+                'picture'   => $result['picture'],
+                'content'   => $result['content'],
+                'votes'     => $result['Votes'],
+                'reposts'   => $result['Reposts'],
+                'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
+                'imgs'      => $imgs,
+                'comments'  => $stmt3
+              )
+            ),
+            'allowComment' => true
+          );
+
+          Template::render('timeline', $data);
+      }
+
+      public static function post($postID) {
+          global $router;
+
+          $stmt = SQL::query(
+              "INSERT INTO comment (userID, postID, comment) VALUES (:userID, :postID, :comment)",
+              array(
+                  'postID' => $postID,
+                  'userID' => $_SESSION['user'],
+                  'comment' => $_POST['comment']
+              )
+          );
+
+          header('Location: ' . $router->generate('viewPostGet', array('id'=>$postID)));
+      }
 }
