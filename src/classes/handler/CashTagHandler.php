@@ -16,7 +16,7 @@ class CashTagHandler
                 (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
               (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
             FROM posts AS P, user AS U
-            WHERE (U.username = P.user) AND ((P.content REGEXP CONCAT('\\\\$', :cashtag, '$')) OR 
+            WHERE (U.username = P.user) AND ((P.content REGEXP CONCAT('\\\\$', :cashtag, '$')) OR
               (P.content REGEXP CONCAT('\\\\$', :cashtag, '[ |\r|\\\\$]+')))",
             array(
                 'cashtag' => $cashtag
@@ -30,11 +30,19 @@ class CashTagHandler
                 'pid' => $result['postID']
             ));
             $imgs = array();
-            $imgCounter = 0;
             while ($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                $imgs[$imgCounter] = $img['filename'];
-                $imgCounter = $imgCounter + 1;
+                $imgs[] = $img['filename'];
             }
+
+            $stmt3 = SQL::query(
+              "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+              FROM comment as C, user as U
+              WHERE C.postID = :postID AND C.userID = U.username
+              ORDER BY C.commentTime DESC",
+              array(
+                'postID' => $postID)
+            );
+
             // erzeugt ein Array mit allen Infos zu jedem Post das an das Template gegeben wird
             $posts[$result['postID']] = array(
                 'postID' => $result['postID'],
@@ -46,7 +54,8 @@ class CashTagHandler
                 'votes' => $result['Votes'],
                 'reposts' => $result['Reposts'],
                 'datePosted' => date('d.m.Y H:i:s', strtotime($result['datePosted'])),
-                'imgs' => $imgs
+                'imgs' => $imgs,
+                'comments'  => $stmt3
             );
         }
         $data = array(
