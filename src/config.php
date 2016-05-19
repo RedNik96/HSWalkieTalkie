@@ -44,7 +44,6 @@ require_once (CLASSES_PATH . "/handler/RSSHandler.php");
 require_once (CLASSES_PATH . "/Search.php");
 require_once (CLASSES_PATH . "/handler/SearchHandler.php");
 require_once (CLASSES_PATH . "/handler/SettingsHandler.php");
-require_once (CLASSES_PATH . "/Session.php");
 require_once (CLASSES_PATH . "/SQL.php");
 require_once (CLASSES_PATH . "/handler/StatisticHandler.php");
 require_once (CLASSES_PATH . "/Template.php");

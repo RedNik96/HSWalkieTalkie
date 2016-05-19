@@ -5,3 +5,8 @@
 .info-row {
   margin-top: 1em;
 }
+
+#cash {
+  margin-top: 10px;
+  font-weight: bold;
+}

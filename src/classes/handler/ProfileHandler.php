@@ -112,16 +112,20 @@ Class ProfileHandler {
     //holt sich alle Posts den mitgegebenen Users
     $posts = TimelineHandler::getOwnPostsAsArray($user);
 
+    //cash für den Nutzer wird geholt
+    $cash=User::getUserCash($user);
     //wenn der eingeloggte Nutzer angezeigt werden soll ist das Editierfeld sichtbar sonst nicht
     if ($user===$_SESSION['user']) {
       $data = array(
           'user_info' => $res,
-          'posts' => $posts
+          'posts' => $posts,
+          'cash' => $cash
       );
     } else {
       $data = array(
           'user_info' => $res,
           'posts' => $posts,
+          'cash' => $cash,
           'cashtag' => true //sorgt dafür das das Editierfeld nicht angezeigt wird
       );
     }
