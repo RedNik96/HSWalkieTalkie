@@ -106,15 +106,15 @@
     }, "logoutGet");
 
     $router->map('POST', '/newpost/', function() {
-        Post::create();
+        PostHandler::create();
     }, "newpostPost");
     
     $router->map('POST', '/repost/', function() {
-        Post::repost();
+        PostHandler::repost();
     }, "repostPost");
     
     $router->map('POST', '/vote/', function() {
-        Post::vote();
+        PostHandler::vote();
     }, 'votePost');
 
     $router->map('POST', '/statisticsToggle/', function(){

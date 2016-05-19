@@ -57,6 +57,14 @@ Class ProfileHandler {
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 
+  /**
+   * Mit dieser Funktion können User followen bzw. nicht mehr followen.
+   * Dazu wird geprüft, ob der Datensatz schon in der follower-Tabelle
+   * enthalten ist. Falls dem so ist, wird der Datensatz gelöscht und somit
+   * nicht mehr gefollowed. Alternativ wird der Datensatz hinzugefügt.
+   * Anschließend wird ein echo ausgeführt, da diese Funktion per
+   * xhtmlhttp-Request aufgerufen wird.
+   */
   public static function followUser(){
 
     extract($_POST);
@@ -68,31 +76,21 @@ Class ProfileHandler {
           'follower'  => $userFollower
       ));
 
-      if($stmt != SQL::SQL_FEHLGESCHLAGEN() AND $stmt->fetch())
+      if($stmt->fetch())
       {
         $stmt = SQL::query("DELETE FROM follower WHERE followed = :followed AND follower = :follower", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
-        if ($stmt != SQL::SQL_FEHLGESCHLAGEN()) {
-          echo "removed";
-        } else {
-          echo "false";
-        }
+        echo "removed";
       } else {
         $stmt = SQL::query("INSERT INTO follower (followed, follower) VALUES (:followed, :follower)", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
 
-        if ($stmt != SQL::SQL_FEHLGESCHLAGEN()) {
-          echo "added";
-        } else {
-          echo "false";
-        }
+        echo "added";
       }
-    } else {
-      echo "false";
     }
   }
 

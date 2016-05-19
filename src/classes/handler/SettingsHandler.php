@@ -77,10 +77,8 @@ class SettingsHandler {
                 'nr' => $nr,
                 'user' => $_SESSION['user']
             ));
-            if($stmt != SQL::SQL_FEHLGESCHLAGEN())
-            {
-                $_SESSION['user'] = $username;
-            }
+
+            $_SESSION['user'] = $username;
         }
         if (isset($_POST['deletePicture'])) {
             $stmt = SQL::query("UPDATE user SET picture=DEFAULT WHERE username=:user", array(
@@ -129,7 +127,7 @@ class SettingsHandler {
             'user' => $_POST['username']
         ));
 
-        if ($stmt == SQL::SQL_FEHLGESCHLAGEN() || $stmt ->fetch()) {
+        if ($stmt ->fetch()) {
             echo "false";
         }
     }

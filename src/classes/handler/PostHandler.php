@@ -1,6 +1,6 @@
 <?php
 
-class Post
+class PostHandler
 {
     public static function create()
     {

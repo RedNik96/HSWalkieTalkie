@@ -2,7 +2,7 @@ use hswalkietalkie;
 
 CREATE PROCEDURE getOriginalPoster (IN pPostID int(11))
 BEGIN
-    DECLARE val, lParentPost, postId INT;
+    DECLARE val, lParentPost INT;
 
     SET val = (SELECT parentPost FROM posts WHERE id = pPostID);
     WHILE (val > 0) DO
