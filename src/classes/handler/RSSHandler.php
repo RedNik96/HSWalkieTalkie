@@ -23,7 +23,6 @@ class RSSHandler
         $rss_xml = simplexml_load_file($rss_url);
 
         if (!$rss_xml = simplexml_load_file($rss_url)) {
-            die("Fehler beim Einlesen der XML-Datei");
         }
 
         $rss_article = array();

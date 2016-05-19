@@ -70,8 +70,8 @@
         SearchHandler::notFound();
     }, 'notFoundGet');
     
-    $router->map('GET', '/showMoreUser/[a:firstname]/[a:lastname]/', function ($firstname, $lastname) {
-        ProfileHandler::showMoreUser($firstname,$lastname);
+    $router->map('GET', '/showMoreUser/[*:name]/', function ($name) {
+        ProfileHandler::showMoreUser($name);
     }, 'showMoreUserGet');
 
     $router->map('GET', '/showCashTag/[a:cashtag]/', function ($cashtag) {
