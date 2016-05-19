@@ -59,9 +59,25 @@ class PostHandler {
               'comments'  => $stmt3
             )
           ),
-          '' => true
+          'allowComment' => true
         );
 
         Template::render('timeline', $data);
+    }
+
+    public static function post($postID) {
+        global $dbh;
+        global $router;
+
+        $stmt = $dbh->prepare(
+          "INSERT INTO comment (userID, postID, comment) VALUES (:userID, :postID, :comment)");
+
+        $stmt->execute(array(
+            'postID' => $postID,
+            'userID' => $_SESSION['user'],
+            'comment' => $_POST['comment']
+        ));
+
+        header('Location: ' . $router->generate('viewPostGet', array('id'=>$postID)));
     }
 }

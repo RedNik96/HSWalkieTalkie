@@ -119,6 +119,10 @@
         PostHandler::get($id);
     }, 'viewPostGet');
 
+    $router->map('POST', '/post/[i:id]/', function($id) {
+        PostHandler::post($id);
+    }, 'viewPostPost');
+
 
     $match = $router->match();
 

@@ -87,6 +87,14 @@
                 </div>
             </div>
             <div class="comments container-fluid">
+                <? if(isset($allowComment)): ?>
+                    <div class="no-marginpad new-Comment-Container row container-fluid">
+                        <form class="no-margpad new-Comment col-xs-12 row" action="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>" method="post">
+                            <textarea class="col-xs-12" name="comment" rows="5" placeholder="Was halten Sie davon?"></textarea>
+                            <button class="btn btn-primary show-right col-xs-offset-9 col-xs-3">Kommentieren</button>
+                        </form>
+                    </div>
+                <? endif; ?>
                 <? $commentsExist = false;
                     while($comment = $post['comments']->fetch(PDO::FETCH_ASSOC)):
                       $commentsExist = true;
