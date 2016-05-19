@@ -351,6 +351,18 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="feedPwd" class=" col-lg-6 control-label">
+                                RSS-Feed Passwort*:
+                            </label>
+                            <div class="col-lg-6">
+                                <input required name="feedPwd" id="feedPwd" type="password" autofocus class="form-control filled" data-value="<?= $user_info['feedPassword']?>" value=<?= $user_info['feedPassword']?>>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-lg-6"></label>
+                            <label class=" col-lg-6">*Dieses Passwort muss im Klartext gespeichert werden<br>Benutze also nie ein Passwort, welches du auch woanders verwendest</label>
+                        </div>
+                        <div class="form-group">
                             <label class="col-lg-6 control-label"></label>
                             <div class="col-lg-4">
                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">

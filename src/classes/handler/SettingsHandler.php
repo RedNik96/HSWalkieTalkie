@@ -198,9 +198,11 @@ class SettingsHandler {
     }
     static public function changeIlias() {
         $url=$_POST['url'];
+        $feedPwd=$_POST['feedPwd'];
 
-        $stmt = SQL::query("UPDATE user SET feedUrl=:url WHERE username=:user", array(
+        $stmt = SQL::query("UPDATE user SET feedUrl=:url, feedPassword=:feedPwd WHERE username=:user", array(
             'url' => $url,
+            'feedPwd' => $feedPwd,
             'user' => $_SESSION['user']
         ));
 
