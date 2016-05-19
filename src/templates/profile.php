@@ -27,7 +27,14 @@
     <?php } ?>
   <div><?= $user_info['email'] ?></div>
   <div><?= $user_info['zip'] ?> <?= $user_info['city'] ?></div>
-  <div><?= $user_info['birthday'] ?></div>
+  <div><?= $user_info['street']?> <?= $user_info['housenumber']?></div>
+  <div><?= date("d.m.Y",strtotime($user_info['birthday'])) ?></div>
+  <div>
+      <?  $date=new DateTime(date('Y-m-d',strtotime($user_info['birthday'])));
+      $today=new DateTime(date('Y-m-d'));
+      $diff=$date->diff($today);
+      echo $diff->format('%y'); ?> Jahre
+  </div>
 </div>
 
 <script type="text/javascript">

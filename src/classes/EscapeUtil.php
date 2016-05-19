@@ -2,7 +2,7 @@
 
 class EscapeUtil
 {
-    public static function escape_array(&$variable) {
+    public static function escapeArray(&$variable) {
         foreach ($variable as &$value) {
             if (!is_array($value)) {
                 $value = htmlspecialchars($value);

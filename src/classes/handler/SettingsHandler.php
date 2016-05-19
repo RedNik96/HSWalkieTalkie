@@ -13,7 +13,7 @@ class SettingsHandler {
         ));
 
         $user_info=$stmt->fetch();
-        EscapeUtil::escape_array($user_info);
+        EscapeUtil::escapeArray($user_info);
 
         $stmt = SQL::query("SELECT account.iban, account.bic, bic.bank FROM account,bic WHERE user=:username and account.bic=bic.bic ORDER BY account.iban ASC", array(
             'username' => $_SESSION['user']
@@ -21,20 +21,20 @@ class SettingsHandler {
 
         $i=0;
         while ($bank_info[$i]=$stmt->fetch()) {
-            EscapeUtil::escape_array($bank_info[$i]);
+            EscapeUtil::escapeArray($bank_info[$i]);
             $i++;
         }
 
         $stmt = SQL::query("SELECT bic, bank from bic");
         while($result = $stmt->fetch()) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $bics[$result[0]] = $result[1];
         }
 
         $stmt = SQL::query("SELECT zip, city from city");
 
         while($result = $stmt->fetch()) {
-            EscapeUtil::escape_array($result);
+            EscapeUtil::escapeArray($result);
             $zips[$result[0]] = $result[1];
         }
         
