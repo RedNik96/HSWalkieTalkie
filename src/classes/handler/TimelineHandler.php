@@ -45,16 +45,16 @@ Class TimelineHandler {
             $imgCounter = $imgCounter + 1;
         }
 
-        // TODO: auf SQL.php umstellen
-        $stmt3 = $dbh->prepare(
-          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-          FROM comment as C, user as U
-          WHERE C.postID = :postID AND C.userID = U.username
-          ORDER BY C.commentTime DESC
-          LIMIT 3");
-        $stmt3->execute(array(
-            'postID' => $result['postID']
-        ));
+        $stmt3 = SQL::query(
+            "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+            FROM comment as C, user as U
+            WHERE C.postID = :postID AND C.userID = U.username
+            ORDER BY C.commentTime DESC
+            LIMIT 3",
+            array(
+              'postID' => $result['postID']
+            )
+        )
 
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
@@ -110,15 +110,16 @@ Class TimelineHandler {
         }
 
         // TODO: auf SQL.php umstellen
-        $stmt3 = $dbh->prepare(
-          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-          FROM comment as C, user as U
-          WHERE C.postID = :postID AND C.userID = U.username
-          ORDER BY C.commentTime DESC
-          LIMIT 3");
-        $stmt3->execute(array(
-            'postID' => $result['postID']
-        ));
+        $stmt3 = SQL::query(
+            "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+            FROM comment as C, user as U
+            WHERE C.postID = :postID AND C.userID = U.username
+            ORDER BY C.commentTime DESC
+            LIMIT 3",
+            array(
+              'postID' => $result['postID']
+            )
+        )
 
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
