@@ -25,18 +25,16 @@ class User {
     }
     
     public static function checkUser($username) {
-        if ($username===$_SESSION['user']) {
-            return true;
-        }
+        
 
         $stmt = SQL::query("SELECT username FROM user WHERE username=:user", array(
             'user' => $_POST['username']
         ));
 
         if ($stmt ->fetch()) {
-            return false;
+            return "false";
         } else {
-            return true;
+            return "true";
         }
     }
 
@@ -136,6 +134,7 @@ class User {
     }
     
     public static function changePersonalInformation($firstname,$lastname,$email,$zip,$street,$username,$birth,$nr) {
+        //$firstname=mysql_real_escape_string($firstname);
         SQL::query("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
             username=:username, birthday=:birth, housenumber=:nr 
             WHERE username=:user", array(

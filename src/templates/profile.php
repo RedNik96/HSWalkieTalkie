@@ -35,7 +35,7 @@
       $diff=$date->diff($today);
       echo $diff->format('%y'); ?> Jahre
   </div>
-  <div id="cash">Cash: <?= $cash ?>$</div>
+  <div id="cash">Cash: $<?= $cash ?></div>
 </div>
 
 <script type="text/javascript">

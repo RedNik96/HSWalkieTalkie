@@ -24,5 +24,14 @@ class RegisterHandler
         header("Location: " . $router->generate("timeline"));
         die();
     }
+
+    /**
+     * überprüft ob es den Nutzernamen im HTTP-Post schon gibt oder ob der Nutzername dem des eingeloggten Users entspricht
+     * und meldet das Ergebnis dem AJAX-Post zurück
+     */
+    static public function checkUser() {
+
+        echo (User::checkUser($_POST['username'])) ;
+    }
 }
 ?>

@@ -50,7 +50,6 @@ class SQL
     public static function query($preparedSQL, $parameterArr = array())
     {
         global $dbh;
-
         if($dbh != null) {
             $stmt = $dbh->prepare($preparedSQL);
             if($stmt->execute($parameterArr)) {
