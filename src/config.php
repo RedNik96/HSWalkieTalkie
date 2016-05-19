@@ -54,6 +54,7 @@ require_once(CLASSES_PATH . "/EscapeUtil.php");
 require_once(CLASSES_PATH . "/handler/CashTagHandler.php");
 require_once(CLASSES_PATH . "/handler/LoginHandler.php");
 require_once(CLASSES_PATH . "/handler/LogoutHandler.php");
+require_once(CLASSES_PATH . "/handler/PostHandlerErsatz.php");
 require_once(CLASSES_PATH . "/handler/ProfileHandler.php");
 require_once(CLASSES_PATH . "/handler/SearchHandler.php");
 require_once(CLASSES_PATH . "/handler/SettingsHandler.php");

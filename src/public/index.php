@@ -106,14 +106,18 @@
     $router->map('POST', '/newpost/', function() {
         Post::create();
     }, "newpostPost");
-    
+
     $router->map('POST', '/repost/', function() {
         Post::repost();
     }, "repostPost");
-    
+
     $router->map('POST', '/vote/', function() {
         Post::vote();
     }, 'votePost');
+
+    $router->map('GET', '/post/[i:id]/', function($id) {
+        PostHandler::get($id);
+    }, 'viewPostGet');
 
 
     $match = $router->match();

@@ -76,11 +76,7 @@ Class TimelineHandler {
             'reposts'   => $result['Reposts'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
             'imgs'      => $imgs,
-            'comments'  => array(
-                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
-                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
-                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC))
-            )
+            'comments'  => $stmt3
         );
     }
     return $posts;
@@ -107,6 +103,7 @@ Class TimelineHandler {
     $stmt = self::getPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        // TODO: refactor
         $stmt2 = $dbh->prepare("SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent");
         $stmt2->execute(array(
             'pid'       => $result['postID'],
@@ -118,6 +115,7 @@ Class TimelineHandler {
             $imgs[$imgCounter] = $img['filename'];
             $imgCounter = $imgCounter + 1;
         }
+        // TODO: refactor und link in HTML
         if (is_null($result['picture'])) {
             $result['picture'] = "/HSWalkieTalkie/src/img/profile_default.png";
         } else {
@@ -146,14 +144,9 @@ Class TimelineHandler {
             'reposts'   => $result['Reposts'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
             'imgs'      => $imgs,
-            'comments'  => array(
-                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
-                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC)),
-                EscapeUtil::escapeArrayReturn($stmt3->fetch(PDO::FETCH_ASSOC))
-            )
+            'comments'  => $stmt3
         );
     }
-    var_dump($posts);
     return $posts;
   }
 }

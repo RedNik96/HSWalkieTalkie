@@ -49,9 +49,9 @@
             <div class="postfooter container-fluid">
 
                 <div class="comment col-xs-4">
-                    <button type="button" class="btn btn-primary btn-comment">
-                        <i class="fa fa-comments" aria-hidden="true"></i> Kommentieren
-                    </button>
+                  <a class="btn btn-primary" target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">
+                    <i class="fa fa-comments" aria-hidden="true"></i> Kommentieren
+                  </a>
                 </div>
 
                 <?php
@@ -87,8 +87,9 @@
                 </div>
             </div>
             <div class="comments container-fluid">
-                <? foreach($post['comments'] as $comment):
-                      if($comment):
+                <? $commentsExist = false;
+                    while($comment = $post['comments']->fetch(PDO::FETCH_ASSOC)):
+                      $commentsExist = true;
                 ?>
                 <div class="comment-container row">
                     <div class="row header">
@@ -114,15 +115,16 @@
                         </div>
                     </div>
                   </div>
-                <? else:
-                      if(key($post['comments']) == 0):?>
-                          <div class="noComments">
-                            Es sind aktuell noch keine Kommentare verfasst worden.
-                          </div>
-                    <? endif;
-                       break; ?>
-                <? endif; ?>
-              <? endforeach; ?>
+              <? endwhile;
+                  if (!$commentsExist):?>
+                      <div class="noComments">
+                        Es sind aktuell noch keine Kommentare verfasst worden.
+                      </div>
+              <? elseif(($router->match())['name'] != 'viewPostGet'): ?>
+                <div class="postCommentLink">
+                  <a target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">Alle Kommentare ...</a>
+                </div>
+              <? endif; ?>
           </div>
         </div>
         <!--</form>-->
