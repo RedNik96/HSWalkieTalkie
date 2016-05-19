@@ -21,4 +21,7 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * Vote-Button deaktivieren, sobald einer gevotet hat //xgwsdfe
 * SettingsHandler - RegisterHandler -> Funktionen auslagern in User.
 * SQL Inserts erst durchführen, wenn Insert auch sicher fehlschlägt = vorher Querys durchführen.
-* mit enter einloggen
+* Trending Cashtags hübsch machen
+* FileInput Master in Libraries umziehen
+* Cashtags im Content klickbar machen
+* Cashtags in Trending Cashtags klickbar machen. Verlinken auf Cashtag-Handler
