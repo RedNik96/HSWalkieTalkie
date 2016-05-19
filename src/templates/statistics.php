@@ -79,7 +79,7 @@
     <? if(!empty($stats['bestPost'])): ?>
         <div class="statistic">
             <div class="bestPost">
-                <legend class="statisticCategory">Teuerster Post</legend>
+                <legend class="statisticCategory">Wertvollster Post</legend>
 
                 <div class="postheader">
                     <div class="postauthor">

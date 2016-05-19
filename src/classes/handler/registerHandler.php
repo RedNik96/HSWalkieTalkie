@@ -4,7 +4,7 @@ class RegisterHandler
     public static function regsister()
     {
         if (isset($_POST['register'])) {
-            Session::create_user(
+            User::createUser(
                 $_POST['firstName'],
                 $_POST['lastName'],
                 $_POST['email'],

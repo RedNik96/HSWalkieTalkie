@@ -1,5 +1,14 @@
 <?php
+
+/**
+ * Class Template bietet eine renderFunktion für die Templates
+ */
 class Template {
+    /**
+     * @param $template_center name des templates das in der Mitte gerendered werden soll  
+     * @param array $data Daten die dem Template übergeben werden sollen
+     * @param array $templates Templates die rechts, links, und oben gerendered werden
+     */
     public static function render($template_center, $data=array(), $templates=array()) {
         // define valid args and their defaults
         $template_top = 'menuBar';
@@ -17,6 +26,7 @@ class Template {
                 $stats=StatisticHandler::getFriendsStats();
             }
         }
+        //Daten für den rssFeed werden geholt
         if ($template_left === 'rss'){
             $rss_article=RSSHandler::getRssfeed();
         }
