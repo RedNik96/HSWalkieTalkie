@@ -1,5 +1,8 @@
 <?php
-
+$settings = array(
+    "dbuser"    => "root",
+    "dbpasswd"  => ""
+);
 // Config inspiriert von: http://code.tutsplus.com/tutorials/organize-your-next-php-project-the-right-way--net-5873
 
 /*

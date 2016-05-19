@@ -29,7 +29,7 @@ if (!isset($cashtag)) {?>
                 <?php
                 if(isset($post['postIDParent']) && $post['postIDParent'])
                 {
-                    echo "<span class='label label-primary' style='font-size:14px;'>Repost from @". Post::getPoster($post['postIDParent']). "</span><br><br>";
+                    echo "<span class='label label-primary' style='font-size:14px;'>Repost from @". PostHandler::getPoster($post['postIDParent']). "</span><br><br>";
                 }
 
                 ?>
