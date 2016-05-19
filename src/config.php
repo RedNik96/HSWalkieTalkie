@@ -33,7 +33,6 @@ error_reporting(E_ALL|E_STRICT);
 // register function to automatically load classes
 //spl_autoload_register( function($class) {
 require_once (CLASSES_PATH . "/Search.php");
-require_once (CLASSES_PATH . "/Session.php");
 require_once (CLASSES_PATH . "/SQL.php");
 require_once (CLASSES_PATH . "/Template.php");
 require_once (CLASSES_PATH . "/User.php");
