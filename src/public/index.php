@@ -5,8 +5,7 @@
     // initialize variables
     $template_data = [];
     global $dbh;
-
-    #TODO: hier sollte das URL-Routing implementiert werden
+    
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
 

@@ -9,3 +9,7 @@
 .rss_link{
     border-bottom: groove;
 }
+
+.rss_failure_message {
+    font-size: 9pt;
+}
