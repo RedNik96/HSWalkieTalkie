@@ -60,14 +60,13 @@
     margin-bottom: 10px;
 }
 
-.post .postfooter .share{
-    display: inline-block;
-    width: 57%;
+.post .postcontent {
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
-.post .postfooter .vote{
-    display: inline-block;
-    width: 40%;
+div.post div.postfooter {
+  margin-top: 1em;
 }
 
 .postcontent .smallerContent{
@@ -82,4 +81,59 @@
     text-align: right;
     display: inline-block;
     width: 20%;
+}
+
+.comments{
+  margin-top: 0.5em;
+}
+
+.comments .no-margpad {
+    margin: unset;
+    padding: unset;
+}
+
+.comments textarea {
+    resize: none;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.comments .new-Comment-Container {
+    margin-bottom: 0.5em;
+}
+
+.comments form button {
+    margin-top: 0.3em;
+}
+
+.comments .comment-container {
+  border-top: 1px solid grey;
+  padding: 0.5em;
+}
+
+.comments div.comment-container .header .picture {
+  padding: unset;
+  text-align: right;
+}
+
+.comments div.comment-container .header .date {
+  text-align: right;
+}
+
+.comments div.comment-container .content .comment {
+    padding-left: unset;
+}
+
+.comments div.noComments {
+  border-top: 1px solid grey;
+  padding: 0.5em;
 }

@@ -33,24 +33,25 @@ error_reporting(E_ALL|E_STRICT);
 
 // register function to automatically load classes
 //spl_autoload_register( function($class) {
+require_once (CLASSES_PATH . "/Search.php");
+require_once (CLASSES_PATH . "/Session.php");
+require_once (CLASSES_PATH . "/SQL.php");
+require_once (CLASSES_PATH . "/Template.php");
+require_once (CLASSES_PATH . "/User.php");
+require_once (CLASSES_PATH . "/EscapeUtil.php");
 require_once (CLASSES_PATH . "/handler/CashTagHandler.php");
 require_once (CLASSES_PATH . "/handler/ErrorHandler.php");
-require_once (CLASSES_PATH . "/EscapeUtil.php");
 require_once (CLASSES_PATH . "/handler/LoginHandler.php");
 require_once (CLASSES_PATH . "/handler/LogoutHandler.php");
 require_once (CLASSES_PATH . "/handler/PostHandler.php");
 require_once (CLASSES_PATH . "/handler/ProfileHandler.php");
 require_once (CLASSES_PATH . "/handler/RegisterHandler.php");
 require_once (CLASSES_PATH . "/handler/RSSHandler.php");
-require_once (CLASSES_PATH . "/Search.php");
 require_once (CLASSES_PATH . "/handler/SearchHandler.php");
 require_once (CLASSES_PATH . "/handler/SettingsHandler.php");
-require_once (CLASSES_PATH . "/Session.php");
-require_once (CLASSES_PATH . "/SQL.php");
 require_once (CLASSES_PATH . "/handler/StatisticHandler.php");
-require_once (CLASSES_PATH . "/Template.php");
 require_once (CLASSES_PATH . "/handler/TimelineHandler.php");
-require_once (CLASSES_PATH . "/User.php");
+
 //});
 
 SQL::createConnection();

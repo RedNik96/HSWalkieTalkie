@@ -13,7 +13,7 @@ Class ProfileHandler {
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 
-  /** 
+  /**
    * @param $user username des Users der angezeigt werden soll
    * das Profil des mitgegebenen Users wird gerendert
    */
@@ -53,7 +53,7 @@ Class ProfileHandler {
    */
   public static function showUserPost() {
     $data=self::getUser($_POST['username']);
-   
+
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 
@@ -108,9 +108,9 @@ Class ProfileHandler {
     } else {
       //wenn ein anderes Profil angezeigt werden soll wird zusätzlich überprüft ob der eingeloggte Nutzer dem anzuzeigenden Nutzer folgt
       $stmt = SQL::query("
-        SELECT *, 
-          (SELECT COUNT(*) FROM follower 
-            WHERE followed = :username AND follower = :user) AS isFollowing 
+        SELECT *,
+          (SELECT COUNT(*) FROM follower
+            WHERE followed = :username AND follower = :user) AS isFollowing
         FROM user as U, city as C WHERE username = :username AND U.zip = C.zip", array(
           'user'    => $_SESSION['user'],
           'username' => $user

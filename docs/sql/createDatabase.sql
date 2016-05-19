@@ -102,7 +102,7 @@ CREATE TABLE `round` (
   `fighterPostAction` int(11) NOT NULL,
   `fighterRepostAction` int(11) NOT NULL,
   PRIMARY KEY (`duell`, `round`),
-  FOREIGN KEY (`duell`) REFERENCES Duell (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`duell`) REFERENCES duell (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `cashtag` (
@@ -116,6 +116,17 @@ CREATE TABLE `cashtagPost` (
   PRIMARY KEY (`cashtag`, `postId`),
   FOREIGN KEY (`cashtag`) REFERENCES cashtag (`cashtag`) ON DELETE CASCADE  ON UPDATE CASCADE,
   FOREIGN KEY (`postId`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `postID` int(11) NOT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `commentTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`userID`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`postID`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 COMMIT;

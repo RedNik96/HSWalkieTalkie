@@ -29,6 +29,7 @@ Class TimelineHandler {
   }
 
   public static function getOwnPostsAsArray($user) {
+    global $dbh;
     $stmt = self::getOwnPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -38,11 +39,23 @@ Class TimelineHandler {
             ));
         $imgs = array();
         $imgCounter = 0;
+
         while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             $imgs[$imgCounter] = $img['filename'];
             $imgCounter = $imgCounter + 1;
         }
-        
+
+        // TODO: auf SQL.php umstellen
+        $stmt3 = $dbh->prepare(
+          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+          FROM comment as C, user as U
+          WHERE C.postID = :postID AND C.userID = U.username
+          ORDER BY C.commentTime DESC
+          LIMIT 3");
+        $stmt3->execute(array(
+            'postID' => $result['postID']
+        ));
+
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
             'username'  => $result['username'],
@@ -53,7 +66,8 @@ Class TimelineHandler {
             'votes'     => $result['Votes'],
             'reposts'   => $result['Reposts'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
-            'imgs'      => $imgs
+            'imgs'      => $imgs,
+            'comments'  => $stmt3
         );
     }
     return $posts;
@@ -78,6 +92,7 @@ Class TimelineHandler {
     }
 
   public static function getPostsAsArray($user) {
+    global $dbh;
     $stmt = self::getPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -93,6 +108,18 @@ Class TimelineHandler {
             $imgs[$imgCounter] = $img['filename'];
             $imgCounter = $imgCounter + 1;
         }
+
+        // TODO: auf SQL.php umstellen
+        $stmt3 = $dbh->prepare(
+          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+          FROM comment as C, user as U
+          WHERE C.postID = :postID AND C.userID = U.username
+          ORDER BY C.commentTime DESC
+          LIMIT 3");
+        $stmt3->execute(array(
+            'postID' => $result['postID']
+        ));
+
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
             'postIDParent' => $result['postIDParent'],
@@ -104,7 +131,8 @@ Class TimelineHandler {
             'votes'     => $result['Votes'],
             'reposts'   => $result['Reposts'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
-            'imgs'      => $imgs
+            'imgs'      => $imgs,
+            'comments'  => $stmt3
         );
     }
     return $posts;
