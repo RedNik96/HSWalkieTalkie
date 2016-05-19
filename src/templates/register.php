@@ -9,55 +9,55 @@
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
             <label for="firstName" class="col-lg-6 control-label">Vorname*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname" autofocus required autocomplete="off">
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname" maxlength="255" autofocus required autocomplete="off">
             </div>
         </div>
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
             <label for="lastName" class="col-lg-6 control-label">Nachname*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Nachname" required autocomplete="off">
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Nachname" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group"> <!-- form-group form-group-sm macht es kleiner, form-group form-group-lg macht es größer -->
             <label for="email" class="col-lg-6 control-label">E-Mail-Adresse*</label>
             <div class="col-lg-6">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required autocomplete="off">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="username" class="col-lg-6 control-label">Benutzername*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" required autocomplete="off">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" maxlength="100" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-lg-6 control-label">Passwort*</label>
             <div class="col-lg-6">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" maxlength="255" required>
             </div>
         </div>
         <div class="form-group">
             <label for="confirmedPassword" class="col-lg-6 control-label">Passwort erneut eingeben*</label>
             <div class="col-lg-6">
-                <input type="password" class="form-control" id="confirmedPassword" name="confirmedPassword" placeholder="Password" required>
+                <input type="password" class="form-control" id="confirmedPassword" name="confirmedPassword" placeholder="Password" maxlength="255" required>
             </div>
         </div>
         <div class="form-group">
             <label for="birthday" class="col-lg-6 control-label">Geburtstag*</label>
             <div class="col-lg-6">
-                <input type="date" class="form-control" id="birthday" name="birthday" required>
+                <input type="date" class="form-control" id="birthday" name="birthday" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="street" class="col-lg-6 control-label">Straße*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="street" name="street" placeholder="Straße" required>
+                <input type="text" class="form-control" id="street" name="street" placeholder="Straße" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
             <label for="housenumber" class="col-lg-6 control-label">Hausnummer*</label>
             <div class="col-lg-6">
-                <input type="text" class="form-control" id="housenumber" name="housenumber" placeholder="21a" required>
+                <input type="text" class="form-control" id="housenumber" name="housenumber" placeholder="Hausnummer" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">
@@ -86,7 +86,7 @@
         <div class="form-group">
             <label for="iban" class="col-lg-3 control-label">IBAN</label>
             <div class="col-lg-9">
-                <input type="text" class="form-control" id="iban" name="iban" placeholder="IBAN" autocomplete="off">
+                <input type="text" class="form-control" id="iban" name="iban" placeholder="IBAN" maxlength="34" autocomplete="off">
             </div>
         </div>
         <div class="form-group">
