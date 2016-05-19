@@ -7,7 +7,7 @@
 <? global $router;
 if (!isset($cashtag)) {?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
-    <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6"></textarea>
+    <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6" maxlength="255"></textarea>
     <div class="postaddonsdiv">
         <input id="postedFiles" name="postedFiles[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
         <script>
