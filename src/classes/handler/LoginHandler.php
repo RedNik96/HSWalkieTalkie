@@ -4,21 +4,22 @@ class LoginHandler
 {
     public static function post(){
         global $router;
-        //In er checkCredentials werden die $_SESSION Variablen gesetzt.
+        //In der checkCredentials werden die $_SESSION Variablen gesetzt.
         //Anschließend muss die Seite aufgerufen werden
-        //Dort kann dann abgefragt werden, ob das Login fehlgeschlagen ist oder erfolgreich war
+        //Dort kann dann abgefragt werden, ob der Login fehlgeschlagen ist oder erfolgreich war
         LoginHandler::checkCredentials($_POST['username'],$_POST['password']);
         header('Location: ' . $router->generate('timeline'));
     }
 
     public static function checkCredentials($user, $password){
 
-        $stmt = SQL::query("SELECT password FROM user
-            WHERE username = :user", array(
+        $stmt = SQL::query("SELECT password FROM user WHERE username = :user", array(
             'user'     => $user,
         ));
 
-        $hash = $stmt->fetchColumn();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $hash = $result['password'];
+
 
         if (password_verify($password, $hash)) {
             $_SESSION['login_failed'] = false;  //Falls ein Fehlversuch entstand, ist der Wert gesetzt und muss zurückgesetzt werden
