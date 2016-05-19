@@ -3,11 +3,12 @@
 class StatisticHandler {
 
     public static function toggle(){
-        if( $_POST['toggle'] === "true"){
-            self::getAllStats();
+        if ($_POST['toggle']==="true") {
+            $_SESSION['toggle']="true";
         } else {
-            self::getFriendsStats();
+            $_SESSION['toggle']="false";
         }
+        echo $_SESSION['toggle'];
     }
 
     //Statistiken für die Follower
@@ -25,14 +26,17 @@ class StatisticHandler {
               ", array("username" => $_SESSION['user']));
 
         $richestUsers = array();
+        $i=0;
         while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
-            $richestUsers[$result['username']] = array(
+            EscapeUtil::escape_array($result);
+            $richestUsers[$i] = array(
                 'profilePicture' => $result['picture'],
                 'username' => $result['username'],
                 'firstName' => $result['firstName'],
                 'lastName' => $result['lastName'],
                 'cash' => $result['cash']
             );
+            $i++;
         }
 
         //TRENDING CASHTAGS UNTER FREUNDEN------------------------------------------------------------------------------
@@ -44,6 +48,7 @@ class StatisticHandler {
 
         $trendingTags = array();
         while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
+            EscapeUtil::escape_array($trendingTags);
             $trendingTags[$result['username']] = array(
                 'username' => $result['username'],
                 'firstName' => $result['firstName'],
@@ -66,6 +71,7 @@ class StatisticHandler {
 
         $bestPost = array();
         while($result = $stmtBestPost->fetch(PDO::FETCH_ASSOC)) {
+            EscapeUtil::escape_array($result);
             $bestPost = array(
                 'postID' => $result['postID'],
                 'firstName' => $result['firstName'],
@@ -99,14 +105,17 @@ class StatisticHandler {
         $stmtRichestUsers = SQL::query($sqlQuery);
 
         $richestUsers = array();
+        $i=0;
         while($result = $stmtRichestUsers->fetch(PDO::FETCH_ASSOC)) {
-            $richestUsers[$result['username']] = array(
+            EscapeUtil::escape_array($result);
+            $richestUsers[$i] = array(
                 'profilePicture' => $result['picture'],
                 'username' => $result['username'],
                 'firstName' => $result['firstName'],
                 'lastName' => $result['lastName'],
                 'cash' => $result['cash']
             );
+            $i++;
         }
 
         //TRENDING CASHTAGS------------------------------------------------------------------------------
@@ -123,6 +132,7 @@ class StatisticHandler {
 
         $trendingTags = array();
         while($trendingTags = $stmtTrendingTags->fetch(PDO::FETCH_ASSOC)) {
+            EscapeUtil::escape_array($trendingTags);
             $trendingTags[$result['username']] = array(
                 'username' => $result['username'],
                 'firstName' => $result['firstName'],
@@ -146,6 +156,7 @@ class StatisticHandler {
         
         $bestPost = array();
         while($result = $stmtBestPost->fetch(PDO::FETCH_ASSOC)) {
+            EscapeUtil::escape_array($result);
             $bestPost = array(
                 'postID' => $result['postID'],
                 'firstName' => $result['firstName'],

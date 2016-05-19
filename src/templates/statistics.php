@@ -6,19 +6,20 @@
     <legend>Statistiken</legend>
     <span>Statistiken anzeigen für </span>
 
+        <input name="toggle" id="toggle-event" data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox" <? if (isset($_SESSION['toggle'])&&($_SESSION['toggle']==="true")) { echo "checked"; }?>>
+        <script>
+            $(function() {
+                $('#toggle-event').change(function() {
+                    $.post('/HSWalkieTalkie/src/public/statisticsToggle/',
+                        {
+                            toggle: ""+$(this).prop('checked')
+                        },function (data) {
+                        location.reload();
+                    });
+                })
+            });
+        </script>
 
-    <input id="toggle-event" data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox">
-    <script>
-        $(function() {
-            $('#toggle-event').change(function() {
-                $.post('/HSWalkieTalkie/src/public/statisticsToggle/', {
-                    toggle: "" + $(this).prop('checked')
-                }, function(data){
-                    alert(data);
-                });
-            })
-        });
-    </script>
 
 
     <!--REICHSTER BENUTZER -------------------------------------------------------------------------------------   -->
@@ -32,7 +33,7 @@
                     $i++?>
                     <div class="ranking">
                         <div class="placement">
-                            <span><?echo $i?>.</span>
+                            <?echo $i?>.
                         </div>
                         <div class="postauthor">
                             <? echo User::getUserHtml($user['profilePicture'], $user['firstName'], $user['lastName'], $user['username'])?>

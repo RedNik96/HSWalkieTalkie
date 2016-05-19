@@ -48,7 +48,7 @@ class CashTagHandler
                 'imgs' => $imgs
             );
         }
-        $stats = StatisticHandler::getStats();
+        $stats = StatisticHandler::getFriendsStats();
         $data = array(
             "posts" => $posts,
             "stats" => $stats,
