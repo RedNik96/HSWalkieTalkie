@@ -55,9 +55,11 @@ if (!isset($cashtag)) {?>
                 </div>
             <div class="postfooter container-fluid">
                 <div class="comment col-xs-4">
-                  <a class="btn btn-primary" target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">
-                    <i class="fa fa-comments" aria-hidden="true"></i> Kommentieren
-                  </a>
+                  <? if(!isset($allowComment)): ?>
+                      <a class="btn btn-primary" target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">
+                        <i class="fa fa-comments" aria-hidden="true"></i> Kommentieren
+                      </a>
+                  <? endif; ?>
                 </div>
                 <div class="share col-xs-4">
                     <button class="btn btn-primary repost" name="btnRepost"
