@@ -57,7 +57,7 @@
         <div class="form-group">
             <label for="housenumber" class="col-lg-6 control-label">Hausnummer*</label>
             <div class="col-lg-6">
-                <input pattern="[0-9][0-9a-z-]+" type="text" class="form-control" id="housenumber" name="housenumber" placeholder="Hausnummer" maxlength="255" required autocomplete="off">
+                <input pattern="[0-9][0-9a-z-]*" type="text" class="form-control" id="housenumber" name="housenumber" placeholder="Hausnummer" maxlength="255" required autocomplete="off">
             </div>
         </div>
         <div class="form-group">

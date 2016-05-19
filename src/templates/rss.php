@@ -30,7 +30,7 @@
                 <br>
                 <? echo "Du kannst die URL und das Passwort in den Einstellungen setzen." ?>
             </p>
-            <a href="<?= $GLOBALS['router']->generate('settingsGet') ?>">Zu den Einstellungen</a>
+            <a href="<?= $GLOBALS['router']->generate('settingsGet',array('tab' => 3)) ?>">Zu den Einstellungen</a>
         </div>
     <?}?>
 

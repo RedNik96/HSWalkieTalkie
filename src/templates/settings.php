@@ -346,7 +346,7 @@
                                 RSS-Feed-URL:
                             </label>
                             <div class="col-lg-6">
-                                <input spellcheck="false" maxlength="255" required name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value="<?= $user_info['feedURL']?>">
+                                <input spellcheck="false" maxlength="255" name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value="<?= $user_info['feedURL']?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -354,7 +354,7 @@
                                 RSS-Feed Passwort*:
                             </label>
                             <div class="col-lg-6">
-                                <input maxlength="255" required name="feedPwd" id="feedPwd" type="password" autofocus class="form-control filled" data-value="<?= $user_info['feedPassword']?>" value="<?= $user_info['feedPassword']?>">
+                                <input maxlength="255" name="feedPwd" id="feedPwd" type="password" autofocus class="form-control filled" data-value="<?= $user_info['feedPassword']?>" value="<?= $user_info['feedPassword']?>">
                             </div>
                         </div>
                         <div class="form-group">
