@@ -8,7 +8,7 @@
     global $match;
 if (!isset($cashtag)) {?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
-    <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6" maxlength="255"></textarea>
+    <textarea class="form-control" name="content" maxlength="255" placeholder="Was machst du gerade?" rows="6" maxlength="255"></textarea>
     <div class="postaddonsdiv">
         <input id="postedFiles" name="postedFiles[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
         <script>
@@ -90,7 +90,7 @@ if (!isset($cashtag)) {?>
                 <? if(isset($allowComment)): ?>
                     <div class="no-marginpad new-Comment-Container row container-fluid">
                         <form class="no-margpad new-Comment col-xs-12 row" action="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>" method="post">
-                            <textarea class="col-xs-12" name="comment" rows="5" placeholder="Was halten Sie davon?"></textarea>
+                            <textarea class="col-xs-12" name="comment" rows="5" maxlength="255" placeholder="Was halten Sie davon?"></textarea>
                             <button class="btn btn-primary show-right col-xs-offset-9 col-xs-3">Kommentieren</button>
                         </form>
                     </div>
