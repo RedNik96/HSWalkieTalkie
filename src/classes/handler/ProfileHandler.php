@@ -32,9 +32,7 @@ Class ProfileHandler {
     $i=0;
     // sucht alle Nutzer mit den übergebenen Namen
     $name=str_replace('%20',' ',$name);
-    $stmt = SQL::query("SELECT picture, firstName, lastName, username FROM user WHERE CONCAT (firstName, ' ', lastName)=:name", array(
-        'name' => $name
-    ));
+    $stmt = User::getUsersByFullName($name);
     // speichert die Abfragergebnisse in einem Array
     while ($res = $stmt->fetch()) {
       EscapeUtil::escapeArray($res);
@@ -102,19 +100,10 @@ Class ProfileHandler {
   public static function getUser($user) {
     //wenn das Profil des eingeloggten Benutzers angezeigt werden soll werden seine Informationen gesucht
     if ($user===$_SESSION['user']) {
-      $stmt = SQL::query("SELECT * FROM user, city where username = :username AND user.zip = city.zip", array(
-        'username' => $user
-      ));
+      $stmt = User::getOwnInfo($user);
     } else {
       //wenn ein anderes Profil angezeigt werden soll wird zusätzlich überprüft ob der eingeloggte Nutzer dem anzuzeigenden Nutzer folgt
-      $stmt = SQL::query("
-        SELECT *, 
-          (SELECT COUNT(*) FROM follower 
-            WHERE followed = :username AND follower = :user) AS isFollowing 
-        FROM user as U, city as C WHERE username = :username AND U.zip = C.zip", array(
-          'user'    => $_SESSION['user'],
-          'username' => $user
-      ));
+      $stmt = User::getOtherInfo($user);
     }
 
 
