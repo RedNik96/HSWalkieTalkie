@@ -23,7 +23,7 @@
             <li <? if ($tab===0) {?>class="active" <?;} ?>><a data-toggle="tab" href="#personal">persönliche Informationen</a></li>
             <li <? if ($tab===1) {?>class="active" <?;} ?>><a data-toggle="tab" href="#pass">Passwort ändern</a></li>
             <li <? if ($tab===2) {?>class="active" <?;} ?>><a data-toggle="tab" href="#account">Konto</a></li>
-            <li <? if ($tab===3) {?>class="active" <?;} ?>><a data-toggle="tab" href="#ilias">Ilias-Feed</a></li>
+            <li <? if ($tab===3) {?>class="active" <?;} ?>><a data-toggle="tab" href="#ilias">ILIAS-Feed</a></li>
         </ul>
 
         <div class="tab-content">
@@ -340,7 +340,7 @@
                 <div class="container-border">
                     <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsChangeIliasPost');?>">
                         <legend>
-                            Ilias-Feed Einstellungen
+                            ILIAS-Feed Einstellungen
                         </legend>
                         <div class="form-group">
                             <label for="url" class=" col-lg-6 control-label">
