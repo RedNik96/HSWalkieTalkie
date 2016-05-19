@@ -236,7 +236,7 @@ class PostHandler
       public static function post($postID) {
           global $router;
 
-          $stmt = SQL:query(
+          $stmt = SQL::query(
               "INSERT INTO comment (userID, postID, comment) VALUES (:userID, :postID, :comment)",
               array(
                   'postID' => $postID,

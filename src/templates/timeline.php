@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/postwritestylesheet.css">
 
 <? global $router;
+    global $match;
 if (!isset($cashtag)) {?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" placeholder="Was machst du gerade?" rows="6" maxlength="255"></textarea>
@@ -127,7 +128,7 @@ if (!isset($cashtag)) {?>
                       <div class="noComments">
                         Es sind aktuell noch keine Kommentare verfasst worden.
                       </div>
-              <? elseif(($router->match())['name'] != 'viewPostGet'): ?>
+              <? elseif($match['name'] != 'viewPostGet'): ?>
                 <div class="postCommentLink">
                   <a target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">Alle Kommentare ...</a>
                 </div>
