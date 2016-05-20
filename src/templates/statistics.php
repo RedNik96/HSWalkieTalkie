@@ -64,7 +64,7 @@
                         <span><?= Search::createCashtagLinks(htmlspecialchars($tag['cashtag'])); ?></span>
                     </div>
                     <div class="placement" style="width:30%; display: inline;">
-                        <span>$<? echo htmlspecialchars($tag['amount']) ?></span>
+                        <span><? echo htmlspecialchars($tag['amount']) ?></span>
                     </div>
                 </div>
                 <?endforeach; ?>

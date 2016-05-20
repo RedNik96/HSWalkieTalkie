@@ -23,7 +23,14 @@ class PostHandler
             $cashtagArr = Search::cashtag($_POST['content']);
             foreach ($cashtagArr as $value)
             {
-                SQL::query("INSERT INTO cashtag VALUES (:cashtag)", array( "cashtag" => $value));
+                $stmt = SQL::query("SELECT cashtag FROM cashtag WHERE cashtag = :cashtag", array("cashtag" => $value));
+
+                //Cashtag hinzufügen, falls er noch nicht existiert
+                if(!$stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    SQL::query("INSERT INTO cashtag VALUES (:cashtag)", array("cashtag" => $value));
+                }
+
                 $stmt = SQL::query("INSERT INTO cashtagpost VALUES (:cashtag, :postId)",
                     array(
                         "cashtag"   => $value,
