@@ -29,5 +29,6 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * Überschrift nach Suche, wonach gesucht werden                 //ELF erledigt
 * Bild zu groß -> Fehler abfangen in Timeline                   //ELF erledigt
 * Anleitung, wie man im ILIAS zur Feed URL kommt                //ELF erledigt
+* Irgendwas stimmt in den Settings nicht bei der Hausnummer "Ihre Eingabe muss mit dem Format übereinstimmen"   //ELF
 
 *** Sonntag um 12:00 sind alle in Whats-App erreichbar, um sich abzustimmen ***
