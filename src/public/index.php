@@ -30,6 +30,10 @@
         SettingsHandler::checkUser();
     }, 'settingsCheckUserPost');
 
+    $router->map('POST', '/register/checkUser/', function () {
+        RegisterHandler::checkUser();
+    }, 'registerCheckUserPost');
+
     $router->map('POST', '/settings/checkPwd/', function () {
         SettingsHandler::checkPwd();
     }, 'settingsCheckPwdPost');
@@ -137,7 +141,7 @@
     // von der Login-Seite auf die Registrierungsseite,
     // von der Registrierungsseite (nach POST) zur RegisterHandler Seite
     // von der Login-Seite (nach Submit der Anmeldedaten)
-    if((!LoginHandler::authenticated()) && (!(in_array($match['name'], array('registrierungGet', 'registrierungPost', 'loginPost'))))) {
+    if((!LoginHandler::authenticated()) && (!(in_array($match['name'], array('registrierungGet', 'registrierungPost', 'loginPost', 'registerCheckUserPost'))))) {
         //Ist die Url z. B. /HSWalkieTalie/src/public/settings/, aber es liegt noch keine Anmeldung vor, dann soll
         //der Schönheitshalber erst ein Redirect auf /HSWalkieTalkie/src/public/ erfolgen
         if($match['name']!='timeline'){

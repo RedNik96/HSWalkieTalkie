@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
-<link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<link href="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
     <div class="container">
         <script type="text/javascript">
@@ -39,7 +39,7 @@
                                         Email:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input maxlength="255" required name="email" id="email" type="email" autofocus class="form-control filled" data-value="<?= $user_info['email']?>" value=<?= $user_info['email']?>>
+                                        <input maxlength="255" required name="email" id="email" type="email" autofocus class="form-control filled" data-value="<?= $user_info['email']?>" value="<?= $user_info['email']?>">
                                     </div>
 
                                 </div>
@@ -48,7 +48,7 @@
                                         Vorname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input maxlength="255" required name="firstname" id="firstname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['firstName']?>" value=<?= $user_info['firstName']?>>
+                                        <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß- ]+" maxlength="255" required name="firstname" id="firstname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['firstName']?>" value="<?= $user_info['firstName']?>">
                                     </div>
 
                                 </div>
@@ -57,7 +57,7 @@
                                         Nachname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input maxlength="255" required name="lastname" id="lastname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['lastName']?>" value=<?= $user_info['lastName']?>>
+                                        <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß- ]+" maxlength="255" required name="lastname" id="lastname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['lastName']?>" value="<?= $user_info['lastName']?>">
                                     </div>
 
                                 </div>
@@ -66,7 +66,7 @@
                                         Benutzername:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input maxlength="100" required name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsCheckUserPost');?>">
+                                        <input pattern="[A-Za-zÄÜÖäüöß0-9-_]+" maxlength="100" required name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsCheckUserPost');?>">
                                     </div>
 
                                 </div>
@@ -75,7 +75,7 @@
                                         Geburtstag:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="birth" id="birth" type="date" autofocus class="form-control filled" data-value="<?= $user_info['birthday']?>" value=<?= $user_info['birthday']?>>
+                                        <input required name="birth" id="birth" type="date" autofocus class="form-control filled" data-value="<?= $user_info['birthday']?>" value="<?= $user_info['birthday']?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -83,7 +83,7 @@
                                         Straße:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input maxlength="255" required name="street" id="street" type="text" autofocus class="form-control filled" data-value="<?= $user_info['street']?>" value=<?= $user_info['street']?>>
+                                        <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß.- ]+" maxlength="255" required name="street" id="street" type="text" autofocus class="form-control filled" data-value="<?= $user_info['street']?>" value="<?= $user_info['street']?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -91,7 +91,7 @@
                                         Hausnummer:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input maxlength="255" required name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value=<?= $user_info['housenumber']?>>
+                                        <input pattern="[0-9][0-9a-z-]+" maxlength="255" required name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value="<?= $user_info['housenumber']?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -228,7 +228,7 @@
                                     IBAN:
                                 </label>
                                 <div class="col-lg-6">
-                                    <input maxlength="34" required name="iban" id="iban" type="text" autofocus class="form-control" data-value="<?= $bank_info[$i]['iban']?>" value=<?= $bank_info[$i]['iban']?>>
+                                    <input pattern="[A-Z0-9]+" maxlength="34" required name="iban" id="iban" type="text" autofocus class="form-control" data-value="<?= $bank_info[$i]['iban']?>" value="<?= $bank_info[$i]['iban']?>">
                                 </div>
 
                             </div>
@@ -264,7 +264,7 @@
                                         <div class="btn-group" role="group">
                                             <button type="submit" class="btn btn-primary" name="change-account"><i class="fa fa-floppy-o" aria-hidden="true"></i>Kontodaten ändern</button>
                                         </div>
-                                            <input name="ibanalt" type="hidden" value=<?= $bank_info[$i]['iban']?>>
+                                            <input name="ibanalt" type="hidden" value="<?= $bank_info[$i]['iban']?>">
                                             <div class="btn-group" role="group">
                                                 <button type="submit" class="btn btn-default active" name="delete-account"><i class="fa fa-trash" aria-hidden="true"></i>Konto löschen</button>
                                             </div>
@@ -290,7 +290,7 @@
                                     IBAN:
                                 </label>
                                 <div class="col-lg-6">
-                                    <input maxlength="34" required name="iban" id="iban" type="text" autofocus class="form-control filled">
+                                    <input  pattern="[A-Z0-9]+" maxlength="34" required name="iban" id="iban" type="text" autofocus class="form-control filled">
                                 </div>
 
                             </div>
@@ -346,7 +346,7 @@
                                 RSS-Feed-URL:
                             </label>
                             <div class="col-lg-6">
-                                <input spellcheck="false" maxlength="255" required name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value=<?= $user_info['feedURL']?>>
+                                <input spellcheck="false" maxlength="255" name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value="<?= $user_info['feedURL']?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -354,7 +354,7 @@
                                 RSS-Feed Passwort*:
                             </label>
                             <div class="col-lg-6">
-                                <input maxlength="255" required name="feedPwd" id="feedPwd" type="password" autofocus class="form-control filled" data-value="<?= $user_info['feedPassword']?>" value=<?= $user_info['feedPassword']?>>
+                                <input maxlength="255" name="feedPwd" id="feedPwd" type="password" autofocus class="form-control filled" data-value="<?= $user_info['feedPassword']?>" value="<?= $user_info['feedPassword']?>">
                             </div>
                         </div>
                         <div class="form-group">

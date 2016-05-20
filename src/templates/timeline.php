@@ -1,5 +1,5 @@
-<link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<link href="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 <script type="text/javascript" src="/HSWalkieTalkie/src/public/js/timeline.js"></script>
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/poststylesheet.css">
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/postwritestylesheet.css">
@@ -48,15 +48,18 @@ if (!isset($cashtag)) {?>
                     }
                     if(count($post['imgs'] > 0)) echo "<br>";
                     $content = str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
-                    $content = Search::user($content);
+                    $content = Search::createUserLinks($content);
+                    $content = Search::createCashtagLinks($content);
                     print $content;
                     ?>
                 </div>
             <div class="postfooter container-fluid">
                 <div class="comment col-xs-4">
-                  <a class="btn btn-primary" target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">
-                    <i class="fa fa-comments" aria-hidden="true"></i> Kommentieren
-                  </a>
+                  <? if(!isset($allowComment)): ?>
+                      <a class="btn btn-primary" target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">
+                        <i class="fa fa-comments" aria-hidden="true"></i> Kommentieren
+                      </a>
+                  <? endif; ?>
                 </div>
                 <div class="share col-xs-4">
                     <button class="btn btn-primary repost" name="btnRepost"
@@ -106,15 +109,19 @@ if (!isset($cashtag)) {?>
                       </div>
                       <div class="col-xs-6">
                         <div class="name">
-                          <?= $comment['firstName'] ?>
-                          <?= $comment['lastName'] ?>
+                          <a href="<?= $router->generate('showUserGet',array( 'user' => comment['username'])) ?>" class="name">
+                            <?= $comment['firstName'] ?>
+                            <?= $comment['lastName'] ?>
+                          </a>
                         </div>
                         <div class="username">
-                          @<?= $comment['username'] ?>
+                          <a href="<?= $router->generate('showUserGet',array( 'user' => comment['username'])) ?>" class="username">
+                            @<?= $comment['username'] ?>
+                          </a>
                         </div>
                       </div>
                       <div class="col-xs-4 time">
-                        <?= $comment['commentTime'] ?>
+                        <?= date('d.m.Y H:i:s', strtotime($comment['commentTime'])) ?>
                       </div>
                     </div>
                     <div class="row content">

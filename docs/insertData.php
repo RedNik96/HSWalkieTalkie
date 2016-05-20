@@ -36,7 +36,7 @@ $iban       = array( "123", "345", "678", "901", "234" );
 $bic        = array( 'WELADED1RHN', 'WELADED1RHN', 'WELADED1RHN', 'WELADED1RHN', 'WELADED1RHN');
 
 for($i = 0; $i < count($username); $i++) {
-    Session::create_user(
+    User::createUser(
         $firstname[$i],
         $lastname[$i],
         $mail[$i],
