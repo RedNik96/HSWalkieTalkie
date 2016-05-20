@@ -66,25 +66,30 @@ if (!isset($cashtag)) {?>
                             data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
                             data-user="<?= $_SESSION['user']; ?>"
                             data-post="<?= $post['postID']; ?>"
-                            <? if($post['username'] == $_SESSION['user']) echo "disabled"; ?>>
+                            <? if($post['username'] == $_SESSION['user']) echo "disabled"; ?>
+                    >
                         <i class="fa fa-share" aria-hidden="true"></i>
                     </button>
                     <span class="shared"><?= htmlspecialchars($post['reposts']); ?></span>
                 </div>
                 <div class="vote col-xs-4">
-                    <button class="btn btn-danger"
+                    <button class="btn btn-danger votedown"
                             data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
                             data-user="<?= $_SESSION['user']; ?>"
                             data-post="<?= $post['postID']; ?>"
-                            data-vote="0">
+                            data-ownvote="<?= $post['ownVote']; ?>"
+                            data-vote="0"
+                    >
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </button>
                     <span class="cash">$<?= $post['votes']; ?></span>
-                    <button class="btn btn-warning"
+                    <button class="btn btn-warning voteup"
                             data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
                             data-user="<?= $_SESSION['user']; ?>"
                             data-post="<?= $post['postID']; ?>"
-                            data-vote="1">
+                            data-ownvote="<?= $post['ownVote']; ?>"
+                            data-vote="1"
+                    >
                         <i class="fa fa-chevron-up" aria-hidden="true"></i>
                     </button>
                 </div>
