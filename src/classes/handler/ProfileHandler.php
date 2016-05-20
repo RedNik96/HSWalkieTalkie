@@ -18,9 +18,15 @@ Class ProfileHandler {
    * das Profil des mitgegebenen Users wird gerendert
    */
   public static function showUser($user) {
-    $data=self::getUser($user);
 
-    Template::render('timeline', $data, array('template_right' => 'profile'));
+    $stmt=SQL::query("SELECT * FROM user WHERE username=:username",array('username' => $user));
+    if ($stmt->fetch()) {
+      $data=self::getUser($user);
+      Template::render('timeline', $data, array('template_right' => 'profile'));
+    } else {
+      ErrorHandler::showError();
+    }
+    
   }
 
   /**
@@ -39,11 +45,17 @@ Class ProfileHandler {
       $users[$i]=$res;
       $i++;
     }
-    $data = array(
-        "users" => $users
-    );
-    // rendert das Template moreUser mit den übergebenen Usern
-    Template::render('moreUser', $data);
+    if ($i>0) {
+      $data = array(
+          "users" => $users
+      );
+      // rendert das Template moreUser mit den übergebenen Usern
+      Template::render('moreUser', $data);
+    } else {
+      global $router;
+      header("Location: " . $router->generate("notFoundGet"));
+    }
+    
   }
 
   /**

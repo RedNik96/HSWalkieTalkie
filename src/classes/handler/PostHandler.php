@@ -195,49 +195,53 @@ class PostHandler
 
         $result = EscapeUtil::escapeArrayReturn($stmt->fetch(PDO::FETCH_ASSOC));
 
-        // Bilder des Posts
-        $stmt2 = SQL::query(
-            "SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent",
-            array(
-              'pid'       => $result['postID'],
-              'pidParent' => $result['postIDParent'])
-        );
+        if (!$result) {
+            ErrorHandler::get();
+        } else {
+            // Bilder des Posts
+            $stmt2 = SQL::query(
+                "SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent",
+                array(
+                  'pid'       => $result['postID'],
+                  'pidParent' => $result['postIDParent'])
+            );
 
-        $imgs = array();
-        while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $imgs[] = $img['filename'];
+            $imgs = array();
+            while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                $imgs[] = $img['filename'];
+            }
+
+            // Kommentare
+            $stmt3 = SQL::query(
+              "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+              FROM comment as C, user as U
+              WHERE C.postID = :postID AND C.userID = U.username
+              ORDER BY C.commentTime DESC",
+              array(
+                'postID' => $postID)
+            );
+
+            $data = array(
+              'posts' => array(
+                array(
+                  'postID'    => $result['postID'],
+                  'username'  => $result['username'],
+                  'firstName' => $result['firstName'],
+                  'lastName'  => $result['lastName'],
+                  'picture'   => $result['picture'],
+                  'content'   => $result['content'],
+                  'votes'     => $result['Votes'],
+                  'reposts'   => $result['Reposts'],
+                  'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
+                  'imgs'      => $imgs,
+                  'comments'  => $stmt3
+                )
+              ),
+              'allowComment' => true
+            );
+
+            Template::render('timeline', $data);
         }
-
-        // Kommentare
-        $stmt3 = SQL::query(
-          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-          FROM comment as C, user as U
-          WHERE C.postID = :postID AND C.userID = U.username
-          ORDER BY C.commentTime DESC",
-          array(
-            'postID' => $postID)
-        );
-
-        $data = array(
-          'posts' => array(
-            array(
-              'postID'    => $result['postID'],
-              'username'  => $result['username'],
-              'firstName' => $result['firstName'],
-              'lastName'  => $result['lastName'],
-              'picture'   => $result['picture'],
-              'content'   => $result['content'],
-              'votes'     => $result['Votes'],
-              'reposts'   => $result['Reposts'],
-              'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
-              'imgs'      => $imgs,
-              'comments'  => $stmt3
-            )
-          ),
-          'allowComment' => true
-        );
-
-        Template::render('timeline', $data);
     }
 
     /**
