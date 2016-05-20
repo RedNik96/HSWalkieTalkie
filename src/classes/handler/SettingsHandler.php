@@ -7,11 +7,9 @@ class SettingsHandler {
     /**
      * sucht alle Voreinstellungen des eingeloggten Users und rendert die Einstellungsseite
      */
-    public static function get($tab) {
+    public static function get($tab,...$errorString) {
         //sucht alle persönlichen Informationen zum eingeloggten User
-        $stmt = SQL::query("SELECT * FROM user, city WHERE username=:username and city.zip=user.zip", array(
-            'username' => $_SESSION['user']
-        ));
+        $stmt = User::getOwnInfo($_SESSION['user']);
 
         $user_info=$stmt->fetch();
         EscapeUtil::escapeArray($user_info);
@@ -43,7 +41,8 @@ class SettingsHandler {
             'user_info' => $user_info,
             'bank_info' => $bank_info,
             'zips' => $zips,
-            'bics' => $bics
+            'bics' => $bics,
+            'errorString' => $errorString
         );
         //links und rechts wird nichts gerendert
         $templates['template_left']=null;
@@ -107,13 +106,22 @@ class SettingsHandler {
                 //das hochgeladene Foto wird gespeichert
                 if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
                     User::changePicture($imageFileType);
+                } else {
+                    $errorString='Fehler: Die Datei konnte nicht hochgeladen werden bitte versuche es erneut.';
                 }
+            } else {
+                $errorString='Fehler: Es wurde kein Bild hochgeladen. Bitte lade eine Bilddatei hoch.';
             }
         }
         
         //die Settingsseite wird gerenderet
-        global $router;
-        header("Location: " . $router->generate("settingsGet",array('tab' => 0)));
+        //global $router;
+        //header("Location: " . $router->generate("settingsGet",array('tab' => 0)));
+        if (isset($errorString)) {
+            SettingsHandler::get(0,$errorString);
+        } else {
+            SettingsHandler::get(0);
+        }
     }
 
     /**
