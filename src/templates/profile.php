@@ -40,40 +40,44 @@
 
 <script type="text/javascript">
     $( document ).ready(function() {
-        var isFollowing = document.getElementById('followUser').getAttribute('data-isFollowing');
-        if(isFollowing == 0)
-            replaceIcon('removed');
-        else
-            replaceIcon('added');
-    });
-    $('#followUser').on('click', function(){
-
-        var url = $(this).data('url');
-        var userFollowed = $(this).data('followeduser');
-        var userFollower = $(this).data('followeruser');
-
-        var span = (this).getElementsByTagName("span")[0];
-
-        $.post(url,
-            {
-                userFollowed: userFollowed,
-                userFollower: userFollower
-            }, function(returnedData) {
-                replaceIcon(returnedData);
-            });
-    });
-    function replaceIcon(data) {
-        var span = document.getElementById('textFollowUser');
-        if (data.trim() == "added") {
-            $('#iconFollowUser').removeClass("fa-user-plus");
-            $('#iconFollowUser').addClass("fa-user-times");
-            span.innerHTML = 'Nicht mehr folgen';
-        } else if (data.trim() == "removed") {
-            $('#iconFollowUser').removeClass("fa-user-times");
-            $('#iconFollowUser').addClass("fa-user-plus");
-            span.innerHTML = 'Folgen';
-        } else {
-            alert('Beim Folgen dieses Users ist ein Fehler aufgetreten.');
+        var btnFollowUser = document.getElementById('followUser');
+        if (btnFollowUser != null) {
+            var isFollowing = btnFollowUser.dataset.isfollowing;
+            if (isFollowing == 0)
+                replaceIcon('removed');
+            else
+                replaceIcon('added');
         }
-    };
+
+        $('#followUser').on('click', function () {
+
+            var url = $(this).data('url');
+            var userFollowed = $(this).data('followeduser');
+            var userFollower = $(this).data('followeruser');
+
+            var span = (this).getElementsByTagName("span")[0];
+
+            $.post(url,
+                {
+                    userFollowed: userFollowed,
+                    userFollower: userFollower
+                }, function (returnedData) {
+                    replaceIcon(returnedData);
+                });
+        });
+        function replaceIcon(data) {
+            var span = document.getElementById('textFollowUser');
+            if (data.trim() == "added") {
+                $('#iconFollowUser').removeClass("fa-user-plus");
+                $('#iconFollowUser').addClass("fa-user-times");
+                span.innerHTML = 'Nicht mehr folgen';
+            } else if (data.trim() == "removed") {
+                $('#iconFollowUser').removeClass("fa-user-times");
+                $('#iconFollowUser').addClass("fa-user-plus");
+                span.innerHTML = 'Folgen';
+            } else {
+                alert('Beim Folgen dieses Users ist ein Fehler aufgetreten.');
+            }
+        };
+    });
 </script>
