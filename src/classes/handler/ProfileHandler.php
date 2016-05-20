@@ -9,7 +9,6 @@ Class ProfileHandler {
    */
   public static function get() {
     $data=self::getUser($_SESSION['user']);
-
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 

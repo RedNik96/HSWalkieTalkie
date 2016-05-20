@@ -70,3 +70,7 @@ i {
     border: solid 2px #ac2925;
     box-shadow: none;
 }
+
+#help {
+    margin-left: 5px;
+}

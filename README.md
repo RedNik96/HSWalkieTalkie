@@ -16,3 +16,5 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * RSS        //macht Marius
 * Trending Cashtags hübsch machen //xgadles
 * Iban als Primäschlüssel mit dem User
+* HTTP-Error 401 wenn ilias passwort falsch oder nicht gesetzt //marius
+* HTTP-Timeout beim Ilias-Feed //marius

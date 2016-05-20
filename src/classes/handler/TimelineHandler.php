@@ -4,11 +4,8 @@ Class TimelineHandler {
   public static function get() {
     $posts = self::getPostsAsArray($_SESSION['user']);
 
-    $stats = StatisticHandler::getFriendsStats();
-
     $data = array(
-        "posts" => $posts,
-        "stats" => $stats
+        "posts" => $posts
     );
 
     Template::render("timeline", $data);

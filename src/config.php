@@ -39,7 +39,6 @@ spl_autoload_register(function($class) {
         require_once($file);
     }
 });
-
 spl_autoload_register(function($class) {
     $file = CLASSES_PATH . "/handler/" .  $class. '.php';
     if (file_exists($file))

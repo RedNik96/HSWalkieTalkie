@@ -9,8 +9,12 @@
 if (!isset($cashtag)) {?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" maxlength="255" placeholder="Was machst du gerade?" rows="6" maxlength="255" required></textarea>
+    <div id="labelpanel">
+        <label class="label label-danger" id="danger"><? if (isset($_SESSION['error'])) { echo $_SESSION['error']; $_SESSION['error']=null;}  ?></label>
+    </div>
     <div class="postaddonsdiv">
-        <input id="postedFiles" name="postedFiles[]" type="file" accept="image/x-png, image/gif, image/jpeg" multiple>
+        <input type="hidden" name="origin" value="<?= $GLOBALS['match']['name'] ?>">
+        <input id="postedFiles" name="postedFiles[]" type="file" accept="image/x-png, image/gif, image/jpeg, image/svg" multiple >
         <script>
             $(document).on('ready', function() {
                 $("#postedFiles").fileinput({showCaption: false});
