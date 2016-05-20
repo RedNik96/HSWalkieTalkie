@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
-<link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<link href="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
     <div class="container">
         <script type="text/javascript">
