@@ -3,7 +3,7 @@
 <span class="rssFeed">
     <legend>ILIAS-RSS-Feed</legend>
 </span>
-<?if (is_array($rss_article)){?>
+<?if (is_array($rss_article)){?> 
     <?foreach ($rss_article as $entry){?>
         <div class="rss_entry">
             <p>
