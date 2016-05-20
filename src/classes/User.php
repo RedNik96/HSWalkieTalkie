@@ -23,7 +23,11 @@ class User {
                        </div>";
         return $userhtml;
     }
-    
+
+    /** überprüft ob der übergebene Username gleich dem des eingeloggten Users oder noch nicht vorhanden ist
+     * @param $username Username der überprüft werden soll
+     * @return string "true" wenn username noch nicht vorhanden oder gleich dem eingeloggtem username
+     */
     public static function checkUser($username) {
         
 
@@ -74,7 +78,11 @@ class User {
 
         return false;
     }
-    
+
+    /** erzeugt eine neue Bankverbindung für den eingeloggten User
+     * @param $iban Iban der Bankverbindung
+     * @param $bic BIC der Bankverbindung
+     */
     public static function createAccount($iban,$bic) {
         $stmt=SQL::query("SELECT iban from account where iban=:iban", array(
                 'iban' => $iban));
@@ -86,7 +94,10 @@ class User {
             ));
         }
     }
-    
+
+    /** löscht die Kontoverbindung des angegebenen Users
+     * @param $iban Iban des Accounts
+     */
     public static function deleteAccount($iban) {
         SQL::query("DELETE FROM account WHERE iban=:iban and user=:user", array(
             'iban' => $iban,
@@ -94,6 +105,11 @@ class User {
         ));
     }
 
+    /** ändert die Kontoverbindung des eingeloggtem Users
+     * @param $ibanalt Iban der alten Verbindung
+     * @param $iban neue Iban
+     * @param $bic neue BIC
+     */
     public static function changeAccount($ibanalt,$iban,$bic) {
         $stmt=SQL::query("SELECT iban from account where iban=:iban", array(
             'iban' => $iban));
@@ -105,7 +121,12 @@ class User {
             ));
         }
     }
-    
+
+    /** ändert das Passwort des eingeloggtem Users
+     * @param $old altes Passwort
+     * @param $new neues Passwort
+     * @param $verify wiederholtes neues Passwort
+     */
     public static function changePassword($old,$new,$verify) {
         if (User::checkCredentials($_SESSION['user'],$old) && $new===$verify) {
             $hash = password_hash($new, PASSWORD_DEFAULT);
@@ -115,7 +136,11 @@ class User {
             ));
         }
     }
-    
+
+    /** ändert die Ilias-Einstellungen des eingeloggten User
+     * @param $url Ilias-Feed-Url
+     * @param $feedPwd Passwort des Ilias-Feeds
+     */
     public static function changeIlias($url,$feedPwd) {
         $stmt = SQL::query("UPDATE user SET feedUrl=:url, feedPassword=:feedPwd WHERE username=:user", array(
             'url' => $url,
@@ -123,14 +148,22 @@ class User {
             'user' => $_SESSION['user']
         ));
     }
-    
+
+    /** sucht alle Informationen zu dem übergebenen User
+     * @param $user Username
+     * @return PDOStatement|string Ergebnis der Abfrage als Statement
+     */
     public static function getOwnInfo($user) {
         $stmt = SQL::query("SELECT * FROM user, city where username = :username AND user.zip = city.zip", array(
             'username' => $user
         ));
         return $stmt;
     }
-    
+
+    /** sucht alle Informationen zu dem übergebenen User und überprüft ob der eingeloggte User diesem folgt
+     * @param $user Username
+     * @return PDOStatement|string Ergebnis der Abfrage als Statement
+     */
     public static function getOtherInfo($user) {
         $stmt = SQL::query("
         SELECT *, 
@@ -142,7 +175,17 @@ class User {
         ));
         return $stmt;
     }
-    
+
+    /** ändert die Persönlichen Informationen des eingeloggten Users
+     * @param $firstname Vorname
+     * @param $lastname Nachname
+     * @param $email Mail-Adresse
+     * @param $zip PLZ
+     * @param $street Straße
+     * @param $username Username
+     * @param $birth Geburtsdatum
+     * @param $nr Hausnummer
+     */
     public static function changePersonalInformation($firstname,$lastname,$email,$zip,$street,$username,$birth,$nr) {
         //$firstname=mysql_real_escape_string($firstname);
         SQL::query("UPDATE user SET firstName=:firstname, lastName=:lastname, email=:email, zip=:zip, street=:street, 
@@ -160,33 +203,61 @@ class User {
         ));
     }
 
+    /** liefert den Namen des Profilbilds des eingeloggten Users
+     * @return PDOStatement|string Ergebniss der Abfrage als Statement
+     */
     public static function getPicture() {
         $stmt=SQL::query("SELECT picture, DEFAULT(picture) AS defaultImg FROM user WHERE username=:user", array(
             'user' => $_SESSION['user']
         ));
         return $stmt;
     }
-    
+
+    /**
+     * löscht das Bild des eingeloggten Users in der Datenbank
+     */
     public static function deletePicture() {
         SQL::query("UPDATE user SET picture=DEFAULT WHERE username=:user", array(
             'user' => $_SESSION['user']
         ));
     }
-    
+
+    /** ändert den Namen des Bildes des eingeloggten Users
+     * @param $imageFileType
+     */
     public static function changePicture($imageFileType) {
         SQL::query("UPDATE user SET picture=:picture WHERE username=:user", array(
             'picture' => $_SESSION['user'] . "." . $imageFileType,
             'user' => $_SESSION['user']
         ));
     }
-    
+
+    /** Sucht alle Benutzer mit dem mitgegebenen Vollnamen
+     * @param $name Vollname
+     * @return PDOStatement|string Ergebniss der Abfrage
+     */
     public static function getUsersByFullName($name) {
         $stmt=SQL::query("SELECT picture, firstName, lastName, username FROM user WHERE CONCAT (firstName, ' ', lastName)=:name", array(
             'name' => $name
         ));
         return $stmt;
-    } 
-    
+    }
+
+    /** erstellt einen neuen Nutzer in der Datenbank
+     * @param $firstName Vorname
+     * @param $lastName Nachname
+     * @param $email Mail-Adresse
+     * @param $username Username
+     * @param $password Passwort
+     * @param $confirmedPassword wiederholtes Passwort
+     * @param $birthday Geburtsdatum
+     * @param $street Straße
+     * @param $housenumber Hausnummer
+     * @param $zip PLZ
+     * @param $iban Iban
+     * @param $bic BIC
+     * @throws Exception wenn es den Benutzernamen schon gibt
+     */
     public static function createUser($firstName, $lastName, $email, $username, $password, $confirmedPassword, $birthday, $street, $housenumber, $zip, $iban, $bic) {
 
     if($password == $confirmedPassword && $email != null && $username != null)  //data okay, go ahead
@@ -240,6 +311,10 @@ class User {
         }
     }
 
+    /** sucht den kumulierten Cash des mitgegebenen Users
+     * @param $user Username
+     * @return mixed Cash des Users
+     */
     public static function getUserCash($user) {
         $stmt=SQL::query("SELECT 
                       ((SELECT COUNT(V.voter) FROM posts AS P, votes AS V WHERE V.post = P.id AND V.vote = 1 AND p.user = U.username) -

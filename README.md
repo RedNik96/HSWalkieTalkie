@@ -14,6 +14,5 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 #ToDos
 * ER-Diagramm anpassen/aktualisieren //xgwsnde
 * RSS        //macht Marius
-* Suche      //macht Jonas
-* Vote-Button deaktivieren, sobald einer gevotet hat //xgwsdfe
 * Trending Cashtags hübsch machen //xgadles
+* Iban als Primäschlüssel mit dem User

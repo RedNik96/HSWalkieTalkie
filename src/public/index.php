@@ -6,6 +6,7 @@
     $template_data = [];
     global $dbh;
 
+    // Erstellung des Routers und koniguration des BasePath sowie der Routen
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
@@ -88,7 +89,7 @@
             'template_right'    => null,
             'template_left'     => null
         ));
-    }, 'registrierungGet');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
+    }, 'registrierungGet');
 
     $router->map('POST', '/register/', function () {
         RegisterHandler::regsister();
@@ -134,6 +135,7 @@
         PostHandler::post($id);
     }, 'viewPostPost');
 
+    // Ermittlung der der aktuellen Route
     $match = $router->match();
 
     //Wenn keine Anmeldung vorliegt, soll direkt auf die Login-Seite verlinkt werden
@@ -164,5 +166,5 @@
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {
-        ErrorHandler::get();
+        ErrorHandler::showError();
     }
