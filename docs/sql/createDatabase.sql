@@ -42,7 +42,7 @@ CREATE TABLE `account` (
   `iban` varchar(34) COLLATE utf8mb4_bin NOT NULL,
   `bic` varchar(11) COLLATE utf8mb4_bin,
   `user` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`iban`),
+  PRIMARY KEY (`iban`, `user`),
   FOREIGN KEY (`bic`) REFERENCES bic (`bic`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`user`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

@@ -39,3 +39,8 @@
     display: inline-block;
     font-weight: bold;
 }
+
+.statistic .smallImages {
+    max-width: 50px;
+    max-height: 50px;
+}

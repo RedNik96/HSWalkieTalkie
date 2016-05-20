@@ -84,8 +84,10 @@ class User {
      * @param $bic BIC der Bankverbindung
      */
     public static function createAccount($iban,$bic) {
-        $stmt=SQL::query("SELECT iban from account where iban=:iban", array(
-                'iban' => $iban));
+        $stmt=SQL::query("SELECT iban from account where iban=:iban AND user=:user", array(
+                'iban' => $iban,
+                'user' => $_SESSION['user']
+        ));
         if (!$stmt->fetch()) {
             SQL::query("INSERT INTO account values (:iban, :bic, :user)", array(
                 'iban' => $iban,
@@ -111,13 +113,19 @@ class User {
      * @param $bic neue BIC
      */
     public static function changeAccount($ibanalt,$iban,$bic) {
-        $stmt=SQL::query("SELECT iban from account where iban=:iban", array(
-            'iban' => $iban));
+        $stmt=SQL::query("SELECT iban from account where iban=:iban AND user=:user",
+            array(
+                'iban' => $iban,
+                'user' => $_SESSION['user']
+            )
+        );
+
         if (!$stmt->fetch()) {
-            SQL::query("UPDATE account SET iban=:iban, bic=:bic WHERE iban=:ibanalt", array(
+            SQL::query("UPDATE account SET iban=:iban, bic=:bic WHERE iban=:ibanalt AND user=:user", array(
                 'bic' => $bic,
                 'iban' => $iban,
-                'ibanalt' => $ibanalt
+                'ibanalt' => $ibanalt,
+                'user'  => $_SESSION['user']
             ));
         }
     }
@@ -285,17 +293,14 @@ class User {
                 ));
 
             if($iban) {
-                //Abfrage, ob IBAN noch nicht existiert
-                $stmt2 = SQL::query("SELECT * FROM account where iban = :iban", array( "iban" => $iban));
-                //Wenn nicht, kann Konto hinzugefüggt werden.
-                if(!$stmt2->fetch()) {
-                    $stmt2 = SQL::query("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)",
-                        array(
-                            'iban' => $iban,
-                            'bic' => $bic,
-                            'username' => $username
-                        ));
-                }
+                //Konto hinzufügen
+                SQL::query("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)",
+                    array(
+                        'iban' => $iban,
+                        'bic' => $bic,
+                        'username' => $username
+                    )
+                );
             }
 
             $_SESSION['logged_in']  = true;

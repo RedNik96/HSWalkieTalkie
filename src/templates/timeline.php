@@ -4,12 +4,14 @@
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/poststylesheet.css">
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/postwritestylesheet.css">
 
-<? global $router;
-    global $match;
-if (isset($outcome)) {?>
+<? global $router;  global $match; ?>
+<!-- TITEL FÜR SUCHERGEBNISSE ----------------------------------------------------------------------------------------------------------- -->
+<? if (isset($outcome)) {?>
     <h2>Ergebnisse für die Suche nach $<?= $outcome ?>:</h2>
 <? }
-if (!isset($cashtag)) {?>
+if (!isset($cashtag)) {
+?>
+<!-- POST ------------------------------------------------------------------------------------------------------------------------------- -->
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" maxlength="255" placeholder="Was machst du gerade?" rows="6" maxlength="255" required></textarea>
     <div id="labelpanel">
@@ -30,9 +32,12 @@ if (!isset($cashtag)) {?>
 </form>
 <? } ?>
 
+<!-- LISTE ALLER POSTS ----------------------------------------------------------------------------------------------------------------- -->
 <? if(!empty($posts)): ?>
     <? foreach($posts as $post): ?>
+        <!-- POST-CONTAINER ------------------------------------------------------------------------------------------------------------- -->
         <div class="post" data-id="<?= $post['postID'] ?>">
+            <!-- POST-HEADER ------------------------------------------------------------------------------------------------------------- -->
             <div class="postheader">
                 <?php
                 if(isset($post['postIDParent']) && $post['postIDParent'])
@@ -45,22 +50,26 @@ if (!isset($cashtag)) {?>
                     <? echo User::getUserHtml($post['picture'], $post['firstName'], $post['lastName'], $post['username'])?>
                 </div>
                 <div class="posttime">
-                    <span class="time"><?= htmlspecialchars($post['datePosted']); ?> Uhr</span>
+                    <span class="time"><?= $post['datePosted']; ?> Uhr</span>
                 </div>
             </div>
-                <div class="postcontent">
-                    <?
-                    foreach ($post['imgs'] as $img) {
-                        ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
-                    }
-                    if(count($post['imgs'] > 0)) echo "<br>";
-                    $content = str_replace(chr(13), '<br>', htmlspecialchars($post['content']));
-                    $content = Search::createUserLinks($content);
-                    $content = Search::createCashtagLinks($content);
-                    print $content;
-                    ?>
-                </div>
+            <!-- POST-INHALT ------------------------------------------------------------------------------------------------------------- -->
+            <div class="postcontent">
+                <?
+                foreach ($post['imgs'] as $img) {
+                    ?><img src="<?= "/HSWalkieTalkie/src/img/posts/".$img;?>" class="img-thumbnail" alt="<?= $img; ?>"><?
+                }
+                if(count($post['imgs'] > 0))
+                    echo "<br>";
+                $content = str_replace(chr(13), '<br>', $post['content']);
+                $content = Search::createUserLinks($content);
+                $content = Search::createCashtagLinks($content);
+                print $content;
+                ?>
+            </div>
+            <!-- POST-FOOTER ------------------------------------------------------------------------------------------------------------- -->
             <div class="postfooter container-fluid">
+                <!-- POST-KOMMENTAR BUTTON------------------------------------------------------------------------------------------------ -->
                 <div class="comment col-xs-4">
                   <? if(!isset($allowComment)): ?>
                       <a class="btn btn-primary" target="_blank" href="<?= $router->generate('viewPostGet', array('id'=>$post['postID'])); ?>">
@@ -68,6 +77,7 @@ if (!isset($cashtag)) {?>
                       </a>
                   <? endif; ?>
                 </div>
+                <!-- POST-REPOST BUTTON-------------------------------------------------------------------------------------------------- -->
                 <div class="share col-xs-4">
                     <button class="btn btn-primary repost" name="btnRepost"
                             data-url="<?= $GLOBALS["router"]->generate('repostPost'); ?>"
@@ -77,9 +87,11 @@ if (!isset($cashtag)) {?>
                     >
                         <i class="fa fa-share" aria-hidden="true"></i>
                     </button>
-                    <span class="shared"><?= htmlspecialchars($post['reposts']); ?></span>
+                    <span class="shared"><?= $post['reposts']; ?></span>
                 </div>
+                <!-- POST-VOTES -------------------------------------------------------------------------------------------------------- -->
                 <div class="vote col-xs-4">
+                    <!-- POST-VOTEDOWN BUTTON------------------------------------------------------------------------------------------- -->
                     <button class="btn btn-danger votedown"
                             data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
                             data-user="<?= $_SESSION['user']; ?>"
@@ -89,7 +101,9 @@ if (!isset($cashtag)) {?>
                     >
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </button>
+                    <!-- POST-SUMME VOTES -------------------------------------------------------------------------------------------- -->
                     <span class="cash">$<?= $post['votes']; ?></span>
+                    <!-- POST-VOTEUP BUTTON ------------------------------------------------------------------------------------------ -->
                     <button class="btn btn-warning voteup"
                             data-url="<?= $GLOBALS["router"]->generate('votePost')?>"
                             data-user="<?= $_SESSION['user']; ?>"
@@ -101,6 +115,7 @@ if (!isset($cashtag)) {?>
                     </button>
                 </div>
             </div>
+            <!-- POST-KOMMENTARE----------- ------------------------------------------------------------------------------------------ -->
             <div class="comments container-fluid">
                 <? if(isset($allowComment)): ?>
                     <div class="no-marginpad new-Comment-Container row container-fluid">

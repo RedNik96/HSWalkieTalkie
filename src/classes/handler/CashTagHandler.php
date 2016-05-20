@@ -11,7 +11,7 @@ class CashTagHandler
     static public function get($cashtag) {
         //sucht alle Posts in denen der übergebene Cashtag enthalten ist
         $stmt = SQL::query(
-            "SELECT P.id AS postID, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
+            "SELECT P.id AS postID, P.parentPost As postIDParent, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
               ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
                 (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
               (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
@@ -25,14 +25,9 @@ class CashTagHandler
         $posts = array();
         while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
             EscapeUtil::escapeArray($result);
+
             //sucht für jeden Post die ggf. vorhanden Bilder
-            $stmt2 = SQL::query("SELECT filename FROM postsImg WHERE postID = :pid", array(
-                'pid' => $result['postID']
-            ));
-            $imgs = array();
-            while ($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                $imgs[] = $img['filename'];
-            }
+            $imgs = PostHandler::getPostImages($result['postID'], $result['postIDParent']);
 
             $stmt3 = SQL::query(
                 "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
