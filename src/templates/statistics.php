@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/statistic.css">
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/modalpost.css">
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<link href="/HSWalkieTalkie/src/libraries/bootstrap-toggle-master/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="/HSWalkieTalkie/src/libraries/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
 
     <legend>Statistiken</legend>
     <span>Statistiken anzeigen für </span>
