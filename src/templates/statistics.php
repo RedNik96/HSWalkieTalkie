@@ -57,14 +57,14 @@
                 foreach($stats['trendingTags'] as $tag):
                 $i++?>
                 <div class="ranking">
-                    <div class="placement" style="width:10%;">
+                    <div class="placement">
                         <span><?echo $i ?>.</span>
                     </div>
-                    <div class="placement" style="width: 60%;">
+                    <div class="cashtag">
                         <span><?= Search::createCashtagLinks(htmlspecialchars($tag['cashtag'])); ?></span>
                     </div>
-                    <div class="placement" style="width:30%; display: inline;">
-                        <span><? echo htmlspecialchars($tag['amount']) ?></span>
+                    <div class="cashtagUsedAmount">
+                        <span>in <? echo htmlspecialchars($tag['amount']) ?> Posts verwendet</span>
                     </div>
                 </div>
                 <?endforeach; ?>
