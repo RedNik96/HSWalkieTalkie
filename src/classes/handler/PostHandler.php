@@ -5,6 +5,30 @@ class PostHandler
     public static function create()
     {
         global $router;
+        if(isset($_FILES['postedFiles'])) {
+            $error = false;
+            foreach ($_FILES['postedFiles']['error'] as $errorCode) {
+                if ($errorCode!=0&&$errorCode!=4) {
+                    $error=true;
+                }
+            }
+            for($i = 0; $i < count($_FILES['postedFiles']['name']); $i++) {
+                //Prüfen, ob es wirklich eine Datei ist
+                if (isset($_FILES["postedFiles"]["tmp_name"][$i])&&$_FILES["postedFiles"]["tmp_name"][$i]!="") {
+                    $check = getimagesize($_FILES["postedFiles"]["tmp_name"][$i]);
+                    if ($check == false) {
+                        $error=true;
+                    }
+                }
+
+            }
+            if ($error==true) {
+                $_SESSION['error']="Fehler: Beim Dateiupload ist ein Fehler aufgetreten. Eventuell ist die Datei zu groß.";
+                header('Location: ' . $router->generate($_POST['origin']));
+                die;
+            }
+        }
+
         if(isset($_POST['content'])) {
 
             $now = date('Y-m-d H:i:s');
@@ -78,7 +102,7 @@ class PostHandler
                 }
             }
 
-            header('Location: ' . $router->generate('timeline'));
+            header('Location: ' . $router->generate($_POST['origin']));
         }
     }
 

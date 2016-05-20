@@ -61,6 +61,7 @@ class CashTagHandler
         }
         $data = array(
             "posts" => $posts,
+            "outcome" => $cashtag,
             "cashtag" => true //sorgt dafür das das Editierfenster nicht angezeigt wird
         );
         // rendert die Timeline mit den in $posts gespeicherten Post

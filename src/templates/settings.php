@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>
-                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPersonalInformationPost');?>">
+                                    <input id="userfile" name="userfile" type="file" accept="image/x-png, image/gif, image/jpeg, image/svg" class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPersonalInformationPost');?>">
                                     <button name="deletePicture" id="deletePicture" class="btn btn-default active"><i class="fa fa-trash" aria-hidden="true"></i>Profilbild löschen</button>
                                     <script >
                                         $(document).on('ready', function() {
@@ -341,9 +341,10 @@
                         <legend>
                             Ilias-Feed Einstellungen
                         </legend>
+
                         <div class="form-group">
                             <label for="url" class=" col-lg-6 control-label">
-                                RSS-Feed-URL:
+                                RSS-Feed-URL des privaten Ilias-Feeds:
                             </label>
                             <div class="col-lg-6">
                                 <input spellcheck="false" maxlength="255" name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value="<?= $user_info['feedURL']?>">
@@ -360,6 +361,18 @@
                         <div class="form-group">
                             <label class=" col-lg-6"></label>
                             <label class=" col-lg-6">*Dieses Passwort muss im Klartext gespeichert werden<br>Benutze also nie ein Passwort, welches du auch an anderer Stelle verwendest</label>
+                        </div>
+                        <div class="form-group" id="help">
+                            <a class="col-lg-12" data-toggle="collapse" data-target="#demo">Brauchst du Hilfe zum Ilias-Feed?</a>
+
+                            <div id="demo" class="collapse col-lg-12">
+                                So kommst du an deinen Ilias-Feed<br>
+                                1. Logge dich im Ilias ein<br>
+                                2. Klicke auf den orangen RSS-Button<br>
+                                3. Du findest den privaten RSS-Feed unter der Überschrift: URL Ihres privaten Newsfeeds<br>
+                                4. Falls die URL hier nicht angezeigt wird, richte den privaten Feed unter dem Link "Einstellung" ein<br>
+                                5. Kopiere die angezeigte URL in das Feld "RSS-Feed-URL des privaten Ilias-Feeds:"
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-6 control-label"></label>

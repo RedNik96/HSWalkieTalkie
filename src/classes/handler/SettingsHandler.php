@@ -92,13 +92,13 @@ class SettingsHandler {
             User::deletePicture();
             //ein neues Profilbild wurde hochgeladen
         } else if (isset($_FILES["userfile"])) {
-            if ($_FILES['userfile']['error']!=0) {
+            if ($_FILES['userfile']['error']!=0&&$_FILES['userfile']['error']!=4) {
                 if ($_FILES['userfile']['error']==1) {
                     $errorString='Fehler: Die hochgeladene Datei ist zu groß. Bitte wähle eine kleinere Datei';
                 } else {
                     $errorString='Fehler: Es ist ein Fehler aufgetreten. Bitte versuche es erneut';
                 }
-            } else {
+            } else if (isset($_FILES["userfile"]["tmp_name"])&&$_FILES["userfile"]["tmp_name"]!=""){
                 //überprüft ob tatsächlich ein Bild hochgeladen wurde
                 $check = getimagesize($_FILES["userfile"]["tmp_name"]);
                 if($check !== false) {
