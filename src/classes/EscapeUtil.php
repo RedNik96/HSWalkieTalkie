@@ -21,6 +21,11 @@ class EscapeUtil
         //return $variable;
     }
 
+    /**
+     * @param $variable Array das escapet werden soll
+     * @return das Array mit den Werten die escaped sind
+     * escaped alle Dateien in dem übergebenen Array mithilfe von htmlspecialchars
+     */
     public static function escapeArrayReturn($data) {
       foreach ((array)$data as $value) {
           if (!is_array($value)) {

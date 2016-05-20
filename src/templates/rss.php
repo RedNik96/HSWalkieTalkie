@@ -17,7 +17,7 @@
                     <?echo $entry['pubDate']?>
                 </div>
                 <div class="rss_link">
-                    <a href="<?=$entry['link']?>">Zur ILIAS-Datei</a>
+                    <a target="_blank" href="<?=$entry['link']?>">Zur ILIAS-Datei</a>
                 </div>
             </p>
         </div>
@@ -33,6 +33,3 @@
             <a href="<?= $GLOBALS['router']->generate('settingsGet',array('tab' => 3)) ?>">Zu den Einstellungen</a>
         </div>
     <?}?>
-
-
-

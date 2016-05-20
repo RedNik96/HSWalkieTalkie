@@ -29,7 +29,6 @@ Class TimelineHandler {
   }
 
   public static function getOwnPostsAsArray($user) {
-    global $dbh;
     $stmt = self::getOwnPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -38,23 +37,21 @@ Class TimelineHandler {
                 "pid"   => $result['postID']
             ));
         $imgs = array();
-        $imgCounter = 0;
 
         while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $imgs[$imgCounter] = $img['filename'];
-            $imgCounter = $imgCounter + 1;
+            $imgs[] = $img['filename'];
         }
 
-        // TODO: auf SQL.php umstellen
-        $stmt3 = $dbh->prepare(
-          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-          FROM comment as C, user as U
-          WHERE C.postID = :postID AND C.userID = U.username
-          ORDER BY C.commentTime DESC
-          LIMIT 3");
-        $stmt3->execute(array(
-            'postID' => $result['postID']
-        ));
+        $stmt3 = SQL::query(
+            "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+            FROM comment as C, user as U
+            WHERE C.postID = :postID AND C.userID = U.username
+            ORDER BY C.commentTime DESC
+            LIMIT 3",
+            array(
+              'postID' => $result['postID']
+            )
+        );
 
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],
@@ -92,7 +89,6 @@ Class TimelineHandler {
     }
 
   public static function getPostsAsArray($user) {
-    global $dbh;
     $stmt = self::getPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -103,22 +99,21 @@ Class TimelineHandler {
             'pidParent' => $result['postIDParent']
         ));
         $imgs = array();
-        $imgCounter = 0;
         while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $imgs[$imgCounter] = $img['filename'];
-            $imgCounter = $imgCounter + 1;
+            $imgs[] = $img['filename'];
         }
 
         // TODO: auf SQL.php umstellen
-        $stmt3 = $dbh->prepare(
-          "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-          FROM comment as C, user as U
-          WHERE C.postID = :postID AND C.userID = U.username
-          ORDER BY C.commentTime DESC
-          LIMIT 3");
-        $stmt3->execute(array(
-            'postID' => $result['postID']
-        ));
+        $stmt3 = SQL::query(
+            "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+            FROM comment as C, user as U
+            WHERE C.postID = :postID AND C.userID = U.username
+            ORDER BY C.commentTime DESC
+            LIMIT 3",
+            array(
+              'postID' => $result['postID']
+            )
+        );
 
         $posts[$result['postID']] = array(
             'postID'    => $result['postID'],

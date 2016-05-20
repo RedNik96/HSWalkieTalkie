@@ -125,6 +125,10 @@ div.post div.postfooter {
   text-align: right;
 }
 
+.comments div.comment-container .header .username {
+  font-weight: bold;
+}
+
 .comments div.comment-container .header .date {
   text-align: right;
 }
