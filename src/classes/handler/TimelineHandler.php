@@ -29,7 +29,6 @@ Class TimelineHandler {
   }
 
   public static function getOwnPostsAsArray($user) {
-    global $dbh;
     $stmt = self::getOwnPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -90,7 +89,6 @@ Class TimelineHandler {
     }
 
   public static function getPostsAsArray($user) {
-    global $dbh;
     $stmt = self::getPosts($user);
     $posts = array();
     while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
