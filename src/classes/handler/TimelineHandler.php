@@ -52,16 +52,7 @@ Class TimelineHandler {
             $imgs = PostHandler::getPostImages($result['postID'], $result['postIDParent']);
 
             //Hole alle Kommentare zu dem Post
-            $stmt3 = SQL::query(
-                "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-                FROM comment as C, user as U
-                WHERE C.postID = :postID AND C.userID = U.username
-                ORDER BY C.commentTime DESC
-                LIMIT 3",
-                array(
-                    'postID' => $result['postID']
-                )
-            );
+            $comments = PostHandler::getPostComments($result['postID']);
 
             //Fülle das Post Aray
             $posts[$result['postID']] = array(
@@ -76,7 +67,7 @@ Class TimelineHandler {
                 'ownVote'   => $result['OwnVote'],
                 'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
                 'imgs'      => $imgs,
-                'comments'  => $stmt3
+                'comments'  => $comments
             );
         }
         return $posts;
@@ -122,16 +113,7 @@ Class TimelineHandler {
             $imgs = PostHandler::getPostImages($result['postID'], $result['postIDParent']);
 
             //Hole alle Kommentare des Posts
-            $stmt3 = SQL::query(
-                "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-                FROM comment as C, user as U
-                WHERE C.postID = :postID AND C.userID = U.username
-                ORDER BY C.commentTime DESC
-                LIMIT 3",
-                array(
-                    'postID' => $result['postID']
-                )
-            );
+            $comments = PostHandler::getPostComments($result['postID']);
 
             $posts[$result['postID']] = array(
                 'postID'    => $result['postID'],
@@ -146,7 +128,7 @@ Class TimelineHandler {
                 'ownVote'   => $result['OwnVote'],
                 'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
                 'imgs'      => $imgs,
-                'comments'  => $stmt3
+                'comments'  => $comments
             );
         }
         return $posts;

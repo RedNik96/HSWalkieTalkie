@@ -355,7 +355,23 @@ class PostHandler
         header('Location: ' . $router->generate('viewPostGet', array('id'=>$postID)));
     }
 
+    /**
+     * Gibt alle Bilder eines Posts zurück
+     * @param $postID Der Post, von dem die Kommentare angezeigt werden sollen
+     * @param $postIDParent Der Ursprungspost, damit, falls es sich um einen Repost handelt,
+     *          einfach die Bilder des Ursprungspost angezeigt werden.
+     * @return array Das Bild-Array
+     */
     public static function getPostImages($postID, $postIDParent){
+
+        //Falls der ParentPost nicht leer ist, hole die Bilder des ursprünglichen Posts.
+        if(!is_null($postIDParent)){
+            SQL::query("CALL getOriginalPoster(:post, @id)", array("post" => $postID));
+            $stmt = SQL::query("SELECT @id as OriginalPoster");
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $postIDParent = $result['OriginalPoster'];
+        }
+
         // Bilder des Posts
         $stmt = SQL::query(
             "SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent",
@@ -369,5 +385,25 @@ class PostHandler
             $imgs[] = $img['filename'];
         }
         return $imgs;
+    }
+
+    /**
+     * Gibt alle Kommentare eines Posts zurück
+     * @param $postID Der Post, von dem die Kommentare angezeigt werden sollen
+     * @return PDOStatement|string Das executete PDO Statement, welches die Kommentare zurückgibt
+     */
+    public static function getPostComments($postID){
+        $stmt = SQL::query(
+            "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+                FROM comment as C, user as U
+                WHERE C.postID = :postID AND C.userID = U.username
+                ORDER BY C.commentTime DESC
+                LIMIT 3",
+            array(
+                'postID' => $postID
+            )
+        );
+
+        return $stmt;
     }
 }

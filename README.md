@@ -25,6 +25,7 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * Sonderzeichen in Post ("<") beim Wertvollsten Post            //DFE erledigt
 * Nur Bild in Post in wertvollsten Post                         //DFE erledigt
 * SQL-Reconnect bei Stored Procedures umgehen                   //DFE erledigt
+* Bilder im Post werden jetzt auch bei mehrmaligen Repost angezeigt //DFE erledigt
 * Überschrift nach Suche, wonach gesucht werden                 //ELF erledigt
 * Bild zu groß -> Fehler abfangen in Timeline                   //ELF erledigt
 * Anleitung, wie man im ILIAS zur Feed URL kommt                //ELF erledigt

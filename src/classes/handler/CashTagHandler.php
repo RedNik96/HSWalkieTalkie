@@ -29,15 +29,7 @@ class CashTagHandler
             //sucht für jeden Post die ggf. vorhanden Bilder
             $imgs = PostHandler::getPostImages($result['postID'], $result['postIDParent']);
 
-            $stmt3 = SQL::query(
-                "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-                FROM comment as C, user as U
-                WHERE C.postID = :postID AND C.userID = U.username
-                ORDER BY C.commentTime DESC",
-                array(
-                  'postID' => $result['postID']
-                )
-            );
+            $comments = PostHandler::getPostComments($result['postID']);
 
             // erzeugt ein Array mit allen Infos zu jedem Post das an das Template gegeben wird
             $posts[$result['postID']] = array(
@@ -51,7 +43,7 @@ class CashTagHandler
                 'reposts' => $result['Reposts'],
                 'datePosted' => date('d.m.Y H:i:s', strtotime($result['datePosted'])),
                 'imgs' => $imgs,
-                'comments'  => $stmt3
+                'comments'  => $comments
             );
         }
         $data = array(
