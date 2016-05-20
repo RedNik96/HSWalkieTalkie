@@ -82,29 +82,6 @@ CREATE TABLE `votes` (
   FOREIGN KEY (`post`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `duell` (
-  `id` int(11) NOT NULL,
-  `fighterPost` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `fighterRepost` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `post` int(11) NOT NULL,
-  `winner` varchar(100) COLLATE utf8mb4_bin,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`fighterPost`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`fighterRepost`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`post`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`winner`) REFERENCES user (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  UNIQUE (`post`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-CREATE TABLE `round` (
-  `duell` int(11) NOT NULL,
-  `round` int(11) NOT NULL,
-  `fighterPostAction` int(11) NOT NULL,
-  `fighterRepostAction` int(11) NOT NULL,
-  PRIMARY KEY (`duell`, `round`),
-  FOREIGN KEY (`duell`) REFERENCES duell (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
 CREATE TABLE `cashtag` (
   `cashtag` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`cashtag`)

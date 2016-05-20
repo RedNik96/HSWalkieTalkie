@@ -18,7 +18,8 @@ Class TimelineHandler {
       $stmt = SQL::query("SELECT P.id AS postID, U.firstName, U.lastName, U.username, P.content, U.picture, P.datePosted,
         ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
           (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
-        (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
+        (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts,
+        (SELECT vote FROM votes WHERE voter = :username AND post = P.id) as OwnVote
       FROM posts AS P, user AS U
       WHERE username = :username AND P.user = :username
       ORDER BY P.datePosted DESC",
@@ -62,6 +63,7 @@ Class TimelineHandler {
             'content'   => $result['content'],
             'votes'     => $result['Votes'],
             'reposts'   => $result['Reposts'],
+            'ownVote'   => $result['OwnVote'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
             'imgs'      => $imgs,
             'comments'  => $stmt3
@@ -75,7 +77,8 @@ Class TimelineHandler {
         $sqlQuery = "SELECT P.id AS postID, P.parentPost As postIDParent, U.firstName, U.lastName, U.username, U.picture, P.content, P.datePosted,
               ((SELECT COUNT(V.voter) FROM votes AS V WHERE V.post = P.id AND V.vote = true) -
                 (SELECT COUNT(V.voter) FROM Votes AS V WHERE V.post = P.id AND V.vote = false)) AS Votes,
-              (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts
+              (SELECT COUNT(id) FROM posts WHERE parentPost = P.id) AS Reposts,
+              (SELECT vote FROM votes WHERE voter = :userid AND post = P.id) as OwnVote
             FROM posts AS P, user AS U
             LEFT JOIN follower AS F ON  U.username = F.followed AND F.follower = :userid
             WHERE (U.username = :userid AND U.username = P.user) OR (F.followed = P.user)
@@ -125,6 +128,7 @@ Class TimelineHandler {
             'content'   => $result['content'],
             'votes'     => $result['Votes'],
             'reposts'   => $result['Reposts'],
+            'ownVote'   => $result['OwnVote'],
             'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
             'imgs'      => $imgs,
             'comments'  => $stmt3
