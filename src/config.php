@@ -5,7 +5,7 @@ $settings = array(
     "dbpasswd"  => ""
 );
 
-
+// Statische Route in Konstanten
 defined("LIBRARY_PATH")
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/libraries'));
 
@@ -31,27 +31,23 @@ ini_set("max_file_uploads", 20);
 ini_set("upload_max_filesize", "4M");
 error_reporting(E_ALL|E_STRICT);
 
-// register function to automatically load classes
-//spl_autoload_register( function($class) {
-require_once (CLASSES_PATH . "/Search.php");
-require_once (CLASSES_PATH . "/SQL.php");
-require_once (CLASSES_PATH . "/Template.php");
-require_once (CLASSES_PATH . "/User.php");
-require_once (CLASSES_PATH . "/EscapeUtil.php");
-require_once (CLASSES_PATH . "/handler/CashTagHandler.php");
-require_once (CLASSES_PATH . "/handler/ErrorHandler.php");
-require_once (CLASSES_PATH . "/handler/LoginHandler.php");
-require_once (CLASSES_PATH . "/handler/LogoutHandler.php");
-require_once (CLASSES_PATH . "/handler/PostHandler.php");
-require_once (CLASSES_PATH . "/handler/ProfileHandler.php");
-require_once (CLASSES_PATH . "/handler/RegisterHandler.php");
-require_once (CLASSES_PATH . "/handler/RSSHandler.php");
-require_once (CLASSES_PATH . "/handler/SearchHandler.php");
-require_once (CLASSES_PATH . "/handler/SettingsHandler.php");
-require_once (CLASSES_PATH . "/handler/StatisticHandler.php");
-require_once (CLASSES_PATH . "/handler/TimelineHandler.php");
+// laden Der Klassen under Handlerklassen
+spl_autoload_register(function($class) {
+    $file = CLASSES_PATH . "/" .  $class. '.php';
+    if (file_exists($file))
+    {
+        require_once($file);
+    }
+});
 
-//});
+spl_autoload_register(function($class) {
+    $file = CLASSES_PATH . "/handler/" .  $class. '.php';
+    if (file_exists($file))
+    {
+        require_once($file);
+    }
+});
+
 
 SQL::createConnection();
 
