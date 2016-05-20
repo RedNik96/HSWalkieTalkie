@@ -134,7 +134,7 @@
                                     </script>
                                 </div>
                                 <div id="labelpanel">
-                                    <label class="label label-danger" id="danger"></label>
+                                    <label class="label label-danger" id="danger"><? if (isset($errorString[0])) { echo $errorString[0]; }  ?></label>
                                 </div>
                             </div>
                         </div>
