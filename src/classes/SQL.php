@@ -54,9 +54,8 @@ class SQL
             $stmt = $dbh->prepare($preparedSQL);
             if($stmt->execute($parameterArr)) {
                 return $stmt;
-            } else if($preparedSQL != "SELECT 1") {
-
-                ErrorHandler::showError();
+            } else {
+                ErrorHandler::showError("Es ist ein Datenbankfehler aufgetreten.");
                 die();
             }
         }

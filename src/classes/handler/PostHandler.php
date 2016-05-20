@@ -31,11 +31,21 @@ class PostHandler
                     SQL::query("INSERT INTO cashtag VALUES (:cashtag)", array("cashtag" => $value));
                 }
 
-                $stmt = SQL::query("INSERT INTO cashtagpost VALUES (:cashtag, :postId)",
+                //Falls mehrere Cashtags in einem Post enthalten sind, soll diese Beziehung nur einmal gesetzt werden.
+                $stmt = SQL::query("SELECT * FROM cashtagpost WHERE cashtag = :cashtag AND postID = :postID",
                     array(
                         "cashtag"   => $value,
-                        "postId"    => $newID
-                    ));
+                        "postID"    => $newID
+                    )
+                );
+                //Falls die Cashtag zu Post-Beziehung noch nicht existiert, füge sie hinzu
+                if(!$stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $stmt = SQL::query("INSERT INTO cashtagpost VALUES (:cashtag, :postId)",
+                        array(
+                            "cashtag" => $value,
+                            "postId" => $newID
+                        ));
+                }
             }
 
             if(isset($_FILES['postedFiles']))
@@ -128,10 +138,9 @@ class PostHandler
         extract($_POST);
 
         if(isset($user) AND isset($post)) {
-            $stmt = SQL::query("CALL getOriginalPoster(:post)", array("post" => $post));
+            SQL::query("CALL getOriginalPoster(:post, @id)", array("post" => $post));
+            $stmt = SQL::query("SELECT @id AS OriginalPoster");
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            SQL::query("SELECT 1"); //reconnect nach stored Procedure
 
             //check if user is original poster
             $stmtIsOriginalUser = SQL::query("SELECT user FROM posts WHERE id = :post", array("post" => $result['OriginalPoster']));

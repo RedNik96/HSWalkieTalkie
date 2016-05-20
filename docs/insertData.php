@@ -6,8 +6,7 @@ ob_start();
 include("sql/createDatabase.sql");
 $createDbSql = ob_get_clean();
 
-$stmt = $dbh->query($createDbSql);
-$stmt->execute();
+SQL::query($createDbSql);
 
 //Datenbank wurde erstelt. Verbindung jetzt mit Datenbank herstellen.
 $dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', '',
@@ -18,10 +17,7 @@ $dbh = new PDO('mysql:host=localhost;dbname=hswalkietalkie', 'root', '',
 ob_start();
 include("sql/insertData.sql");
 $insertDataSql = ob_get_clean();
-$stmt = $dbh->prepare($insertDataSql);
-$stmt->execute();
-
-$dbh->query("Select 1"); //reconnect nach Create Table
+SQL::query($insertDataSql);
 
 //weitere Testdaten hinzufügen
 $firstname  = array( 'David', 'Niklas', 'Marius', 'Jonas', 'Leon');

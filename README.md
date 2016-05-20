@@ -13,13 +13,14 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 
 #ToDos bis Samstag Abend!
 * ÜBERALL KOMMENTARE ANFÜGEN
-* ER-Diagramm anpassen/aktualisieren (Duell+Round)  //xgwsnde
+* ER-Diagramm anpassen/aktualisieren (Duell+Round, account = PK ist IBAN + username)  //xgwsnde
 * RSS-Versionsprüfung                               //xgadmmh
 * Trending Cashtags hübsch machen                   //xgadles
 * Login-Überschrift schön machen                    //xgadles
 * Iban als Primäschlüssel mit dem Use               //xgwsdfe
-* diselben Cashtags in einem Post abfangen          //xgwsdfe
+* dieselben Cashtags innerhalb eines Posts abfangen //xgwsdfe
 * Testdaten anlegen                                 //xgwsdfe
+* SQL-Reconnect bei Stored Procedures umgehen       //xgwsdfe erledigt
 * Überschrift nach Suche, wonach gesucht werden     //xgadelf
 * Bild zu groß -> Fehler abfangen in Timeline       //xgadelf
 * Anleitung, wie man im ILIAS zur Feed URL kommt    //xgadelf
