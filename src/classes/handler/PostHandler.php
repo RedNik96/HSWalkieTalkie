@@ -203,7 +203,7 @@ class PostHandler
         $result = EscapeUtil::escapeArrayReturn($stmt->fetch(PDO::FETCH_ASSOC));
 
         if (!$result) {
-            ErrorHandler::get();
+            ErrorHandler::showError();
         } else {
             // Bilder des Posts
             $stmt2 = SQL::query(

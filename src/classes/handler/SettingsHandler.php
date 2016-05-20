@@ -9,7 +9,7 @@ class SettingsHandler {
      */
     public static function get($tab,...$errorString) {
         if ($tab>3) {
-            ErrorHandler::showError();
+            ErrorHandler::showError('Fehler 404: Seite nicht gefunden');
             die;
         }
 
