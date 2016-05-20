@@ -87,31 +87,40 @@ class SettingsHandler {
             User::deletePicture();
             //ein neues Profilbild wurde hochgeladen
         } else if (isset($_FILES["userfile"])) {
-            //überprüft ob tatsächlich ein Bild hochgeladen wurde
-            $check = getimagesize($_FILES["userfile"]["tmp_name"]);
-            if($check !== false) {
-                //sucht den Pfad des aktuellen Profilbildes und löscht es falls es nicht das Default Bild ist
-                $stmt = User::getPicture();
-
-                $result=$stmt->fetch(PDO::FETCH_ASSOC);
-                if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
-                    unlink(IMG_PATH . "/" . "profile/" . $result['picture']);
-                }
-                //es wird der Pfad zum Profilbild generiert
-                $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
-                $target_file = IMG_PATH . "/" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
-                //der Ordner für die Profilbilder wird angelegt falls er noch nicht existiert
-                if(!file_exists(IMG_PATH. "/profile"))
-                    mkdir(IMG_PATH. "/profile");
-                //das hochgeladene Foto wird gespeichert
-                if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                    User::changePicture($imageFileType);
+            if ($_FILES['userfile']['error']!=0) {
+                if ($_FILES['userfile']['error']==1) {
+                    $errorString='Fehler: Die hochgeladene Datei ist zu groß. Bitte wähle eine kleinere Datei';
                 } else {
-                    $errorString='Fehler: Die Datei konnte nicht hochgeladen werden bitte versuche es erneut.';
+                    $errorString='Fehler: Es ist ein Fehler aufgetreten. Bitte versuche es erneut';
                 }
             } else {
-                $errorString='Fehler: Es wurde kein Bild hochgeladen. Bitte lade eine Bilddatei hoch.';
+                //überprüft ob tatsächlich ein Bild hochgeladen wurde
+                $check = getimagesize($_FILES["userfile"]["tmp_name"]);
+                if($check !== false) {
+                    //sucht den Pfad des aktuellen Profilbildes und löscht es falls es nicht das Default Bild ist
+                    $stmt = User::getPicture();
+
+                    $result=$stmt->fetch(PDO::FETCH_ASSOC);
+                    if ($result["picture"] != null && $result["picture"] != $result["defaultImg"]) {
+                        unlink(IMG_PATH . "/" . "profile/" . $result['picture']);
+                    }
+                    //es wird der Pfad zum Profilbild generiert
+                    $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
+                    $target_file = IMG_PATH . "/" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
+                    //der Ordner für die Profilbilder wird angelegt falls er noch nicht existiert
+                    if(!file_exists(IMG_PATH. "/profile"))
+                        mkdir(IMG_PATH. "/profile");
+                    //das hochgeladene Foto wird gespeichert
+                    if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
+                        User::changePicture($imageFileType);
+                    } else {
+                        $errorString='Fehler: Die Datei konnte nicht hochgeladen werden bitte versuche es erneut.';
+                    }
+                } else {
+                    $errorString='Fehler: Es wurde kein Bild hochgeladen. Bitte lade eine Bilddatei hoch.';
+                }
             }
+
         }
         
         //die Settingsseite wird gerenderet
