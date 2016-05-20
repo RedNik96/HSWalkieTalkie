@@ -38,11 +38,9 @@ Class TimelineHandler {
                 "pid"   => $result['postID']
             ));
         $imgs = array();
-        $imgCounter = 0;
 
         while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $imgs[$imgCounter] = $img['filename'];
-            $imgCounter = $imgCounter + 1;
+            $imgs[] = $img['filename'];
         }
 
         $stmt3 = SQL::query(
@@ -103,10 +101,8 @@ Class TimelineHandler {
             'pidParent' => $result['postIDParent']
         ));
         $imgs = array();
-        $imgCounter = 0;
         while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            $imgs[$imgCounter] = $img['filename'];
-            $imgCounter = $imgCounter + 1;
+            $imgs[] = $img['filename'];
         }
 
         // TODO: auf SQL.php umstellen
