@@ -1,44 +1,80 @@
 <?php
 
+/**
+ * Class ProfileHandler kümmert sich um alle Profilaufrufe
+ */
 Class ProfileHandler {
+  /**
+   * das Profil des aktuell eingeloggten Users wird gerendert
+   */
   public static function get() {
-    $data=self::getUser($_SESSION['user'],true);
+    $data=self::getUser($_SESSION['user']);
 
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
+
+  /**
+   * @param $user username des Users der angezeigt werden soll
+   * das Profil des mitgegebenen Users wird gerendert
+   */
   public static function showUser($user) {
-    $data=self::getUser($user,true);
 
-    Template::render('timeline', $data, array('template_right' => 'profile'));
+    $stmt=SQL::query("SELECT * FROM user WHERE username=:username",array('username' => $user));
+    if ($stmt->fetch()) {
+      $data=self::getUser($user);
+      Template::render('timeline', $data, array('template_right' => 'profile'));
+    } else {
+      ErrorHandler::showError();
+    }
+    
   }
-  public static function showMoreUser($firstname,$lastname) {
-    // User holen
-    // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
-    // konto(IBAN, BIC)
 
+  /**
+   * @param $firstname Vorname der anzuzeigenden User
+   * @param $lastname Nachname der anzuzeigenden User
+   * zeigt alle Nutzer mit dem mitgegebenen Namen an
+   */
+  public static function showMoreUser($name) {
     $i=0;
-    $stmt = SQL::query("SELECT picture, firstName, lastName, username FROM user where firstName = :firstname and lastName = :lastname", array(
-        'lastname' => $lastname,
-        'firstname' => $firstname
-    ));
+    // sucht alle Nutzer mit den übergebenen Namen
+    $name=str_replace('%20',' ',$name);
+    $stmt = User::getUsersByFullName($name);
+    // speichert die Abfragergebnisse in einem Array
     while ($res = $stmt->fetch()) {
+      EscapeUtil::escapeArray($res);
       $users[$i]=$res;
       $i++;
     }
-    $stats = StatisticHandler::getFriendsStats();
-
-    $data = array(
-        "users" => $users,
-        "stats" => $stats
-    );
-    Template::render('moreUser', $data);
+    if ($i>0) {
+      $data = array(
+          "users" => $users
+      );
+      // rendert das Template moreUser mit den übergebenen Usern
+      Template::render('moreUser', $data);
+    } else {
+      global $router;
+      header("Location: " . $router->generate("notFoundGet"));
+    }
+    
   }
+
+  /**
+   * rendern das Profil des Users im HTTP-Post
+   */
   public static function showUserPost() {
-    $data=self::getUser($_POST['username'],true);
-   
+    $data=self::getUser($_POST['username']);
+
     Template::render('timeline', $data, array('template_right' => 'profile'));
   }
 
+  /**
+   * Mit dieser Funktion können User followen bzw. nicht mehr followen.
+   * Dazu wird geprüft, ob der Datensatz schon in der follower-Tabelle
+   * enthalten ist. Falls dem so ist, wird der Datensatz gelöscht und somit
+   * nicht mehr gefollowed. Alternativ wird der Datensatz hinzugefügt.
+   * Anschließend wird ein echo ausgeführt, da diese Funktion per
+   * xhtmlhttp-Request aufgerufen wird.
+   */
   public static function followUser(){
 
     extract($_POST);
@@ -50,69 +86,62 @@ Class ProfileHandler {
           'follower'  => $userFollower
       ));
 
-      if($stmt != SQL::SQL_FEHLGESCHLAGEN() AND $stmt->fetch())
+      if($stmt->fetch())
       {
         $stmt = SQL::query("DELETE FROM follower WHERE followed = :followed AND follower = :follower", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
-        if ($stmt != SQL::SQL_FEHLGESCHLAGEN()) {
-          echo "removed";
-        } else {
-          echo "false";
-        }
+        echo "removed";
       } else {
         $stmt = SQL::query("INSERT INTO follower (followed, follower) VALUES (:followed, :follower)", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
 
-        if ($stmt != SQL::SQL_FEHLGESCHLAGEN()) {
-          echo "added";
-        } else {
-          echo "false";
-        }
+        echo "added";
       }
-    } else {
-      echo "false";
     }
   }
-  public static function getUser($user,$own) {
-    /*
-     */
-    // User holen
-    // link, firstName, LastName, username, email, wohnort(über fk), zip, birthday,
-    // konto(IBAN, BIC)
-    if ($user===$_SESSION['user']) {
-      $stmt = SQL::query("SELECT * FROM user, city where username = :username AND user.zip = city.zip", array(
-        'username' => $user
-      ));
-    } else {
 
-      $stmt = SQL::query("
-        SELECT *, 
-          (SELECT COUNT(*) FROM follower 
-            WHERE followed = :username AND follower = :user) AS isFollowing 
-        FROM user as U, city as C WHERE username = :username AND U.zip = C.zip", array(
-          'user'    => $_SESSION['user'],
-          'username' => $user
-      ));
+  /**
+   * @param $user Username des anzuzeigenden Users
+   * @return array alle nötigen Informationen des Users als array
+   * sucht alle fürs Profil nötigen Informationen des übergebenen Users
+   */
+  public static function getUser($user) {
+    //wenn das Profil des eingeloggten Benutzers angezeigt werden soll werden seine Informationen gesucht
+    if ($user===$_SESSION['user']) {
+      $stmt = User::getOwnInfo($user);
+    } else {
+      //wenn ein anderes Profil angezeigt werden soll wird zusätzlich überprüft ob der eingeloggte Nutzer dem anzuzeigenden Nutzer folgt
+      $stmt = User::getOtherInfo($user);
     }
 
 
     $res = $stmt->fetch();
+    EscapeUtil::escapeArray($res);
+    //holt sich alle Posts den mitgegebenen Users
+    $posts = TimelineHandler::getOwnPostsAsArray($user);
 
-    if ($own) {
-      $posts = TimelineHandler::getOwnPostsAsArray($user);
+    //cash für den Nutzer wird geholt
+    $cash=User::getUserCash($user);
+    //wenn der eingeloggte Nutzer angezeigt werden soll ist das Editierfeld sichtbar sonst nicht
+    if ($user===$_SESSION['user']) {
+      $data = array(
+          'user_info' => $res,
+          'posts' => $posts,
+          'cash' => $cash
+      );
     } else {
-      $posts = TimelineHandler::getPostsAsArray($user);
+      $data = array(
+          'user_info' => $res,
+          'posts' => $posts,
+          'cash' => $cash,
+          'cashtag' => true //sorgt dafür das das Editierfeld nicht angezeigt wird
+      );
     }
-
-
-    $data = array(
-        'user_info' => $res,
-        'posts' => $posts
-    );
+    // gibt alle notwendigen Daten des anzuzeigenden Users zurück
     return $data;
   }
 }

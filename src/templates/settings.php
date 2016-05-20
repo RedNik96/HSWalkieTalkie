@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
-<link href="/HSWalkieTalkie/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<script src="/HSWalkieTalkie/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+<link href="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 
     <div class="container">
         <script type="text/javascript">
@@ -18,16 +18,15 @@
             }
 
         </script>
-
         <ul class="nav nav-tabs">
-            <li <? if ($tab===0) {?>class="active" <?;} ?>><a data-toggle="tab" href="#personal">persönliche Informationen</a></li>
-            <li <? if ($tab===1) {?>class="active" <?;} ?>><a data-toggle="tab" href="#pass">Passwort ändern</a></li>
-            <li <? if ($tab===2) {?>class="active" <?;} ?>><a data-toggle="tab" href="#account">Konto</a></li>
-            <li <? if ($tab===3) {?>class="active" <?;} ?>><a data-toggle="tab" href="#ilias">Ilias-Feed</a></li>
+            <li <? if ($tab==0) {?>class="active" <?;} ?>><a data-toggle="tab" href="#personal">persönliche Informationen</a></li>
+            <li <? if ($tab==1) {?>class="active" <?;} ?>><a data-toggle="tab" href="#pass">Passwort ändern</a></li>
+            <li <? if ($tab==2) {?>class="active" <?;} ?>><a data-toggle="tab" href="#account">Konto</a></li>
+            <li <? if ($tab==3) {?>class="active" <?;} ?>><a data-toggle="tab" href="#ilias">Ilias-Feed</a></li>
         </ul>
 
         <div class="tab-content">
-            <div id="personal" class="tab-pane fade <? if ($tab===0) {?>in active<?;} ?>">
+            <div id="personal" class="tab-pane fade <? if ($tab==0) {?>in active<?;} ?>">
                 <div class="container-border">
                     <form id="personal" class="form-horizontal" method="post" enctype="multipart/form-data" action="<? global $router; echo $router->generate('settingsPersonalInformationPost')?>">
                         <legend>
@@ -40,7 +39,7 @@
                                         Email:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="email" id="email" type="email" autofocus class="form-control filled" data-value="<?= $user_info['email']?>" value=<?= $user_info['email']?>>
+                                        <input maxlength="255" required name="email" id="email" type="email" autofocus class="form-control filled" data-value="<?= $user_info['email']?>" value="<?= $user_info['email']?>">
                                     </div>
 
                                 </div>
@@ -49,7 +48,7 @@
                                         Vorname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="firstname" id="firstname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['firstName']?>" value=<?= $user_info['firstName']?>>
+                                        <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß- ]+" maxlength="255" required name="firstname" id="firstname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['firstName']?>" value="<?= $user_info['firstName']?>">
                                     </div>
 
                                 </div>
@@ -58,7 +57,7 @@
                                         Nachname:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="lastname" id="lastname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['lastName']?>" value=<?= $user_info['lastName']?>>
+                                        <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß- ]+" maxlength="255" required name="lastname" id="lastname" type="text" autofocus class="form-control filled" data-value="<?= $user_info['lastName']?>" value="<?= $user_info['lastName']?>">
                                     </div>
 
                                 </div>
@@ -67,7 +66,7 @@
                                         Benutzername:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsCheckUserPost');?>">
+                                        <input pattern="[A-Za-zÄÜÖäüöß0-9-_]+" maxlength="100" required name="username" id="username" type="text" autofocus class="form-control filled" data-value="<?= $user_info['username']?>" value="<?= $user_info['username']?>" url="<? global $router; echo $router->generate('settingsCheckUserPost');?>">
                                     </div>
 
                                 </div>
@@ -76,7 +75,7 @@
                                         Geburtstag:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="birth" id="birth" type="date" autofocus class="form-control filled" data-value="<?= $user_info['birthday']?>" value=<?= $user_info['birthday']?>>
+                                        <input required name="birth" id="birth" type="date" autofocus class="form-control filled" data-value="<?= $user_info['birthday']?>" value="<?= $user_info['birthday']?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -84,7 +83,7 @@
                                         Straße:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="street" id="street" type="text" autofocus class="form-control filled" data-value="<?= $user_info['street']?>" value=<?= $user_info['street']?>>
+                                        <input pattern="[A-Za-zÄÜÖäüöß][A-Za-zÄÜÖäüöß.- ]+" maxlength="255" required name="street" id="street" type="text" autofocus class="form-control filled" data-value="<?= $user_info['street']?>" value="<?= $user_info['street']?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -92,7 +91,7 @@
                                         Hausnummer:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input required name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value=<?= $user_info['housenumber']?>>
+                                        <input pattern="[0-9][0-9a-z-]+" maxlength="255" required name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value="<?= $user_info['housenumber']?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -126,7 +125,7 @@
                                 </div>
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>
-                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPost');?>">
+                                    <input id="userfile" name="userfile" type="file" multiple class="file-loading" upload-url="<? global $router; echo $router->generate('settingsPersonalInformationPost');?>">
                                     <button name="deletePicture" id="deletePicture" class="btn btn-default active"><i class="fa fa-trash" aria-hidden="true"></i>Profilbild löschen</button>
                                     <script >
                                         $(document).on('ready', function() {
@@ -135,7 +134,7 @@
                                     </script>
                                 </div>
                                 <div id="labelpanel">
-                                    <label class="label label-danger" id="danger"></label>
+                                    <label class="label label-danger" id="danger"><? if (isset($errorString[0])) { echo $errorString[0]; }  ?></label>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +159,7 @@
                     </form>
                 </div>
             </div>
-            <div id="pass" class="tab-pane fade <? if ($tab===1) {?>in active<?;} ?>">
+            <div id="pass" class="tab-pane fade <? if ($tab==1) {?>in active<?;} ?>">
                 <div class="container-border">
                     <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsChangePwdPost');?>">
                         <legend>
@@ -171,7 +170,7 @@
                                         Altes Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input required name="old" id="old" type="password" autofocus class="form-control filled" url="<? global $router; echo $router->generate('settingsCheckPwdPost');?>">
+                                        <input maxlength="255" required name="old" id="old" type="password" autofocus class="form-control filled" url="<? global $router; echo $router->generate('settingsCheckPwdPost');?>">
                                     </div>
 
                                 </div>
@@ -180,7 +179,7 @@
                                         Neues Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input required name="new" id="new" type="password" autofocus class="form-control filled">
+                                        <input maxlength="255" required name="new" id="new" type="password" autofocus class="form-control filled">
                                     </div>
 
                                 </div>
@@ -189,7 +188,7 @@
                                         Wiederhole Passwort:
                                     </label>
                                     <div class="col-lg-6">
-                                        <input required name="verify" id="verify" type="password" autofocus class="form-control filled">
+                                        <input maxlength="255" required name="verify" id="verify" type="password" autofocus class="form-control filled">
                                     </div>
                                 </div>
                         <div class="form-group">
@@ -209,7 +208,7 @@
                 </div>
 
             </div>
-            <div id="account" class="tab-pane fade <? if ($tab===2) {?>in active<?;} ?>">
+            <div id="account" class="tab-pane fade <? if ($tab==2) {?>in active<?;} ?>">
                 <div class="container-border">
 
                         <legend>
@@ -229,7 +228,7 @@
                                     IBAN:
                                 </label>
                                 <div class="col-lg-6">
-                                    <input required name="iban" id="iban" type="text" autofocus class="form-control" data-value="<?= $bank_info[$i]['iban']?>" value=<?= $bank_info[$i]['iban']?>>
+                                    <input pattern="[A-Z0-9]+" maxlength="34" required name="iban" id="iban" type="text" autofocus class="form-control" data-value="<?= $bank_info[$i]['iban']?>" value="<?= $bank_info[$i]['iban']?>">
                                 </div>
 
                             </div>
@@ -265,7 +264,7 @@
                                         <div class="btn-group" role="group">
                                             <button type="submit" class="btn btn-primary" name="change-account"><i class="fa fa-floppy-o" aria-hidden="true"></i>Kontodaten ändern</button>
                                         </div>
-                                            <input name="ibanalt" type="hidden" value=<?= $bank_info[$i]['iban']?>>
+                                            <input name="ibanalt" type="hidden" value="<?= $bank_info[$i]['iban']?>">
                                             <div class="btn-group" role="group">
                                                 <button type="submit" class="btn btn-default active" name="delete-account"><i class="fa fa-trash" aria-hidden="true"></i>Konto löschen</button>
                                             </div>
@@ -291,7 +290,7 @@
                                     IBAN:
                                 </label>
                                 <div class="col-lg-6">
-                                    <input required name="iban" id="iban" type="text" autofocus class="form-control filled">
+                                    <input  pattern="[A-Z0-9]+" maxlength="34" required name="iban" id="iban" type="text" autofocus class="form-control filled">
                                 </div>
 
                             </div>
@@ -336,7 +335,7 @@
 
                 </div>
             </div>
-            <div id="ilias" class="tab-pane fade <? if ($tab===3) {?>in active<?;} ?>">
+            <div id="ilias" class="tab-pane fade <? if ($tab==3) {?>in active<?;} ?>">
                 <div class="container-border">
                     <form class="form-horizontal" method="post" action="<? global $router; echo $router->generate('settingsChangeIliasPost');?>">
                         <legend>
@@ -347,7 +346,7 @@
                                 RSS-Feed-URL:
                             </label>
                             <div class="col-lg-6">
-                                <input required name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value=<?= $user_info['feedURL']?>>
+                                <input spellcheck="false" maxlength="255" name="url" id="url" type="url" autofocus class="form-control filled" data-value="<?= $user_info['feedURL']?>" value="<?= $user_info['feedURL']?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -355,12 +354,12 @@
                                 RSS-Feed Passwort*:
                             </label>
                             <div class="col-lg-6">
-                                <input required name="feedPwd" id="feedPwd" type="password" autofocus class="form-control filled" data-value="<?= $user_info['feedPassword']?>" value=<?= $user_info['feedPassword']?>>
+                                <input maxlength="255" name="feedPwd" id="feedPwd" type="password" autofocus class="form-control filled" data-value="<?= $user_info['feedPassword']?>" value="<?= $user_info['feedPassword']?>">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class=" col-lg-6"></label>
-                            <label class=" col-lg-6">*Dieses Passwort muss im Klartext gespeichert werden<br>Benutze also nie ein Passwort, welches du auch woanders verwendest</label>
+                            <label class=" col-lg-6">*Dieses Passwort muss im Klartext gespeichert werden<br>Benutze also nie ein Passwort, welches du auch an anderer Stelle verwendest</label>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-6 control-label"></label>

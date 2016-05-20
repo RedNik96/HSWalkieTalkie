@@ -1,31 +1,11 @@
 <?php
 
-// Config inspiriert von: http://code.tutsplus.com/tutorials/organize-your-next-php-project-the-right-way--net-5873
-
-$config = array(
-    "db" => array(
-        "db1" => array(
-            "dbname" => "hsw",
-            "username" => "dbUser1",
-            "password" => "pa$$",
-            "host" => "localhost"
-        ),
-        "db2" => array(
-            "dbname" => "hsw",
-            "username" => "dbUser2",
-            "password" => "pa$$",
-            "host" => "localhost"
-        )
-    ),
-    "urls" => array(
-        "baseUrl" => "http://HSW.com"
-    )
+$settings = array(
+    "dbuser"    => "root",
+    "dbpasswd"  => ""
 );
 
-/*
-    Creating constants for heavily used paths makes things a lot easier.
-    ex. require_once(LIBRARY_PATH . "Paginator.php")
-*/
+// Statische Route in Konstanten
 defined("LIBRARY_PATH")
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/libraries'));
 
@@ -35,33 +15,39 @@ defined("TEMPLATES_PATH")
 defined("CLASSES_PATH")
     or define("CLASSES_PATH", realpath(dirname(__FILE__) . '/classes'));
 
+defined("CSS_PATH")
+or define("CSS_PATH",  "/HSWalkieTalkie/src/public/css");
+
 defined("IMG_PATH")
-    or define("IMG_PATH", realpath(dirname(__FILE__) . '/img'));
+    or define("IMG_PATH",  realpath(dirname(__FILE__) . "/img"));
 
 /*
     Error reporting.
 */
 ini_set("error_reporting", "true");
+ini_set("short_open_tag", "true");
+ini_set("file_uploads", "true");
+ini_set("max_file_uploads", 20);
+ini_set("upload_max_filesize", "4M");
 error_reporting(E_ALL|E_STRICT);
 
-// register function to automatically load classes
-//spl_autoload_register( function($class) {
-require_once(CLASSES_PATH . "/Session.php");
-require_once(CLASSES_PATH . "/Template.php");
-require_once(CLASSES_PATH . "/Post.php");
-require_once(CLASSES_PATH . "/EscapeUtil.php");
-require_once(CLASSES_PATH . "/handler/SettingsHandler.php");
-require_once(CLASSES_PATH . "/handler/StatisticHandler.php");
-require_once(CLASSES_PATH . "/handler/LogoutHandler.php");
-require_once(CLASSES_PATH . "/handler/LoginHandler.php");
-require_once(CLASSES_PATH . "/handler/TimelineHandler.php");
-require_once(CLASSES_PATH . "/handler/SearchHandler.php");
-require_once(CLASSES_PATH . "/handler/CashTagHandler.php");
-include(CLASSES_PATH . "/handler/ProfileHandler.php");
-require_once (CLASSES_PATH . "/User.php");
-require_once (CLASSES_PATH . "/SQL.php");
-require_once (CLASSES_PATH . "/Search.php");
-//});
+// laden Der Klassen under Handlerklassen
+spl_autoload_register(function($class) {
+    $file = CLASSES_PATH . "/" .  $class. '.php';
+    if (file_exists($file))
+    {
+        require_once($file);
+    }
+});
+
+spl_autoload_register(function($class) {
+    $file = CLASSES_PATH . "/handler/" .  $class. '.php';
+    if (file_exists($file))
+    {
+        require_once($file);
+    }
+});
+
 
 SQL::createConnection();
 

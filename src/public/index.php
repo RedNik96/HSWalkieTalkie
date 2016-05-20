@@ -6,7 +6,7 @@
     $template_data = [];
     global $dbh;
 
-    #TODO: hier sollte das URL-Routing implementiert werden
+    // Erstellung des Routers und koniguration des BasePath sowie der Routen
     $router = new AltoRouter();
     $router->setBasePath('/HSWalkieTalkie/src/public');
 
@@ -14,12 +14,13 @@
         TimelineHandler::get();
     }, 'timeline');
 
-    $router->map( 'GET', '/settings/', function() {
-        SettingsHandler::get();
-    }, 'settingsGet');  //Über den 4. Parameter (settings) ist der Pfad mit $router->generate('settings') zu bekommen
+    $router->map( 'GET', '/settings/[i:tab]/', function($tab) {
+        SettingsHandler::get($tab);
+    }, 'settingsGet');
 
     $router->map('POST', '/settings/', function () {
-        SettingsHandler::post();
+        echo "scheiße";
+        die;
     }, 'settingsPost');
 
     $router->map('POST', '/settings/personalInformation/', function () {
@@ -29,6 +30,10 @@
     $router->map('POST', '/settings/checkUser/', function () {
         SettingsHandler::checkUser();
     }, 'settingsCheckUserPost');
+
+    $router->map('POST', '/register/checkUser/', function () {
+        RegisterHandler::checkUser();
+    }, 'registerCheckUserPost');
 
     $router->map('POST', '/settings/checkPwd/', function () {
         SettingsHandler::checkPwd();
@@ -66,8 +71,12 @@
         ProfileHandler::showUserPost();
     }, 'showUserPost');
 
-    $router->map('GET', '/showMoreUser/[a:firstname]/[a:lastname]/', function ($firstname, $lastname) {
-        ProfileHandler::showMoreUser($firstname,$lastname);
+    $router->map('GET', '/notFound/', function () {
+        SearchHandler::notFound();
+    }, 'notFoundGet');
+
+    $router->map('GET', '/showMoreUser/[*:name]/', function ($name) {
+        ProfileHandler::showMoreUser($name);
     }, 'showMoreUserGet');
 
     $router->map('GET', '/showCashTag/[a:cashtag]/', function ($cashtag) {
@@ -80,10 +89,10 @@
             'template_right'    => null,
             'template_left'     => null
         ));
-    }, 'registrierungGet');  //Über den 4. Parameter (register) ist der Pfad mit $router->generate('register') zu bekommen
+    }, 'registrierungGet');
 
     $router->map('POST', '/register/', function () {
-      include(CLASSES_PATH . "/handler/registerHandler.php");
+        RegisterHandler::regsister();
     }, 'registrierungPost');
 
     $router->map('GET', '/profile/', function () {
@@ -103,22 +112,30 @@
     }, "logoutGet");
 
     $router->map('POST', '/newpost/', function() {
-        Post::create();
+        PostHandler::create();
     }, "newpostPost");
-    
+
     $router->map('POST', '/repost/', function() {
-        Post::repost();
+        PostHandler::repost();
     }, "repostPost");
-    
+
     $router->map('POST', '/vote/', function() {
-        Post::vote();
+        PostHandler::vote();
     }, 'votePost');
 
     $router->map('POST', '/statisticsToggle/', function(){
         StatisticHandler::toggle();
     }, 'statisticsTogglePost');
 
+    $router->map('GET', '/post/[i:id]/', function($id) {
+        PostHandler::get($id);
+    }, 'viewPostGet');
 
+    $router->map('POST', '/post/[i:id]/', function($id) {
+        PostHandler::post($id);
+    }, 'viewPostPost');
+
+    // Ermittlung der der aktuellen Route
     $match = $router->match();
 
     //Wenn keine Anmeldung vorliegt, soll direkt auf die Login-Seite verlinkt werden
@@ -126,7 +143,7 @@
     // von der Login-Seite auf die Registrierungsseite,
     // von der Registrierungsseite (nach POST) zur RegisterHandler Seite
     // von der Login-Seite (nach Submit der Anmeldedaten)
-    if((!LoginHandler::authenticated()) && (!(in_array($match['name'], array('registrierungGet', 'registrierungPost', 'loginPost'))))) {
+    if((!LoginHandler::authenticated()) && (!(in_array($match['name'], array('registrierungGet', 'registrierungPost', 'loginPost', 'registerCheckUserPost'))))) {
         //Ist die Url z. B. /HSWalkieTalie/src/public/settings/, aber es liegt noch keine Anmeldung vor, dann soll
         //der Schönheitshalber erst ein Redirect auf /HSWalkieTalkie/src/public/ erfolgen
         if($match['name']!='timeline'){
@@ -149,5 +166,5 @@
     if( $match && is_callable( $match['target'] ) ) {
     	call_user_func_array( $match['target'], $match['params'] );
     } else {
-    	header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        ErrorHandler::showError('Fehler 404: Seite nicht gefunden');
     }

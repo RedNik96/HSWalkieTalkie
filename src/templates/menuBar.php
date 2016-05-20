@@ -18,8 +18,8 @@
       <ul class="nav navbar-nav">
         <li <? if ($GLOBALS['match']['name']=='timeline') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("timeline");?>"><span class="fa fa-newspaper-o fa-2x"></span> Neuigkeiten</a></span></li>
         <li <? if ($GLOBALS['match']['name']=='profile') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("profile");?>"><span class="fa fa-user fa-2x"></span> Profil</a></span></li>
-        <li <? if ($GLOBALS['match']['name']=='settingsGet') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settingsGet");?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
-        <form display="inline" class="navbar-form navbar-left" method="post" action="<? global $router;echo $router->generate('searchPost') ?>">
+        <li <? if ($GLOBALS['match']['name']=='settingsGet') { ?>class="active"<? } ?> > <a href="<? global $router; echo $router->generate("settingsGet",array('tab'=>0));?>"><span class="fa fa-gear fa-2x"></span> Einstellungen</a></span></li>
+        <form id="searchForm" display="inline" class="navbar-form navbar-left" method="post" action="<? global $router;echo $router->generate('searchPost') ?>">
           <div class="form-group">
             <select name="search" type="search" id="searchBar" type="text" class="select2-input" placeholder="Suchen">
               <option></option>
@@ -57,7 +57,7 @@
       names+='{ "id":"n'+data.fullNames[i]+'", "text":"'+data.fullNames[i]+'"}';
     }
     if(data.tags) {
-      names += ']},{ "text":"$chashtags" , "children": [ ';
+      names += ']},{ "text":"$cashtags" , "children": [ ';
       for (var i = 0; i < data.tags.length; i++) {
         if (i > 0) {
           names += ',';
@@ -75,6 +75,7 @@
     });
 
   });
+
 
 
 </script>

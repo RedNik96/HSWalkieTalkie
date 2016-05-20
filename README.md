@@ -11,14 +11,17 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 >$moneymoneymoney
 >$blingbling
 
-#ToDos
-* Kommentare //macht xgwsnde
-* ER-Diagramm anpassen/aktualisieren //xgwsnde
-* RSS        //macht Marius
-* Suche      //macht Jonas
-* Auf im Post genannte Namen verlinken //xgwsnde
-* Duell      //xgwsdfe
-* email für Registrierung
-* css Dateien abgleichen. z. B. wird im Login der Benutzername grau gedruckt, das Passwort nicht, weil in Layout css ein entsprechendes css gegeben ist.
-* 404 Landing Page
-* kein retweet von eigenen posts
+#ToDos bis Samstag Abend!
+* ÜBERALL KOMMENTARE ANFÜGEN
+* ER-Diagramm anpassen/aktualisieren (Duell+Round)  //xgwsnde
+* RSS-Versionsprüfung                               //xgadmmh
+* Trending Cashtags hübsch machen                   //xgadles
+* Login-Überschrift schön machen                    //xgadles
+* Iban als Primäschlüssel mit dem Use               //xgwsdfe
+* diselben Cashtags in einem Post abfangen          //xgwsdfe
+* Testdaten anlegen                                 //xgwsdfe
+* Überschrift nach Suche, wonach gesucht werden     //xgadelf
+* Bild zu groß -> Fehler abfangen in Timeline       //xgadelf
+* Anleitung, wie man im ILIAS zur Feed URL kommt    //xgadelf
+
+*** Sonntag um 12:00 sind alle in Whats-App erreichbar, um sich abzustimmen ***

@@ -7,7 +7,7 @@
     <form action="<?= $router->generate('loginPost'); ?>" method="post" class="form-horizontal">
         <fieldset>
             <legend>LogIn</legend>
-            <div class="username">
+            <div>
                 <div class="form-group">
                     <label for="username" class="col-sm-4 control-label">
                         Benutzername:
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="password">
+            <div>
                 <div class="form-group">
                     <label for="password" class="col-sm-4 control-label">
                         Passwort:
@@ -44,7 +44,7 @@
             </div>
 
             <div class="register-link col-xs-offset-6">
-                <a href="<?= $router->generate('registrierungGet'); ?>">$Rich Bitch werden - Registieren</a>
+                <a href="<?= $router->generate('registrierungGet'); ?>">Jetzt registieren und reich werden!</a>
             </div>
         </fieldset>
     </form>

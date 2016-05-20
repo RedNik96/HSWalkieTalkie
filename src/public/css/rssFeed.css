@@ -1,0 +1,15 @@
+.rss_entry {
+    font-size: 9pt;
+}
+
+.rss_date_pre {
+    font-weight: bold;
+}
+
+.rss_link{
+    border-bottom: groove;
+}
+
+.rss_failure_message {
+    font-size: 9pt;
+}
