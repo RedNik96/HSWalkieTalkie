@@ -6,6 +6,9 @@
 
 <? global $router;
     global $match;
+if (isset($outcome)) {?>
+    <h2>Ergebnisse für die Suche nach $<?= $outcome ?>:</h2>
+<? }
 if (!isset($cashtag)) {?>
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
     <textarea class="form-control" name="content" maxlength="255" placeholder="Was machst du gerade?" rows="6" maxlength="255" required></textarea>

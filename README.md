@@ -21,8 +21,9 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * diselben Cashtags in einem Post abfangen          //xgwsdfe
 * Testdaten anlegen                                 //xgwsdfe
 * Überschrift nach Suche, wonach gesucht werden     //xgadelf
-* Bild zu groß -> Fehler abfangen in Timeline       //xgadelf
-* Anleitung, wie man im ILIAS zur Feed URL kommt    //xgadelf
+* Bild zu groß -> Fehler abfangen in Timeline       //xgadelf erledigt
+* Anleitung, wie man im ILIAS zur Feed URL kommt    //xgadelf erledigt
 * HTTP-Error 401 wenn ilias passwort falsch oder nicht gesetzt //marius
 * HTTP-Timeout beim Ilias-Feed //marius
+* Sonderzeichen in Post ("<") beim Wertvollsten Post  //David??
 *** Sonntag um 12:00 sind alle in Whats-App erreichbar, um sich abzustimmen ***
