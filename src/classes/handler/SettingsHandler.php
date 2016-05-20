@@ -8,6 +8,11 @@ class SettingsHandler {
      * sucht alle Voreinstellungen des eingeloggten Users und rendert die Einstellungsseite
      */
     public static function get($tab,...$errorString) {
+        if ($tab>3) {
+            ErrorHandler::showError();
+            die;
+        }
+
         //sucht alle persönlichen Informationen zum eingeloggten User
         $stmt = User::getOwnInfo($_SESSION['user']);
 

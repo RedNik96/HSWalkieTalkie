@@ -56,7 +56,7 @@ class SQL
                 return $stmt;
             } else if($preparedSQL != "SELECT 1") {
 
-                ErrorHandler::get();
+                ErrorHandler::showError();
                 die();
             }
         }
