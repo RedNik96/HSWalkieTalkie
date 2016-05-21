@@ -13,18 +13,22 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 
 #ToDos bis Samstag Abend!
 * ÜBERALL KOMMENTARE ANFÜGEN
-* ER-Diagramm anpassen/aktualisieren (Duell+Round)  //xgwsnde
-* RSS-Versionsprüfung                               //xgadmmh
-* Trending Cashtags hübsch machen                   //xgadles
-* Login-Überschrift schön machen                    //xgadles
-* Iban als Primäschlüssel mit dem Use               //xgwsdfe
-* diselben Cashtags in einem Post abfangen          //xgwsdfe
-* Testdaten anlegen                                 //xgwsdfe
-* Überschrift nach Suche, wonach gesucht werden     //xgadelf erledigt
-* Bild zu groß -> Fehler abfangen in Timeline       //xgadelf erledigt
-* Anleitung, wie man im ILIAS zur Feed URL kommt    //xgadelf erledigt
-* HTTP-Error 401 wenn ilias passwort falsch oder nicht gesetzt //marius
-* HTTP-Timeout beim Ilias-Feed                      //marius
-* Sonderzeichen in Post ("<") beim Wertvollsten Post //David??
-* Nur Bild in Post in wertvollsten Post              //David??
+* ER-Diagramm anpassen/aktualisieren (Duell+Round, account = PK ist IBAN + username)  //NDE erledigt
+* RSS-Versionsprüfung                                           //MMH
+* HTTP-Error 401 wenn ilias passwort falsch oder nicht gesetzt  //MMH
+* HTTP-Timeout beim Ilias-Feed                                  //MMH
+* Trending Cashtags hübsch machen                               //LES
+* Login-Überschrift schön machen                                //LES
+* Iban als Primäschlüssel mit dem User                          //DFE erledigt
+* dieselben Cashtags innerhalb eines Posts ermöglichen          //DFE erledigt
+* Testdaten anlegen                                             //DFE
+* Sonderzeichen in Post ("<") beim Wertvollsten Post            //DFE erledigt
+* Nur Bild in Post in wertvollsten Post                         //DFE erledigt
+* SQL-Reconnect bei Stored Procedures umgehen                   //DFE erledigt
+* Bilder im Post werden jetzt auch bei mehrmaligen Repost angezeigt //DFE erledigt
+* Überschrift nach Suche, wonach gesucht werden                 //ELF erledigt
+* Bild zu groß -> Fehler abfangen in Timeline                   //ELF erledigt
+* Anleitung, wie man im ILIAS zur Feed URL kommt                //ELF erledigt
+* Irgendwas stimmt in den Settings nicht bei der Hausnummer "Ihre Eingabe muss mit dem Format übereinstimmen"   //ELF
+
 *** Sonntag um 12:00 sind alle in Whats-App erreichbar, um sich abzustimmen ***

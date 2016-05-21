@@ -1,6 +1,6 @@
 use hswalkietalkie;
 
-CREATE PROCEDURE getOriginalPoster (IN pPostID int(11))
+CREATE PROCEDURE getOriginalPoster (IN pPostID int(11), OUT pOutPost int(11))
 BEGIN
     DECLARE val, lParentPost INT;
 
@@ -10,7 +10,7 @@ BEGIN
     	SET lParentPost = val;
     	SET val = (SELECT parentPost FROM posts WHERE id = lParentPost);
     END WHILE;
-	SELECT lParentPost As OriginalPoster;
+	  SET pOutPost = (SELECT lParentPost As OriginalPoster);
 END;
 
 COMMIT;
@@ -12679,3 +12679,5 @@ INSERT INTO `bic` (`bic`, `bank`) VALUES
 ('WUEHDE61XXX', 'Wüstenrot Bank Pfandbriefbk ehe Wüstenrot Hypo'),
 ('WUPSDE33XXX', 'Stadtsparkasse Wuppertal'),
 ('WWBADE3AXXX', 'abcbank');
+
+COMMIT;

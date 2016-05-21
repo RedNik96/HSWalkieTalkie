@@ -1,6 +1,10 @@
 <?php
 class RegisterHandler
 {
+    /**
+     * Führt eine Registrierung durch
+     * @throws Exception
+     */
     public static function regsister()
     {
         if (isset($_POST['register'])) {

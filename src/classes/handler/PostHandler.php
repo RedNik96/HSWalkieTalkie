@@ -2,19 +2,29 @@
 
 class PostHandler
 {
+    /**
+     * Diese Funktion erzeugt einen Post.
+     * Dabei wird der Datensatz in die Post-Tabelle gespeichert, die
+     * Bilder werden geprüft, hochgeladen und der Link in die DB gespeichert
+     * und die Cashtags werden in deren Tabelle gespeichert.
+     * @throws Exception
+     */
     public static function create()
     {
         global $router;
-        if(isset($_FILES['postedFiles'])) {
+        //Wenn Bilder gepostet wurden
+        if(isset($_FILES['postedFiles']) && $_FILES['postedFiles']['name'][0] != "") {
             $error = false;
+            //Für jede Datei prüfen, ob ein Fehler auftrat (z. B. Datei zu groß)
             foreach ($_FILES['postedFiles']['error'] as $errorCode) {
-                if ($errorCode!=0&&$errorCode!=4) {
+                if ($errorCode != 0 && $errorCode != 4) {
                     $error=true;
                 }
             }
+
             for($i = 0; $i < count($_FILES['postedFiles']['name']); $i++) {
                 //Prüfen, ob es wirklich eine Datei ist
-                if (isset($_FILES["postedFiles"]["tmp_name"][$i])&&$_FILES["postedFiles"]["tmp_name"][$i]!="") {
+                if (isset($_FILES["postedFiles"]["tmp_name"][$i]) && $_FILES["postedFiles"]["tmp_name"][$i] != "") {
                     $check = getimagesize($_FILES["postedFiles"]["tmp_name"][$i]);
                     if ($check == false) {
                         $error=true;
@@ -22,6 +32,8 @@ class PostHandler
                 }
 
             }
+            
+            //Fehlermeldung geben, falls ein Fehler auftrat
             if ($error==true) {
                 $_SESSION['error']="Fehler: Beim Dateiupload ist ein Fehler aufgetreten. Eventuell ist die Datei zu groß.";
                 header('Location: ' . $router->generate($_POST['origin']));
@@ -29,10 +41,12 @@ class PostHandler
             }
         }
 
+        //Wenn der Inhalt gesetzt ist.
         if(isset($_POST['content'])) {
 
             $now = date('Y-m-d H:i:s');
 
+            //Füge den Datensatz in die Post-Tabelle
             $stmt = SQL::query("INSERT INTO posts (content, user, datePosted)
             VALUES (:content, :user, :date)", array(
                 'content'   => $_POST['content'],
@@ -40,10 +54,12 @@ class PostHandler
                 'date'      => $now
             ));
 
+            //Hole dir die letzte PostID, also die des gerade hinzugefügten Posts.
             $stmt = SQL::query("SELECT MAX(id) AS newID FROM posts");
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $newID = $result['newID'];
 
+            //Hole alle Cashtags des Inhalts
             $cashtagArr = Search::cashtag($_POST['content']);
             foreach ($cashtagArr as $value)
             {
@@ -55,39 +71,55 @@ class PostHandler
                     SQL::query("INSERT INTO cashtag VALUES (:cashtag)", array("cashtag" => $value));
                 }
 
-                $stmt = SQL::query("INSERT INTO cashtagpost VALUES (:cashtag, :postId)",
+                //Falls mehrere Cashtags in einem Post enthalten sind, soll diese Beziehung nur einmal in der DB gespeichert werden.
+                $stmt = SQL::query("SELECT * FROM cashtagpost WHERE cashtag = :cashtag AND postID = :postID",
                     array(
                         "cashtag"   => $value,
-                        "postId"    => $newID
-                    ));
+                        "postID"    => $newID
+                    )
+                );
+
+                //Falls die Cashtag zu Post-Beziehung noch nicht existiert, füge sie hinzu
+                if(!$stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $stmt = SQL::query("INSERT INTO cashtagpost VALUES (:cashtag, :postId)",
+                        array(
+                            "cashtag" => $value,
+                            "postId" => $newID
+                        ));
+                }
             }
 
-            if(isset($_FILES['postedFiles']))
+            //Falls oben die erste Dateiprüfung bzgl. der Größe erfolgte und der Post hinzugefügt wurde,
+            //kann nun die Datei final hochgeladen werden
+            if(isset($_FILES['postedFiles']) && $_FILES['postedFiles']['name'][0] != "")
             {
+
                 for($i = 0; $i < count($_FILES['postedFiles']['name']); $i++)
                 {
-                    //Prüfen, ob es wirklich eine Datei ist
-                    $check = getimagesize($_FILES["postedFiles"]["tmp_name"][$i]);
-                    if($check !== false)
-                    {
-                        $imageFileType = pathinfo($_FILES["postedFiles"]["name"][$i],PATHINFO_EXTENSION);
+                    //Hole die Dateiendung
+                    $imageFileType = pathinfo($_FILES["postedFiles"]["name"][$i],PATHINFO_EXTENSION);
 
-                        $target_file = "../img/posts/". $newID . "_" . $i . "." . $imageFileType;
-                        if(!file_exists("../img/posts"))
-                            mkdir("../img/posts");
-                        if (move_uploaded_file($_FILES["postedFiles"]["tmp_name"][$i], $target_file)) {
-                            echo "The file ". basename( $_FILES["postedFiles"]["name"][$i]). " has been uploaded.";
+                    //Gib der Datei einen eindeutigen Namen
+                    $target_file = "../img/posts/". $newID . "_" . $i . "." . $imageFileType;
 
-                            $target_file = basename($target_file);
+                    //Falls der Ordner "posts" noch nicht existiert, erzeuge ihn
+                    if(!file_exists("../img/posts"))
+                        mkdir("../img/posts");
 
-                            $stmt = SQL::query("INSERT INTO postsImg (postId, filename) VALUES (:pid, :filename)",
-                                array(
-                                    'pid'       => $newID,
-                                    'filename'  => $target_file
-                            ));
-                        } else {
-                            echo "Sorry, there was an error uploading your file.";
-                        }
+                    //lade die Datei final hoch
+                    if (move_uploaded_file($_FILES["postedFiles"]["tmp_name"][$i], $target_file)) {
+
+                        //schreibe nur den Dateinamen in die Datenbank
+                        $target_file = basename($target_file);
+                        $stmt = SQL::query("INSERT INTO postsImg (postId, filename) VALUES (:pid, :filename)",
+                            array(
+                                'pid'       => $newID,
+                                'filename'  => $target_file
+                        ));
+                    } else {
+                        $_SESSION['error']="Fehler: Beim Dateiupload ist ein Fehler aufgetreten.";
+                        header('Location: ' . $router->generate($_POST['origin']));
+                        die;
                     }
                 }
             }
@@ -96,6 +128,11 @@ class PostHandler
         }
     }
 
+    /**
+     * Liefert alle Daten eines Posts.
+     * @param $id = Die ID des Posts, von dem die Daten geholt werden sollen
+     * @return PDOStatement|string = das executete PDOStatement
+     */
     public static function getData($id)
     {
         $stmt = SQL::query(
@@ -113,11 +150,20 @@ class PostHandler
         return $stmt;
     }
 
+    /**
+     * Hier findet der Up- und Downvote statt
+     */
     public static function vote()
     {
+        //Die Post Variable wird extrahiert
         extract($_POST);
+
+        //Es wird geprüft, ob die benötigten Daten für einen Up- / Downvote gesetzt sind.
         if(isset($voter) AND isset($post) AND isset($vote)) {
+
             $voteExists = false;
+
+            //Prüfe, ob dieser User schon einmal den Post bewertet hat
             $stmt = SQL::query("SELECT * FROM votes WHERE voter = :voter AND post = :post",
                 array(
                     "voter" => $voter,
@@ -126,6 +172,7 @@ class PostHandler
             $voteExists = $stmt->fetch();
 
             if (!$voteExists) {
+                //Wurde noch nicht gevotet wird der Datensatz hinzugefügt
                 $stmt = SQL::query("INSERT INTO votes (voter, post, vote) VALUES (:voter, :post, :vote)",
                     array(
                         "voter" => $voter,
@@ -133,6 +180,7 @@ class PostHandler
                         "vote" => $vote
                 ));
             } else {
+                //Falls bereits für diesen Post von dem User ein Vote durchgeführt wurde, wird seine Meinung geändert.
                 $stmt = SQL::query("UPDATE votes SET vote = :vote WHERE voter = :voter AND post = :post",
                     array(
                         "voter" => $voter,
@@ -140,6 +188,8 @@ class PostHandler
                         "vote" => $vote
                 ));
             }
+
+            //Es werden die aktuellen Daten des Posts geholt, um die derzeitigen votes an den XMLHTTPRequest zurückzugeben
             $stmt = self::getData($post);
             if($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo $result['Votes'];
@@ -147,22 +197,28 @@ class PostHandler
         }
     }
 
+    /**
+     * Diese Methode repostet einen Post
+     */
     public static function repost()
     {
+        //Die übergebenen Post variablen werden extrahiert
         extract($_POST);
 
+        //Es wird geprüft, ob die für einen Repost notwendigen Daten übergeben wurden
         if(isset($user) AND isset($post)) {
-            $stmt = SQL::query("CALL getOriginalPoster(:post)", array("post" => $post));
+
+            //Hole den absolut ursprünglichen Poster rekursiv über die storedProcedure
+            SQL::query("CALL getOriginalPoster(:post, @id)", array("post" => $post));
+            $stmt = SQL::query("SELECT @id AS OriginalPoster");
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            SQL::query("SELECT 1"); //reconnect nach stored Procedure
-
-            //check if user is original poster
+            //Prüfe, ob der User einen Repost seines eigenen Posts reposten möchte
             $stmtIsOriginalUser = SQL::query("SELECT user FROM posts WHERE id = :post", array("post" => $result['OriginalPoster']));
             $resultIsOriginalUser = $stmtIsOriginalUser->fetch(PDO::FETCH_ASSOC);
             $userHasAlreadyReposted = $resultIsOriginalUser['user'] == $user;
 
-            //check if user has reposted once
+            //Prüfe, ob der User den ursprünglichen Post bereits einmal repostet hatte.
             if(!$userHasAlreadyReposted)
                 $userHasAlreadyReposted = self::userHasAlreadyReposted($result['OriginalPoster'], $user);
             if (!$userHasAlreadyReposted) {
@@ -174,6 +230,8 @@ class PostHandler
                         "datePosted" => date('Y-m-d H:i:s')
                     ));
             }
+
+            //Hole die Post-Daten, um die aktuelle Anzahl an Reposts an den XMLHTTPRequest zurückzugeben
             $stmt = self::getData($post);
             if ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo $result['Reposts'];
@@ -181,6 +239,12 @@ class PostHandler
         }
     }
 
+    /**
+     * Diese Methode prüft rekursiv, ob der User bereits einmal einen Post repostet hatte.
+     * @param $postID = Die "originale" PostID
+     * @param $forbiddenUsername User, der reposten möchte
+     * @return bool gibt zurück, ob der User bereits einen Repost gemacht hat
+     */
     public static function userHasAlreadyReposted($postID, $forbiddenUsername)
     {
         $stmt = SQL::query("SELECT id, user FROM posts WHERE parentPost = :post", array("post" => $postID));
@@ -196,6 +260,11 @@ class PostHandler
         return false;
     }
 
+    /**
+     * Gib den Poster des Posts zurück
+     * @param $postID Der Post, von dem der Poster herausgesucht werden soll
+     * @return mixed Der Username des Posters
+     */
     public static function getPoster($postID)
     {
         $stmt = SQL::query("SELECT username FROM user As U, posts AS P where P.user = U.username AND P.iD = :id",
@@ -208,7 +277,7 @@ class PostHandler
 
     /**
     * @param $postID die ID des Posts, der angezeigt werden soll
-    * holt alle Daten zum Post und Alle Kommentare und rendert den Post mit
+    * holt alle Daten zum Post und alle Kommentare und rendert den Post mit
     * allen Kommetaren
     */
     public static function get($postID) {
@@ -229,28 +298,10 @@ class PostHandler
         if (!$result) {
             ErrorHandler::showError();
         } else {
-            // Bilder des Posts
-            $stmt2 = SQL::query(
-                "SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent",
-                array(
-                  'pid'       => $result['postID'],
-                  'pidParent' => $result['postIDParent'])
-            );
-
-            $imgs = array();
-            while($img = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                $imgs[] = $img['filename'];
-            }
+            $imgs = self::getPostImages($result["postID"], $result["postIDParent"]);
 
             // Kommentare
-            $stmt3 = SQL::query(
-              "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-              FROM comment as C, user as U
-              WHERE C.postID = :postID AND C.userID = U.username
-              ORDER BY C.commentTime DESC",
-              array(
-                'postID' => $postID)
-            );
+            $comments = self::getPostComments($postID, false);
 
             $data = array(
               'posts' => array(
@@ -265,7 +316,7 @@ class PostHandler
                   'reposts'   => $result['Reposts'],
                   'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
                   'imgs'      => $imgs,
-                  'comments'  => $stmt3
+                  'comments'  => $comments
                 )
               ),
               'allowComment' => true
@@ -295,5 +346,62 @@ class PostHandler
 
         // Weiterleitung auf den Posts
         header('Location: ' . $router->generate('viewPostGet', array('id'=>$postID)));
+    }
+
+    /**
+     * Gibt alle Bilder eines Posts zurück
+     * @param $postID Der Post, von dem die Kommentare angezeigt werden sollen
+     * @param $postIDParent Der Ursprungspost, damit, falls es sich um einen Repost handelt,
+     *          einfach die Bilder des Ursprungspost angezeigt werden.
+     * @return array Das Bild-Array
+     */
+    public static function getPostImages($postID, $postIDParent){
+
+        //Falls der ParentPost nicht leer ist, hole die Bilder des ursprünglichen Posts.
+        if(!is_null($postIDParent)){
+            SQL::query("CALL getOriginalPoster(:post, @id)", array("post" => $postID));
+            $stmt = SQL::query("SELECT @id as OriginalPoster");
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $postIDParent = $result['OriginalPoster'];
+        }
+
+        // Bilder des Posts
+        $stmt = SQL::query(
+            "SELECT filename FROM postsImg WHERE postID = :pid OR postID = :pidParent",
+            array(
+                'pid'       => $postID,
+                'pidParent' => $postIDParent
+        ));
+
+        $imgs = array();
+        while($img = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $imgs[] = $img['filename'];
+        }
+        return $imgs;
+    }
+
+    /**
+     * Gibt alle Kommentare eines Posts zurück
+     * @param $postID Der Post, von dem die Kommentare angezeigt werden sollen
+     * @return PDOStatement|string Das executete PDO Statement, welches die Kommentare zurückgibt
+     */
+    public static function getPostComments($postID, $limitStatement = true){
+        $sql = "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+                FROM comment as C, user as U
+                WHERE C.postID = :postID AND C.userID = U.username
+                ORDER BY C.commentTime ASC";
+
+        if($limitStatement) {
+            $sql = $sql . " LIMIT 3";
+        }
+
+        $stmt = SQL::query($sql,
+            array(
+                'postID' => $postID
+            )
+        );
+
+
+        return $stmt;
     }
 }

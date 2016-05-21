@@ -50,3 +50,7 @@ body footer {
 .error {
     text-align: center;
 }
+
+.label.label-primary.repost a {
+    color:white;
+}

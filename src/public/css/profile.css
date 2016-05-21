@@ -10,3 +10,8 @@
   margin-top: 10px;
   font-weight: bold;
 }
+
+.profileBigPicture {
+  max-width: 350px;
+  max-height: 500px;
+}

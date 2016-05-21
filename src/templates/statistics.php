@@ -84,13 +84,23 @@
                     <div class="postauthor">
                         <? echo User::getUserHtml($stats['bestPost']['picture'], $stats['bestPost']['firstName'], $stats['bestPost']['lastName'], $stats['bestPost']['username'])?>
                     </div>
-                    <!--<div class="posttime">
-                    <span class="time"><?//= htmlspecialchars($stats['bestPost']['datePosted']); ?> Uhr</span>
-                </div> -->
+                </div>
                 </div>
                 <div class="postcontent">
-                    <a href="<?= $GLOBALS['router']->generate('viewPostGet', array('id'=>$stats['bestPost']['postID'])) ?>" target="_blank" class="smallerContent"><? print str_replace(chr(13), '<br>', htmlspecialchars($stats['bestPost']['content'])); ?></a>
-                    <span class="cash">$<? echo htmlspecialchars($stats['bestPost']['votes'])?></span>
+                    <a href="<?= $GLOBALS['router']->generate('viewPostGet', array('id'=>$stats['bestPost']['postID'])) ?>" target="_blank" class="smallerContent">
+                        <?
+                        for($i = 0; $i < count($stats['bestPost']['imgs']); $i++){ ?>
+                        <img src="/HSWalkieTalkie/src/img/posts/<?= $stats['bestPost']['imgs'][$i]; ?>" class="img-thumbnail smallImages">
+                        <?
+                        }
+                        if(count($stats['bestPost']['imgs']) > 0)
+                            echo "<br>";
+                        $bestPostContent = str_replace(chr(13), '<br>', $stats['bestPost']['content']);
+                        $bestPostContent = Search::createSmileys($bestPostContent);
+                        print $bestPostContent;
+                        ?>
+                    </a>
+                    <span class="cash">$<? echo $stats['bestPost']['votes'] ?></span>
                 </div>
             </div>
         </div>

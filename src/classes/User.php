@@ -84,8 +84,10 @@ class User {
      * @param $bic BIC der Bankverbindung
      */
     public static function createAccount($iban,$bic) {
-        $stmt=SQL::query("SELECT iban from account where iban=:iban", array(
-                'iban' => $iban));
+        $stmt=SQL::query("SELECT iban from account where iban=:iban AND user=:user", array(
+                'iban' => $iban,
+                'user' => $_SESSION['user']
+        ));
         if (!$stmt->fetch()) {
             SQL::query("INSERT INTO account values (:iban, :bic, :user)", array(
                 'iban' => $iban,
@@ -111,13 +113,19 @@ class User {
      * @param $bic neue BIC
      */
     public static function changeAccount($ibanalt,$iban,$bic) {
-        $stmt=SQL::query("SELECT iban from account where iban=:iban", array(
-            'iban' => $iban));
+        $stmt=SQL::query("SELECT iban from account where iban=:iban AND user=:user",
+            array(
+                'iban' => $iban,
+                'user' => $_SESSION['user']
+            )
+        );
+
         if (!$stmt->fetch()) {
-            SQL::query("UPDATE account SET iban=:iban, bic=:bic WHERE iban=:ibanalt", array(
+            SQL::query("UPDATE account SET iban=:iban, bic=:bic WHERE iban=:ibanalt AND user=:user", array(
                 'bic' => $bic,
                 'iban' => $iban,
-                'ibanalt' => $ibanalt
+                'ibanalt' => $ibanalt,
+                'user'  => $_SESSION['user']
             ));
         }
     }
@@ -225,9 +233,9 @@ class User {
     /** ändert den Namen des Bildes des eingeloggten Users
      * @param $imageFileType
      */
-    public static function changePicture($imageFileType) {
+    public static function changePicture($imageName) {
         SQL::query("UPDATE user SET picture=:picture WHERE username=:user", array(
-            'picture' => $_SESSION['user'] . "." . $imageFileType,
+            'picture' => $imageName,
             'user' => $_SESSION['user']
         ));
     }
@@ -285,17 +293,14 @@ class User {
                 ));
 
             if($iban) {
-                //Abfrage, ob IBAN noch nicht existiert
-                $stmt2 = SQL::query("SELECT * FROM account where iban = :iban", array( "iban" => $iban));
-                //Wenn nicht, kann Konto hinzugefüggt werden.
-                if(!$stmt2->fetch()) {
-                    $stmt2 = SQL::query("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)",
-                        array(
-                            'iban' => $iban,
-                            'bic' => $bic,
-                            'username' => $username
-                        ));
-                }
+                //Konto hinzufügen
+                SQL::query("INSERT INTO account (iban, bic, user) VALUES (:iban, :bic, :username)",
+                    array(
+                        'iban' => $iban,
+                        'bic' => $bic,
+                        'username' => $username
+                    )
+                );
             }
 
             $_SESSION['logged_in']  = true;
@@ -322,6 +327,53 @@ class User {
               FROM user AS U WHERE U.username=:username",array( "username" => $user));
         $result=$stmt->fetch();
         return $result['cash'];
+    }
+
+    /**
+     * Es werden User-Testdaten erzeugt.
+     * @throws Exception
+     */
+    public static function createTestdata(){
+        $firstname  = array( 'David', 'Niklas', 'Marius', 'Jonas', 'Leon');
+        $lastname   = array( 'Feldhoff', 'Devenish', 'Mamsch', 'Elfering', 'Stapper');
+        $mail       = array( 'feldhoff.david@gmail.com', 'devenishniklas@gmail.com', 'marius.mamsch@gmail.com', 'jonas.elfering@gmail.com', 'leonstapper96@gmail.com');
+        $username   = array( 'xgwsdfe', 'xgwsnde', 'xgadmmh', 'xgadelf', 'xgadles');
+        $birthday   = array( '1994-05-04', '1996-12-16', '1996-05-15', '1996-06-03', '1996-06-02');
+        $street     = array( 'Moorstr.', 'Roter Weg', 'Siemensstr.', 'Zur Ritze', 'Buchdahlstr.');
+        $housenumber= array( '88a', '1', '88', '69', '00');
+        $zip        = array( "48432", "48429", "48432", "48165", "48429");
+        $iban       = array( "123", "345", "678", "901", "234" );
+        $bic        = array( 'WELADED1RHN', 'WELADED1RHN', 'WELADED1RHN', 'WELADED1RHN', 'WELADED1RHN');
+        $picture    = array( 'xgwsdfe.jpg', 'xgwsnde.jpg', 'xgadmmh.jpg', 'xgadelf.jpg', 'xgadles.jpg');
+
+        for($i = 0; $i < count($username); $i++) {
+            User::createUser(
+                $firstname[$i],
+                $lastname[$i],
+                $mail[$i],
+                $username[$i],
+                'test',
+                'test',
+                $birthday[$i],
+                $street[$i],
+                $housenumber[$i],
+                $zip[$i],
+                $iban[$i],
+                $bic[$i]
+            );
+        }
+
+        //Passe die Bilder an.
+        //Da, falls die Datenbank noch nicht existiert und sie erst erzeugt werden muss, noch keine Session existiert
+        //muss erst eine Session gestartet werden, umd ie Funktionalität User::changePicture zu verwenden
+        session_start();
+        for($i = 0; $i < count($username); $i++) {
+            $_SESSION['user'] = $username[$i];
+            User::changePicture("jpg");
+        }
+
+        session_destroy();
+        
     }
     
 }

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/profile.css">
 <div class="row picture-row">
-  <img src="/HSWalkieTalkie/src/img/profile/<?= $user_info['picture'] ?>" class="img-responsive" alt="Profil Bild" />
+  <img src="/HSWalkieTalkie/src/img/profile/<?= $user_info['picture'] ?>" class="img-rounded profileBigPicture" alt="Profil Bild" />
 </div>
 <div class="row name-row col-md-offset-1">
   <div>
