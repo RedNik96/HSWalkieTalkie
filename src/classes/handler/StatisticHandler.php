@@ -168,27 +168,39 @@ class StatisticHandler {
         );
     }
 
+    /**
+     * Holt die beliebtesten Cashtags.
+     * Hierzu wird für jeden Post der ursprüngliche Post geholt, da nur zu
+     * dem ursprünglichen Post eine Post-Cashtag Beziehung existiert
+     * @param $searchInFriendsOnly Je nachdem, ob nur die beliebtesten Cashtags der
+     * Freunde oder aller Benutzer angezeigt werden sollen
+     * @return array DAs Array mit den drei beliebtesten Cashtags
+     */
     public static function getTrendingCashtags($searchInFriendsOnly)
     {
         $cashtags = array();
 
         if($searchInFriendsOnly) {
+            //Holt die Posts von einem selber und von den Followern
             $stmt = SQL::query("SELECT p.id FROM posts AS p LEFT JOIN follower AS f ON p.user = f.followed WHERE (f.follower = :user) OR p.user = :user",
                 array('user' => $_SESSION['user']));
         } else {
+            //Holt alle Posts
             $stmt = SQL::query("SELECT id FROM posts");
         }
 
         while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
+            //Hole die ursprüngliche PostID, falls es sich um Reposts handelt.
             SQL::query("CALL getOriginalPoster(:post, @id);", array("post" => $result["id"]));
             $stmtOriginalPost = SQL::query("SELECT @id AS OriginalPoster");
             $resultOriginalPost = $stmtOriginalPost->fetch(PDO::FETCH_ASSOC);
 
-
+            //Hole alle cashtags, die in dem ursprünglichen Post gehören
             $stmtCashtags = SQL::query("SELECT cashtag FROM cashtagpost WHERE postId = :post",
                 array("post" => $resultOriginalPost['OriginalPoster']));
 
+            //Zähle die Verwendung der Cashtags hoch.
+            //Falls der Cashtag bislang noch nicht verwendet wurde, initialisiere ihn erst zunächst.
             while ($resultCashtag = $stmtCashtags->fetch(PDO::FETCH_ASSOC)) {
                 EscapeUtil::escapeArray($resultCashtag);
                 if (!isset($cashtags[$resultCashtag['cashtag']])) {
@@ -197,9 +209,11 @@ class StatisticHandler {
                 $cashtags[$resultCashtag['cashtag']]++;
             }
         }
-        
+
+        //Sortiere die Cashtags nach dem Wert und behalte die Keys.
         arsort($cashtags);
 
+        //erstelle ein neues Array, welches nur die beliebtesten drei cashtags enthält
         $i = 0;
         $trendingTags = array();
         foreach ($cashtags as $key => $value){

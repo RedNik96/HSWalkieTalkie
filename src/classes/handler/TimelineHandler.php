@@ -2,7 +2,8 @@
 
 Class TimelineHandler {
     /**
-     *
+     * Holt die Posts, die in der Neuigkeiten-Seite angezeigt werden sollen
+     * Also alle, die von einem Selber gepostet werden und von Freunden gepostet wurden
      */
     public static function get() {
         $posts = self::getPostsAsArray($_SESSION['user']);
@@ -73,8 +74,12 @@ Class TimelineHandler {
         return $posts;
     }
 
-    //Hole alle Posts für die Neuigkeiten-Seite
-    //Sprich: Alle eigenen Posts und alle Posts von den Freunden, falls man einigen folgt.
+    /**
+     * Hole alle Posts für die Neuigkeiten-Seite
+     * Sprich: Alle eigenen Posts und alle Posts von den Freunden, falls man einigen folgt.
+     * @param $user = der User, von dem die Posts angezeigt werden sollen
+     * @return PDOStatement|string
+     */
     public static function getPosts($user)
     {
         $sqlQuery = "
