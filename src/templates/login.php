@@ -1,7 +1,7 @@
 <!--Dieses Template stellt die Loginseite der Anwendung dar.-->
 
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/login.css">
-<header>$$HSWalkieTalkie$$</header>
+<header>Herzlich Willkommen bei HSWalkieTalkie</header>
 <main>
     <? global $router; ?>
     <div class="container">

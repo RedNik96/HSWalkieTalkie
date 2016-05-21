@@ -1,6 +1,7 @@
 div.container {
     width:500px;
-    border:1px solid black;
+    border: 1px solid grey;
+    box-shadow: 1px 1px 1px 1px grey;
     webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -10,7 +11,7 @@ div.container {
 
 header {
     font-size: 24pt;
-    color: gold;
+    color: #777;
     margin:auto;
     align-content: center;
     text-align: center;
