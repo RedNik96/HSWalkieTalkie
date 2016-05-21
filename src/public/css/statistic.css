@@ -40,6 +40,18 @@
     font-weight: bold;
 }
 
+.statistic .cashtag {
+    width: 25%;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.statistic .cashtagUsedAmount {
+    width: 60%;
+    display: inline-block;
+    font-weight: bold;
+}
+
 .statistic .smallImages {
     max-width: 50px;
     max-height: 50px;
