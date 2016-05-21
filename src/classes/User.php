@@ -369,11 +369,11 @@ class User {
         session_start();
         for($i = 0; $i < count($username); $i++) {
             $_SESSION['user'] = $username[$i];
-            User::changePicture("jpg");
+            User::changePicture($username[$i] . ".jpg");
         }
 
         session_destroy();
-        
+
     }
     
 }
