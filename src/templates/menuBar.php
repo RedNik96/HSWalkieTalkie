@@ -62,7 +62,7 @@
         if (i > 0) {
           names += ',';
         }
-        names += '{ "id":"' + data.tags[i] + '", "text":"' + data.tags[i] + '"}';
+        names += '{ "id":"' + data.tags[i]+ '", "text":"' + data.tags[i] + '"}';
       }
     }
     names+=']}]';
@@ -73,7 +73,6 @@
       data: obj,
       closeOnSelect: false
     });
-
   });
 
 

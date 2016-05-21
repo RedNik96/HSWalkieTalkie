@@ -68,11 +68,11 @@ class PostHandler
                 //Cashtag hinzufügen, falls er noch nicht existiert
                 if(!$stmt->fetch(PDO::FETCH_ASSOC))
                 {
-                    SQL::query("INSERT INTO cashtag VALUES (:cashtag)", array("cashtag" => $value));
+                    SQL::query("INSERT INTO cashtag (cashtag) VALUES (:cashtag)", array("cashtag" => $value));
                 }
 
                 //Falls mehrere Cashtags in einem Post enthalten sind, soll diese Beziehung nur einmal in der DB gespeichert werden.
-                $stmt = SQL::query("SELECT * FROM cashtagpost WHERE cashtag = :cashtag AND postID = :postID",
+                $stmt = SQL::query("SELECT * FROM cashtagpost, cashtag WHERE cashtagId = id AND postID = :postID AND cashtag=:cashtag",
                     array(
                         "cashtag"   => $value,
                         "postID"    => $newID
@@ -81,7 +81,7 @@ class PostHandler
 
                 //Falls die Cashtag zu Post-Beziehung noch nicht existiert, füge sie hinzu
                 if(!$stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $stmt = SQL::query("INSERT INTO cashtagpost VALUES (:cashtag, :postId)",
+                    $stmt = SQL::query("INSERT INTO cashtagpost VALUES ((SELECT id from cashtag WHERE cashtag=:cashtag), :postId)",
                         array(
                             "cashtag" => $value,
                             "postId" => $newID

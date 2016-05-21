@@ -55,6 +55,7 @@ class SQL
             if($stmt->execute($parameterArr)) {
                 return $stmt;
             } else {
+                print_r($stmt);
                 ErrorHandler::showError("Es ist ein Datenbankfehler aufgetreten.");
                 die();
             }

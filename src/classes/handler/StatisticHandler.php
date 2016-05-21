@@ -186,7 +186,7 @@ class StatisticHandler {
             $resultOriginalPost = $stmtOriginalPost->fetch(PDO::FETCH_ASSOC);
 
 
-            $stmtCashtags = SQL::query("SELECT cashtag FROM cashtagpost WHERE postId = :post",
+            $stmtCashtags = SQL::query("SELECT cashtag FROM cashtagpost, cashtag WHERE cashtagId=id AND postId = :post",
                 array("post" => $resultOriginalPost['OriginalPoster']));
 
             while ($resultCashtag = $stmtCashtags->fetch(PDO::FETCH_ASSOC)) {

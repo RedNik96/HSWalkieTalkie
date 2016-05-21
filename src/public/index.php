@@ -85,7 +85,7 @@
         ProfileHandler::showMoreUser($name);
     }, 'showMoreUserGet');
 
-    $router->map('GET', '/showCashTag/[*:cashtag]/', function ($cashtag) {
+    $router->map('GET', '/showCashTag/[i:cashtag]/', function ($cashtag) {
         CashTagHandler::get($cashtag);
     }, 'showCashTagGet');
 

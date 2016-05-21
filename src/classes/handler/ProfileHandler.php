@@ -35,7 +35,7 @@ Class ProfileHandler {
    */
   public static function showMoreUser($name) {
     $i=0;
-    // sucht alle Nutzer mit den übergebenen Namen
+    // ersetzt alle durch die URL oder den Router escapden Zeichen
     $name=str_replace('%20',' ',$name);
     $name=str_replace('%C3%A4','ä',$name);
     $name=str_replace('%C3%84','Ä',$name);
@@ -43,6 +43,7 @@ Class ProfileHandler {
     $name=str_replace('%C3%9C','Ü',$name);
     $name=str_replace('%C3%B6','ö',$name);
     $name=str_replace('%C3%96','Ö',$name);
+    // sucht alle Nutzer mit den übergebenen Namen
     $stmt = User::getUsersByFullName($name);
     // speichert die Abfragergebnisse in einem Array
     while ($res = $stmt->fetch()) {

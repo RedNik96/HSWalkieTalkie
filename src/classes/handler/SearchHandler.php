@@ -47,9 +47,15 @@ class SearchHandler
         } else {
             //wenn die gepostete Variable mit einem Dollar beginnt werden alle Posts mit dem übergebenen Cashtag angezeigt
             if (substr($_POST['search'],0,1)==='$') {
-
                 global $router;
-                header("Location: " . $router->generate("showCashTagGet",array('cashtag' => substr($_POST['search'],1))));
+                $stmt=SQL::query("SELECT id from cashtag WHERE cashtag=:cashtag",array('cashtag'=>$_POST['search']));
+                if ($result=$stmt->fetch()) {
+                    EscapeUtil::escapeArray($result);
+                    header("Location: " . $router->generate("showCashTagGet",array('cashtag' => $result['id'])));
+                } else {
+                    header("Location: " . $router->generate("notFoundGet"));
+                }
+                
             } else {
                 //wenn die gepostete Variable mit n beginnt wurde eine Vollname ausgewählt
                 if (substr($_POST['search'],0,1)==='n') {
@@ -93,6 +99,14 @@ class SearchHandler
      */
     static public function notFound() {
         Template::render('notFound');
+    }
+
+    function jsspecialchars( $string = '') {
+        $string = preg_replace("/\r*\n/","\\n",$string);
+        $string = preg_replace("/\//","\\\/",$string);
+        $string = preg_replace("/\"/","\\\"",$string);
+        $string = preg_replace("/'/"," ",$string);
+        return $string;
     }
 }
 ?>

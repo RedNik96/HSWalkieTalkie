@@ -11,7 +11,7 @@ class Search
      */
     public static function cashtag($content)
     {
-        preg_match_all("/\\\$[^ |\r|\$]+/", $content, $treffer);
+        preg_match_all("/\\$[A-Za-z0-9ÄÜÖäüöß]+/", $content, $treffer);
         return $treffer[0];
     }
 
@@ -47,28 +47,37 @@ class Search
 
     public static function createCashtagLinks($content)
     {
-        preg_match_all("/\\$[^ |\r|\$]+/", $content, $treffer);
+        preg_match_all("/\\$[A-Za-z0-9ÄÜÖäüöß]+/", $content, $treffer);
 
         $treffer = $treffer[0];
+        $replace=$content;
+        $erg="";
         foreach ($treffer as $cashtag)
         {
+
             //$cashtag hat noch das $ mit inbegriffen
             $pureCashtag = substr($cashtag, 1);
 
             //Suche, ob der Cashtag existiert. Nur dann soll ein Link hierfür eingebunden werden
             $stmt = SQL::query("SELECT * FROM cashtag WHERE cashtag = :cashtag", array('cashtag' => $cashtag));
 
-            if($stmt->fetch()) {
-                //Cashtag existiert -> erzeuge Link
-
-                $content = str_replace(
+            if($result=$stmt->fetch()) {
+            //Cashtag existiert -> erzeuge Link
+                $first=substr($replace,0,strpos($replace,$cashtag)+strlen($cashtag));
+                $first = str_replace(
                     $cashtag,
-                    "<a href=\"" . $GLOBALS['router']->generate('showCashTagGet', array('cashtag' => $pureCashtag)) . "\" class=\"cashtag\">" . $cashtag . "</a>",
-                    $content
+                    "<a href=\"" . $GLOBALS['router']->generate('showCashTagGet', array('cashtag' => $result['id'])) . "\" class=\"cashtag\">" . $cashtag . "</a>",
+                    $first
                 );
+                $replace=substr($replace,strpos($replace,$cashtag)+strlen($cashtag));
+                $erg = $erg . $first;
             }
+            $erg = $erg.$replace;
         }
         //Gib den ersetzen Inhalt zurück
+        if ($erg!="") {
+            return $erg;
+        }
         return $content;
     }
 

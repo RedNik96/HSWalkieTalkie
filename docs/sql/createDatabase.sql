@@ -83,15 +83,16 @@ CREATE TABLE `votes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `cashtag` (
-  `cashtag` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`cashtag`)
+  `cashtag` varchar(100) COLLATE utf8mb4_bin NOT NULL UNIQUE,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE `cashtagPost` (
-  `cashtag` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `cashtagId` int(11) NOT NULL,
   `postId` int(11) NOT NULL,
-  PRIMARY KEY (`cashtag`, `postId`),
-  FOREIGN KEY (`cashtag`) REFERENCES cashtag (`cashtag`) ON DELETE CASCADE  ON UPDATE CASCADE,
+  PRIMARY KEY (`cashtagId`, `postId`),
+  FOREIGN KEY (`cashtagId`) REFERENCES cashtag (`id`) ON DELETE CASCADE  ON UPDATE CASCADE,
   FOREIGN KEY (`postId`) REFERENCES posts (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
