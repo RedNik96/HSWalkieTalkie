@@ -63,7 +63,13 @@
         SearchHandler::search();
     }, 'searchPost');
 
-    $router->map('GET', '/showUser/[a:user]/', function( $user ) {
+    $router->map('GET', '/showUser/[*:user]/', function( $user ) {
+        $user=str_replace('%C3%A4','ä',$user);
+        $user=str_replace('%C3%84','Ä',$user);
+        $user=str_replace('%C3%BC','ü',$user);
+        $user=str_replace('%C3%9C','Ü',$user);
+        $user=str_replace('%C3%B6','ö',$user);
+        $user=str_replace('%C3%96','Ö',$user);
         ProfileHandler::showUser($user);
     }, 'showUserGet');
 
@@ -79,7 +85,7 @@
         ProfileHandler::showMoreUser($name);
     }, 'showMoreUserGet');
 
-    $router->map('GET', '/showCashTag/[a:cashtag]/', function ($cashtag) {
+    $router->map('GET', '/showCashTag/[*:cashtag]/', function ($cashtag) {
         CashTagHandler::get($cashtag);
     }, 'showCashTagGet');
 
