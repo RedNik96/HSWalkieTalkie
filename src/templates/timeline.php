@@ -131,6 +131,7 @@ if (!isset($cashtag) && !isset($allowComment)) {
                       $commentsExist = true;
                 ?>
                 <div class="comment-container row">
+                    <!-- EINZELNER KOMMENTAR HEADER -------------------------------------------------------------------------------->
                     <div class="row header hswUser">
                       <div class="col-xs-offset-1 col-xs-1 picture">
                         <img src="<?= "/HSWalkieTalkie/src/img/profile/" . $comment['picture'];?>" class="img-responsive img-rounded"/>
@@ -152,11 +153,11 @@ if (!isset($cashtag) && !isset($allowComment)) {
                         <?= date('d.m.Y H:i:s', strtotime($comment['commentTime'])) ?>
                       </div>
                     </div>
+                    <!-- EINZELNER KOMMENTAR INHALT -------------------------------------------------------------------------------->
                     <div class="row content">
                         <div class="col-xs-offset-1 col-xs-10 comment">
                             <?
                                 $tempComment = str_replace(chr(13), '<br>', $comment['comment']);
-                                //$tempComment = $comment['comment'];
                                 $tempComment = Search::createUserLinks($tempComment);
                                 $tempComment = Search::createCashtagLinks($tempComment);
                                 $tempComment = Search::createSmileys($tempComment);

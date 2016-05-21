@@ -45,6 +45,14 @@ class Search
         return $content;
     }
 
+    /**
+     * Sucht Cashtags innerhalb des übergebenen Inhalts
+     * Falls welche gefunden werden, wird geprüft, ob sie gültige Cashtags sind,
+     * also Cashtags, die in der Datenbank existieren.
+     * Wenn dem so ist, wird ein Link hierzu erstellt.
+     * @param $content = Der Inhalt, der auf Cashtags überprüft werden soll
+     * @return mixed = Der Inhalt inklusive Links auf Cashtags
+     */
     public static function createCashtagLinks($content)
     {
         preg_match_all("/\\$[A-Za-z0-9ÄÜÖäüöß]+/", $content, $treffer);
@@ -82,6 +90,7 @@ class Search
     }
 
     /**
+     * Überprüft den Inhalt auf Smileys und ersetzt ihn mit Smiley-Icons
      * @param Ändere den Text von z. B. :) zu einem entsprechendem Smiley
      * @return der Inhalt, der die Smiley-Icons enthält
      */

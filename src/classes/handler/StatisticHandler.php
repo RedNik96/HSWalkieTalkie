@@ -185,7 +185,7 @@ class StatisticHandler {
             $stmtOriginalPost = SQL::query("SELECT @id AS OriginalPoster");
             $resultOriginalPost = $stmtOriginalPost->fetch(PDO::FETCH_ASSOC);
 
-
+            //Hole alle cashtags, die in dem ursprünglichen Post gehören
             $stmtCashtags = SQL::query("SELECT cashtag FROM cashtagpost, cashtag WHERE cashtagId=id AND postId = :post",
                 array("post" => $resultOriginalPost['OriginalPoster']));
 

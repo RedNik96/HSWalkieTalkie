@@ -3,7 +3,10 @@
 <link href="/HSWalkieTalkie/src/libraries/bootstrap-toggle-master/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="/HSWalkieTalkie/src/libraries/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
 
-    <legend>Statistiken</legend>
+    <legend>
+        <i class="fa fa-bar-chart" aria-hidden="true"> </i>
+        Statistiken
+    </legend>
     <span>Statistiken anzeigen für </span>
 
         <input name="toggle" id="toggle-event" data-toggle="toggle" data-on="Alle Benutzer" data-off="Freunde" type="checkbox" <? if (isset($_SESSION['toggle'])&&($_SESSION['toggle']==="true")) { echo "checked"; }?>>
