@@ -80,8 +80,9 @@ class Search
                 $replace=substr($replace,strpos($replace,$cashtag)+strlen($cashtag));
                 $erg = $erg . $first;
             }
-            $erg = $erg.$replace;
+
         }
+        $erg = $erg.$replace;
         //Gib den ersetzen Inhalt zurück
         if ($erg!="") {
             return $erg;
