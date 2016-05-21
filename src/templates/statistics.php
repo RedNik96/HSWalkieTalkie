@@ -69,7 +69,7 @@
                         <span><?= Search::createCashtagLinks($tag['cashtag']); ?></span>
                     </div>
                     <div class="cashtagUsedAmount">
-                        <span>in <? echo htmlspecialchars($tag['amount']) ?> Posts verwendet</span>
+                        <span>Anzahl Posts: <? echo htmlspecialchars($tag['amount']) ?></span>
                     </div>
                 </div>
                 <?endforeach; ?>

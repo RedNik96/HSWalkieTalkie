@@ -38,18 +38,22 @@
     width: 10%;
     display: inline-block;
     font-weight: bold;
+    overflow: hidden;
 }
 
 .statistic .cashtag {
-    width: 25%;
+    width: 88%;
     display: inline-block;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .statistic .cashtagUsedAmount {
     width: 60%;
     display: inline-block;
     font-weight: bold;
+    margin-left: 10%;
 }
 
 .statistic .smallImages {
