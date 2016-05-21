@@ -21,7 +21,8 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * Login-Überschrift schön machen                                //LES
 * Iban als Primäschlüssel mit dem User                          //DFE erledigt
 * dieselben Cashtags innerhalb eines Posts ermöglichen          //DFE erledigt
-* Testdaten anlegen                                             //DFE
+* Testdaten anlegen                                             //DFE erledigt
+* Testdaten mit Cashtags!                                       //DFE
 * Sonderzeichen in Post ("<") beim Wertvollsten Post            //DFE erledigt
 * Nur Bild in Post in wertvollsten Post                         //DFE erledigt
 * SQL-Reconnect bei Stored Procedures umgehen                   //DFE erledigt

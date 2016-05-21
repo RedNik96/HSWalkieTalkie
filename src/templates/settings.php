@@ -91,7 +91,7 @@
                                         Hausnummer:
                                     </label>
                                     <div class="col-sm-6">
-                                        <input pattern="[0-9][0-9a-z-]+" maxlength="255" required name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value="<?= $user_info['housenumber']?>">
+                                        <input pattern="[0-9][0-9a-z-]*" maxlength="255" required name="nr" id="nr" type="text" autofocus class="form-control filled" data-value="<?= $user_info['housenumber']?>" value="<?= $user_info['housenumber']?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
