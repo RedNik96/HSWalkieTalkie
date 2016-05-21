@@ -1,3 +1,5 @@
+<!--Mit diesem Template werden die Posts und Reposts der Nutzer auf der Neuigkeitenseite der Anwendung dargestellt.-->
+
 <link href="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/js/fileinput.min.js"></script>
 <script type="text/javascript" src="/HSWalkieTalkie/src/public/js/timeline.js"></script>

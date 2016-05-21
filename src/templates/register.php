@@ -1,3 +1,6 @@
+<!--Dieses Template stellt die Registrierungsseite dar, auf die der Nutzer gelangt, wenn er auf der Loginseite auf den
+Registrierungsllink klickt.-->
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" type="text/css" href="../css/register.css">
 

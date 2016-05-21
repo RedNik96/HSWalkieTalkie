@@ -1,3 +1,7 @@
+<!--Dieses Template stellt den grundlegenden Aufbau der Anwendung dar. Es gibt verschiedene Bereiche der Anwendung die
+ mit unterschiedlichen Inhalten gefüllt werden können. Es existiert je ein Bereich auf der linken und der rechten
+ Seite und ein Bereich in der Mitte. Außerdem gibt es einen Bereich für den oberen Seiteninhalt und den footer-->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">

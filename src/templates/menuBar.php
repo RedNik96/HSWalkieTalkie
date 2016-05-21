@@ -1,3 +1,5 @@
+<!--Mit diesem Template wird die Navigationsleiste im oberen Bereich der Anwendung dargestellt.-->
+
 <link href="/HSWalkieTalkie/src/libraries/select2-4.0.2/dist/css/select2.min.css" rel="stylesheet" />
 <script src="/HSWalkieTalkie/src/libraries/select2-4.0.2/dist/js/select2.min.js"></script>
 <nav class="navbar navbar-default">

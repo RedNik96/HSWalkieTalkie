@@ -1,3 +1,5 @@
+<!--Dieses Template stellt die Error-Page dar, auf die der Nutzer geleitet wird, falls ein Fehler im Backend entsteht.-->
+
 <div class="error border">
     <h2>Upps da ist irgendwas schief gelaufen</h2>
     <div>

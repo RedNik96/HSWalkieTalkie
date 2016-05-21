@@ -1,3 +1,5 @@
+<!--Mit diesem Template wird das Profil eines Nutzers dargestellt.-->
+
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/profile.css">
 <div class="row picture-row">
   <img src="/HSWalkieTalkie/src/img/profile/<?= $user_info['picture'] ?>" class="img-rounded profileBigPicture" alt="Profil Bild" />

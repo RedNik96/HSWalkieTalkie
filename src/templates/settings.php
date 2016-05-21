@@ -1,3 +1,6 @@
+<!--Dieses Template stellt die Einstellungsseite dar, auf die der Nutzer gelangt, wenn er in der Navigationsleiste
+den Punkt "Einstellungen" wählt.-->
+
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/settings.css">
 <link href="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <script src="/HSWalkieTalkie/src/libraries/bootstrap-fileinput-master/js/fileinput.min.js"></script>

@@ -1,3 +1,5 @@
+<!--Mit diesem Template werden auf der rechten Seite der Anwendung die Nutzerstatistiken dargestellt.-->
+
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/statistic.css">
 <link rel="stylesheet" href="/HSWalkieTalkie/src/public/css/modalpost.css">
 <link href="/HSWalkieTalkie/src/libraries/bootstrap-toggle-master/css/bootstrap-toggle.min.css" rel="stylesheet">
