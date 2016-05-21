@@ -233,9 +233,9 @@ class User {
     /** ändert den Namen des Bildes des eingeloggten Users
      * @param $imageFileType
      */
-    public static function changePicture($imageFileType) {
+    public static function changePicture($imageName) {
         SQL::query("UPDATE user SET picture=:picture WHERE username=:user", array(
-            'picture' => $_SESSION['user'] . "." . $imageFileType,
+            'picture' => $imageName,
             'user' => $_SESSION['user']
         ));
     }
