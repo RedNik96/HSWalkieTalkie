@@ -71,4 +71,20 @@ class Search
         //Gib den ersetzen Inhalt zurück
         return $content;
     }
+
+    /**
+     * @param Ändere den Text von z. B. :) zu einem entsprechendem Smiley
+     * @return der Inhalt, der die Smiley-Icons enthält
+     */
+    public static function createSmileys($content)
+    {
+        $content = str_replace(":)", '<i class="fa fa-smile-o" aria-hidden="true"></i>', $content);
+        $content = str_replace(":|", '<i class="fa fa-meh-o" aria-hidden="true"></i>', $content);
+        $content = str_replace(":(", '<i class="fa fa-frown-o" aria-hidden="true"></i>', $content);
+        $content = str_replace("(c)", '<i class="fa fa-copyright" aria-hidden="true"></i>', $content);
+
+
+        //Gib den ersetzen Inhalt zurück
+        return $content;
+    }
 }

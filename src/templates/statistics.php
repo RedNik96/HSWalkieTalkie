@@ -95,7 +95,9 @@
                         }
                         if(count($stats['bestPost']['imgs']) > 0)
                             echo "<br>";
-                        print str_replace(chr(13), '<br>', $stats['bestPost']['content']);
+                        $bestPostContent = str_replace(chr(13), '<br>', $stats['bestPost']['content']);
+                        $bestPostContent = Search::createSmileys($bestPostContent);
+                        print $bestPostContent;
                         ?>
                     </a>
                     <span class="cash">$<? echo $stats['bestPost']['votes'] ?></span>

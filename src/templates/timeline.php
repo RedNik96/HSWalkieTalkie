@@ -9,7 +9,7 @@
 <? if (isset($outcome)) {?>
     <h2>Ergebnisse für die Suche nach $<?= $outcome ?>:</h2>
 <? }
-if (!isset($cashtag)) {
+if (!isset($cashtag) && !isset($allowComment)) {
 ?>
 <!-- POST ------------------------------------------------------------------------------------------------------------------------------- -->
 <form method="post" action="<?= $router->generate('newpostPost'); ?>" class="postwrite" enctype="multipart/form-data">
@@ -64,6 +64,7 @@ if (!isset($cashtag)) {
                 $content = str_replace(chr(13), '<br>', $post['content']);
                 $content = Search::createUserLinks($content);
                 $content = Search::createCashtagLinks($content);
+                $content = Search::createSmileys($content);
                 print $content;
                 ?>
             </div>
@@ -130,7 +131,7 @@ if (!isset($cashtag)) {
                       $commentsExist = true;
                 ?>
                 <div class="comment-container row">
-                    <div class="row header">
+                    <div class="row header hswUser">
                       <div class="col-xs-offset-1 col-xs-1 picture">
                         <img src="<?= "/HSWalkieTalkie/src/img/profile/" . $comment['picture'];?>" class="img-responsive img-rounded"/>
                       </div>
@@ -153,7 +154,14 @@ if (!isset($cashtag)) {
                     </div>
                     <div class="row content">
                         <div class="col-xs-offset-1 col-xs-10 comment">
-                            <?= $comment['comment'] ?>
+                            <?
+                                $tempComment = str_replace(chr(13), '<br>', $comment['comment']);
+                                //$tempComment = $comment['comment'];
+                                $tempComment = Search::createUserLinks($tempComment);
+                                $tempComment = Search::createCashtagLinks($tempComment);
+                                $tempComment = Search::createSmileys($tempComment);
+                                echo $tempComment;
+                            ?>
                         </div>
                     </div>
                   </div>

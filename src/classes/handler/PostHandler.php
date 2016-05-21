@@ -301,14 +301,7 @@ class PostHandler
             $imgs = self::getPostImages($result["postID"], $result["postIDParent"]);
 
             // Kommentare
-            $stmt3 = SQL::query(
-              "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
-              FROM comment as C, user as U
-              WHERE C.postID = :postID AND C.userID = U.username
-              ORDER BY C.commentTime DESC",
-              array(
-                'postID' => $postID)
-            );
+            $comments = self::getPostComments($postID, false);
 
             $data = array(
               'posts' => array(
@@ -323,7 +316,7 @@ class PostHandler
                   'reposts'   => $result['Reposts'],
                   'datePosted'=> date('d.m.Y H:i:s', strtotime($result['datePosted'])),
                   'imgs'      => $imgs,
-                  'comments'  => $stmt3
+                  'comments'  => $comments
                 )
               ),
               'allowComment' => true
@@ -392,17 +385,22 @@ class PostHandler
      * @param $postID Der Post, von dem die Kommentare angezeigt werden sollen
      * @return PDOStatement|string Das executete PDO Statement, welches die Kommentare zurückgibt
      */
-    public static function getPostComments($postID){
-        $stmt = SQL::query(
-            "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
+    public static function getPostComments($postID, $limitStatement = true){
+        $sql = "SELECT C.comment, C.commentTime, U.username, U.firstName, U.lastName, U.picture
                 FROM comment as C, user as U
                 WHERE C.postID = :postID AND C.userID = U.username
-                ORDER BY C.commentTime DESC
-                LIMIT 3",
+                ORDER BY C.commentTime ASC";
+
+        if($limitStatement) {
+            $sql = $sql . " LIMIT 3";
+        }
+
+        $stmt = SQL::query($sql,
             array(
                 'postID' => $postID
             )
         );
+
 
         return $stmt;
     }

@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" type="text/css" href="/HSWalkieTalkie/src/public/css/rssFeed.css">
 <span class="rssFeed">
-    <legend>ILIAS-RSS-Feed</legend>
+    <legend><i class="fa fa-rss" aria-hidden="true"></i> ILIAS-RSS-Feed</legend>
 </span>
 <?if (is_array($rss_article)){?> 
     <?foreach ($rss_article as $entry){?>
