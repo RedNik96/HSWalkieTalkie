@@ -86,6 +86,7 @@ Class ProfileHandler {
 
     if(isset($userFollowed) AND isset($userFollower))
     {
+      //Abfrage, ob User derzeit dem angefragten User followed
       $stmt = SQL::query("SELECT * FROM follower WHERE followed = :followed AND follower = :follower", array(
           'followed'  => $userFollowed,
           'follower'  => $userFollower
@@ -93,17 +94,18 @@ Class ProfileHandler {
 
       if($stmt->fetch())
       {
-        $stmt = SQL::query("DELETE FROM follower WHERE followed = :followed AND follower = :follower", array(
+        //Falls dem so ist, wird der Datensatz gelöscht und das followen beendet
+        SQL::query("DELETE FROM follower WHERE followed = :followed AND follower = :follower", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
         echo "removed";
       } else {
-        $stmt = SQL::query("INSERT INTO follower (followed, follower) VALUES (:followed, :follower)", array(
+        //Andernfalls wird der Datensatz hinzugefügt und der User folgt dem angefragten User
+        SQL::query("INSERT INTO follower (followed, follower) VALUES (:followed, :follower)", array(
             'followed' => $userFollowed,
             'follower' => $userFollower
         ));
-
         echo "added";
       }
     }
