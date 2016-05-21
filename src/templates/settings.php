@@ -134,7 +134,7 @@
                                     </script>
                                 </div>
                                 <div id="labelpanel">
-                                    <label class="label label-danger" id="danger"><? if (isset($errorString[0])) { echo $errorString[0]; }  ?></label>
+                                    <label class="label label-danger" id="danger"><? if (isset($_SESSION['error'])) { echo $_SESSION['error']; $_SESSION['error']=null;}  ?></label>
                                 </div>
                             </div>
                         </div>
@@ -414,6 +414,13 @@
             $('.bankselect').on('change', function() {
                 var bics = <?php echo json_encode($bics); ?>;
                 $('#bank'+this.id).text(bics[this.value]);
+            });
+            $('#url').on('change', function() {
+                if ((this).value!="") {
+                    $('#feedPwd').prop("required",true);
+                } else {
+                    $('#feedPwd').prop("required",false);
+                }
             });
             $('#username').on('change', function(){
                 var username=(this).value;

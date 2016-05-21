@@ -111,13 +111,19 @@ class SettingsHandler {
                     }
                     //es wird der Pfad zum Profilbild generiert
                     $imageFileType = pathinfo($_FILES["userfile"]["name"],PATHINFO_EXTENSION);
-                    $target_file = IMG_PATH . "/" . "profile/" . $_SESSION['user'] . "." . $imageFileType;
+                    //an  den Filenamen wird abwechselnd 0 oder 1 angehangen damit keine alten Bilder gecasht werden
+                    if ($_SESSION['user']."0.".$imageFileType===$result['picture']) {
+                        $imagename=$_SESSION['user']."1.".$imageFileType;
+                    } else {
+                        $imagename=$_SESSION['user']."0.".$imageFileType;
+                    }
+                    $target_file = IMG_PATH . "/" . "profile/" . $imagename;
                     //der Ordner für die Profilbilder wird angelegt falls er noch nicht existiert
                     if(!file_exists(IMG_PATH. "/profile"))
                         mkdir(IMG_PATH. "/profile");
                     //das hochgeladene Foto wird gespeichert
                     if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                        User::changePicture($imageFileType);
+                        User::changePicture($imagename);
                     } else {
                         $errorString='Fehler: Die Datei konnte nicht hochgeladen werden bitte versuche es erneut.';
                     }
@@ -127,15 +133,13 @@ class SettingsHandler {
             }
 
         }
-        
-        //die Settingsseite wird gerenderet
-        //global $router;
-        //header("Location: " . $router->generate("settingsGet",array('tab' => 0)));
         if (isset($errorString)) {
-            SettingsHandler::get(0,$errorString);
-        } else {
-            SettingsHandler::get(0);
+            $_SESSION['error']=$errorString;
         }
+        //die Settingsseite wird gerenderet
+        global $router;
+        header("Location: " . $router->generate("settingsGet",array('tab' => 0)));
+
     }
 
     /**
