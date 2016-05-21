@@ -37,6 +37,12 @@ Class ProfileHandler {
     $i=0;
     // sucht alle Nutzer mit den übergebenen Namen
     $name=str_replace('%20',' ',$name);
+    $name=str_replace('%C3%A4','ä',$name);
+    $name=str_replace('%C3%84','Ä',$name);
+    $name=str_replace('%C3%BC','ü',$name);
+    $name=str_replace('%C3%9C','Ü',$name);
+    $name=str_replace('%C3%B6','ö',$name);
+    $name=str_replace('%C3%96','Ö',$name);
     $stmt = User::getUsersByFullName($name);
     // speichert die Abfragergebnisse in einem Array
     while ($res = $stmt->fetch()) {
