@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-sm-6 imagepanel">
                                 <div >
-                                    <img src="/HSWalkieTalkie/src/img/profile/<? print $user_info['picture']."\""; ?>" alt="Profilbild">
+                                    <img class="img-rounded" src="/HSWalkieTalkie/src/img/profile/<? print $user_info['picture']."\""; ?>" alt="Profilbild">
                                 </div>
                                 <div class="form-group" id="fileupload">
                                     <label class="control-label">Profilbild ändern:</label>
