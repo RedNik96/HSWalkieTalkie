@@ -102,7 +102,8 @@
                             echo "<br>";
                         $bestPostContent = str_replace(chr(13), '<br>', $stats['bestPost']['content']);
                         $bestPostContent = Search::createSmileys($bestPostContent);
-                        print $bestPostContent;
+
+                        print preg_replace('/<br>*/', "...", $bestPostContent);;
                         ?>
                     </a>
                     <span class="cash">$<? echo $stats['bestPost']['votes'] ?></span>
