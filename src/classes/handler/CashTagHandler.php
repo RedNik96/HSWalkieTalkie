@@ -56,6 +56,7 @@ class CashTagHandler
                 // erzeugt ein Array mit allen Infos zu jedem Post das an das Template gegeben wird
                 $posts[$resultReposts['postID']] = array(
                     'postID' => $resultReposts['postID'],
+                    'postIDParent' => $resultReposts['postIDParent'],
                     'username' => $resultReposts['username'],
                     'firstName' => $resultReposts['firstName'],
                     'lastName' => $resultReposts['lastName'],

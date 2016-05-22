@@ -58,6 +58,7 @@ Class TimelineHandler {
             //Fülle das Post Aray
             $posts[$result['postID']] = array(
                 'postID'    => $result['postID'],
+                'postIDParent' => $result['postIDParent'],
                 'username'  => $result['username'],
                 'firstName' => $result['firstName'],
                 'lastName'  => $result['lastName'],
