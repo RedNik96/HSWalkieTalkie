@@ -4,9 +4,15 @@
     margin:auto;
 }
 
+.hswUser {
+    white-space: nowrap;
+}
+
 .hswUser .hswUsername{
-     display: inline-block;
-     vertical-align: top;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
  }
 
 .hswUser .hswUsername span{

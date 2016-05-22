@@ -17,8 +17,8 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * RSS-Versionsprüfung                                           //MMH erledigt
 * HTTP-Error 401 wenn ilias passwort falsch oder nicht gesetzt  //MMH erledigt
 * HTTP-Timeout beim Ilias-Feed                                  //MMH erledigt
-* Trending Cashtags hübsch machen                               //LES
-* Login-Überschrift schön machen                                //LES
+* Trending Cashtags hübsch machen                               //LES erledigt
+* Login-Überschrift schön machen                                //LES erledigt
 * Iban als Primäschlüssel mit dem User                          //DFE erledigt
 * dieselben Cashtags innerhalb eines Posts ermöglichen          //DFE erledigt
 * Testdaten anlegen                                             //DFE erledigt
