@@ -14,9 +14,9 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 #ToDos bis Samstag Abend!
 * ÜBERALL KOMMENTARE ANFÜGEN
 * ER-Diagramm anpassen/aktualisieren (Duell+Round, account = PK ist IBAN + username)  //NDE erledigt
-* RSS-Versionsprüfung                                           //MMH
-* HTTP-Error 401 wenn ilias passwort falsch oder nicht gesetzt  //MMH
-* HTTP-Timeout beim Ilias-Feed                                  //MMH
+* RSS-Versionsprüfung                                           //MMH erledigt
+* HTTP-Error 401 wenn ilias passwort falsch oder nicht gesetzt  //MMH erledigt
+* HTTP-Timeout beim Ilias-Feed                                  //MMH erledigt
 * Trending Cashtags hübsch machen                               //LES
 * Login-Überschrift schön machen                                //LES
 * Iban als Primäschlüssel mit dem User                          //DFE erledigt

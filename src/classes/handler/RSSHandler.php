@@ -13,6 +13,7 @@ class RSSHandler
      * @param $user der aktuell eingeloggte Benutzer
      * @return feedURL_valid URL des RSS-Feed in der bereits das Passwort für den Feed eingebunden ist
      * @return null wenn keine URL für den RSS-Feed hinterlegt wurde
+     * @return 0 wenn weder URL noch Passwort für den Feed gesetzt sind
      */
     public static function getRssUrl($user)
     {
@@ -50,6 +51,7 @@ class RSSHandler
            return 'Es besteht keine Internetverbindung.<br>Bitte versuche es zu einem späteren Zeitpunkt nochmal.';
        }
 
+        //Prüfung, ob die URL und das Passwort für den RSS-Feed gesetzt sind
         if(RSSHandler::getRssUrl($_SESSION['user']) === 0){
             return 'Es wurde noch kein RSS-Feed eingerichtet.';
         }
