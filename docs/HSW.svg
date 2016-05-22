@@ -264,12 +264,15 @@
     <rect style="fill: #ffffff" x="413.79" y="422" width="133.8" height="18"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="413.79" y="422" width="133.8" height="18"/>
     <text font-size="11.2" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="480.69" y="436">cashtag</text>
-    <rect style="fill: #ffffff" x="413.79" y="440" width="133.8" height="20"/>
-    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="413.79" y="440" width="133.8" height="20"/>
+    <rect style="fill: #ffffff" x="413.79" y="440" width="133.8" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="413.79" y="440" width="133.8" height="36"/>
     <polygon style="fill: #000000" points="416.79,450 418.79,453 420.79,450 418.79,447 "/>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="422.79" y="456">cashtag</text>
-    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="486.69" y="456">varchar</text>
-    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="422.79" y1="457.6" x2="540.59" y2="457.6"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="422.79" y="456">id</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="486.69" y="456">int</text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="422.79" y1="457.6" x2="509.79" y2="457.6"/>
+    <ellipse style="fill: #000000" cx="418.79" cy="466" rx="2" ry="2"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="422.79" y="472">cashtag</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="486.69" y="472">varchar</text>
   </g>
   <g>
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="129.14,333.154 129.14,280.92 128.648,280.92 128.648,238.423 "/>
@@ -289,14 +292,14 @@
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="480.69,422 480.69,396 578.054,396 "/>
     <polygon style="fill: #000000" points="585.554,396 575.554,401 578.054,396 575.554,391 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="585.554,396 575.554,401 578.054,396 575.554,391 "/>
-    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="484.69" y="418">1</text>
-    <text font-size="9.59863" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="583.79" y="392">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="484.69" y="418">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="583.79" y="392">n</text>
   </g>
   <g>
     <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="889.821,405 889.821,341 890.45,341 890.45,286.736 "/>
     <polygon style="fill: #000000" points="890.45,279.236 895.45,289.236 890.45,286.736 885.45,289.236 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="890.45,279.236 895.45,289.236 890.45,286.736 885.45,289.236 "/>
-    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="893.821" y="401">1</text>
-    <text font-size="9.59863" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="894.45" y="289">n</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="893.821" y="401">1</text>
+    <text font-size="9.6" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="894.45" y="289">n</text>
   </g>
 </svg>
