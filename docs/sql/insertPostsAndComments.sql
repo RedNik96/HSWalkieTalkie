@@ -10,7 +10,7 @@ INSERT INTO `posts` (`id`, `content`, `user`, `parentPost`, `datePosted`) VALUES
 (3, 'Moin zusammen, weiß jemand, ob auch Reposts klappen?\r\n$HowToRepost', 'xgadles', NULL, '2016-05-21 11:12:08'),
 (4, 'Moin zusammen, weiß jemand, ob auch Reposts klappen?\r\n$HowToRepost', 'xgadelf', 3, '2016-05-21 11:12:50'),
 (5, 'Stark. Man kann ja sogar mehrere Bilder gleichzeitig posten.\r\n$GeilGemacht $MehrereBilder', 'xgadmmh', NULL, '2016-05-21 11:17:16'),
-(6, '... Ich bin einfach nur begeistert von der Seite.\r\nDurch den RSS-Feed links bleib ich immer auf dem Laufenden und alle Namen und Cashtags verlinken auf die Suche hiernach bzw. auf die Profile.\r\nWirklich keine schlechte Arbeit !\r\nBeiDenEntwicklernLäufts', 'xgwsnde', NULL, '2016-05-21 11:23:36'),
+(6, '... Ich bin einfach nur begeistert von der Seite.\r\nDurch den RSS-Feed links bleib ich immer auf dem Laufenden und alle Namen und Cashtags verlinken auf die Suche hiernach bzw. auf die Profile.\r\nWirklich keine schlechte Arbeit !\r\n$BeiDenEntwicklernLäufts', 'xgwsnde', NULL, '2016-05-21 11:23:36'),
 (7, 'Da fällt mir nur noch eins ein.\r\n$ThumbsUp', 'xgwsdfe', NULL, '2016-05-21 11:34:07');
 
 INSERT INTO `comment` (`id`, `userID`, `postID`, `comment`, `commentTime`) VALUES

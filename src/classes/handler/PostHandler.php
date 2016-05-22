@@ -260,6 +260,21 @@ class PostHandler
         return false;
     }
 
+
+    public static function getRepostIDsAsString($postID, $repostStr)
+    {
+        $stmt = SQL::query("SELECT id FROM posts WHERE parentPost = :post", array("post" => $postID));
+
+        while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if($repostStr != ""){
+                $repostStr = $repostStr. ", ";
+            }
+            $repostStr = $repostStr . $result['id'];
+            $repostStr = self::getRepostIDsAsString($result['id'], $repostStr);
+        }
+        return $repostStr;
+    }
+
     /**
      * Gib den Poster des Posts zurück
      * @param $postID Der Post, von dem der Poster herausgesucht werden soll
