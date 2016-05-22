@@ -19,13 +19,19 @@
 
 </head>
 <body>
+
     <div class="container-fluid full">
         <? if (isset($content_top)) { ?>
             <div class="row">
                 <?=$content_top ?>
             </div>
-        <? }
-        if (isset($content_left) && isset($content_right)) { ?>
+        <? } ?>
+        <noscript>
+            <div class="border alert">
+                JavaScript ist deaktiviert! <br> Bitte aktiviere JavaScript um alle Funktionalitäten nutzen zu können
+            </div>
+        </noscript>
+        <? if (isset($content_left) && isset($content_right)) { ?>
             <div class="row content">
                 <div id="content-right" class="col-lg-3 container-fluid">
                     <?=$content_left ?>
