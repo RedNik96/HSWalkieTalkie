@@ -145,15 +145,17 @@ Registrierungsllink klickt.-->
 </div>
 
 <script type="text/javascript">
+    // zeigt den zur ausgewählten BIC passenden Banknamen an
     $('#bic').on('change', function() {
         var bics = <?php echo json_encode($bics); ?>;
         $('#bankname').text(bics[this.value]);
     });
+    // zeigt den zur ausgewählten PLZ passenden Ort an
     $('#zip').on('change', function() {
         var zips = <?php echo json_encode($zips); ?>;
         $('#city').text(zips[this.value]);
     });
-
+    // prüft ob die beiden Passwörter identisch sind
     $('#confirmedPassword').on('change', function(){
         if ((this).value!==$('#password').val()) {
             $('#confirmedPassword').focus();
@@ -165,6 +167,7 @@ Registrierungsllink klickt.-->
             $('#confirmedPassword').removeClass('wrong');
         }
     });
+    // prüft ob es den Benutzernamen schon gibt
     $('#username').on('change', function(){
         var username=(this).value;
         var url=document.getElementById('username').getAttribute('url');

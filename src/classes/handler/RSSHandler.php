@@ -52,7 +52,7 @@ class RSSHandler
             return 'Das Passwort für den ILIAS-RSS-Feed ist nicht gesetzt.';
         }
 
-        //Versuch die URL des RSS-Feeds in Variable speichern
+        //URL des RSS-Feeds in Variable speichern
         $rss_url = RSSHandler::getRssUrl($_SESSION['user']);
 
         //Prüfung, ob eine URL vorhanden ist.
