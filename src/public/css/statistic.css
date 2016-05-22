@@ -60,3 +60,8 @@
     max-width: 50px;
     max-height: 50px;
 }
+
+.ranking .postauthor .hswUser .hswUsername .name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

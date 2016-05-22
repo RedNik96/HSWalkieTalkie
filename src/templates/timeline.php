@@ -9,7 +9,7 @@
 <? global $router;  global $match; ?>
 <!-- TITEL FÜR SUCHERGEBNISSE ----------------------------------------------------------------------------------------------------------- -->
 <? if (isset($outcome)) {?>
-    <h2>Ergebnisse für die Suche nach $<?= $outcome ?>:</h2>
+    <h2 id="outcome">Ergebnisse für die Suche nach $<?= $outcome ?>:</h2>
 <? }
 if (!isset($cashtag) && !isset($allowComment)) {
 ?>
