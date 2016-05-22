@@ -6,13 +6,13 @@
 
 .hswUser {
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hswUser .hswUsername{
     display: inline-block;
     vertical-align: top;
-    overflow: hidden;
-    text-overflow: ellipsis;
  }
 
 .hswUser .hswUsername span{
