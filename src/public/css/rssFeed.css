@@ -1,5 +1,7 @@
 .rss_entry {
     font-size: 9pt;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .rss_date_pre {
