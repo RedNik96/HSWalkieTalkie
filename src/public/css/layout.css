@@ -30,6 +30,7 @@ body footer {
 
 #searchBar {
     width: 250px;
+
 }
 
 .border {
@@ -53,4 +54,9 @@ body footer {
 
 .label.label-primary.repost a {
     color:white;
+}
+
+#outcome {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

@@ -38,10 +38,12 @@
   </div><!-- /.container-fluid -->
 </nav>
 <script type="text/javascript">
+  //sucht alle Vorschläge für die Suchleiste
   $.ajax({
     method: 'POST',
     url: '/HSWalkieTalkie/src/public/searchData/',
   }).then(function (data) {
+    //erzeugt JSON-Objekt mit allen Vorschlägen
     var names= '[' +
       '{ "text":"Benutzer" , "children": [ ';
     
@@ -69,7 +71,7 @@
     }
     names+=']}]';
     var obj = JSON.parse(names);
-
+    //Initialisiert die Suchleiste
     $('#searchBar').select2({
       placeholder: 'Name oder $cashtag suchen',
       data: obj,

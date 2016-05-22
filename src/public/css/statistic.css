@@ -53,10 +53,15 @@
     width: 60%;
     display: inline-block;
     font-weight: bold;
-    margin-left: 10%;
+    margin-left: 12%;
 }
 
 .statistic .smallImages {
     max-width: 50px;
     max-height: 50px;
+}
+
+.ranking .postauthor .hswUser .hswUsername .name{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
