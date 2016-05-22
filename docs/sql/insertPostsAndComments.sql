@@ -5,13 +5,13 @@ INSERT INTO `follower` (`followed`, `follower`) VALUES
 ('xgwsnde', 'xgwsdfe');
 
 INSERT INTO `posts` (`id`, `content`, `user`, `parentPost`, `datePosted`) VALUES
-(1, 'Wow, der erste Post auf HSWalkieTalkie!', 'xgadmmh', NULL, '2016-05-21 11:08:07'),
-(2, 'Ich hab gehört man kann sogar Smileys machen.\r\nWeiß einer wie das geht?', 'xgwsnde', NULL, '2016-05-21 11:08:36'),
-(3, 'Moin zusammen, weiß jemand, ob auch Reposts klappen?', 'xgadles', NULL, '2016-05-21 11:12:08'),
-(4, 'Moin zusammen, weiß jemand, ob auch Reposts klappen?', 'xgadelf', 3, '2016-05-21 11:12:50'),
-(5, 'Stark. Man kann ja sogar mehrere Bilder gleichzeitig posten.', 'xgadmmh', NULL, '2016-05-21 11:17:16'),
-(6, '... Ich bin einfach nur begeistert von der Seite.\r\nDurch den RSS-Feed links bleib ich immer auf dem Laufenden und alle Namen und Cashtags verlinken auf die Suche hiernach bzw. auf die Profile.\r\nWirklich keine schlechte Arbeit !', 'xgwsnde', NULL, '2016-05-21 11:23:36'),
-(7, 'Da fällt mir nur noch eins ein.', 'xgwsdfe', NULL, '2016-05-21 11:34:07');
+(1, 'Wow, der erste Post auf HSWalkieTalkie! $läuft', 'xgadmmh', NULL, '2016-05-21 11:08:07'),
+(2, 'Ich hab gehört man kann sogar Smileys machen.\r\nWeiß einer wie das geht? \r\n$Smiley', 'xgwsnde', NULL, '2016-05-21 11:08:36'),
+(3, 'Moin zusammen, weiß jemand, ob auch Reposts klappen?\r\n$HowToRepost', 'xgadles', NULL, '2016-05-21 11:12:08'),
+(4, 'Moin zusammen, weiß jemand, ob auch Reposts klappen?\r\n$HowToRepost', 'xgadelf', 3, '2016-05-21 11:12:50'),
+(5, 'Stark. Man kann ja sogar mehrere Bilder gleichzeitig posten.\r\n$GeilGemacht $MehrereBilder', 'xgadmmh', NULL, '2016-05-21 11:17:16'),
+(6, '... Ich bin einfach nur begeistert von der Seite.\r\nDurch den RSS-Feed links bleib ich immer auf dem Laufenden und alle Namen und Cashtags verlinken auf die Suche hiernach bzw. auf die Profile.\r\nWirklich keine schlechte Arbeit !\r\nBeiDenEntwicklernLäufts', 'xgwsnde', NULL, '2016-05-21 11:23:36'),
+(7, 'Da fällt mir nur noch eins ein.\r\n$ThumbsUp', 'xgwsdfe', NULL, '2016-05-21 11:34:07');
 
 INSERT INTO `comment` (`id`, `userID`, `postID`, `comment`, `commentTime`) VALUES
 (1, 'xgwsdfe', 2, 'Ja, du musst, jeweils ohne Leerzeichen, folgendes tippen:\r\n: ) = :)\r\n: | = :|\r\n: ( = :(\r\n( c ) = (c)', '2016-05-21 09:09:24'),
@@ -31,3 +31,21 @@ INSERT INTO `postsimg` (`postId`, `filename`) VALUES
 
 INSERT INTO `votes` (`voter`, `post`, `vote`) VALUES
 ('xgwsdfe', 5, 1);
+
+INSERT INTO `cashtag` (`cashtag`, `id`) VALUES
+('$läuft', 1),
+('$Smiley', 2),
+('$HowToRepost', 3),
+('$GeilGemacht', 4),
+('$MehrereBilder', 5),
+('$BeiDenEntwicklernLäufts', 6),
+('$ThumbsUp', 7);
+
+INSERT INTO `cashtagpost` (`cashtagId`, `postId`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 5),
+(5, 5),
+(6, 6),
+(7, 7);

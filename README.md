@@ -22,7 +22,7 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * Iban als Primäschlüssel mit dem User                          //DFE erledigt
 * dieselben Cashtags innerhalb eines Posts ermöglichen          //DFE erledigt
 * Testdaten anlegen                                             //DFE erledigt
-* Testdaten mit Cashtags!                                       //DFE
+* Testdaten mit Cashtags!                                       //DFE erledigt
 * Sonderzeichen in Post ("<") beim Wertvollsten Post            //DFE erledigt
 * Nur Bild in Post in wertvollsten Post                         //DFE erledigt
 * SQL-Reconnect bei Stored Procedures umgehen                   //DFE erledigt
@@ -30,6 +30,5 @@ HSW Testat Datenbankprogrammierung - WI 44/14
 * Überschrift nach Suche, wonach gesucht werden                 //ELF erledigt
 * Bild zu groß -> Fehler abfangen in Timeline                   //ELF erledigt
 * Anleitung, wie man im ILIAS zur Feed URL kommt                //ELF erledigt
-* Irgendwas stimmt in den Settings nicht bei der Hausnummer "Ihre Eingabe muss mit dem Format übereinstimmen"   //ELF
 
 *** Sonntag um 12:00 sind alle in Whats-App erreichbar, um sich abzustimmen ***
