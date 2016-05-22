@@ -23,7 +23,7 @@ class Search
      */
     public static function createUserLinks($content)
     {
-        preg_match_all("/@[^ |\r|@]+/", $content, $treffer);
+        preg_match_all("/@[A-Za-zÄÜÖäüöß0-9-_]++/", $content, $treffer);
         $treffer = $treffer[0];
         foreach ($treffer as $username)
         {
