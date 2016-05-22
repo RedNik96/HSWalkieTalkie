@@ -22,6 +22,9 @@ class RSSHandler
             $feedPassword = $result['feedPassword'];
             $feedURL = $result['feedURL'];
 
+            if((is_null($feedURL) || $feedURL === '') && (is_null($feedPassword) || $feedPassword === '')){
+                return 0;
+            }
             //Prüfung, ob das Feed-Passwort gesetzt ist
             if (is_null($feedPassword) || $feedPassword === '') {
                 return null;
@@ -47,6 +50,9 @@ class RSSHandler
            return 'Es besteht keine Internetverbindung.<br>Bitte versuche es zu einem späteren Zeitpunkt nochmal.';
        }
 
+        if(RSSHandler::getRssUrl($_SESSION['user']) === 0){
+            return 'Es wurde noch kein RSS-Feed eingerichtet.';
+        }
         //Prüfung, ob das Passwort für den RSS-Feed in den Einstellungen gesetzt ist.
         if (is_null(RSSHandler::getRssUrl($_SESSION['user']))){
             return 'Das Passwort für den ILIAS-RSS-Feed ist nicht gesetzt.';
